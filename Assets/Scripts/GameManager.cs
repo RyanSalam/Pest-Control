@@ -5,10 +5,4 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
 
-    Ability ability;
-    string abilityName;
-    private void Start()
-    {
-        
-    }
 }
