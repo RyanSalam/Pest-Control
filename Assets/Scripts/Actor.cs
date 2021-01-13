@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public abstract class Actor : MonoBehaviour
 {
@@ -9,14 +10,12 @@ public abstract class Actor : MonoBehaviour
     public delegate void HealthChanged(float max, float current);
     public event HealthChanged OnHealthChanged;
 
-    public delegate void DamageTakenHandler(DamageData data);
-    public event DamageTakenHandler OnDamageTaken;
+    public delegate void DamageHandler(DamageData data);
+    public event DamageHandler OnDamageTaken;
 
-    public delegate void DamageFailedHandler(DamageData data);
-    public event DamageFailedHandler OnDamageFailed;
+    public event DamageHandler OnDamageFailed;
 
-    public delegate void DeathHandler();
-    public event DeathHandler OnDeath;
+    public event Action OnDeath;
 
     [SerializeField] protected float maxHealth = 10.0f;
     private float m_currentHealth;
@@ -97,7 +96,7 @@ public abstract class Actor : MonoBehaviour
         }
 
         CurrentHealth -= data.damageAmount;
-        OnDamageTaken.Invoke(data);
+        OnDamageTaken?.Invoke(data);
         Anim.SetTrigger("Hit");
     }
 
