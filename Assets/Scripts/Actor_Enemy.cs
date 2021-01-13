@@ -29,9 +29,8 @@ public class Actor_Enemy : Actor
     // Boolean to track if the enemy is retaliating against an attacker.
     [HideInInspector] public bool isRetaliating;
 
-    [Tooltip("Float determining the movement speed of the enemy.")]
-    public float movementSpeed;
 
+    [Header("Behaviour Variables")]
     [Tooltip("Float determining the amount of damage resisted when attacked outside the hit angle.")]
     public float armourStrength;
 
@@ -39,7 +38,7 @@ public class Actor_Enemy : Actor
     public float energyCarried;
 
     [Tooltip("Trigger box that activates upon the Enemy's attack.")]
-    public BoxCollider attackBox;
+    public GameObject attackBox;
 
     [Tooltip("Float determining the amount of damage the enemy will do on attack.")]
     public float attackDamage;
@@ -47,9 +46,8 @@ public class Actor_Enemy : Actor
     [Tooltip("Float determining the cooldown time between successive attacks.")]
     public float rateOfFire;
 
-    // Float determining the range the target has to be within for the Enemy to attack.
-    private float _attackRange;
-    public float attackRange { get { return _attackRange; } }
+    [Tooltip("Float determining the range the target has to be within for the Enemy to attack.")]
+    public float attackRange;
 
     [Tooltip("Layer that the players will be on for detection purposes.")]
     public LayerMask playerLayer;
@@ -66,6 +64,9 @@ public class Actor_Enemy : Actor
     [Tooltip("Hard references for player and core to aid in target switching.")]
     public Actor player;
     public Actor core;
+
+    // Int to track how many times the enemy has been hit.
+    [HideInInspector] public int hitsRecieved = 0;
     #endregion
 
     protected override void Start()
@@ -87,17 +88,50 @@ public class Actor_Enemy : Actor
     {
         // Agent and Animator reference.
         _agent = GetComponent<NavMeshAgent>();
-        _animator = GetComponentInChildren<Animator>();
+
+        // Set the agent stopping distance to half the size of the attack box.
+        _agent.stoppingDistance = attackRange;
 
         // Setting the movement speed of the Enemy's agent to the value of the Enemy's movement speed.
-        _agent.speed = movementSpeed;
-
-        // Setting the attack range to 3/4 the attack box.
-        _attackRange = attackBox.bounds.extents.y + attackBox.bounds.extents.y / 2;
+        _agent.speed = moveSpeed;
 
         //// Player and Core reference
         //player = LevelManager.Instance.player;
         //core = LevelManager.Instance.core;
+
+        // Subscribing the retaliate function to on damage taken.
+        OnDamageTaken += TakeDamage;
+    }
+
+    private void Update()
+    {
+        // If not retaliating and target and new target differ set target to new target.
+        if(!isRetaliating && target != newTarget)
+            _target = newTarget;
+
+        // If stopped and there is a target then trigger the attack animation.
+        if (target != null && Vector3.Distance(target.transform.position, attackBox.transform.position) <= attackRange)
+            Anim.SetTrigger("Attacking");
+
+        // Set the target on the animator accordingly.
+        if (target)
+            Anim.SetBool("hasTarget", true);
+        else
+            Anim.SetBool("hasTarget", false);
+    }
+
+    // On taking damage, increase the hits recieved and if enemy is a grunt it will persue and attack their attacker.
+    public override void TakeDamage(DamageData data)
+    {
+        base.TakeDamage(data);
+        hitsRecieved++;
+        Anim.SetInteger("hitsRecieved", hitsRecieved);
+
+        if(enemyType == EnemyType.Grunt)
+        {
+            newTarget = data.damager;
+            isRetaliating = true;
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -111,6 +145,14 @@ public class Actor_Enemy : Actor
             // Debug drawing a wire sphere to vialise the range a player has to exceed in order to be "lost" by the Enemy.
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, detectionLossRange);
+
+            // Debug drawing a wire cube to visualise the attack box of the Enemy.
+            if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
+                Gizmos.color = Color.green;
+            else
+                Gizmos.color = Color.red;
+
+            Gizmos.DrawWireCube(attackBox.transform.position, Vector3.one * attackRange);
         }
     }
 
