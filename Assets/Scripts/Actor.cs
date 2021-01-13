@@ -49,7 +49,7 @@ public abstract class Actor : MonoBehaviour
 
     protected virtual void Awake() // All components should be cached in Awake.
     {
-        m_Anim = GetComponent<Animator>();
+        m_Anim = GetComponentInChildren<Animator>();
     }
 
     protected virtual void Start()
