@@ -162,7 +162,7 @@ public class Actor_Player : Actor
         UnequipWeapon();
 
         newWeapon.gameObject.SetActive(true);
-        newWeapon.transform.IsChildOf(_weaponHolder);
+        newWeapon.transform.SetParent(_weaponHolder);
         newWeapon.transform.localPosition = Vector3.zero; // Resetting the transform after we child it.
 
         currentWpn = newWeapon;
