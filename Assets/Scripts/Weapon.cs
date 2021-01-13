@@ -14,7 +14,8 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected float vRecoil = 0.0f;
     [SerializeField] protected float hRecoil = 0.0f;
     [SerializeField] protected float recoilSpeed = 1.0f;
-    [SerializeField] protected float fireRate = 1f;
+    [SerializeField] protected float fireRate = 1.0f;
+    [SerializeField] protected int Damage = 1;
     //[SerializeField] public enum ammoType { projectilePrefab, RayCast, trapPrefab }; //using an enum to determine our ammo type, this way can use a switch on weapon scripts
     [Tooltip("Is the weapon automatic?")] [SerializeField] protected bool auto = false;
 
@@ -22,26 +23,30 @@ public abstract class Weapon : MonoBehaviour
     [Space(10)]
 
     [Header("Weapon Cooldown Stats")]
-    [SerializeField] public int shotCounter = 0;
-    [SerializeField] protected int maxShots = 20;
-    [SerializeField] protected int shotIncrease = 1;
-    [SerializeField] public bool canFire = true;
-    [SerializeField] protected bool isFiring = false;
-    [SerializeField] protected float coolDownDelay = 3;
-    [SerializeField] protected float shotReloadDelay = 3;
+    [SerializeField] public int currentShots = 0; //current shots keep track of how many shots we have fired (resets after cooldown) 
+    [SerializeField] protected int maxShots = 20; //maxShots is the maximimun number of shots a gun can shoot before it breaks (currentshots > maxShots -> cooldown)
+    [SerializeField] protected int shotIncrease = 1; //everytime you shoot the currentShots is increased by shotIncrease, allowing for some guns to overheat faster
+    //[SerializeField] protected float coolDownDelay = 3; //
+    [SerializeField] protected float timeTillWeaponCooldown = 3; //how long it takes for our gun to reload (cool off)
 
     [Space(10)]
     [Header("Weapon Efx")]
     protected AudioSource WeaponEfxPlayer;
     [SerializeField] protected AudioClip fireSound;
+    [SerializeField] protected ParticleSystem ImpactParticle;
+    [SerializeField] protected ParticleSystem muzzleFlashParticle;
 
     //stats for our weapons damage
     public delegate void Weapondamage(DamageData data);
    // public event DamageData
 
     public float lastFired = 0.0f;
-    protected Vector2 recoil;
+    protected Vector3 recoil;
     protected Vector3 initialCamPos;
+
+    [HideInInspector] public bool canFire = true; //if we can fire or not
+    [SerializeField] protected bool isFiring = false; //are we currently firing ?
+
 
     //our player
     protected Actor_Player player;
@@ -75,13 +80,10 @@ public abstract class Weapon : MonoBehaviour
 
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        //grab our muzzle flash component, 
+        //and animator   
+        muzzleFlashParticle = GetComponentInChildren<ParticleSystem>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     public virtual void Shoot()
@@ -91,14 +93,14 @@ public abstract class Weapon : MonoBehaviour
             return;
 
         //update our weapon variables
-        lastFired = Time.time;
-        isFiring = true;
-        shotCounter += shotIncrease;
+        lastFired = Time.time; //reset our last fired
+        isFiring = true; //we are firing
+        currentShots += shotIncrease; //increment our current shots
 
         //should trigger our weapon overheating-breaking animation
-        if (shotCounter >= maxShots)
+        if (currentShots >= maxShots)
         {
-            canFire = false;
+            canFire = false; //we cannot fire now
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
             StartCoroutine(WeaponCooldown());
             
@@ -123,14 +125,14 @@ public abstract class Weapon : MonoBehaviour
 
     protected float GetHeatRatio()
     {
-        Debug.Log("Heat Ratio is: " + (float)shotCounter / (float)maxShots);
-        return (float)shotCounter / (float)maxShots;
+        Debug.Log("Heat Ratio is: " + (float)currentShots / (float)maxShots);
+        return (float)currentShots / (float)maxShots;
 
     }
 
     IEnumerator WeaponCooldown()
     {
-        float elapsed = shotReloadDelay;
+        float elapsed = timeTillWeaponCooldown;
 
         canFire = false; //re-assurance
 
@@ -146,7 +148,7 @@ public abstract class Weapon : MonoBehaviour
 
         //reset our weapon variables 
         canFire = true;
-        shotCounter = 0;
+        currentShots = 0;
         Release(); //may not need this 
     }
 }
