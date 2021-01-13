@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class Actor_Player : Actor
 {
-    protected CharacterController controller;
-
     [Header("Input Variables")]
     public bool controlsEnabled = true;
     public float mouseSensitivity = 100.0f;
@@ -23,14 +21,22 @@ public class Actor_Player : Actor
 
     // Components
     [SerializeField] private Camera _playerCam;
+    protected CharacterController controller;
     public Camera PlayerCam { get { return _playerCam; } }
+    public CharacterController Controller { get { return controller; } }
 
+    [Header("Abilities")]
     [SerializeField] private Ability _abilityOne;
     [SerializeField] private Ability _abilityTwo;
 
+    [SerializeField] protected Transform _abilitySpawnPoint;
+    public Transform AbilitySpawnPoint { get { return _abilitySpawnPoint; } }
     public Ability AbilityOne { get { return _abilityOne; } }
     public Ability AbilityTwo { get { return _abilityTwo; } }
 
+    [Header("Weapon")]
+    [SerializeField] private Transform _weaponHolder;
+    [SerializeField] private Weapon currentWpn; 
 
     protected override void Awake()
     {
@@ -49,8 +55,12 @@ public class Actor_Player : Actor
     protected virtual void Update()
     {
         HandleInputs();
-        HandleMovement();
         HandleRotation();
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        HandleMovement();
     }
 
     private void HandleInputs()
@@ -87,22 +97,30 @@ public class Actor_Player : Actor
                 AbilityTwo.Execute();
         }
 
+        if (currentWpn != null)
+        {
+            if (currentWpn.ButtonPressed)
+                currentWpn.Shoot();
+
+            if (Input.GetButtonUp("Fire1"))
+                currentWpn.Release();
+        }
 
     }
 
     private void HandleMovement()
     {
         Vector3 movement = transform.right * moveVector.x + transform.forward * moveVector.y;
-        movement *= moveSpeed;
+        movement *= moveSpeed * Time.fixedDeltaTime;
 
-        _verticalVel = controller.isGrounded ? -2.0f : _verticalVel + -9.81f * Time.deltaTime;
+        _verticalVel = controller.isGrounded ? -2.0f : _verticalVel + -9.81f * Time.fixedDeltaTime;
 
         // Condition to make sure we've let the jump button go
         // And we've at least covered some minimum ground 
         // Otherwise just tapping and letting it go would seem hella lame
         if (_jumpRequest || _jumpElapsed.IsWithin(Mathf.Epsilon, _minJumpDuration))
         {
-            _jumpElapsed += Time.deltaTime;
+            _jumpElapsed += Time.fixedDeltaTime;
             _verticalVel = (jumpStrength * _jumpElapsed) + (0.5f * -9.81f * _jumpElapsed * _jumpElapsed);
         }
 
@@ -110,9 +128,9 @@ public class Actor_Player : Actor
             _jumpElapsed = 0.0f;
 
 
-        movement += Vector3.up * _verticalVel;
+        movement += Vector3.up * _verticalVel * Time.fixedDeltaTime;
 
-        controller.Move(movement * Time.deltaTime);
+        controller.Move(movement);
 
     }
 
@@ -133,5 +151,27 @@ public class Actor_Player : Actor
     {
         base.OnEnable();
         controlsEnabled = true;
+    }
+
+    public void EquipWeapon(Weapon newWeapon)
+    {
+        // We will first unequip our previous weapon
+        // We then make our new weapon a child of our weaponHolder transform
+        // then reset the local position so it snaps directly to it's parent position
+
+        UnequipWeapon();
+
+        newWeapon.gameObject.SetActive(true);
+        newWeapon.transform.IsChildOf(_weaponHolder);
+        newWeapon.transform.localPosition = Vector3.zero; // Resetting the transform after we child it.
+
+        currentWpn = newWeapon;
+    }
+
+    public void UnequipWeapon()
+    {
+        currentWpn.transform.IsChildOf(null);
+        currentWpn.gameObject.SetActive(false);
+        currentWpn = null;
     }
 }
