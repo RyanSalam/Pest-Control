@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AeonPortal : MonoBehaviour
+public class Weapon_Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
