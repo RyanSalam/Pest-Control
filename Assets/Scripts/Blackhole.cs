@@ -85,8 +85,5 @@ public class Blackhole : MonoBehaviour
         }
     }
 
-    void BlackHoleAbility()
-    {
-        blackholeReady = false;
-    }
+   
 }
