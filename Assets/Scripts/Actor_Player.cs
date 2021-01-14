@@ -50,6 +50,12 @@ public class Actor_Player : Actor
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        if (AbilityOne != null)
+            AbilityOne.Initialize(gameObject);
+
+        if (AbilityTwo != null)
+            AbilityTwo.Initialize(gameObject);
     }
 
     protected virtual void Update()
