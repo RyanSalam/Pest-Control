@@ -28,7 +28,7 @@ public class Inventory : MonoSingleton<Inventory>
         if (inventoryList.Count <= inventoryLimit && !inventoryList.Contains(item)) 
         {
             inventoryList.Add(item);  //adds item to inventory 
-            onItemChangeCallback?.Invoke();
+            onItemChangeCallback?.Invoke(); //calling delgate function "onItemChangeCallback" "?" is !=null
         }
     }
     public void InventoryRemove(Item item) //function that removes an item from the Item class to the inventory 
@@ -37,7 +37,7 @@ public class Inventory : MonoSingleton<Inventory>
         if (inventoryList.Contains(item))
         {
             inventoryList.Remove(item); // removes item from inventory 
-            onItemChangeCallback?.Invoke();
+            onItemChangeCallback?.Invoke(); //calling delgate function "onItemChangeCallback" "?" is !=null
         }
     }
 
