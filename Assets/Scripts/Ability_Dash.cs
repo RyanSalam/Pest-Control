@@ -7,7 +7,7 @@ using UnityEngine;
 public class Ability_Dash : Ability
 {
 
-    public Actor_Player pA;
+    private Actor_Player pA;
     private int dashLimit = 3;
     private int dashCounter = 0;
     private float dashDistance = 5.0f;
