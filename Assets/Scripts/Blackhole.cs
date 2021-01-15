@@ -15,7 +15,7 @@ public class Blackhole : MonoBehaviour
     [Range(1.0f, 7.0f)] public float TargetRadius;
 
     private float timeInAir;
-    public bool blackholeReady = true;
+    //public bool blackholeReady = true;
     protected Vector3 direction;
 
     protected Rigidbody rb;
@@ -28,13 +28,14 @@ public class Blackhole : MonoBehaviour
     [SerializeField] Transform plane;
     [SerializeField] Transform swirl;
     [SerializeField] private float expandTime = 0.8f;
-    // Start is called before the first frame update
+   
     void Start()
     {
+        //Applies force to the projectile in an arc
         RB.AddForce(transform.forward * launchForwardForce + Vector3.up * launchUpWardForce, ForceMode.Impulse);
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
 
