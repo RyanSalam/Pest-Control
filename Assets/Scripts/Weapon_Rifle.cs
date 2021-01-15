@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon_Rifle : MonoBehaviour
+public class Weapon_Rifle : Weapon_Hitscan
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public override void Shoot()
     {
-        
+        base.Shoot();
+
+        //add specific recoil based off of rifle fire rate
+
+
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
