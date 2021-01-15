@@ -24,5 +24,5 @@ public abstract class Ability : ScriptableObject
     /// Conditions that must be met for our ability to be triggered.
     /// </summary>
     /// <returns></returns>
-    public virtual bool CanExecute() => isAbilityOnCoolDown;
+    public virtual bool CanExecute() => !isAbilityOnCoolDown;
 }

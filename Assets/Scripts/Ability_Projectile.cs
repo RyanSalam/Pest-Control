@@ -6,7 +6,7 @@ using UnityEngine;
 public class Ability_Projectile : Ability
 {
     public GameObject prefabToSpawn;
-    public Actor_Player pA;
+    private Actor_Player pA;
 
     // Start is called before the first frame update
     public override void Execute()

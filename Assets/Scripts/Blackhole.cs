@@ -25,14 +25,15 @@ public class Blackhole : MonoBehaviour
     }
 
     [Header("VFX Properties")]
-    [SerializeField] Transform plane;
-    [SerializeField] Transform swirl;
+    //[SerializeField] Transform plane;
+   // [SerializeField] Transform swirl;
     [SerializeField] private float expandTime = 0.8f;
    
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         //Applies force to the projectile in an arc
-        RB.AddForce(transform.forward * launchForwardForce + Vector3.up * launchUpWardForce, ForceMode.Impulse);
+        rb.AddForce(transform.forward * launchForwardForce + Vector3.up * launchUpWardForce, ForceMode.Impulse);
     }
 
    
@@ -59,7 +60,9 @@ public class Blackhole : MonoBehaviour
             //Detection of enemies
             DetectEnemies();
             rb.isKinematic = true;
-            //Pulling enemies in            
+            //Pulling enemies in     
+            
+        // wait for Timer script to destroy the ball after
         }
     }
 
@@ -73,6 +76,7 @@ public class Blackhole : MonoBehaviour
 
     void DetectEnemies()
     {
+        Debug.Log("Looking for alien scum");
         Collider[] allEnemies = Physics.OverlapSphere(transform.position, TargetRadius);
         foreach (Collider enemy in allEnemies)
 
