@@ -2,17 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ability_Dash : MonoBehaviour
+
+[CreateAssetMenu(fileName = "New Dash", menuName = "Abilities/Dash Ability")]
+public class Ability_Dash : Ability
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private Actor_Player pA;
+    private int dashLimit = 3;
+    private int dashCounter = 0;
+    private float dashDistance = 5.0f;
+
+    public override void Execute()
     {
-        
+        // Do the dash here
+        // Increment the dashCounter
+        Vector3 destination = (pA.transform.forward * dashDistance);
+        pA.Controller.Move(destination);
+
+        dashCounter++;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override bool CanExecute()
     {
-        
+        return (dashCounter <= dashLimit);
+    }
+
+    public override void Initialize(GameObject abilitySource)
+    {
+        pA = abilitySource.GetComponent<Actor_Player>();
+        dashCounter = 0;
+
     }
 }
