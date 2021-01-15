@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cc38a0a9ee897c46a5924f9372b5211, type: 3}
+  m_Name: Blackhole
+  m_EditorClassIdentifier: 
+  abilityName: Blackhole
+  abilityDesc: Description
+  abilitySprite: {fileID: 0}
+  coolDownDuration: 5
+  AbilityButton: Ability One
+  isAbilityOnCoolDown: 0
+  prefabToSpawn: {fileID: 3147279108591053944, guid: 455f961f3b328a343892e31b7952b66b,
+    type: 3}
