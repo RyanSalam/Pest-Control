@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ability_Portal : MonoBehaviour
+[CreateAssetMenu(menuName = "Abilities/Portal Ability")]
+public class Ability_Portal : Ability
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject prefabToSpawn;
+    private Actor_Player pA;
+    public override void Execute()
     {
-        
+        Instantiate(prefabToSpawn, pA.AbilitySpawnPoint.position, pA.AbilitySpawnPoint.rotation);
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Initialize(GameObject abilitySource)
     {
-        
+       pA = abilitySource.GetComponent<Actor_Player>();
+
     }
 }
