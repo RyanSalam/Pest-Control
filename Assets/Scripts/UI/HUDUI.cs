@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class HUDUI : MonoBehaviour
 {
-
-    // Wave management
     [SerializeField] Text waveNumber;
+    // Wave management
     // Update wave number - called on a new wave
     /// <summary>
     /// Update the current wave. Call at start of a new wave. Takes in current wave number

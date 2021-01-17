@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour
 {
-    // Update current health. Caused when taking damage or gaining health
     [SerializeField] Slider healthBar;
     [SerializeField] Image healthBarImage;
+    // Update current health. Caused when taking damage or gaining health
     /// <summary>
     /// Update the health bar to the set value. Takes in floats for current health and maximum health.
     /// </summary>

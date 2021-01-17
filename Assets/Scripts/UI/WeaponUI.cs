@@ -5,8 +5,12 @@ using UnityEngine.UI;
 
 public class WeaponUI : MonoBehaviour
 {
-    // Update heat bar - called when heat level changes
     [SerializeField] Image heatBar;
+    [SerializeField] Image crosshair;
+    [SerializeField] Image hitmarkerImage;
+    [SerializeField] float hitmarkerTime;
+
+    // Update heat bar - called when heat level changes
     /// <summary>
     /// Update the heat bar. Call when heat level changes. Takes in current heat level and max heat level
     /// </summary>
@@ -16,7 +20,6 @@ public class WeaponUI : MonoBehaviour
     }
 
     // Crosshair
-    [SerializeField] Image crosshair;
     public void CrosshairSpread(Vector2 spread)
     {
         crosshair.transform.position = spread;
@@ -32,8 +35,6 @@ public class WeaponUI : MonoBehaviour
     }
 
     // Hit marker
-    [SerializeField] Image hitmarkerImage;
-    [SerializeField] float hitmarkerTime;
     public void DrawHitmarker()
     {
         StopCoroutine("showhitmarker");
