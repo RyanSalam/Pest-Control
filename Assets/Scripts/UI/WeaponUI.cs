@@ -23,13 +23,12 @@ public class WeaponUI : MonoBehaviour
     }
 
     // Toggle canvas
-    [SerializeField] Canvas weaponUICanvas;
     /// <summary>
     /// True - enable, False - disable
     /// </summary>
     public void ToggleCanvas(bool toggle)
     {
-        weaponUICanvas.gameObject.SetActive(toggle);
+        gameObject.SetActive(toggle);
     }
 
     // Hit marker
