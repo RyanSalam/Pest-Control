@@ -18,18 +18,4 @@ public class HealthUI : MonoBehaviour
         healthBar.value = healthAsDecimal;
         healthBarImage.fillAmount = healthAsDecimal;
     }
-
-    // Core health
-    [SerializeField] Slider coreHealthBar;
-    [SerializeField] Image coreHealthBarImage;
-    /// <summary>
-    /// Update the core's health bar to the set value. Takes in floats for current health and maximum health.
-    /// </summary>
-    public void UpdateCoreHealth(float health, float maxHealth)
-    {
-        // Set health to current health as a decimal
-        float healthAsDecimal = health / maxHealth;
-        coreHealthBar.value = health / maxHealth;
-        coreHealthBarImage.fillAmount = healthAsDecimal;
-    }
 }
