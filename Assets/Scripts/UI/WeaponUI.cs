@@ -6,18 +6,18 @@ using UnityEngine.UI;
 public class WeaponUI : MonoBehaviour
 {
     // Update heat bar - called when heat level changes
-    [SerializeField] Slider heatBar;
+    [SerializeField] Image heatBar;
     /// <summary>
     /// Update the heat bar. Call when heat level changes. Takes in current heat level and max heat level
     /// </summary>
     public void UpdateHeatBar(float heatLevel, float maxHeatLevel)
     {
-        heatBar.value = heatLevel / maxHeatLevel;
+        heatBar.fillAmount = heatLevel / maxHeatLevel;
     }
 
     // Crosshair
     [SerializeField] Image crosshair;
-    public void ui_CrosshairSpread(Vector2 spread)
+    public void CrosshairSpread(Vector2 spread)
     {
         crosshair.transform.position = spread;
     }
