@@ -21,17 +21,9 @@ public class LevelManager : MonoSingleton<LevelManager>
     [SerializeField] private Camera spectatorCamera;
 
     [SerializeField] private GameObject EndGameMenu;
-    [SerializeField] private TextMeshProUGUI EndGameText;
 
-    private static LevelManager _instance;
-    public static LevelManager Instance { get{ return _instance; } }
-
-    private void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
+    protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
-        if (_instance) //if instance exists destroy gameObject
-            Destroy(gameObject);
-        else
-            _instance = this; //if instance is this check if there is playerSpawnPoint
         if(playerSpawnPoint == null)
         {
             Debug.LogError("No Spawn Point Found");
@@ -80,7 +72,6 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         EndGameMenu.SetActive(true);
         //EndGameMenu DoTween here 
-        EndGameText.text = playerWon ? "Victory!" : "Defeat!";
     }
 
     public void OnRestartButton()
