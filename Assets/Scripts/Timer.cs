@@ -28,6 +28,7 @@ public class Timer
         playing = playOnStart;
     }
 
+    // Tick function that needs to be run on a monobehavior update loop.
     public void Tick(float rate)
     {
         if (!playing) return;
