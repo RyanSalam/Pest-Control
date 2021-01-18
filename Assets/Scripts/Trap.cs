@@ -27,7 +27,6 @@ public class Trap : Weapon
 
         return true;
     }
-
     public virtual void Build()
     {
         enabled = true;
