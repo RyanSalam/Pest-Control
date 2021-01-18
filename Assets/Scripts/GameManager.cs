@@ -10,8 +10,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void Restart()
     {
-        string s = SceneManager.GetActiveScene().name;
-        LoadScene(s);
+        string scene = SceneManager.GetActiveScene().name;
+        LoadScene(scene);
     }
 
     public void LoadScene(string SceneName)
