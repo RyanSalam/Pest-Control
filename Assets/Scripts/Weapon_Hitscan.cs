@@ -4,14 +4,46 @@ using UnityEngine;
 
 public class Weapon_Hitscan : Weapon
 {
+    //recoil variables
+    [Header("REference Points:")]
+    public Transform recoilPosition;
+    public Transform rotationPoint;
+    [Space(10)]
+
+    [Header("Speed Settings:")]
+    public float positionalRecoilSpeed = 8f;
+    public float rotationalRecoilSpeed = 8f;
+    [Space(10)]
+
+    public float positionalReturnSpeed = 18f;
+    public float rotationalReturnSpeed = 38f;
+    [Space(10)]
+
+    [Header("Amount Settings:")]
+    public Vector3 RecoilRotation = new Vector3(10, 5, 7);
+    public Vector3 RecoilKickBack = new Vector3(0.015f, 0f, -0.2f);
+
+    //[Space(10)]
+    //public Vector3 RecoilRotationAim = new Vector3(10, 4, 6);
+    //public Vector3 RecoilKickBackAim = new Vector3(0.015f, 0f, -0.2f);
+    [Space(10)]
+
+    Vector3 rotationalRecoil;
+    Vector3 positionalRecoil;
+    Vector3 Rot;
+
+    Vector2 weaponRecoil;
+
+    public AnimationCurve animCurve;
+    public float timeFiring = 0f;
+    
     //range variable for our raycast
     public float range = 80.0f;
 
     //this is our hitscan script. The pistol and SMG will use this script
     private void Awake()
     {
-           
-        
+         
     }
 
     public override void Shoot()
@@ -29,6 +61,8 @@ public class Weapon_Hitscan : Weapon
         Ray ray = new Ray(mousePosition, playerCam.transform.forward + recoil);
         RaycastHit hit;
         Debug.DrawRay(mousePosition, playerCam.transform.forward + recoil, Color.red);
+
+        
 
         if (Physics.Raycast(ray, out hit, range))
         {
@@ -49,28 +83,67 @@ public class Weapon_Hitscan : Weapon
                 };
                 //apply damage to our enemy
                 enemyHit.TakeDamage(damageData);
-               
-            }
-            //here we would add our recoil - currently we are waiting for more weapon progress
 
+            }
 
             //instantiating our impact particles for now - hope for an object pool down the line
             if (ImpactParticle != null)
                 Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
 
-            
+
+         
         }
+
+    }
+
+    public override void Release()
+    {
+        base.Release();
+
+        //reseting our recoil
+       
     }
 
     void Start()
     {
-        
+        //this will be removed later on, for testing purposes.
+        player = GameObject.FindObjectOfType<Actor_Player>();
+        player.EquipWeapon(this);
+
+        playerCam = Camera.main;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //when we are firing simulate recoil
+        if (isFiring)
+        {
+            //weapon recoil script
+            rotationalRecoil = Vector3.Lerp(rotationalRecoil, Vector3.zero, rotationalReturnSpeed * Time.deltaTime);
+            positionalRecoil = Vector3.Lerp(positionalRecoil, Vector3.zero, positionalReturnSpeed * Time.deltaTime);
+
+            recoilPosition.localPosition = Vector3.Slerp(recoilPosition.localPosition, positionalRecoil, positionalRecoilSpeed * Time.fixedDeltaTime);
+            Rot = Vector3.Slerp(Rot, rotationalRecoil, rotationalRecoilSpeed * Time.fixedDeltaTime);
+            rotationPoint.localRotation = Quaternion.Euler(Rot);
+
+            //on shoot, not sure if this is the best location
+
+            rotationalRecoil += new Vector3(-RecoilRotation.x, Random.Range(-RecoilRotation.y, RecoilRotation.y), Random.Range(-RecoilRotation.z, RecoilRotation.z));
+            positionalRecoil += new Vector3(Random.Range(-RecoilKickBack.x, RecoilKickBack.x), Random.Range(-RecoilKickBack.y, RecoilKickBack.y), RecoilKickBack.z);
+
+        }
+        else //if we are not firing we need to go back to normal
+        {
+            //weapon recoil script
+            rotationalRecoil = Vector3.Lerp(rotationalRecoil, Vector3.zero, rotationalReturnSpeed * Time.deltaTime);
+            positionalRecoil = Vector3.Lerp(positionalRecoil, Vector3.zero, positionalReturnSpeed * Time.deltaTime);
+        }
+
+        transform.localPosition = positionalRecoil;
+        //transform.rotation = Quaternion.Euler(rotationalRecoil);
+
     }
 
 }

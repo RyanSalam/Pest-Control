@@ -176,7 +176,9 @@ public class Actor_Player : Actor
 
     public void UnequipWeapon()
     {
-        currentWpn.transform.IsChildOf(null);
+        if (currentWpn == null) return;
+
+        currentWpn.transform.SetParent(null);
         currentWpn.gameObject.SetActive(false);
         currentWpn = null;
     }
