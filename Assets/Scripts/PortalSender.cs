@@ -12,60 +12,21 @@ public class PortalSender : MonoBehaviour
     public bool playerCollision = false;
     public bool projectileCollision = false;
 
-    private float forwardOffset;
-
-    [SerializeField] int buildSpace = 1;
-    [SerializeField] LayerMask whatIsBuildable;
-    public bool isPortal = false;
-    [HideInInspector] private float movementSpeed;
-
     public Transform bulletTransformPoint;
-    public Transform portalForward;
 
     public Actor_Player actP;
 
-    [SerializeField] LayerMask whatIsTargetable;
    
     void Update()
     {
-        if (!gameObject.activeSelf)
-            isPortalPlaced = false;
+
     }
 
-    public void Use(Actor_Player user)
-    {
-        user.UnequipWeapon();
-        //user.PortalHandler.EnterState(this);
-    }
-
-    public virtual bool Buildable()
-    {
-        Collider[] objs = Physics.OverlapBox(transform.position, Vector3.one * 0.4f);
-
-        foreach (Collider col in objs)
-        {
-            if(col.GetComponent<Actor_Player>() == true && col != this.GetComponent<Collider>())
-            {
-                Debug.Log("Can't Build Portal");
-                return false;
-            }
-
-        }
-        Debug.Log("Can build Portal");
-        return true;
-    }
-
-    public virtual void Build()
-    {
-        enabled = true;
-        transform.parent = null;
-        isPortalPlaced = true;
-    }
 
     protected virtual void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(transform.position, Vector3.one * 0.6f);
-        Gizmos.color = Color.magenta;
+        //Gizmos.DrawWireCube(transform.position, Vector3.one * 0.6f);
+        //Gizmos.color = Color.magenta;
     }
 
     public void HandlePlayerCollision()

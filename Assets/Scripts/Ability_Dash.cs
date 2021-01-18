@@ -24,7 +24,7 @@ public class Ability_Dash : Ability
 
     public override bool CanExecute()
     {
-        return (dashCounter <= dashLimit);
+        return (dashCounter < dashLimit);
     }
 
     public override void Initialize(GameObject abilitySource)
