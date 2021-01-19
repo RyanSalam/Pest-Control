@@ -46,7 +46,7 @@ public abstract class Weapon : MonoBehaviour
 
     [HideInInspector] public bool canFire = true; //if we can fire or not
     [SerializeField] protected bool isFiring = false; //are we currently firing ?
-
+    [SerializeField] public bool hasAltFire = false;
 
     //our player
     protected Actor_Player player;
@@ -84,6 +84,16 @@ public abstract class Weapon : MonoBehaviour
         //and animator   
         muzzleFlashParticle = GetComponentInChildren<ParticleSystem>();
         animator = GetComponentInChildren<Animator>();
+
+        //check if our gun has an alternate fire attatchment - not sure if this is the best way for it
+        /* 
+         * var altFireComponent = getComponentInChildren(altFireScript)
+         * 
+         * if (altFireComponent)
+         *      hasAltFire = true;
+         * else
+         *      hasAltFire = false;
+         */
     }
 
     public virtual void Shoot()
@@ -106,6 +116,21 @@ public abstract class Weapon : MonoBehaviour
             
         }
            
+    }
+
+    //can either do a function or use a boolean
+    //our alternate fire function
+    public virtual void alternateShoot()
+    {
+        /*
+         * if (hasAltFire)
+         * {
+         *  do stuff -> take away energy from player
+         *  the unique firing patterns can be handled in the attatchemnts script
+         *  call fire on the attatchments script? may need to pass it the spawnpoint/projectile?
+         *  
+         * }
+         */
     }
 
     public virtual void Release()
@@ -141,7 +166,7 @@ public abstract class Weapon : MonoBehaviour
             
             elapsed -= Time.deltaTime;
 
-            //this line is for updating our UI, var is a ui element
+            //this line is for updating our UI, uiVar is a ui element
              // uiVar = elapsed / shotReloadDelay;
             yield return null;
         }
