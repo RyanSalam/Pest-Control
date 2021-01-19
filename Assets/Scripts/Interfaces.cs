@@ -5,7 +5,13 @@ using UnityEngine;
 public interface IEquippable
 {
      void Equip();
-     bool PrimaryFire();
-     bool RealeaseFire();
-     bool SecondaryFire();
+
+     bool PrimaryFireCheck();
+
+     bool SecondaryFireCheck();
+
+     void SecondaryFire();
+
+     void PrimaryFire();
+    
 }
