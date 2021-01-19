@@ -14,7 +14,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         public Actor_Enemy enemyPrefab;
 
         [Tooltip("Number of clones to spawn")]
-        public float numberToSpawn;
+        public int numberToSpawn;
     }
 
     // Wave info data struct to store relevant data
@@ -79,6 +79,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     private int _enemiesRemaining;
     #endregion
 
+    // Creating the timer and initiating it to 0. Subscribing the Spawner Coroutine to run at the end of the build phase, then starts the first wave
     private void Start()
     {
         buildPhaseTimer = new Timer(0, false);
@@ -127,7 +128,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     }
 
     // Decrease the enemies remaining and check for wave end
-    public void EnemyTracker()
+    public void UpdateRemEnemies()
     {
         _enemiesRemaining--;
 
@@ -164,7 +165,7 @@ public class WaveManager : MonoSingleton<WaveManager>
             toSpawn = Instantiate(toSpawn, whereToSpawn.position, whereToSpawn.rotation);
 
             //Adds the enemy tracker function to the enemyAI's death event
-            toSpawn.OnDeath += EnemyTracker;
+            toSpawn.OnDeath += UpdateRemEnemies;
 
             //Waits for the set spawndelay before spawning again.
             yield return new WaitForSeconds(currentWave.spawnDelay);
