@@ -105,7 +105,7 @@ public class Actor_Player : Actor
 
         if (currentWpn != null)
         {
-            if (currentWpn.ButtonPressed)
+            if (currentWpn.PrimaryFireCheck())
                 currentWpn.Shoot();
 
             if (Input.GetButtonUp("Fire1"))

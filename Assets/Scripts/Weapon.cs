@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour, IEquippable
 {
+
     //TODO: clean up variable names, look for more useful things we can add
 
     //This is our weapons base class,
@@ -18,8 +19,8 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected int Damage = 1;
     //[SerializeField] public enum ammoType { projectilePrefab, RayCast, trapPrefab }; //using an enum to determine our ammo type, this way can use a switch on weapon scripts
     [Tooltip("Is the weapon automatic?")] [SerializeField] protected bool auto = false;
+  
 
-    
     [Space(10)]
 
     [Header("Weapon Cooldown Stats")]
@@ -46,10 +47,16 @@ public abstract class Weapon : MonoBehaviour
 
     [HideInInspector] public bool canFire = true; //if we can fire or not
     [SerializeField] protected bool isFiring = false; //are we currently firing ?
-    [SerializeField] public bool hasAltFire = false;
+    [SerializeField] protected AltFireAttachment weaponAttachment;
+    [SerializeField] protected Transform firePoint;
 
-    //our player
-    protected Actor_Player player;
+    public Transform FirePoint
+    {
+        get { return firePoint; }
+    }
+
+   //our player
+   protected Actor_Player player;
     public Actor_Player Player
     {
         get { return player; }
@@ -67,33 +74,26 @@ public abstract class Weapon : MonoBehaviour
 
     //this is set on our weapon script when we shoot
     //this will maybe be changed to if proj -> projFire() elseif raycast ->
-    public bool ButtonPressed
-    {
-        get
-        {
-            if (auto) return Input.GetButton("Fire1");
-            else return Input.GetButtonDown("Fire1");
-        }
-    }
 
-   
 
-    void Start()
+
+
+    protected virtual void Start()
     {
         //grab our muzzle flash component, 
         //and animator   
         muzzleFlashParticle = GetComponentInChildren<ParticleSystem>();
         animator = GetComponentInChildren<Animator>();
 
-        //check if our gun has an alternate fire attatchment - not sure if this is the best way for it
-        /* 
-         * var altFireComponent = getComponentInChildren(altFireScript)
-         * 
-         * if (altFireComponent)
-         *      hasAltFire = true;
-         * else
-         *      hasAltFire = false;
-         */
+        //initializing our weapon
+        if (weaponAttachment != null)
+            weaponAttachment.initialize(this);
+      
+    }
+
+    protected virtual void Update()
+    {
+        
     }
 
     public virtual void Shoot()
@@ -118,20 +118,6 @@ public abstract class Weapon : MonoBehaviour
            
     }
 
-    //can either do a function or use a boolean
-    //our alternate fire function
-    public virtual void alternateShoot()
-    {
-        /*
-         * if (hasAltFire)
-         * {
-         *  do stuff -> take away energy from player
-         *  the unique firing patterns can be handled in the attatchemnts script
-         *  call fire on the attatchments script? may need to pass it the spawnpoint/projectile?
-         *  
-         * }
-         */
-    }
 
     public virtual void Release()
     {
@@ -176,4 +162,50 @@ public abstract class Weapon : MonoBehaviour
         currentShots = 0;
         Release(); //may not need this 
     }
+
+    public virtual void Equip()
+    {
+        lastFired = 0.0f;
+    }
+
+    public virtual bool PrimaryFireCheck()
+    {
+        if (auto) return Input.GetButton("Fire1");
+        else return Input.GetButtonDown("Fire1");
+    }
+    public virtual void PrimaryFire()
+    {
+        //if these are not true we do not do anything, so nothing below will get run
+        if (!(Time.time > fireRate + lastFired && canFire == true))
+            return;
+
+        //update our weapon variables
+        lastFired = Time.time; //reset our last fired
+        isFiring = true; //we are firing
+        currentShots += shotIncrease; //increment our current shots
+
+        //should trigger our weapon overheating-breaking animation
+        if (currentShots >= maxShots)
+        {
+            canFire = false; //we cannot fire now
+            //temporary coroutine until we get smarter - coroutine toggles our weapon variables
+            StartCoroutine(WeaponCooldown());
+
+        }
+    }
+
+    public virtual bool SecondaryFireCheck()
+    {
+        return Input.GetButtonDown("Fire2");
+    }
+
+    public virtual void SecondaryFire()
+    {
+        //if (player.energy > weaponAttachment.energyCost)
+            //player.energy -=  weaponAttachment.energyCost
+        weaponAttachment.AltShoot();
+  
+    }
 }
+
+

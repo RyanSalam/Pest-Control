@@ -33,4 +33,24 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     {
 
     }
+
+    public bool PrimaryFireCheck()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public bool SecondaryFireCheck()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    void IEquippable.SecondaryFire()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    void IEquippable.PrimaryFire()
+    {
+        throw new System.NotImplementedException();
+    }
 }
