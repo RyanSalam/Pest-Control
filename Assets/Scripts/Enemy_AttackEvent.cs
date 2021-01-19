@@ -13,6 +13,7 @@ public class Enemy_AttackEvent : MonoBehaviour
     {
         // Assign the enemy reference accordingly.
         thisEnemy = GetComponentInParent<Actor_Enemy>();
+        enabled = false;
     }
 
     public void StartAttack()
