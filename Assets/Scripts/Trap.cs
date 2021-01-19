@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap : Weapon
+public class Trap : MonoBehaviour
 {
-    public Item item;
-    public float forwardOffset;
-
-    [SerializeField] protected int buildSpace = 1;
     [SerializeField] protected LayerMask whatIsBuildable;
     [SerializeField] protected int trapDamage = 1;
     [SerializeField] protected int maxUses;
@@ -27,7 +23,7 @@ public class Trap : Weapon
 
         return true;
     }
-    public virtual void Build()
+    public void Build()
     {
         enabled = true;
         transform.parent = null;
