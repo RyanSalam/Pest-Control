@@ -16,9 +16,10 @@ public class Item : ScriptableObject
     //trap
     private int _refundCost;
 
+
     public void Use() //equips the item
     {
-        //LevelManager.player.EquipWeapon(weaponToEquip); // equiping weapon 
+        LevelManager.Instance.Player.EquipWeapon(weaponToEquip); // equiping weapon 
     }
     public virtual void ItemPurchased() //purchases an Item
     {
