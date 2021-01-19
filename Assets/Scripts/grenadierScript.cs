@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class grenadierScript : MonoBehaviour
+public class GrenadierScript : MonoBehaviour
 {
     public Rigidbody projectile;
     // Start is called before the first frame update

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class altFireAttachment : ScriptableObject
+public abstract class AltFireAttachment : ScriptableObject
 {
     protected Weapon weapon;
 
@@ -20,7 +20,7 @@ public abstract class altFireAttachment : ScriptableObject
 }
 
 [CreateAssetMenu(fileName = "New ProjectileAttachment", menuName = "Attachment/Projectile")]
-public class ProjectileAttachment : altFireAttachment
+public class ProjectileAttachment : AltFireAttachment
 {
     [SerializeField] protected Rigidbody projectilePrefab;
     public override void AltShoot()

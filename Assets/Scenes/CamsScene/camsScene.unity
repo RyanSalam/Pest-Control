@@ -258,6 +258,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5769632365849720983, guid: 3dbfccad6c40edf45aa0dc589ff285d9,
+        type: 3}
+      propertyPath: weaponAttachment
+      value: 
+      objectReference: {fileID: 11400000, guid: a428c05eb6af12f47b86d551ccbca921,
+        type: 2}
     - target: {fileID: 9134610054443472385, guid: 3dbfccad6c40edf45aa0dc589ff285d9,
         type: 3}
       propertyPath: m_Name
@@ -343,6 +349,8 @@ MonoBehaviour:
   lastFired: 0
   canFire: 1
   isFiring: 0
+  weaponAttachment: {fileID: 0}
+  firePoint: {fileID: 0}
   recoilPosition: {fileID: 513259414}
   rotationPoint: {fileID: 1932884872}
   positionalRecoilSpeed: 8

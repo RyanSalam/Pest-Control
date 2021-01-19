@@ -47,7 +47,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     [HideInInspector] public bool canFire = true; //if we can fire or not
     [SerializeField] protected bool isFiring = false; //are we currently firing ?
-    [SerializeField] protected altFireAttachment weaponAttachment;
+    [SerializeField] protected AltFireAttachment weaponAttachment;
     [SerializeField] protected Transform firePoint;
 
     public Transform FirePoint
