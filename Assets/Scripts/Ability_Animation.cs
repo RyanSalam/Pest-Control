@@ -6,7 +6,7 @@ using UnityEngine;
 public class Ability_Animation : Ability
 {
     private Actor_Player pA;
-    private string triggerName;
+    [SerializeField] private string triggerName;
 
     public override void Execute()
     {

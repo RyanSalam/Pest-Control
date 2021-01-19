@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7864417393676115712}
   - component: {fileID: 7864417393676115713}
   - component: {fileID: 7864417393676115715}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 7864417394028300084}
   - component: {fileID: 7864417394028300073}
   - component: {fileID: 7864417394028300072}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 7864417394227104954}
   - component: {fileID: 7864417394227104955}
   - component: {fileID: 7864417394227104952}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7864417394483169468}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AttackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
