@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TrapPlacement : MonoBehaviour, IEquippable
 {
+    [SerializeField] protected LayerMask whatIsBuildable;
     public void Equip()
     {
       
@@ -22,5 +23,14 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     public bool SecondaryFire()
     {
         return true;
+    }
+
+    public virtual bool Buildable()
+    {
+        return true;
+    }
+    public void Build()
+    {
+
     }
 }

@@ -32,7 +32,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         }
         //uncomment after GameManager is finnished line 41-42
         //player = Instantiate(GameManager.playerPrefab, playerSpawnPoint.transform.position, Quaternion.identity); 
-        //_player.DamageBody.OnDeath += Respawn;
+        //_player.OnDeath += Respawn;
 
         if (_player == null)
         {

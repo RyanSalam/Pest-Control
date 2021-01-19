@@ -4,30 +4,60 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    [SerializeField] protected LayerMask whatIsBuildable;
     [SerializeField] protected int trapDamage = 1;
-    [SerializeField] protected int maxUses;
-    [HideInInspector] protected float movementSpeed;
+    [SerializeField] protected int maxUses = 10;
+    [SerializeField] protected float buildDuration;
+    protected int currentUses;
+    bool isTrapBuilt;
+    Timer buildTimer;
+    protected Animator anim;
 
-    public virtual bool Buildable()
+
+    protected virtual void Start()
     {
-        Collider[] objects = Physics.OverlapBox(transform.position, Vector3.one * 0.4f);
-
-        foreach (Collider col in objects)
-        {
-            if (col.GetComponent<Actor>() == true && col != this.GetComponent<Collider>())
-            {
-                return false;
-            }
-        }
-
-        return true;
+        buildTimer = new Timer(buildDuration, false);
+        buildTimer.OnTimerEnd += () => isTrapBuilt = true; //lamda expression: delegates without parameters and dont have an excessive function 
+        anim = GetComponent<Animator>();
     }
-    public void Build()
+
+    protected virtual void Update()
     {
-        enabled = true;
-        transform.parent = null;
-        GetComponent<AudioCue>().PlayAudioCue(); //for audio
+        // checking if the trap is being built to false so that the build timer can take time during combat phase 
+        if (isTrapBuilt == false) 
+        {
+            buildTimer.Tick(Time.deltaTime); //increasing build timer before the trap is built
+            return;
+        }
+    }
+
+    public virtual void Activate()
+    {
+       /* if (!isBuilt) // should be implemented on the top like this for other trap scripts if overiding
+        {
+            return;
+        }
+       */
+        // when trap is activated
+        currentUses++; //add current uses 
+        if (currentUses >= maxUses) //checks if the current trap uses is greater or equal to max
+        {
+            gameObject.SetActive(false);  //setting the game object to false 
+        }
+    }
+
+    protected virtual void OnEnable()
+    {
+        //function that gets called when a trap is placed
+        if(WaveManager.Instance.IsBuildPhase == false) // checking if it is not on the build phase 
+        {
+            buildTimer.PlayFromStart(); //starting buildTimer
+        }
+        else
+        {
+            isTrapBuilt = true; //if its on build phase instantly built the trap 
+        }
+        currentUses = 0; //this should always occur when you spawn a trap so that it resets its current uses and dosent destroy instantly 
+
     }
 
     protected virtual void OnDrawGizmos()
@@ -36,7 +66,7 @@ public class Trap : MonoBehaviour
         Gizmos.color = Color.red;
     }
 
-    public virtual void Interact(Actor_Player player)
+    public virtual void Interact()
     {
         //player energy refund here
     }
