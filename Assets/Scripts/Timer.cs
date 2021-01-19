@@ -29,6 +29,9 @@ public class Timer
     }
 
     // Tick function that needs to be run on a monobehavior update loop.
+    // Lets the timer increment and reach to it's duration. 
+    // Normal pass would be time.deltaTime but we could pass in our custom rates as well.
+    // Could be pretty much used as a counter as well.
     public void Tick(float rate)
     {
         if (!playing) return;
@@ -50,6 +53,11 @@ public class Timer
     {
         remainingSeconds = 0f;
         playing = true;
+    }
+
+    public void SetDuration(float newDuration)
+    {
+        totalSeconds = newDuration;
     }
 
     public void Stop()

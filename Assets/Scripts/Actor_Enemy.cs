@@ -63,7 +63,7 @@ public class Actor_Enemy : Actor
 
     [Tooltip("Hard references for player and core to aid in target switching.")]
     public Actor player;
-    public Actor core;
+    public Actor_Core core;
 
     // Int to track how many times the enemy has been hit.
     [HideInInspector] public int hitsRecieved = 0;
@@ -95,9 +95,9 @@ public class Actor_Enemy : Actor
         // Setting the movement speed of the Enemy's agent to the value of the Enemy's movement speed.
         _agent.speed = moveSpeed;
 
-        //// Player and Core reference
-        //player = LevelManager.Instance.player;
-        //core = LevelManager.Instance.core;
+        // Player and Core reference
+        player = LevelManager.Instance.Player;
+        core = LevelManager.Instance.Core;
 
         // Subscribing the retaliate function to on damage taken.
         OnDamageTaken += TakeDamage;
@@ -112,6 +112,12 @@ public class Actor_Enemy : Actor
         // If stopped and there is a target then trigger the attack animation.
         if (target != null && Vector3.Distance(target.transform.position, attackBox.transform.position) <= attackRange)
             Anim.SetTrigger("Attacking");
+
+        // If the target is the player and they are outside detection loss range switch to core, else default to core
+        if (target == player && Vector3.Distance(target.transform.position, transform.position) > detectionLossRange)
+            newTarget = core;
+        else
+            newTarget = core;
 
         // Set the target on the animator accordingly.
         if (target)
