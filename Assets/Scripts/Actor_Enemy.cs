@@ -73,19 +73,7 @@ public class Actor_Enemy : Actor
     {
         base.Start();
         // Run the initialise function.
-        Init();
-    }
-
-    protected override void Awake()
-    {
-        base.Awake();
-        // Run the initialise function
-        Init();
-    }
-
-    // Function to intialise variables that need initialised
-    private void Init()
-    {
+        
         // Agent and Animator reference.
         _agent = GetComponent<NavMeshAgent>();
 
@@ -98,9 +86,12 @@ public class Actor_Enemy : Actor
         // Player and Core reference
         player = LevelManager.Instance.Player;
         core = LevelManager.Instance.Core;
+    }
 
-        // Subscribing the retaliate function to on damage taken.
-        OnDamageTaken += TakeDamage;
+    protected override void Awake()
+    {
+        base.Awake();
+        // Run the initialise function
     }
 
     private void Update()

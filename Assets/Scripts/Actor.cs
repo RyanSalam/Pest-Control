@@ -24,7 +24,7 @@ public abstract class Actor : MonoBehaviour
         get { return m_currentHealth; }
         set
         {
-            m_currentHealth = Mathf.Clamp(m_currentHealth + value, 0f, maxHealth);
+            m_currentHealth = Mathf.Clamp(value, 0f, maxHealth);
             OnHealthChanged?.Invoke(maxHealth, m_currentHealth); //calls health delegate
 
             if (m_currentHealth <= 0)
@@ -54,6 +54,7 @@ public abstract class Actor : MonoBehaviour
     protected virtual void Start()
     {
         m_currentHealth = maxHealth;
+        isDead = false;
     }
 
     // Take Damage should have two different functions.
