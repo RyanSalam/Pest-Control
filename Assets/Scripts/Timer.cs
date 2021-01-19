@@ -57,7 +57,7 @@ public class Timer
 
     public void SetDuration(float newDuration)
     {
-        remainingSeconds = newDuration;
+        totalSeconds = newDuration;
     }
 
     public void Stop()
