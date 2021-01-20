@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: grenadier
-  m_EditorClassIdentifier: Assembly-CSharp::ProjectileAttachment
-  energyCostPerFire: 50
-  secondaryDamage: 8
-  projectilePrefab: {fileID: 7513803429035349772, guid: 99e04bfbdacf3cc46a968734c73c5a22,
-    type: 3}
+  m_Script: {fileID: 11500000, guid: e68f6bb7368e37c408c710d9af0cf4ca, type: 3}
+  m_Name: New Item
+  m_EditorClassIdentifier: 
+  itemName: 
+  itemCost: 0
+  itemIcon: {fileID: 0}
+  itemDescription: 
+  equipSound: {fileID: 0}
+  EquipableToSpawn: {fileID: 0}

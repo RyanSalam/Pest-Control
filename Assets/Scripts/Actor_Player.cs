@@ -36,7 +36,8 @@ public class Actor_Player : Actor
 
     [Header("Weapon")]
     [SerializeField] private Transform _weaponHolder;
-    [SerializeField] private IEquippable _currentEquiped; 
+    [SerializeField] private IEquippable _currentEquiped;
+    private int itemIndex = 0;
 
     public Transform WeaponHolder { get { return _weaponHolder; } }
     private IEquippable CurrentEquipped { get { return _currentEquiped; } }
@@ -50,6 +51,8 @@ public class Actor_Player : Actor
     protected override void Start()
     {
         base.Start();
+
+        Inventory.Instance.StartingItem.Use();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -104,6 +107,15 @@ public class Actor_Player : Actor
 
             if (Input.GetButtonDown(AbilityTwo.AbilityButton) && AbilityTwo.CanExecute())
                 AbilityTwo.Execute();
+        }
+
+        float mouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
+        if (mouseWheel != 0)
+        {
+            itemIndex += (int)Input.GetAxis("Mouse ScrollWheel");
+            // We modulus it so we can never go above the max number of items we have in our inventory
+            itemIndex %= Inventory.Instance.InventoryList.Count; 
+            Inventory.Instance.InventoryList[itemIndex].Use();
         }
 
         if (_currentEquiped != null)
@@ -163,6 +175,7 @@ public class Actor_Player : Actor
 
     public void EquipWeapon(IEquippable newWeapon)
     {
+        if (newWeapon == CurrentEquipped) return;
         // We will first unequip our previous weapon
         // We then make our new weapon a child of our weaponHolder transform
         // then reset the local position so it snaps directly to it's parent position
