@@ -24,20 +24,32 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
-        if(playerSpawnPoint == null)
-        {
-            Debug.LogError("No Spawn Point Found");
-            //Respawn Player if there is no Spawn Point Found
-            playerSpawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform; 
-        }
-        //uncomment after GameManager is finnished line 41-42
-        //player = Instantiate(GameManager.playerPrefab, playerSpawnPoint.transform.position, Quaternion.identity); 
-        //_player.OnDeath += Respawn;
+        base.Awake();
 
-        if (_player == null)
+        if (playerSpawnPoint == null)
         {
-            Debug.LogError("There was no player selected from character selection");
+            //Respawn Player if there is no Spawn Point Found
+            playerSpawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
+
+            if (playerSpawnPoint == null)
+                Debug.LogError("No Spawn Point Found you cunt!");
         }
+
+        if (GameManager.selectedPlayer != null)
+        {
+            // Spawn Player from gameManager.
+            _player = Instantiate(GameManager.selectedPlayer, playerSpawnPoint.transform.position, Quaternion.identity);
+        }
+
+        else
+        {
+            _player = FindObjectOfType<Actor_Player>();
+
+            if (_player == null)
+                Debug.LogError("THere's no player in your scene you cunt! Are you even trying?");
+        }
+
+        _player.OnDeath += Respawn;       
     }
     
     private void Respawn() // respawning character and Setting Spectator Camera
@@ -77,6 +89,6 @@ public class LevelManager : MonoSingleton<LevelManager>
     public void OnRestartButton()
     {
         string scene = SceneManager.GetActiveScene().name;
-        //GameManager.instance.LoadScene(scene); //uncomment after GameManager is finnished
+        GameManager.Instance.LoadScene(scene);
     }
 }
