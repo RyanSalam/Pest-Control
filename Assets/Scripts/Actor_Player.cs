@@ -112,9 +112,9 @@ public class Actor_Player : Actor
         float mouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
         if (mouseWheel != 0)
         {
-            Debug.Log(mouseWheel);
             itemIndex += (int)Input.GetAxis("Mouse ScrollWheel");
-            itemIndex %= Inventory.Instance.InventoryList.Count;
+            // We modulus it so we can never go above the max number of items we have in our inventory
+            itemIndex %= Inventory.Instance.InventoryList.Count; 
             Inventory.Instance.InventoryList[itemIndex].Use();
         }
 
