@@ -6,27 +6,30 @@ public class Weapon_Hitscan : Weapon
 {
     //recoil variables
     [Header("REference Points:")]
-    public Transform recoilPosition;
-    public Transform rotationPoint;
+    [SerializeField] protected Transform recoilPosition;
+    [SerializeField] protected Transform rotationPoint;
     [Space(10)]
 
     [Header("Speed Settings:")]
-    public float positionalRecoilSpeed = 8f;
-    public float rotationalRecoilSpeed = 8f;
+    [SerializeField] protected float positionalRecoilSpeed = 8f;
+    [SerializeField] protected float rotationalRecoilSpeed = 8f;
     [Space(10)]
 
-    public float positionalReturnSpeed = 18f;
-    public float rotationalReturnSpeed = 38f;
+    [SerializeField] protected float positionalReturnSpeed = 18f;
+    [SerializeField] protected float rotationalReturnSpeed = 38f;
     [Space(10)]
 
     [Header("Amount Settings:")]
-    public Vector3 RecoilRotation = new Vector3(10, 5, 7);
-    public Vector3 RecoilKickBack = new Vector3(0.015f, 0f, -0.2f);
+    [SerializeField] protected Vector3 RecoilRotation = new Vector3(10, 5, 7);
+    [SerializeField] protected Vector3 RecoilKickBack = new Vector3(0.015f, 0f, -0.2f);
 
     //[Space(10)]
     //public Vector3 RecoilRotationAim = new Vector3(10, 4, 6);
     //public Vector3 RecoilKickBackAim = new Vector3(0.015f, 0f, -0.2f);
     [Space(10)]
+
+    [SerializeField] protected float bloomX = 1f;
+    [SerializeField] protected float bloomY = 1f;
 
     Vector3 rotationalRecoil;
     Vector3 positionalRecoil;
@@ -34,11 +37,11 @@ public class Weapon_Hitscan : Weapon
 
     Vector2 weaponRecoil;
 
-    public AnimationCurve animCurve;
-    public float timeFiring = 0f;
-    
+    [SerializeField] protected AnimationCurve animCurve;
+    [SerializeField] protected float timeFiring = 0f;
+
     //range variable for our raycast
-    public float range = 80.0f;
+    [SerializeField] protected float range = 80.0f;
 
     //this is our hitscan script. The pistol and SMG will use this script
     private void Awake()
@@ -46,18 +49,29 @@ public class Weapon_Hitscan : Weapon
          
     }
 
-    public override void Shoot()
+    public override void PrimaryFire()
     {
         //our base shoot function is what oversees our weapon heating and cooldown (reload) functionality
         //it increments shots -> overheats -> cooldowns
-        base.Shoot();
+        base.PrimaryFire();
 
         //muzzle flash creation
         if (muzzleFlashParticle != null)
             muzzleFlashParticle.Play();
 
         //Ray mouseRay = playerCam.ScreenPointToRay(Input.mousePosition);
-        Vector3 mousePosition = playerCam.ScreenToWorldPoint(Input.mousePosition);
+        //Vector2 mousePosition = new Vector2(Random.Range(-bloomX, bloomX)
+        
+        //Random spread along axis
+        float spreadX = Random.Range(-bloomX, bloomX);
+        float spreadY = Random.Range(-bloomY, bloomY);
+
+        //converting vector2 to vector3 so it can be used with mouseposition
+        Vector3 spreadVector = new Vector2(spreadX, spreadY);
+
+        //adding bloom to the mouse position
+        Vector3 mousePosition = playerCam.ScreenToWorldPoint(Input.mousePosition + spreadVector);
+
         Ray ray = new Ray(mousePosition, playerCam.transform.forward + recoil);
         RaycastHit hit;
         Debug.DrawRay(mousePosition, playerCam.transform.forward + recoil, Color.red);
@@ -90,8 +104,6 @@ public class Weapon_Hitscan : Weapon
             if (ImpactParticle != null)
                 Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
 
-
-         
         }
 
     }
@@ -104,8 +116,9 @@ public class Weapon_Hitscan : Weapon
        
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         //this will be removed later on, for testing purposes.
         player = GameObject.FindObjectOfType<Actor_Player>();
         player.EquipWeapon(this);
@@ -115,8 +128,9 @@ public class Weapon_Hitscan : Weapon
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         //when we are firing simulate recoil
         if (isFiring)
         {
