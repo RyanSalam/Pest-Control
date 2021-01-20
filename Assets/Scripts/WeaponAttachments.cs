@@ -29,4 +29,12 @@ public class ProjectileAttachment : AltFireAttachment
     }
 }
 
+public class RayCastAttachment : AltFireAttachment
+{
+    public override void AltShoot()
+    {
+        
+    }
+}
+
 
