@@ -123,17 +123,6 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     {
         isFiring = false;
     }
-
-    public void EquipWeapon()
-    {
-        lastFired = 0.0f;
-    }
-
-    public void UnEquipWeapon()
-    {
-        
-    }
-
     protected float GetHeatRatio()
     {
         Debug.Log("Heat Ratio is: " + (float)currentShots / (float)maxShots);
@@ -165,7 +154,16 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     public virtual void Equip()
     {
+        transform.SetParent(player.WeaponHolder);
+        transform.localPosition = Vector3.zero;
+        gameObject.SetActive(true);
+
         lastFired = 0.0f;
+    }
+
+    public virtual void Unequip()
+    {
+
     }
 
     public virtual bool PrimaryFireCheck()

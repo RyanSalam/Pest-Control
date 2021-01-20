@@ -4,14 +4,11 @@ using UnityEngine;
 
 public interface IEquippable
 {
-     void Equip();
-
-     bool PrimaryFireCheck();
-
-     bool SecondaryFireCheck();
-
-     void SecondaryFire();
-
-     void PrimaryFire();
+    void Equip();
+    void Unequip();
+    bool PrimaryFireCheck();
+    bool SecondaryFireCheck();
+    void SecondaryFire();
+    void PrimaryFire();
     
 }

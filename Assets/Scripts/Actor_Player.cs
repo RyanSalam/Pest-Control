@@ -36,7 +36,10 @@ public class Actor_Player : Actor
 
     [Header("Weapon")]
     [SerializeField] private Transform _weaponHolder;
-    [SerializeField] private Weapon currentWpn; 
+    [SerializeField] private IEquippable _currentEquiped; 
+
+    public Transform WeaponHolder { get { return _weaponHolder; } }
+    private IEquippable CurrentEquipped { get { return _currentEquiped; } }
 
     protected override void Awake()
     {
@@ -103,15 +106,14 @@ public class Actor_Player : Actor
                 AbilityTwo.Execute();
         }
 
-        if (currentWpn != null)
+        if (_currentEquiped != null)
         {
-            if (currentWpn.PrimaryFireCheck())
-                currentWpn.Shoot();
+            if (_currentEquiped.PrimaryFireCheck())
+                _currentEquiped.PrimaryFire();
 
-            if (Input.GetButtonUp("Fire1"))
-                currentWpn.Release();
+            if (_currentEquiped.SecondaryFireCheck())
+                _currentEquiped.SecondaryFire();
         }
-
     }
 
     private void HandleMovement()
@@ -159,27 +161,16 @@ public class Actor_Player : Actor
         controlsEnabled = true;
     }
 
-    public void EquipWeapon(Weapon newWeapon)
+    public void EquipWeapon(IEquippable newWeapon)
     {
         // We will first unequip our previous weapon
         // We then make our new weapon a child of our weaponHolder transform
         // then reset the local position so it snaps directly to it's parent position
 
-        UnequipWeapon();
+        if (_currentEquiped != null)
+            _currentEquiped.Unequip();
 
-        newWeapon.gameObject.SetActive(true);
-        newWeapon.transform.SetParent(_weaponHolder);
-        newWeapon.transform.localPosition = Vector3.zero; // Resetting the transform after we child it.
-
-        currentWpn = newWeapon;
-    }
-
-    public void UnequipWeapon()
-    {
-        if (currentWpn == null) return;
-
-        currentWpn.transform.SetParent(null);
-        currentWpn.gameObject.SetActive(false);
-        currentWpn = null;
+        newWeapon.Equip();
+        _currentEquiped = newWeapon;
     }
 }
