@@ -163,7 +163,8 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     public virtual void Unequip()
     {
-
+        transform.SetParent(null);
+        gameObject.SetActive(false);
     }
 
     public virtual bool PrimaryFireCheck()
