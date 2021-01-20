@@ -9,30 +9,34 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     [SerializeField] protected float verticalSearch; // max distanace for raycast 
     [SerializeField] protected LayerMask whatIsBuildable; // detecting groundlayer for raycast 
     [SerializeField] protected int trapPrice;
-    public void Equip()
+    public bool isDebuging;
+  
+    public virtual void Awake()
     {
-        gameObject.SetActive(true); //setting trap gameobject to active when equiping 
+        //gameObject.SetActive(false);
     }
 
-    public virtual void Start()
+    public void Equip()
     {
-        gameObject.SetActive(false);
+        transform.SetParent(LevelManager.Instance.Player.WeaponHolder);
+        transform.localPosition = Vector3.zero; //ressetting position
+        gameObject.SetActive(true); //setting trap gameobject to active when equiping 
     }
 
     private void Update()
     {
-        transform.position = new Vector3(offset, LevelManager.Instance.Player.transform.position.y, 0); //setting offset in front of the player
+        transform.localPosition = new Vector3(offset, LevelManager.Instance.Player.transform.position.y, 0); //setting offset in front of the player
 
         RaycastHit outHit;
-        Ray floorCast = new Ray(transform.position, Vector3.down); // cast from trapObject to spawn 
+        Ray floorCast = new Ray(transform.localPosition, Vector3.down); // cast from trapObject to spawn 
         Physics.Raycast(floorCast, out outHit, verticalSearch, whatIsBuildable);
-        transform.position = outHit.collider.transform.position; // assigns the trap to where the raycast hits
+        transform.localPosition = outHit.collider.ClosestPointOnBounds(outHit.point); // assigns the trap to where the raycast hits
     }
 
     public void PrimaryFire()
     {
         //setting the trapGameobject to spawn on where the new position is located by raycast
-        trapToSpawn.transform.position = transform.position;
+        trapToSpawn.transform.position = transform.localPosition;
         trapToSpawn.SetActive(true);
     }
 
@@ -54,5 +58,13 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     public void Unequip()
     {
         gameObject.SetActive(false);
+    }
+
+    protected void OnDrawGizmos()
+    {
+        if(isDebuging)
+        {
+            Debug.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - verticalSearch, transform.position.z), Color.green);
+        }
     }
 }

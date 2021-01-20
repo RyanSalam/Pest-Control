@@ -24,6 +24,8 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
+        base.Awake();
+
         if(playerSpawnPoint == null)
         {
             Debug.LogError("No Spawn Point Found");
@@ -36,6 +38,8 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         if (_player == null)
         {
+            _player = FindObjectOfType<Actor_Player>();
+
             Debug.LogError("There was no player selected from character selection");
         }
     }

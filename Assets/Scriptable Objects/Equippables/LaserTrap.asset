@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e68f6bb7368e37c408c710d9af0cf4ca, type: 3}
-  m_Name: TestItem
+  m_Name: LaserTrap
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Laser Trap
   itemCost: 0
   itemIcon: {fileID: 0}
   itemDescription: 
   equipSound: {fileID: 0}
-  EquipableToSpawn: {fileID: 0}
+  EquipableToSpawn: {fileID: 6662004006499764242, guid: 410fea32844358448adb7aa605816412,
+    type: 3}
