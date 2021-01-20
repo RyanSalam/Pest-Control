@@ -5,51 +5,32 @@ using UnityEngine;
 public class TrapPlacement : MonoBehaviour, IEquippable
 {
     [SerializeField] protected LayerMask whatIsBuildable;
+    
     public void Equip()
     {
       
     }
-
-    public bool PrimaryFire()
+    public void PrimaryFire()
     {
-        return true;
-    }
-
-    public bool RealeaseFire()
-    {
-        return true;
-    }
-
-    public bool SecondaryFire()
-    {
-        return true;
-    }
-
-    public virtual bool Buildable()
-    {
-        return true;
-    }
-    public void Build()
-    {
-
+        throw new System.NotImplementedException();
     }
 
     public bool PrimaryFireCheck()
+    {
+        return Input.GetButtonDown("Fire1");
+    }
+
+    public void SecondaryFire()
     {
         throw new System.NotImplementedException();
     }
 
     public bool SecondaryFireCheck()
     {
-        throw new System.NotImplementedException();
+        return Input.GetButtonDown("Fire2");
     }
 
-    void IEquippable.SecondaryFire()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    void IEquippable.PrimaryFire()
+    public void Unequip()
     {
         throw new System.NotImplementedException();
     }
