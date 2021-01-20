@@ -31,6 +31,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
 
     public void PrimaryFire()
     {
+        //setting the trapGameobject to spawn on where the new position is located by raycast
         trapToSpawn.transform.position = transform.position;
         trapToSpawn.SetActive(true);
     }
