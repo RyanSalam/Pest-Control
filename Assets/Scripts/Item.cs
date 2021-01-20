@@ -12,14 +12,18 @@ public class Item : ScriptableObject
     public string itemDescription;
     //weapon 
     public AudioClip equipSound; 
-    public Weapon weaponToEquip;
+    public GameObject EquipableToSpawn;
     //trap
     private int _refundCost;
 
 
     public void Use() //equips the item
     {
-        LevelManager.Instance.Player.EquipWeapon(weaponToEquip); // equiping weapon 
+        if (!Inventory.Instance.Equipables.ContainsKey(this))
+            return;
+
+        LevelManager.Instance.Player.
+            EquipWeapon(Inventory.Instance.Equipables[this]); // equiping weapon 
     }
     public virtual void ItemPurchased() //purchases an Item
     {
