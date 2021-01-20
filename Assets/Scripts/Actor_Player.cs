@@ -52,8 +52,6 @@ public class Actor_Player : Actor
     {
         base.Start();
 
-        Inventory.Instance.StartingItem.Use();
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -62,6 +60,8 @@ public class Actor_Player : Actor
 
         if (AbilityTwo != null)
             AbilityTwo.Initialize(gameObject);
+
+        Inventory.Instance.StartingItem.Use();
     }
 
     protected virtual void Update()

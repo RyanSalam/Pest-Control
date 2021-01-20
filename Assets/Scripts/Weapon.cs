@@ -93,7 +93,11 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     protected virtual void Update()
     {
-        
+        if (isFiring)
+        {
+            if (Input.GetButtonUp("Fire1"))
+                Release();
+        }
     }
 
     public virtual void Shoot()
