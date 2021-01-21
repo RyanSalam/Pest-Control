@@ -39,10 +39,12 @@ public class LevelManager : MonoSingleton<LevelManager>
         {
             // Spawn Player from gameManager.
             _player = Instantiate(GameManager.selectedPlayer, playerSpawnPoint.transform.position, Quaternion.identity);
+            
         }
 
         else
         {
+            Debug.Log("No GameManager found, Searching for player here");
             _player = FindObjectOfType<Actor_Player>();
 
             if (_player == null)

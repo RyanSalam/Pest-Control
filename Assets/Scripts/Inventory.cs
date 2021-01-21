@@ -29,15 +29,17 @@ public class Inventory : MonoSingleton<Inventory>
     {
         base.Awake();
         m_equipables = new Dictionary<Item, IEquippable>();
+
+        if (startingItem != null)
+        {
+            InventoryAdd(startingItem);
+        }
     }
 
     //checks to see if the starting item exists then adds it into the inventory list
     private void Start()
     {
-        if(startingItem != null) 
-        {
-            InventoryAdd(startingItem);            
-        }
+
     }
     public void InventoryAdd(Item item) //function that adds an item from the Item class to the inventory 
     {  
