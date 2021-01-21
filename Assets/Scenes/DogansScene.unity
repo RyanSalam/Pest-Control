@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef2e9c52e1f73f40a17b9397a266910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingItem: {fileID: 11400000, guid: 7ee8ab5a1c25d1a47bbbe7edb77e4177, type: 2}
+  startingItem: {fileID: 11400000, guid: 27ec0857478401b45aff755050c41f2a, type: 2}
   m_inventoryList: []
   inventoryLimit: 4
 --- !u!4 &1345067846
@@ -613,6 +613,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbbb804aa00c5624b841f067f4350dc2, type: 3}
+--- !u!1 &2013873780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2013873782}
+  - component: {fileID: 2013873781}
+  m_Layer: 0
+  m_Name: LevelManager_temp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2013873781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013873780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6881091166f18bf4bbc575998af6d55c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _core: {fileID: 0}
+  playerSpawnPoint: {fileID: 2013873782}
+  respawnTimer: 2
+  spectatorCamera: {fileID: 0}
+  EndGameMenu: {fileID: 0}
+--- !u!4 &2013873782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013873780}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.12850094, y: 0.24900198, z: -0.3382814}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2066678344
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,4 +17,5 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   itemDescription: 
   equipSound: {fileID: 0}
-  EquipableToSpawn: {fileID: 0}
+  EquipableToSpawn: {fileID: 9134610054443472385, guid: 3dbfccad6c40edf45aa0dc589ff285d9,
+    type: 3}
