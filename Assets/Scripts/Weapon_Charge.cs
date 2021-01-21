@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon_Charge : Weapon
 {
     [SerializeField] protected float chargeRate = 2f;
-    [SerializeField] protected float maxCharge = 10f;
+    [SerializeField] protected float maxChargeDuration = 10f;
     [SerializeField] protected float chargeModifier = 1.5f;
     [SerializeField] protected float projForce = 10f;
     [SerializeField] protected float chargeTime = 0.45f;
@@ -20,15 +20,12 @@ public class Weapon_Charge : Weapon
     protected float currentCharge = 0f;
     protected bool isCharging = false;
 
+    [SerializeField] AnimationCurve bulletScaleCurve;
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
-        if (isCharging && currentCharge < maxCharge)
-        {
-            Charge();
-        }
     }
 
     public override void PrimaryFire()
@@ -43,25 +40,50 @@ public class Weapon_Charge : Weapon
 
             // Play chargeHold vFX
             // Play charging vFX
+
+            currentChargeCoroutine = StartCoroutine(Charge());
+
+            if (tempProjectile != null)
+            {
+
+            }
+        }
+    }
+
+    private Coroutine currentChargeCoroutine;
+
+    private IEnumerator Charge()
+    {
+        isCharging = true;
+        currentCharge = 0.0f;
+
+        while (currentCharge < maxChargeDuration)
+        {
+            currentCharge += Time.deltaTime;
+            float scaleFactor = bulletScaleCurve.Evaluate(currentCharge / maxChargeDuration);
+            tempProjectile.transform.localScale += Vector3.one * scaleFactor;            
+
+            yield return null;
         }
     }
 
     public override void Release()
     {
-        if (tempProjectile == null) return;
-
         base.Release();
+
+        if (tempProjectile == null) return;
 
         // Stop charging animations
         // Play release animation
 
+        isCharging = false;
+
+        StopCoroutine(currentChargeCoroutine);
+        currentChargeCoroutine = null;
+
         tempProjectile.transform.SetParent(null);
 
         // Play audio
-
-        Vector3 mousePos = playerCam.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.y = 0f;
-        mousePos.z = 0f;
 
         DamageData data = new DamageData
         {
@@ -77,20 +99,10 @@ public class Weapon_Charge : Weapon
         tempProjectile.GetComponent<Rigidbody>().AddForce(data.direction * (projForce + 10), ForceMode.Impulse);
 
         lastFired = Time.time;
-        isCharging = false;
+
         currentCharge = 0;
         chargeTime = 0.45f;
-
-
     }
 
-    protected void Charge()
-    {
-        isCharging = true;
-        currentCharge += (chargeRate * chargeTime);
-        tempProjectile.transform.localScale = Vector3.one * currentCharge;
-        chargeTime += chargeRate;
-
-    }
-
+    private void LaunchProjectile() { }
 }

@@ -80,6 +80,9 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     protected virtual void Start()
     {
+        player = LevelManager.Instance.Player;
+        playerCam = player.PlayerCam;
+
         //grab our muzzle flash component, 
         //and animator   
         muzzleFlashParticle = GetComponentInChildren<ParticleSystem>();
@@ -96,7 +99,11 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         if (isFiring)
         {
             if (Input.GetButtonUp("Fire1"))
+            {
+                Debug.Log("Button is released.");
                 Release();
+            }
+                
         }
     }
 
