@@ -43,6 +43,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     private Dictionary<Item, IEquippable> m_equipables;
     public Dictionary<Item, IEquippable> Equipables => m_equipables;
 
+    [SerializeField] ShopUI shopUI;
 
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
@@ -101,6 +102,15 @@ public class LevelManager : MonoSingleton<LevelManager>
     private void Start()
     {
 
+    }
+
+    public void Update()
+    {
+        // Quick test will be removed in the future.
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            shopUI.ToggleMenu();
+        }
     }
 
     #region GameLoop

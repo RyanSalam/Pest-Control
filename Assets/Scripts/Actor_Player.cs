@@ -47,10 +47,12 @@ public class Actor_Player : Actor
 
     [Header("Weapon")]
     [SerializeField] private Transform _weaponHolder;
+    [SerializeField] private Transform _trapHolder;
     [SerializeField] private IEquippable _currentEquiped;
     private int itemIndex = 0;
 
     public Transform WeaponHolder { get { return _weaponHolder; } }
+    public Transform TrapHolder { get { return _trapHolder; } }
     private IEquippable CurrentEquipped { get { return _currentEquiped; } }
 
     protected override void Awake()
@@ -121,6 +123,7 @@ public class Actor_Player : Actor
         float mouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
         if (mouseWheel != 0)
         {
+            Debug.Log(mouseWheel);
             itemIndex += (int)Input.GetAxis("Mouse ScrollWheel");
             // We modulus it so we can never go above the max number of items we have in our inventory
             itemIndex %= LevelManager.Instance.InventoryList.Count; 

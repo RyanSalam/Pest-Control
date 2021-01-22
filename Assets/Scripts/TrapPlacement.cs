@@ -23,7 +23,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
 
     public void Equip()
     {
-        transform.SetParent(LevelManager.Instance.Player.WeaponHolder);
+        transform.SetParent(LevelManager.Instance.Player.TrapHolder);
         transform.localPosition = Vector3.zero + transform.forward * offset; //resetting gameObject's position
         gameObject.SetActive(true); //setting trap to activate when equiping 
     }

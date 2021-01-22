@@ -31,6 +31,6 @@ public class ShopUI : MonoBehaviour
 
     private void UpdateItemUI()
     {
-        throw new NotImplementedException();
+        
     }
 }

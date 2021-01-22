@@ -32,16 +32,17 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (LevelManager.Instance.InventoryList.Contains(item)) return;
 
+        Debug.Log("Inventory Button Pressed");
         LevelManager.Instance.InventoryAdd(item);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.DOScale(Vector3.one * 1.25f, 0.25f);
+        transform.localScale = Vector3.one * 1.25f;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.DOScale(Vector3.one, 0.25f);
+        transform.localScale = Vector3.one;
     }
 }
