@@ -737,8 +737,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6286992044012704424}
+  - component: {fileID: -3340471259548488871}
   m_Layer: 0
-  m_Name: P_LaserTrap
+  m_Name: P_LaserTrap Placement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -752,13 +753,35 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6662004006499764242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.511582, y: -6.4049993, z: 8.881357}
+  m_LocalPosition: {x: -3.75, y: 0, z: -4.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6328420386864723782}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3340471259548488871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662004006499764242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4547b9474c0ba043ab55a96059850dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trapToSpawn: {fileID: 6662004006499764242, guid: 6bb26c23cb79056419db581213a54456,
+    type: 3}
+  trapModel: {fileID: 6328420386864723782}
+  offset: 2
+  verticalSearch: 2
+  whatIsBuildable:
+    serializedVersion: 2
+    m_Bits: 1024
+  trapPrice: 0
+  isDebugging: 1
 --- !u!1 &7102626379882069075
 GameObject:
   m_ObjectHideFlags: 0
