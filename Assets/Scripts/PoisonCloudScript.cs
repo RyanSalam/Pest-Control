@@ -29,6 +29,8 @@ public class PoisonCloudScript : MonoBehaviour
     {
         layerMask = LayerMask.GetMask("Enemy");
 
+        isDeployingPoison = false;
+
         timer = 0;
     }
 
@@ -69,18 +71,7 @@ public class PoisonCloudScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //search for enemies in our physics.overlap
-        //colliders = Physics.OverlapSphere(collision.transform.position, radius, layerMask);
-
-        //int enemyCount = 0;
-
-        ////load all our colliders into our enemies to damage array by grabbing the component
-        //foreach (Collider c in colliders)
-        //{
-        //    enemiesToDamage[enemyCount] = colliders[enemyCount].GetComponent<Actor_Enemy>();
-        //    enemyCount++;
-        //}
-
+       
         //toggle our bool so our posion logic in update kicks in
         isDeployingPoison = true;
     }
