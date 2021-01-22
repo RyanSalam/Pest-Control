@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68f6bb7368e37c408c710d9af0cf4ca, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Pistol
   itemCost: 0
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 253069214fa43cb488e57b70e668c1a3, type: 3}
   itemDescription: 
   equipSound: {fileID: 0}
   EquipableToSpawn: {fileID: 5943468318281720411, guid: 55e4ff7ea784484419ac3df59ded27be,
