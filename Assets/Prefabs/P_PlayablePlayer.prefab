@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3462469030898304911}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 1.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3650972581413493858}
@@ -313,6 +313,8 @@ MonoBehaviour:
   externalMouseForce: {x: 0, y: 0}
   jumpStrength: 4
   _minJumpDuration: 0.75
+  mass: 1
+  airtime: 0
   _playerCam: {fileID: 3828171031570228784}
   _abilityOne: {fileID: 11400000, guid: 56dd13d55c659f94aacbe6f99aa06512, type: 2}
   _abilityTwo: {fileID: 11400000, guid: f1a96881bf115c04ab530474e4edffc6, type: 2}

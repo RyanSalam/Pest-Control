@@ -19,6 +19,17 @@ public class Actor_Player : Actor
     private bool _jumpRequest = false;
     private float _jumpElapsed = 0.0f;
 
+    //physical attributes
+    public float mass = 1f;
+
+    //impact 
+    Vector3 impactVector = Vector3.zero;
+    bool isFlying = false;
+
+    //states   
+    public bool airtime = false;
+    bool jumping = false;
+
     // Components
     [SerializeField] private Camera _playerCam;
     protected CharacterController controller;
@@ -131,6 +142,7 @@ public class Actor_Player : Actor
         Vector3 movement = transform.right * moveVector.x + transform.forward * moveVector.y;
         movement *= moveSpeed * Time.fixedDeltaTime;
 
+
         _verticalVel = controller.isGrounded ? -2.0f : _verticalVel + -9.81f * Time.fixedDeltaTime;
 
         // Condition to make sure we've let the jump button go
@@ -184,4 +196,27 @@ public class Actor_Player : Actor
         newWeapon.Equip();
         _currentEquiped = newWeapon;
     }
+
+    bool CheckSlope()
+    {
+        RaycastHit rayOut;
+        bool checkRayHit = Physics.Raycast(transform.position, Vector3.down, out rayOut, 2f); // hardcoded to player's height; add variable later
+        if (checkRayHit && rayOut.normal != Vector3.up)
+            return true;
+        return false;
+    }
+    public void AddImpact(float impactForce, Vector3 direction)
+    {
+        impactVector = Vector3.zero;
+        _verticalVel = impactForce;
+        isFlying = true;
+        jumping = false;
+        impactVector = direction;
+        impactVector.Normalize();
+        impactVector.y = 0f;
+        impactVector *= impactForce * Mathf.Sin(Vector3.Angle(transform.up, direction)) / (0.5f * mass);
+        _verticalVel = impactForce / mass;
+        
+    }
+
 }
