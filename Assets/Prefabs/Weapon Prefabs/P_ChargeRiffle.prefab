@@ -95,15 +95,14 @@ MonoBehaviour:
   firePoint: {fileID: 6965653023597013632}
   maxChargeDuration: 1
   chargeModifier: 1.5
-  projForce: 15
-  projectilePrefab: {fileID: 8811669881112931464, guid: e9bb6861f0e3e5d48b6e0696298b13e5,
+  projForce: 30
+  chargeThreshold: 0.4
+  reachedThreshold: 0
+  projectilePrefab: {fileID: 3679318245965258635, guid: e9bb6861f0e3e5d48b6e0696298b13e5,
     type: 3}
   chargeHold: {fileID: 0}
   charging: {fileID: 0}
   release: {fileID: 0}
-  currentCharge: 0
-  chargeThreshold: 0.4
-  reachingThreshold: 0
   bulletScaleCurve:
     serializedVersion: 2
     m_Curve:

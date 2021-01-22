@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8811669881112931469}
   - component: {fileID: 8811669881112931470}
   - component: {fileID: 8811669881112931471}
+  - component: {fileID: 3679318245965258635}
   m_Layer: 0
   m_Name: ChargeBullet
   m_TagString: Untagged
@@ -44,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.07394314, y: 0.16000001, z: 0.22047533}
-  m_Center: {x: -0.0003027916, y: 0, z: 0.00059631653}
+  m_Size: {x: 0.07394314, y: 0.04339671, z: 0.11897805}
+  m_Center: {x: -0.0003027916, y: -0.00000011920929, z: 0.0010102987}
 --- !u!54 &8811669881112931471
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -62,6 +63,22 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3679318245965258635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8811669881112931464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4202bafa385b64c4987815204e6a7d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projSpeed: 3
+  damage: 0
+  launchForce: 0
+  lifeTime: 5
 --- !u!1001 &8811669882658204798
 PrefabInstance:
   m_ObjectHideFlags: 0

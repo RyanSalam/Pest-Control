@@ -9,11 +9,11 @@ public class Weapon_Charge : Weapon
     [SerializeField] protected float projForce;
     protected float currentCharge = 0f;
     [SerializeField] protected float chargeThreshold;
-    [SerializeField] protected bool reachedThreshold = false;
+    protected bool reachedThreshold = false;
     protected bool isCharging = false;
 
-    [SerializeField] GameObject projectilePrefab;
-    protected GameObject tempProjectile;
+    [SerializeField] Weapon_Projectile projectilePrefab;
+    protected Weapon_Projectile tempProjectile;
 
     [SerializeField] private ParticleSystem chargeHold;
     [SerializeField] private ParticleSystem charging;
@@ -129,10 +129,10 @@ public class Weapon_Charge : Weapon
             damageSource = firePoint.transform.position
         };
 
-        tempProjectile.GetComponent<Rigidbody>().isKinematic = false;
-        // HERE: Assign data to temp object
+        tempProjectile.RB.isKinematic = false;
+        tempProjectile.Initialize(data);
         tempProjectile.GetComponent<Collider>().enabled = true;
-        tempProjectile.GetComponent<Rigidbody>().AddForce(data.direction * (projForce + 10), ForceMode.Impulse);
+        tempProjectile.RB.AddForce(data.direction * projForce, ForceMode.Impulse);
 
         lastFired = Time.time;
         currentCharge = 0;
