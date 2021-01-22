@@ -144,7 +144,7 @@ MonoBehaviour:
   recoilSpeed: 1
   fireRate: 1
   Damage: 1
-  auto: 1
+  auto: 0
   currentShots: 0
   maxShots: 20
   shotIncrease: 1
@@ -155,7 +155,7 @@ MonoBehaviour:
   lastFired: 0
   canFire: 1
   isFiring: 0
-  weaponAttachment: {fileID: 11400000, guid: 3c05c12dc3a4a0d49beeb434bffab647, type: 2}
+  weaponAttachment: {fileID: 0}
   firePoint: {fileID: 1005532296260209577}
   recoilPosition: {fileID: 1070349915}
   rotationPoint: {fileID: 1273709577}
@@ -163,8 +163,8 @@ MonoBehaviour:
   rotationalRecoilSpeed: 8
   positionalReturnSpeed: 30
   rotationalReturnSpeed: 8
-  RecoilRotation: {x: 8, y: 8, z: 8}
-  RecoilKickBack: {x: 0.001, y: 0, z: -0.004}
+  RecoilRotation: {x: 5, y: 5, z: 5}
+  RecoilKickBack: {x: 0.007, y: 0, z: -0.008}
   bloomX: 1
   bloomY: 1
   animCurve:
@@ -323,22 +323,22 @@ PrefabInstance:
     - target: {fileID: 477785413377366834, guid: cde4185c39bc8964eb20d569b7f289dd,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.48616
+      value: 0.3733135
       objectReference: {fileID: 0}
     - target: {fileID: 477785413377366834, guid: cde4185c39bc8964eb20d569b7f289dd,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.48616
+      value: 0.3166464
       objectReference: {fileID: 0}
     - target: {fileID: 477785413377366834, guid: cde4185c39bc8964eb20d569b7f289dd,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.48616
+      value: 0.06453819
       objectReference: {fileID: 0}
     - target: {fileID: 477785413377366834, guid: cde4185c39bc8964eb20d569b7f289dd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.083
+      value: -2.08
       objectReference: {fileID: 0}
     - target: {fileID: 477785413377366834, guid: cde4185c39bc8964eb20d569b7f289dd,
         type: 3}
@@ -348,7 +348,7 @@ PrefabInstance:
     - target: {fileID: 477785413377366834, guid: cde4185c39bc8964eb20d569b7f289dd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.404
+      value: -0.23
       objectReference: {fileID: 0}
     - target: {fileID: 477785413377366834, guid: cde4185c39bc8964eb20d569b7f289dd,
         type: 3}
