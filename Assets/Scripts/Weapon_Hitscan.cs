@@ -48,9 +48,9 @@ public class Weapon_Hitscan : Weapon
     [SerializeField] protected float range = 80.0f;
 
     //this is our hitscan script. The pistol and SMG will use this script
-    private void Awake()
+    protected override void Awake()
     {
-         
+        base.Awake();
     }
 
     public override void PrimaryFire()
@@ -118,7 +118,7 @@ public class Weapon_Hitscan : Weapon
         base.Release();
 
         //reseting our recoil
-       
+        muzzleFlashParticle.Stop();
     }
 
     protected override void Start()

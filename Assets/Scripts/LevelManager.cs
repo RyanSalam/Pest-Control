@@ -48,6 +48,20 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         base.Awake();
 
+        if (_player == null)
+        {
+            _player = FindObjectOfType<Actor_Player>();
+            Debug.Log("Level Manager Return error");
+        }
+
+        m_equipables = new Dictionary<Item, IEquippable>();
+
+        if (StartingItem != null)
+        {
+            InventoryAdd(StartingItem);
+            _player.EquipWeapon(m_equipables[StartingItem]);
+        }
+
         #region PlayerSetupInitialization
 
         //if (_player == null)
@@ -81,22 +95,12 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         #endregion
 
-        _player = FindObjectOfType<Actor_Player>();
 
-        if (Player == null) Debug.Log("Level Manager Return error");
-
-        m_equipables = new Dictionary<Item, IEquippable>();
-
-        if (StartingItem != null)
-        {
-            InventoryAdd(StartingItem);
-            _player.EquipWeapon(m_equipables[StartingItem]);
-        }
     }
 
     private void Start()
     {
-        
+
     }
 
     #region GameLoop

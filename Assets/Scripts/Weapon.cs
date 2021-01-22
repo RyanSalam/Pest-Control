@@ -77,14 +77,14 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     protected virtual void Awake()
     {
-
+        player = LevelManager.Instance.Player;
+        playerCam = player.PlayerCam;
     }
 
 
     protected virtual void Start()
     {
-        player = LevelManager.Instance.Player;
-        playerCam = player.PlayerCam;
+
         //grab our muzzle flash component, 
         //and animator   
         muzzleFlashParticle = GetComponentInChildren<ParticleSystem>();
