@@ -8,6 +8,7 @@ public class PoisonCloudScript : MonoBehaviour
     float damageAmount = 1f;
     float timeSinceLastDamage = 0f;
     float damageDelay = 2f;
+    float projectileForce = 10.0f;
 
     //our max lifetime
     float lifetime = 60.0f;
@@ -24,6 +25,8 @@ public class PoisonCloudScript : MonoBehaviour
     Collider[] colliders;
     Actor_Enemy[] enemiesToDamage;
 
+    Rigidbody projectile;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,10 @@ public class PoisonCloudScript : MonoBehaviour
         isDeployingPoison = false;
 
         timer = 0;
+
+        projectile = GetComponent<Rigidbody>();
+
+        projectile.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
     }
 
     // Update is called once per frame
@@ -74,6 +81,8 @@ public class PoisonCloudScript : MonoBehaviour
        
         //toggle our bool so our posion logic in update kicks in
         isDeployingPoison = true;
+
+        projectile.constraints = RigidbodyConstraints.FreezeAll;
     }
 
 
