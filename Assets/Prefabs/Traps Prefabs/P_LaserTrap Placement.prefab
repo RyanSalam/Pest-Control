@@ -774,13 +774,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trapToSpawn: {fileID: 6662004006499764242, guid: 6bb26c23cb79056419db581213a54456,
     type: 3}
-  offset: 0
-  verticalSearch: 0
+  trapModel: {fileID: 6328420386864723782}
+  offset: 2
+  verticalSearch: 2
   whatIsBuildable:
     serializedVersion: 2
     m_Bits: 1024
   trapPrice: 0
-  isDebugging: 0
+  isDebugging: 1
 --- !u!1 &7102626379882069075
 GameObject:
   m_ObjectHideFlags: 0

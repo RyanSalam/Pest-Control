@@ -188,6 +188,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &43429967 stripped
@@ -215,6 +220,135 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3.0000007, z: 0}
   m_Center: {x: 0, y: -1.5000004, z: 0}
+--- !u!1001 &46565837
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 678772520}
+    m_Modifications:
+    - target: {fileID: 564038738032522297, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_Name
+      value: P_FloorPlane
+      objectReference: {fileID: 0}
+    - target: {fileID: 564038738032522297, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.9195967
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f22bf0fc400bb8d4f8ae873be3fb7823, type: 3}
+--- !u!4 &46565838 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+    type: 3}
+  m_PrefabInstance: {fileID: 46565837}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &46565839 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 564038738032522297, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+    type: 3}
+  m_PrefabInstance: {fileID: 46565837}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &46565840
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46565839}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.00000047683716}
+--- !u!1 &87349049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 87349050}
+  m_Layer: 0
+  m_Name: WeaponHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &87349050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87349049}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 861687204}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &136207836
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +470,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &157256521 stripped
@@ -429,6 +568,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlaneTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
@@ -524,6 +668,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &444302040 stripped
@@ -561,6 +710,8 @@ GameObject:
   m_Component:
   - component: {fileID: 507732603}
   - component: {fileID: 507732604}
+  - component: {fileID: 507732605}
+  - component: {fileID: 507732606}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -599,6 +750,37 @@ MonoBehaviour:
   respawnTimer: 2
   spectatorCamera: {fileID: 0}
   EndGameMenu: {fileID: 0}
+--- !u!114 &507732605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507732602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef2e9c52e1f73f40a17b9397a266910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingItem: {fileID: 11400000, guid: 1ce4697cda59e9c47b222c4a7d8e6c5b, type: 2}
+  m_inventoryList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  inventoryLimit: 4
+--- !u!114 &507732606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507732602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1170eced0aa8f429719d2c27ce4e7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &561576586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -665,6 +847,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlaneTest (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
@@ -760,6 +947,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &587809803 stripped
@@ -853,6 +1045,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlaneTest (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
@@ -978,6 +1175,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &637029986 stripped
@@ -1005,6 +1207,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3.0000007, z: 0}
   m_Center: {x: 0, y: -1.5000004, z: 0}
+--- !u!1 &678772519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 678772520}
+  m_Layer: 0
+  m_Name: Floor 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &678772520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678772519}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.837551, y: -12.249597, z: 5.4357367}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 46565838}
+  - {fileID: 902190561}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &861687203
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1071,7 +1305,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _weaponHolder
       value: 
-      objectReference: {fileID: 1783245013}
+      objectReference: {fileID: 87349050}
     - target: {fileID: 4170628562088871640, guid: 4788c84b7da9b1a4db17e2689755b752,
         type: 3}
       propertyPath: m_Name
@@ -1152,6 +1386,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &886029671 stripped
@@ -1179,6 +1418,105 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3.0000007, z: 0}
   m_Center: {x: 0, y: -1.5000004, z: -0.00000047683716}
+--- !u!1001 &902190560
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 678772520}
+    m_Modifications:
+    - target: {fileID: 564038738032522297, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_Name
+      value: P_FloorPlane (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 564038738032522297, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.9195967
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.6757367
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f22bf0fc400bb8d4f8ae873be3fb7823, type: 3}
+--- !u!4 &902190561 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+    type: 3}
+  m_PrefabInstance: {fileID: 902190560}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &902190562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 564038738032522297, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
+    type: 3}
+  m_PrefabInstance: {fileID: 902190560}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &902190563
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902190562}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3, z: 0}
+  m_Center: {x: 0, y: 0.0000009536743, z: 0.00000047683716}
 --- !u!1001 &960695687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1245,6 +1583,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlaneTest (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
@@ -1340,6 +1683,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &1045888754 stripped
@@ -1433,6 +1781,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlaneTest (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
@@ -1528,6 +1881,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &1179046168 stripped
@@ -1621,6 +1979,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlaneTest (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
@@ -1716,6 +2079,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &1238499209 stripped
@@ -1810,6 +2178,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &1281643628 stripped
@@ -1903,6 +2276,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlaneTest (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
@@ -2090,6 +2468,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &1469478153 stripped
@@ -2183,6 +2566,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlaneTest (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
@@ -2278,6 +2666,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &1562604300 stripped
@@ -2372,6 +2765,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &1659999259 stripped
@@ -2399,36 +2797,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3.0000007, z: 0}
   m_Center: {x: 0, y: -1.5000004, z: 0}
---- !u!1 &1783245012
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1783245013}
-  m_Layer: 0
-  m_Name: WeaponHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1783245013
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1783245012}
-  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.111, z: 1.224}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 861687204}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1924038288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2495,6 +2863,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlaneTest (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
@@ -2590,6 +2963,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaneTest (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
 --- !u!4 &1946478905 stripped
@@ -2683,6 +3061,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlaneTest (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: affeb62614b1ba747b392c1ae3db5fc2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affeb62614b1ba747b392c1ae3db5fc2, type: 3}
