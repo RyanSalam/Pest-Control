@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Weapon_Charge : Weapon
 {
-    [SerializeField] protected float chargeRate = 2f;
-    [SerializeField] protected float maxChargeDuration = 10f;
+    [SerializeField] protected float maxChargeDuration;
     [SerializeField] protected float chargeModifier = 1.5f;
-    [SerializeField] protected float projForce = 10f;
-    [SerializeField] protected float chargeTime = 0.45f;
+    [SerializeField] protected float projForce;
+    protected float currentCharge = 0f;
+    [SerializeField] protected float chargeThreshold;
+    [SerializeField] protected bool reachedThreshold = false;
+    protected bool isCharging = false;
 
     [SerializeField] GameObject projectilePrefab;
     protected GameObject tempProjectile;
@@ -16,16 +18,50 @@ public class Weapon_Charge : Weapon
     [SerializeField] private ParticleSystem chargeHold;
     [SerializeField] private ParticleSystem charging;
     [SerializeField] private ParticleSystem release;
-
-    protected float currentCharge = 0f;
-    protected bool isCharging = false;
-
     [SerializeField] AnimationCurve bulletScaleCurve;
 
     // Update is called once per frame
     protected override void Update()
     {
-        base.Update();
+        if (isCharging)
+        {
+            if (Input.GetButtonUp("Fire1"))
+            {
+                // Release the bullet if it has passed the threshold
+                if (PassedThreshold())
+                {
+                    Release();
+                }
+                else
+                {
+                    reachedThreshold = false;
+                }
+            }
+        }
+
+        if (!reachedThreshold)
+        {
+            ChargeUntilThreshold();
+        }
+    }
+
+    // Checks if the charging bullet has reached the threshold
+    public bool PassedThreshold()
+    {
+        return currentCharge >= chargeThreshold;
+    }
+
+    public void ChargeUntilThreshold()
+    {
+        if (!PassedThreshold())
+        {
+            Charge();
+        }
+        else
+        {
+            Release();
+            reachedThreshold = true;
+        }
     }
 
     public override void PrimaryFire()
@@ -99,10 +135,6 @@ public class Weapon_Charge : Weapon
         tempProjectile.GetComponent<Rigidbody>().AddForce(data.direction * (projForce + 10), ForceMode.Impulse);
 
         lastFired = Time.time;
-
         currentCharge = 0;
-        chargeTime = 0.45f;
     }
-
-    private void LaunchProjectile() { }
 }

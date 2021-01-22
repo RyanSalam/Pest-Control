@@ -93,22 +93,23 @@ MonoBehaviour:
   isFiring: 0
   weaponAttachment: {fileID: 0}
   firePoint: {fileID: 6965653023597013632}
-  chargeRate: 2
-  maxChargeDuration: 1.5
+  maxChargeDuration: 1
   chargeModifier: 1.5
-  projForce: 10
-  chargeTime: 0.45
+  projForce: 15
   projectilePrefab: {fileID: 8811669881112931464, guid: e9bb6861f0e3e5d48b6e0696298b13e5,
     type: 3}
   chargeHold: {fileID: 0}
   charging: {fileID: 0}
   release: {fileID: 0}
+  currentCharge: 0
+  chargeThreshold: 0.4
+  reachingThreshold: 0
   bulletScaleCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.35040283
+      value: 0.1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -117,9 +118,9 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
+      value: 0.2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
