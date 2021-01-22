@@ -10,7 +10,7 @@ using System;
 public class LevelManager : MonoSingleton<LevelManager>
 {
     [SerializeField] private Actor_Core _core = null;
-    public Actor_Core Core { get { return _core; } }  
+    public Actor_Core Core { get { return _core; } }
 
     [SerializeField] private Actor_Player _player;
     public Actor_Player Player
@@ -117,9 +117,9 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     private void Respawn() // respawning character and Setting Spectator Camera
     {
-        if (isRespawning) return; 
+        if (isRespawning) return;
         //activate Spectator Camera and set Player's gameObject to false
-        spectatorCamera.gameObject.SetActive(true); 
+        spectatorCamera.gameObject.SetActive(true);
         Player.gameObject.SetActive(false);
         //start the player respawn
         StartCoroutine(RespawnTimer());
@@ -153,6 +153,11 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         string scene = SceneManager.GetActiveScene().name;
         GameManager.Instance.LoadScene(scene);
+    }
+
+    public void OnQuitButton()
+    {
+        GameManager.Instance.OnQuitButton();
     }
 
     #endregion

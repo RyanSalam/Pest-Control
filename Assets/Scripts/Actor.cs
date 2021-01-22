@@ -101,7 +101,7 @@ public abstract class Actor : MonoBehaviour
         Anim.SetTrigger("Hit");
     }
 
-    protected void Death()
+    protected virtual void Death()
     {
         isDead = true;
         Anim.SetTrigger("Death");

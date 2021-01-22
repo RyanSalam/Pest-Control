@@ -131,6 +131,13 @@ public class Actor_Enemy : Actor
         }
     }
 
+    protected override void Death()
+    {
+        base.Death();
+
+        Destroy(gameObject);
+    }
+
     private void OnDrawGizmosSelected()
     {
         if(isDebugging)

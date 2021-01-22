@@ -14,8 +14,6 @@ public class ShopUI : MonoBehaviour
     private void Start()
     {
         LevelManager.Instance.onItemChangeCallback += UpdateItemUI;
-
-        ToggleMenu();
     }
 
     public void ToggleMenu()

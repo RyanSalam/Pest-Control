@@ -79,15 +79,15 @@ public class Weapon_Hitscan : Weapon
 
         Ray ray = new Ray(mousePosition, playerCam.transform.forward + recoil);
         RaycastHit hit;
-        Debug.DrawRay(mousePosition, playerCam.transform.forward + recoil, Color.red);
+        Debug.DrawRay(mousePosition, playerCam.transform.forward * range, Color.red);
 
         
 
         if (Physics.Raycast(ray, out hit, range))
         {
-
+            Debug.Log("We are shooting at: " + hit.transform.name);
             //check if we hit enemy
-            if (hit.transform.tag == "Enemy")
+            if (hit.transform.CompareTag("Enemy"))
             {
                 Actor enemyHit = hit.transform.GetComponent<Actor>();
 
