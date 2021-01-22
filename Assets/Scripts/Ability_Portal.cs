@@ -13,7 +13,7 @@ public class Ability_Portal : Ability
 
     public override void Execute()
     {
-        portalList[portalCount].transform.position = pA.AbilitySpawnPoint.position;
+        portalList[portalCount].transform.position = pA.AbilitySpawnPoint.position + pA.AbilitySpawnPoint.transform.forward * 3;
         portalList[portalCount].transform.rotation = pA.AbilitySpawnPoint.rotation;
 
         portalList[portalCount].gameObject.SetActive(true);
