@@ -119,12 +119,6 @@ public class Weapon_Hitscan : Weapon
     protected override void Start()
     {
         base.Start();
-        //this will be removed later on, for testing purposes.
-        player = GameObject.FindObjectOfType<Actor_Player>();
-        player.EquipWeapon(this);
-
-        playerCam = Camera.main;
-
     }
 
     // Update is called once per frame

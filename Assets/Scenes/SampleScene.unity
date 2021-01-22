@@ -530,6 +530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _core: {fileID: 0}
+  _player: {fileID: 424117814}
   playerSpawnPoint: {fileID: 1346282351}
   respawnTimer: 2
   spectatorCamera: {fileID: 0}
