@@ -109,6 +109,8 @@ public class Weapon_Hitscan : Weapon
             if (ImpactParticle != null)
                 Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
 
+            
+
         }
 
     }
