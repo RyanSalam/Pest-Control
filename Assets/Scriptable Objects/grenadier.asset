@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: grenadier
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileAttachment
   energyCostPerFire: 50
-  secondaryDamage: 8
+  secondaryDamage: 0
   projectilePrefab: {fileID: 7513803429035349772, guid: 99e04bfbdacf3cc46a968734c73c5a22,
     type: 3}

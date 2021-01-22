@@ -55,6 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d33646e34bc3ae44aeacc137adeb2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemiesToDamage: []
 --- !u!23 &6391247818688516989
 MeshRenderer:
   m_ObjectHideFlags: 0

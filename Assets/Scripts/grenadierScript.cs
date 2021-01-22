@@ -16,22 +16,35 @@ public class GrenadierScript : MonoBehaviour
     //scalar value for our addForce();
     int projectileForce = 10;
 
+    //explosion radius
+    int radius = 10;
+
+    //damage on explosion
+    int damage = 10;
+
+    //enemy LayerMask
+    LayerMask enemyMask;
+
+    //our array of enemies we need to damage on explosion
+    Actor_Enemy[] enemiesToDamage;
+
     // Start is called before the first frame update
     void Start()
     {
         projectile = GetComponent<Rigidbody>();
+        
         bounceCount = 0;
 
-        maxBounceCount = 3;
+        maxBounceCount = 2;
+
+        enemyMask = LayerMask.GetMask("Enemy");
 
         projectile.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
+
+        enemiesToDamage = new Actor_Enemy[20];
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -44,8 +57,33 @@ public class GrenadierScript : MonoBehaviour
 
         if (bounceCount >= maxBounceCount)
         {
-            Debug.Log("Kaboom?");
+            //here is where we would start the explosion VFX (or in function)
+
+            DamageEnemies();
+
             Destroy(gameObject);
+        }
+    }
+
+    private void DamageEnemies()
+    {
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius, enemyMask);
+      
+
+        int enemyCount = 0;
+
+        if (colliders.Length > 0)
+        {
+            foreach (Collider c in colliders)
+            {
+                enemiesToDamage[enemyCount] = colliders[enemyCount].GetComponentInParent<Actor_Enemy>();
+
+                enemiesToDamage[enemyCount].TakeDamage(damage);
+
+                enemyCount++;
+
+            }
         }
     }
 }
