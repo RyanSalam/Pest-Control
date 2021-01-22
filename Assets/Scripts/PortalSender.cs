@@ -31,7 +31,7 @@ public class PortalSender : MonoBehaviour
 
     public void HandlePlayerCollision()
     {
-        Debug.Log("HandlePlayerCollision is functional");
+        //Debug.Log("HandlePlayerCollision is functional");
 
         actP.Controller.enabled = false;
         actP.transform.position = otherPortal.destination.position;

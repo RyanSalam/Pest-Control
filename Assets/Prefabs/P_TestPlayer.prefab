@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 3828171030826589136}
   m_Layer: 0
   m_Name: P_TestPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -251,6 +251,11 @@ MonoBehaviour:
   externalMouseForce: {x: 0, y: 0}
   jumpStrength: 4
   _minJumpDuration: 0.75
+  mass: 1
+  airtime: 0
   _playerCam: {fileID: 3828171031570228784}
   _abilityOne: {fileID: 0}
   _abilityTwo: {fileID: 0}
+  _abilitySpawnPoint: {fileID: 0}
+  _weaponHolder: {fileID: 0}
+  _trapHolder: {fileID: 0}
