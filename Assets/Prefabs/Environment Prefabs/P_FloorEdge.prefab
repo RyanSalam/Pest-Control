@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7536343126822300544}
   - component: {fileID: 6861695484755190821}
   - component: {fileID: 8709210685775335663}
-  m_Layer: 0
-  m_Name: SM_FloorPlane (1)
+  m_Layer: 10
+  m_Name: P_FloorEdge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

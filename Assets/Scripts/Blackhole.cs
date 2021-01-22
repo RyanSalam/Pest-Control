@@ -81,7 +81,7 @@ public class Blackhole : MonoBehaviour
         foreach (Collider enemy in allEnemies)
 
         {
-            var enemyActor = enemy.GetComponent<Actor_Enemy>();
+            var enemyActor = enemy.GetComponentInParent<Actor_Enemy>();
             if (enemyActor != null && Vector3.Distance(enemyActor.transform.position, transform.position) > 1.0f)
             {
                 Vector3 direction = (transform.position - enemyActor.transform.position).normalized;
