@@ -5347,12 +5347,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: f22bf0fc400bb8d4f8ae873be3fb7823, type: 3}
 --- !u!4 &2106668656 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 907491349191503491, guid: f22bf0fc400bb8d4f8ae873be3fb7823,
-    type: 3}
-  m_PrefabInstance: {fileID: 2106668655}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &2108747296
-PrefabInstance:
+Development
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
@@ -5507,6 +5502,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1346282350, guid: 566d321ad4cb7e84f9b13a7abff087a8, type: 3}
+      propertyPath: _sfxVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346282350, guid: 566d321ad4cb7e84f9b13a7abff087a8, type: 3}
+      propertyPath: _musicVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346282350, guid: 566d321ad4cb7e84f9b13a7abff087a8, type: 3}
+      propertyPath: _masterVolume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8402986662682793157, guid: 566d321ad4cb7e84f9b13a7abff087a8,
         type: 3}
       propertyPath: m_Name
@@ -5569,8 +5576,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8402986662682793176, guid: 566d321ad4cb7e84f9b13a7abff087a8,
         type: 3}
-      propertyPath: _player
-      value: 
-      objectReference: {fileID: 1533388541}
+Development
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 566d321ad4cb7e84f9b13a7abff087a8, type: 3}
