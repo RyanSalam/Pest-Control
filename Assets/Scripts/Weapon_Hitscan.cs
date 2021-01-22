@@ -40,6 +40,10 @@ public class Weapon_Hitscan : Weapon
     [SerializeField] protected AnimationCurve animCurve;
     [SerializeField] protected float timeFiring = 0f;
 
+
+    //Audio Settings
+    AudioCue ACue;
+
     //range variable for our raycast
     [SerializeField] protected float range = 80.0f;
 
@@ -59,6 +63,7 @@ public class Weapon_Hitscan : Weapon
         if (muzzleFlashParticle != null)
             muzzleFlashParticle.Play();
 
+        ACue.PlayAudioCue();
         //Ray mouseRay = playerCam.ScreenPointToRay(Input.mousePosition);
         //Vector2 mousePosition = new Vector2(Random.Range(-bloomX, bloomX)
         
@@ -119,6 +124,7 @@ public class Weapon_Hitscan : Weapon
     protected override void Start()
     {
         base.Start();
+        ACue = GetComponent<AudioCue>();
     }
 
     // Update is called once per frame

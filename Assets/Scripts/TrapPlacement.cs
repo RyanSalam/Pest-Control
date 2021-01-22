@@ -12,7 +12,10 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     [SerializeField] protected int trapPrice;
     public bool isDebugging;
 
-    
+
+    //Audio Settings
+    AudioCue ACue;
+
     public virtual void Awake()
     {
         gameObject.SetActive(false);
@@ -43,6 +46,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     {
         //setting the trap GameObject to spawn on raycast's position 
         GameObject tempTrap = Instantiate(trapToSpawn, trapModel.position, transform.rotation); //instantiating trap 
+        ACue.PlayAudioCue();
     }
 
     public bool PrimaryFireCheck()
@@ -71,5 +75,10 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         {
             Debug.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - verticalSearch, transform.position.z), Color.green);
         }
+    }
+
+    protected void Start()
+    {
+        ACue = GetComponent<AudioCue>();
     }
 }

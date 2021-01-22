@@ -738,6 +738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6286992044012704424}
   - component: {fileID: -3340471259548488871}
+  - component: {fileID: 551121752816470550}
   m_Layer: 0
   m_Name: P_LaserTrap Placement
   m_TagString: Untagged
@@ -782,6 +783,24 @@ MonoBehaviour:
     m_Bits: 1024
   trapPrice: 0
   isDebugging: 1
+--- !u!114 &551121752816470550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662004006499764242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f4dcd5da0291c4b914bd20a115beb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioCue: {fileID: 11400000, guid: 786d701e37c926945b2eb9ad49a3ba31, type: 2}
+  _playOnStart: 0
+  _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
+    type: 2}
+  _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
+    type: 2}
 --- !u!1 &7102626379882069075
 GameObject:
   m_ObjectHideFlags: 0

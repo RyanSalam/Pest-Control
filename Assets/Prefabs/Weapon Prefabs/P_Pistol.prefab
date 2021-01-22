@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 922396192194762793}
   - component: {fileID: 8419441482282743823}
+  - component: {fileID: 541031496880407571}
   m_Layer: 0
   m_Name: P_Pistol
   m_TagString: Untagged
@@ -61,6 +62,8 @@ MonoBehaviour:
   lastFired: 0
   canFire: 1
   isFiring: 0
+  weaponAttachment: {fileID: 0}
+  firePoint: {fileID: 0}
   recoilPosition: {fileID: 0}
   rotationPoint: {fileID: 0}
   positionalRecoilSpeed: 8
@@ -69,6 +72,8 @@ MonoBehaviour:
   rotationalReturnSpeed: 38
   RecoilRotation: {x: 10, y: 5, z: 7}
   RecoilKickBack: {x: 0.015, y: 0, z: -0.2}
+  bloomX: 1
+  bloomY: 1
   animCurve:
     serializedVersion: 2
     m_Curve: []
@@ -77,6 +82,24 @@ MonoBehaviour:
     m_RotationOrder: 4
   timeFiring: 0
   range: 80
+--- !u!114 &541031496880407571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943468318281720411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f4dcd5da0291c4b914bd20a115beb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioCue: {fileID: 11400000, guid: 62d70b05526401949be6e6a454255c92, type: 2}
+  _playOnStart: 0
+  _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
+    type: 2}
+  _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
+    type: 2}
 --- !u!1 &7630208820619711404
 GameObject:
   m_ObjectHideFlags: 0
