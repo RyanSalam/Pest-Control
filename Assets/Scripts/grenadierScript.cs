@@ -22,7 +22,7 @@ public class GrenadierScript : MonoBehaviour
         projectile = GetComponent<Rigidbody>();
         bounceCount = 0;
 
-        maxBounceCount = 3;
+        maxBounceCount = 2;
 
         projectile.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
     }

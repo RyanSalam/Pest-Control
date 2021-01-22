@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon_GrenadeLauncher : Weapon
 {
     [SerializeField] protected Rigidbody projectilePrefab;
-    [SerializeField] protected float projectileForce = 1f;
+    [SerializeField] protected float projectileForce = 10f;
 
     GameObject currentProjectile;
     GameObject phase3Proj1;
