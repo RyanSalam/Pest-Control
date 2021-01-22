@@ -19,15 +19,11 @@ public class Item : ScriptableObject
 
     public void Use() //equips the item
     {
-        if (!Inventory.Instance.Equipables.ContainsKey(this))
-            return;
-
-        LevelManager.Instance.Player.
-            EquipWeapon(Inventory.Instance.Equipables[this]); // equiping weapon 
+        LevelManager.Instance.UseItem(this); // equiping weapon 
     }
     public virtual void ItemPurchased() //purchases an Item
     {
         //gets inventory and adds item
-        Inventory.Instance.InventoryAdd(this); 
+        LevelManager.Instance.InventoryAdd(this); 
     }
 }

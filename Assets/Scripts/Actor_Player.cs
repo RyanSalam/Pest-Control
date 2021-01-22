@@ -60,8 +60,6 @@ public class Actor_Player : Actor
 
         if (AbilityTwo != null)
             AbilityTwo.Initialize(gameObject);
-
-        Inventory.Instance.StartingItem.Use();
     }
 
     protected virtual void Update()
@@ -114,8 +112,8 @@ public class Actor_Player : Actor
         {
             itemIndex += (int)Input.GetAxis("Mouse ScrollWheel");
             // We modulus it so we can never go above the max number of items we have in our inventory
-            itemIndex %= Inventory.Instance.InventoryList.Count; 
-            Inventory.Instance.InventoryList[itemIndex].Use();
+            itemIndex %= LevelManager.Instance.InventoryList.Count; 
+            LevelManager.Instance.InventoryList[itemIndex].Use();
         }
 
         if (_currentEquiped != null)

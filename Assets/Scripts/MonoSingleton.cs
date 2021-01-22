@@ -29,6 +29,9 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 
     protected virtual void Awake()
     {
+        if (_instance == null)
+            _instance = GetComponent<T>();
+
         if (Instance != this)
             Destroy(gameObject);
     }

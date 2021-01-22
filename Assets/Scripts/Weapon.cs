@@ -75,11 +75,16 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     //this is set on our weapon script when we shoot
     //this will maybe be changed to if proj -> projFire() elseif raycast ->
 
-
+    protected virtual void Awake()
+    {
+        player = LevelManager.Instance.Player;
+    }
 
 
     protected virtual void Start()
     {
+        
+        playerCam = player.PlayerCam;
         //grab our muzzle flash component, 
         //and animator   
         muzzleFlashParticle = GetComponentInChildren<ParticleSystem>();
@@ -88,7 +93,6 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         //initializing our weapon
         if (weaponAttachment != null)
             weaponAttachment.initialize(this);
-      
     }
 
     protected virtual void Update()
@@ -96,7 +100,11 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         if (isFiring)
         {
             if (Input.GetButtonUp("Fire1"))
+            {
+                Debug.Log("Button is released.");
                 Release();
+            }
+                
         }
     }
 
@@ -160,6 +168,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     {
         transform.SetParent(player.WeaponHolder);
         transform.localPosition = Vector3.zero;
+        transform.localRotation = player.WeaponHolder.localRotation;
         gameObject.SetActive(true);
 
         lastFired = 0.0f;
