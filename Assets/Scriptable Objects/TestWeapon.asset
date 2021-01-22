@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68f6bb7368e37c408c710d9af0cf4ca, type: 3}
   m_Name: TestWeapon
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Assult Rifle
   itemCost: 0
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: a02ba8184dd47574cba2d6fc1d7a7165, type: 3}
   itemDescription: 
   equipSound: {fileID: 0}
   EquipableToSpawn: {fileID: 9134610054443472385, guid: 3dbfccad6c40edf45aa0dc589ff285d9,
