@@ -90,7 +90,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         if (StartingItem != null)
         {
             InventoryAdd(StartingItem);
-            Player.EquipWeapon(m_equipables[StartingItem]);
+            _player.EquipWeapon(m_equipables[StartingItem]);
         }
     }
 
