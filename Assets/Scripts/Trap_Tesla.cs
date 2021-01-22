@@ -12,12 +12,63 @@ public class Trap_Tesla : Trap
 
     void ChainLighting(Vector3 chainPosition)
     {
-        Collider[] objects = Physics.OverlapSphere(chainPosition, chainRadius,)
+        //setting array of objects with collider to have a sphere checking chain's position, raidus, and know what enemy
+        Collider[] objects = Physics.OverlapSphere(chainPosition, chainRadius, whatIsEnemy); 
+
+        if (objects[0] != null)
+        {
+            if (currentChainAmmount >= enemyChainAmmount)
+            {
+                isChaining = false;
+                currentChainAmmount = 0;
+                return;
+            }
+
+            Actor_Enemy enemy = objects[0].GetComponent<Actor_Enemy>();
+
+            if (enemy != null)
+            {
+                enemy.TakeDamage(trapDamage);
+                currentChainAmmount++;
+                ChainLighting(enemy.transform.position);
+            }
+            else
+            {
+                isChaining = false;
+                currentChainAmmount = 0;
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
+        if (isChaining == false)
+        {
+            ChainLighting(transform.position);
+        }
+    }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.DrawSphere(transform.position, chainRadius);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(maxUses > 0)
+        {
+            if(other.GetComponent<Actor_Enemy>() && isChaining == false)
+            {
+                isChaining = true;
+                ChainLighting(other.transform.position);
+            }
+            maxUses--;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
