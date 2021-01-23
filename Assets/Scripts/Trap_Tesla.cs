@@ -71,14 +71,6 @@ public class Trap_Tesla : Trap
                 //set the chain to true and get the lighting to that enemy
                 isChaining = true;
                 ChainLighting(other.transform.position);
-                //Adjusting the damageData of the trap
-                DamageData data = new DamageData
-                {
-                    damageAmount = trapDamage, //setting the damageAmmount to the trapDamage
-                    damageSource = this.transform.position, //getting the damage source from the trap
-                };
-
-                other.GetComponent<Actor_Enemy>().TakeDamage(data); //enemy actor, when triggered will take new damage data
             }
             maxUses--; //decrease the max uses
         }
