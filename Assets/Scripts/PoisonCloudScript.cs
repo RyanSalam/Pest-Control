@@ -96,7 +96,10 @@ public class PoisonCloudScript : MonoBehaviour
         //load all our colliders into our enemies to damage array by grabbing the component
         foreach (Collider c in colliders)
         {
-            enemiesToDamage[enemyCount] = colliders[enemyCount].GetComponent<Actor_Enemy>();
+            //THESE ARE CAUSING NULL REFERENCES AND I DONT KNOW WHY
+
+            //enemiesToDamage[enemyCount] = colliders[enemyCount].GetComponentInParent<Actor_Enemy>();
+            //enemiesToDamage[enemyCount] = colliders[enemyCount].GetComponent<Actor_Enemy>();
             enemyCount++;
         }
 
