@@ -9,14 +9,15 @@ public class Trap_Tesla : Trap
     [SerializeField] private int enemyChainAmmount = 4; // setting how much enemy can be infliceted by lighting chain
     [SerializeField] private float chainRadius = 2.0f; //raidus of the chain
     [SerializeField] private LayerMask whatIsEnemy; //check enemy layer 
+    private Actor_Enemy enemyTarget;
+
 
     protected override void Update()
     {
         base.Update();
-        if (isChaining == false) //if chaining is false put back the 
+        if (enemyTarget == null) // finding enemy
         {
-            // ressetting chaing lighting position
-            ChainLighting(transform.position);
+            ChainLighting(transform.position); // ressetting chain lighting position
         }
     }
 
@@ -30,20 +31,20 @@ public class Trap_Tesla : Trap
             //checking the current chain ammount is greater or equal to the enemy's chain
             if (currentChainAmmount >= enemyChainAmmount)
             {
-                //reseting chaing and current chain ammount
+                //reseting chain and current chain ammount
                 isChaining = false;
                 currentChainAmmount = 0;
                 return;
             }
 
-            Actor_Enemy enemy = objects[0].GetComponent<Actor_Enemy>(); //setting enemy as objects
+            enemyTarget = objects[0].GetComponent<Actor_Enemy>(); //setting enemy as objects
             // if the enemy is not empty
-            if (enemy != null)
+            if (enemyTarget != null)
             {
                 //make enemy take damage from the trap
-                enemy.TakeDamage(trapDamage);
-                currentChainAmmount++;          //add the current chain ammount when it is an enemy
-                ChainLighting(enemy.transform.position); //set the lighting of the trap to the enemys position
+                enemyTarget.TakeDamage(trapDamage);
+                //add the current chain ammount when it is an enemy
+                currentChainAmmount++;         
             }
             else
             {
@@ -54,29 +55,31 @@ public class Trap_Tesla : Trap
         }
     }
 
-    protected override void OnDrawGizmos()
+    public override void Activate()
     {
-        base.OnDrawGizmos();
-        Gizmos.DrawSphere(transform.position, chainRadius); //shows the traps ChainRadius on scene 
+        if (!isTrapBuilt) //checks if the trap is not built 
+        {
+            return;
+        }
+
+        //set the chain to true and get the lighting to that enemy
+        isChaining = true;
+        ChainLighting(enemyTarget.transform.position); //set the lighting of the trap to the enemys position
+        base.Activate();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //checking traps uses till it destroys 
-        if (maxUses > 0) 
+        //checkig if collider is an enemy and checks if the trap chain is off
+        if (enemyTarget !=null && isChaining == false)
         {
-            //checkig if collider is an enemy and checks if the trap chain is off
-            if (other.GetComponent<Actor_Enemy>() && isChaining == false) 
-            {
-                //set the chain to true and get the lighting to that enemy
-                isChaining = true;
-                ChainLighting(other.transform.position);
-            }
-            maxUses--; //decrease the max uses
+            Activate();
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+    }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.DrawSphere(transform.position, chainRadius); //shows the traps ChainRadius on scene 
     }
 }

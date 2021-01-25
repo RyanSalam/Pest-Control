@@ -8,7 +8,7 @@ public class Trap : MonoBehaviour
     [SerializeField] protected int maxUses = 10;
     [SerializeField] protected float buildDuration;
     protected int currentUses;
-    bool isTrapBuilt;
+    protected bool isTrapBuilt;
     Timer buildTimer;
     protected Animator anim;
 
@@ -32,11 +32,11 @@ public class Trap : MonoBehaviour
 
     public virtual void Activate()
     {
-       /* if (!isBuilt) // should be implemented on the top like this for other trap scripts if overiding
-        {
-            return;
-        }
-       */
+        /* if (!isTrapBuilt) // should be implemented on the top like this for other trap scripts if overiding
+         {
+             return;
+         }
+        */
         // when trap is activated
         currentUses++; //add current uses 
         if (currentUses >= maxUses) //checks if the current trap uses is greater or equal to max
