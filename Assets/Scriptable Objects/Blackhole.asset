@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Blackhole
   abilityDesc: Description
-  abilitySprite: {fileID: 0}
+  abilitySprite: {fileID: 21300000, guid: be0b630c0f66a114e88182bbfdf92581, type: 3}
   coolDownDuration: 5
   AbilityButton: Ability One
   isAbilityOnCoolDown: 0

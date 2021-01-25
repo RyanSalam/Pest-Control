@@ -9,6 +9,7 @@ public abstract class Ability : ScriptableObject
     [Multiline(5)]public string abilityDesc = "Description";
     public Sprite abilitySprite;
 
+    public Timer abilityTimer;
     public float coolDownDuration = 5.0f;
     public string AbilityButton = "Button Name";
     public bool isAbilityOnCoolDown = false;
@@ -18,11 +19,26 @@ public abstract class Ability : ScriptableObject
     /// Takes in Gameobject parameter that will contain variables and components the ability will need.
     /// </summary>
     /// <param name="abilitySource"></param>
-    public abstract void Initialize(GameObject abilitySource);
-    public abstract void Execute();
+    public virtual void Initialize(GameObject abilitySource)
+    {
+        abilityTimer = new Timer(coolDownDuration, false);
+        abilityTimer.OnTimerEnd += OnCooldownEnd;
+    }
+    public virtual void Execute()
+    {
+        abilityTimer.PlayFromStart();
+    }
     /// <summary>
     /// Conditions that must be met for our ability to be triggered.
     /// </summary>
     /// <returns></returns>
+    /// 
     public virtual bool CanExecute() => !isAbilityOnCoolDown;
+
+    /// <summary>
+    /// Gets triggered when the ability timer ends.
+    /// </summary>
+    /// <returns></returns>
+    /// 
+    public abstract void OnCooldownEnd();
 }
