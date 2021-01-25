@@ -14,12 +14,26 @@ public class PortalSender : MonoBehaviour
 
     public Transform bulletTransformPoint;
 
-    public Actor_Player actP;
+    private Actor_Player actP;
+
+    private bool inDelay = false;
+    private float currentDelayTime = 0.0f;
+    [SerializeField] private float delayTime;
 
    
     void Update()
     {
-
+        // A quick delay before the player can teleport again
+        if (inDelay)
+        {
+            currentDelayTime += Time.deltaTime;
+            // Adjust the delay time here!
+            if (currentDelayTime >= delayTime)
+            {
+                currentDelayTime = 0.0f;
+                inDelay = false;
+            }
+        }
     }
 
 
@@ -45,8 +59,10 @@ public class PortalSender : MonoBehaviour
     {
         if (otherPortal.gameObject.activeSelf ==false || gameObject.activeSelf == false) { return; }
 
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") && !inDelay)
         {
+            inDelay = true;
+            destination.GetComponentInParent<PortalSender>().inDelay = true;
             HandlePlayerCollision();
         }
     }
