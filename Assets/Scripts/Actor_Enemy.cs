@@ -140,24 +140,24 @@ public class Actor_Enemy : Actor
 
     private void OnDrawGizmosSelected()
     {
-        if(isDebugging)
-        {
-            // Debug drawing a wire sphere to visualise the range a player has to be in in order to be detected.
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        //if(isDebugging)
+        //{
+        //    // Debug drawing a wire sphere to visualise the range a player has to be in in order to be detected.
+        //    Gizmos.color = Color.red;
+        //    Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
-            // Debug drawing a wire sphere to vialise the range a player has to exceed in order to be "lost" by the Enemy.
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, detectionLossRange);
+        //    // Debug drawing a wire sphere to vialise the range a player has to exceed in order to be "lost" by the Enemy.
+        //    Gizmos.color = Color.yellow;
+        //    Gizmos.DrawWireSphere(transform.position, detectionLossRange);
 
-            // Debug drawing a wire cube to visualise the attack box of the Enemy.
-            if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
-                Gizmos.color = Color.green;
-            else
-                Gizmos.color = Color.red;
+        //    // Debug drawing a wire cube to visualise the attack box of the Enemy.
+        //    if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
+        //        Gizmos.color = Color.green;
+        //    else
+        //        Gizmos.color = Color.red;
 
-            Gizmos.DrawWireCube(attackBox.transform.position, Vector3.one * attackRange);
-        }
+        //    Gizmos.DrawWireCube(attackBox.transform.position, Vector3.one * attackRange);
+        //}
     }
 
     //Enumerator to define the Enemy Type, used by the Wave Manager to determine which enemies to spawn.

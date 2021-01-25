@@ -155,7 +155,7 @@ MonoBehaviour:
   lastFired: 0
   canFire: 1
   isFiring: 0
-  weaponAttachment: {fileID: 11400000, guid: 3c05c12dc3a4a0d49beeb434bffab647, type: 2}
+  weaponAttachment: {fileID: 11400000, guid: d05d3cbff221f3b48b7b6169c7080f8e, type: 2}
   firePoint: {fileID: 1005532296260209577}
   recoilPosition: {fileID: 1070349915}
   rotationPoint: {fileID: 1273709577}
