@@ -95,7 +95,7 @@ MonoBehaviour:
   playerCollision: 0
   projectileCollision: 0
   bulletTransformPoint: {fileID: 0}
-  actP: {fileID: 0}
+  delayTime: 2
 --- !u!1 &2881985205987358629
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   playerCollision: 0
   projectileCollision: 0
   bulletTransformPoint: {fileID: 0}
-  actP: {fileID: 0}
+  delayTime: 2
 --- !u!1 &6715927603155748980
 GameObject:
   m_ObjectHideFlags: 0
