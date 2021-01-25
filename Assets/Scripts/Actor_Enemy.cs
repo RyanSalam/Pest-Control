@@ -58,9 +58,6 @@ public class Actor_Enemy : Actor
     [Tooltip("Float determining the distance the player must be away from the enemy before the enemy loses aggro.")]
     public float detectionLossRange;
 
-    [Tooltip("New target actor, for target switching purposes.")]
-    public Actor newTarget;
-
     [Tooltip("Hard references for player and core to aid in target switching.")]
     public Actor player;
     public Actor_Core core;
@@ -96,7 +93,7 @@ public class Actor_Enemy : Actor
 
     private void Update()
     {
-        
+
         /*
         // If not retaliating and target and new target differ set target to new target.
         if(!isRetaliating && target != newTarget)
@@ -112,12 +109,41 @@ public class Actor_Enemy : Actor
         else
             newTarget = core;
 
-    */
+        */
+
         // Set the target on the animator accordingly.
         if (target)
             Anim.SetBool("hasTarget", true);
         else
             Anim.SetBool("hasTarget", false);
+    }
+
+    public void Search()
+    {
+        // Create an overlap sphere to search the area around the enemy for any colliders on the player layer.
+        Collider[] targets = Physics.OverlapSphere(transform.position, detectionRadius, playerLayer);
+
+        Debug.Log("Searching");
+
+        // If any targets are found set newTarget to the first found player.
+        if (targets.Length > 0 && Vector3.Distance(core.transform.position, transform.position) > detectionRadius)
+        {
+            SwitchTarget(player);
+            Debug.Log("Targting Player");
+        }
+        else
+        {
+            SwitchTarget(core);
+            Debug.Log("Targeting Core");
+        }
+    }    
+
+    public void SwitchTarget(Actor newTarget)
+    {
+        if(_target != newTarget)
+        {
+            _target = newTarget;
+        }
     }
 
     // On taking damage, increase the hits recieved and if enemy is a grunt it will persue and attack their attacker.
@@ -129,7 +155,7 @@ public class Actor_Enemy : Actor
 
         if(enemyType == EnemyType.Grunt)
         {
-            newTarget = data.damager;
+            SwitchTarget(data.damager);
             isRetaliating = true;
         }
     }

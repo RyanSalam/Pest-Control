@@ -20433,6 +20433,18 @@ Transform:
   m_Father: {fileID: 174276064}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &579050615 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3187139777319102279, guid: 566d321ad4cb7e84f9b13a7abff087a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 8402986661879953320}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab7387a4ec90fc4ab16eb35396e1ea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &582389715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73025,6 +73037,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8402986662682793176, guid: 566d321ad4cb7e84f9b13a7abff087a8,
+        type: 3}
+      propertyPath: _core
+      value: 
+      objectReference: {fileID: 579050615}
     - target: {fileID: 8402986662682793176, guid: 566d321ad4cb7e84f9b13a7abff087a8,
         type: 3}
       propertyPath: shopUI
