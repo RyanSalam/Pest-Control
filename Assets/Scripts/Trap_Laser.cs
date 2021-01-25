@@ -19,7 +19,7 @@ public class Trap_Laser : Trap
     }
     public override void Activate()
     {
-        /*if (!isTrapBuilt)
+        /*if (!isTrapBuilt) // need nayeems push to reference base trap script 
         {
             return;
         }*/
