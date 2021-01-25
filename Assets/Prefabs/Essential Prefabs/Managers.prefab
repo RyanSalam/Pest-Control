@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &2476181598536640890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7771072548673770797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ab7387a4ec90fc4ab16eb35396e1ea5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
-  moveSpeed: 10
-  hitAngle: 360
-  hitForwardRot: 360
 --- !u!1 &8402986662682793157
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6881091166f18bf4bbc575998af6d55c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _core: {fileID: 2476181598536640890}
+  _core: {fileID: 0}
   _player: {fileID: 0}
   playerSpawnPoint: {fileID: 8402986662682793159}
   respawnTimer: 2
@@ -70,6 +54,7 @@ MonoBehaviour:
   EndGameMenu: {fileID: 0}
   StartingItem: {fileID: 11400000, guid: 7ee8ab5a1c25d1a47bbbe7edb77e4177, type: 2}
   inventoryLimit: 4
+  shopUI: {fileID: 0}
 --- !u!114 &8402986662682793158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,12 +159,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5a92f942a7f19e40b7acc5ebf37e41e, type: 3}
---- !u!1 &7771072548673770797 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 116529854635653054, guid: c5a92f942a7f19e40b7acc5ebf37e41e,
-    type: 3}
-  m_PrefabInstance: {fileID: 7657696093789250195}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7771072548673770796 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 116529854635653055, guid: c5a92f942a7f19e40b7acc5ebf37e41e,
