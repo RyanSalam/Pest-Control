@@ -15,8 +15,10 @@ MonoBehaviour:
   abilityName: Blackhole
   abilityDesc: Description
   abilitySprite: {fileID: 21300000, guid: be0b630c0f66a114e88182bbfdf92581, type: 3}
-  coolDownDuration: 5
+  coolDownDuration: 7
   AbilityButton: Ability One
   isAbilityOnCoolDown: 0
   prefabToSpawn: {fileID: 3147279108591053944, guid: 455f961f3b328a343892e31b7952b66b,
     type: 3}
+  spawnedProjectile: {fileID: 0}
+  lifeTime: 7

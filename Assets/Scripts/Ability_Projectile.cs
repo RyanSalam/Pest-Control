@@ -6,6 +6,7 @@ using UnityEngine;
 public class Ability_Projectile : Ability
 {
     public GameObject prefabToSpawn;
+    public GameObject spawnedProjectile;
     private Actor_Player pA;
 
     [SerializeField] protected float lifeTime = 5f;
@@ -14,7 +15,7 @@ public class Ability_Projectile : Ability
     public override void Execute()
     {
         base.Execute();
-        Instantiate(prefabToSpawn, pA.AbilitySpawnPoint.position, pA.AbilitySpawnPoint.rotation);
+        spawnedProjectile = Instantiate(prefabToSpawn, pA.AbilitySpawnPoint.position, pA.AbilitySpawnPoint.rotation);
 
     }
 
@@ -25,8 +26,13 @@ public class Ability_Projectile : Ability
         
     }
 
+    public override bool CanExecute()
+    {
+        return spawnedProjectile == null;
+    }
+
     public override void OnCooldownEnd()
     {
-        throw new System.NotImplementedException();
+        Destroy(spawnedProjectile);
     }
 }
