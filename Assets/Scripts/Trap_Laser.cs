@@ -13,6 +13,10 @@ public class Trap_Laser : Trap
     {
         base.Start();
     }
+    protected override void Update()
+    {
+        base.Update();
+    }
     public override void Activate()
     {
         /*if (!isTrapBuilt)
@@ -20,8 +24,8 @@ public class Trap_Laser : Trap
             return;
         }*/
         animator.SetTrigger("Lasers");
-        enemyTarget.TakeDamage(TrapDamage);
-        enemyTarget = null;
+        enemyTarget.TakeDamage(TrapDamage); //damage enemy 
+        enemyTarget = null; //reseting enemy back to null
         base.Activate(); 
     }
     private void OnTriggerEnter(Collider trigger)
@@ -29,7 +33,7 @@ public class Trap_Laser : Trap
         enemyTarget = GetComponent<Actor_Enemy>();
         if (enemyTarget != null) //if the enemy actor collides with trap
         {
-            Activate();
+            Activate(); //when triggered activate
         }
     }
 }
