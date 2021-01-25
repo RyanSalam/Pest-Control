@@ -15,6 +15,7 @@ public class Actor_Player : Actor
 
     [SerializeField] protected float jumpStrength = 4.0f;
     [SerializeField] private float _minJumpDuration = 0.75f;
+    [SerializeField] private float _maxJumpDuration = 2.0f;
     private float _verticalVel = 0.0f;
     private bool _jumpRequest = false;
     private float _jumpElapsed = 0.0f;
@@ -106,10 +107,13 @@ public class Actor_Player : Actor
         if (Input.GetButtonDown("Jump") && controller.isGrounded) 
             _jumpRequest = true;
 
+        
         if (Input.GetButtonUp("Jump"))
         {
             _jumpRequest = false;
         }
+        
+        
 
         if (AbilityOne != null && AbilityTwo != null)
         {
@@ -146,18 +150,21 @@ public class Actor_Player : Actor
         movement *= moveSpeed * Time.fixedDeltaTime;
 
 
-        _verticalVel = controller.isGrounded ? -2.0f : _verticalVel + -9.81f * Time.fixedDeltaTime;
+        _verticalVel = controller.isGrounded ? -0.5f : _verticalVel + -9.81f * Time.fixedDeltaTime;
 
         // Condition to make sure we've let the jump button go
         // And we've at least covered some minimum ground 
         // Otherwise just tapping and letting it go would seem hella lame
-        if (_jumpRequest || _jumpElapsed.IsWithin(Mathf.Epsilon, _minJumpDuration))
+        if (_jumpRequest || _jumpElapsed.IsWithin(Mathf.Epsilon, _minJumpDuration) && _jumpElapsed <= _maxJumpDuration)
         {
             _jumpElapsed += Time.fixedDeltaTime;
-            _verticalVel = (jumpStrength * _jumpElapsed) + (0.5f * -9.81f * _jumpElapsed * _jumpElapsed);
+            _verticalVel = (jumpStrength * _jumpElapsed * 2.3f) + (0.5f * -9.81f * _jumpElapsed * _jumpElapsed);
+            //_verticalVel = (jumpStrength) ;
+            // _jumpRequest = false;
         }
 
         else
+            //_verticalVel = (-9.81f);
             _jumpElapsed = 0.0f;
 
 
