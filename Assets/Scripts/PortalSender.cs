@@ -14,10 +14,11 @@ public class PortalSender : MonoBehaviour
 
     public Transform bulletTransformPoint;
 
-    public Actor_Player actP;
+    private Actor_Player actP;
 
-    public bool inDelay = false;
-    public float delayTimer = 0.0f;
+    private bool inDelay = false;
+    private float currentDelayTime = 0.0f;
+    [SerializeField] private float delayTime;
 
    
     void Update()
@@ -25,10 +26,11 @@ public class PortalSender : MonoBehaviour
         // A quick delay before the player can teleport again
         if (inDelay)
         {
-            delayTimer += Time.deltaTime;
+            currentDelayTime += Time.deltaTime;
             // Adjust the delay time here!
-            if (delayTimer >= 5.0f)
+            if (currentDelayTime >= delayTime)
             {
+                currentDelayTime = 0.0f;
                 inDelay = false;
             }
         }
