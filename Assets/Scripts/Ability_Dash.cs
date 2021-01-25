@@ -14,12 +14,14 @@ public class Ability_Dash : Ability
 
     public override void Execute()
     {
+        base.Execute();
         // Do the dash here
         // Increment the dashCounter
         Vector3 destination = (pA.transform.forward * dashDistance);
         pA.Controller.Move(destination);
 
         dashCounter++;
+            
     }
 
     public override bool CanExecute()
@@ -29,8 +31,19 @@ public class Ability_Dash : Ability
 
     public override void Initialize(GameObject abilitySource)
     {
+        base.Initialize(abilitySource);
         pA = abilitySource.GetComponent<Actor_Player>();
         dashCounter = 0;
 
+    }
+
+    public override void OnCooldownEnd()
+    {
+        dashCounter--;
+        if (dashCounter != 0)
+        {
+            abilityTimer.PlayFromStart();
+        }
+        //throw new System.NotImplementedException();
     }
 }

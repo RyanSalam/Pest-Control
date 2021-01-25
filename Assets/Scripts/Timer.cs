@@ -40,6 +40,7 @@ public class Timer
 
         if (remainingSeconds >= totalSeconds)
         {
+            playing = false;
             OnTimerEnd?.Invoke();
         }
     }

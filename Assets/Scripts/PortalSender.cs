@@ -16,10 +16,22 @@ public class PortalSender : MonoBehaviour
 
     public Actor_Player actP;
 
+    public bool inDelay = false;
+    public float delayTimer = 0.0f;
+
    
     void Update()
     {
-
+        // A quick delay before the player can teleport again
+        if (inDelay)
+        {
+            delayTimer += Time.deltaTime;
+            // Adjust the delay time here!
+            if (delayTimer >= 5.0f)
+            {
+                inDelay = false;
+            }
+        }
     }
 
 
@@ -45,8 +57,10 @@ public class PortalSender : MonoBehaviour
     {
         if (otherPortal.gameObject.activeSelf ==false || gameObject.activeSelf == false) { return; }
 
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") && !inDelay)
         {
+            inDelay = true;
+            destination.GetComponentInParent<PortalSender>().inDelay = true;
             HandlePlayerCollision();
         }
     }

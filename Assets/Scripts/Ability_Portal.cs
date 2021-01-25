@@ -13,11 +13,16 @@ public class Ability_Portal : Ability
 
     public override void Execute()
     {
+
         portalList[portalCount].transform.position = pA.AbilitySpawnPoint.position + pA.AbilitySpawnPoint.transform.forward * 3;
         portalList[portalCount].transform.rotation = pA.AbilitySpawnPoint.rotation;
 
         portalList[portalCount].gameObject.SetActive(true);
         portalCount++;
+
+        if (portalCount == portalList.Count)
+            // Call this when you want to start the cooldown
+            base.Execute();
     }
 
     public override bool CanExecute()
@@ -27,6 +32,8 @@ public class Ability_Portal : Ability
 
     public override void Initialize(GameObject abilitySource)
     {
+        base.Initialize(abilitySource);
+
         // Get the placeholder child object from Actor_Player
         // Disable both portals on init
         pA = abilitySource.GetComponent<Actor_Player>();
@@ -52,5 +59,13 @@ public class Ability_Portal : Ability
         }
     }
 
-    // Wait for the OnAbility Reset for cooldown implementation
+    public override void OnCooldownEnd()
+    {
+        // Reset portals
+        portalCount = 0;
+        foreach (PortalSender portal in portalList)
+        {
+            portal.gameObject.SetActive(false);
+        }
+    }
 }
