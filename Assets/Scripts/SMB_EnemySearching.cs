@@ -16,7 +16,7 @@ public class SMB_EnemySearching : StateMachineBehaviour
         thisEnemy = animator.GetComponentInParent<Actor_Enemy>();
 
         // Ensure the Enemy is stopped as they search.
-        thisEnemy.agent.isStopped = true;
+       // thisEnemy.agent.isStopped = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

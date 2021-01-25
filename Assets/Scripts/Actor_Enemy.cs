@@ -96,6 +96,8 @@ public class Actor_Enemy : Actor
 
     private void Update()
     {
+        
+        /*
         // If not retaliating and target and new target differ set target to new target.
         if(!isRetaliating && target != newTarget)
             _target = newTarget;
@@ -110,6 +112,7 @@ public class Actor_Enemy : Actor
         else
             newTarget = core;
 
+    */
         // Set the target on the animator accordingly.
         if (target)
             Anim.SetBool("hasTarget", true);
