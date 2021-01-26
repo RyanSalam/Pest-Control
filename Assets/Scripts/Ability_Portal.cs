@@ -47,7 +47,7 @@ public class Ability_Portal : Ability
             if (t != portalPrefab.transform)
             {
                 portalList.Add(t);
-                t.GetComponent<PortalSender>().actP = pA;
+                //t.GetComponent<PortalSender>().actP = pA;
             }
         }
         

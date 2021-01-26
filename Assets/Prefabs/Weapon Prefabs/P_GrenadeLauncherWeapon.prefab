@@ -90,7 +90,7 @@ MonoBehaviour:
   lastFired: 0
   canFire: 1
   isFiring: 0
-  weaponAttachment: {fileID: 0}
+  weaponAttachment: {fileID: 11400000, guid: dbcb79a4f59b1a541b57d4e3ab887e21, type: 2}
   firePoint: {fileID: 1276595699964514502}
   projectilePrefab: {fileID: 2221685402508476846, guid: 77811e88227db92489017efc683573df,
     type: 3}

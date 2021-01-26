@@ -56,6 +56,17 @@ public class Actor_Player : Actor
     public Transform TrapHolder { get { return _trapHolder; } }
     private IEquippable CurrentEquipped { get { return _currentEquiped; } }
 
+    private int _currentEnergy = 200;
+    public int CurrentEnergy
+    {
+        get { return _currentEnergy; }
+        set
+        {
+            _currentEnergy = value;
+            // Call UI Update Here 
+        }
+    }
+
     protected override void Awake()
     {
         base.Awake();

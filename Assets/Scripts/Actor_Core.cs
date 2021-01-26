@@ -25,7 +25,7 @@ public class Actor_Core : Actor
         public void HandleRingRotation()
         {
             if (!bIsRotating) return;
-            ring.transform.Rotate(rotationDir * speed);
+            ring.transform.Rotate(rotationDir * speed * Time.deltaTime);
         }
 
         // Delegate takes 

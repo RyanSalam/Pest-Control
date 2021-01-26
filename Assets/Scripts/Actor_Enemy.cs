@@ -58,9 +58,6 @@ public class Actor_Enemy : Actor
     [Tooltip("Float determining the distance the player must be away from the enemy before the enemy loses aggro.")]
     public float detectionLossRange;
 
-    [Tooltip("New target actor, for target switching purposes.")]
-    public Actor newTarget;
-
     [Tooltip("Hard references for player and core to aid in target switching.")]
     public Actor player;
     public Actor_Core core;
@@ -96,6 +93,8 @@ public class Actor_Enemy : Actor
 
     private void Update()
     {
+
+        /*
         // If not retaliating and target and new target differ set target to new target.
         if(!isRetaliating && target != newTarget)
             _target = newTarget;
@@ -110,11 +109,41 @@ public class Actor_Enemy : Actor
         else
             newTarget = core;
 
+        */
+
         // Set the target on the animator accordingly.
         if (target)
             Anim.SetBool("hasTarget", true);
         else
             Anim.SetBool("hasTarget", false);
+    }
+
+    public void Search()
+    {
+        // Create an overlap sphere to search the area around the enemy for any colliders on the player layer.
+        Collider[] targets = Physics.OverlapSphere(transform.position, detectionRadius, playerLayer);
+
+        Debug.Log("Searching");
+
+        // If any targets are found set newTarget to the first found player.
+        if (targets.Length > 0 && Vector3.Distance(core.transform.position, transform.position) > detectionRadius)
+        {
+            SwitchTarget(player);
+            Debug.Log("Targting Player");
+        }
+        else
+        {
+            SwitchTarget(core);
+            Debug.Log("Targeting Core");
+        }
+    }    
+
+    public void SwitchTarget(Actor newTarget)
+    {
+        if(_target != newTarget)
+        {
+            _target = newTarget;
+        }
     }
 
     // On taking damage, increase the hits recieved and if enemy is a grunt it will persue and attack their attacker.
@@ -126,7 +155,7 @@ public class Actor_Enemy : Actor
 
         if(enemyType == EnemyType.Grunt)
         {
-            newTarget = data.damager;
+            SwitchTarget(data.damager);
             isRetaliating = true;
         }
     }
@@ -140,24 +169,24 @@ public class Actor_Enemy : Actor
 
     private void OnDrawGizmosSelected()
     {
-        if(isDebugging)
-        {
-            // Debug drawing a wire sphere to visualise the range a player has to be in in order to be detected.
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        //if(isDebugging)
+        //{
+        //    // Debug drawing a wire sphere to visualise the range a player has to be in in order to be detected.
+        //    Gizmos.color = Color.red;
+        //    Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
-            // Debug drawing a wire sphere to vialise the range a player has to exceed in order to be "lost" by the Enemy.
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, detectionLossRange);
+        //    // Debug drawing a wire sphere to vialise the range a player has to exceed in order to be "lost" by the Enemy.
+        //    Gizmos.color = Color.yellow;
+        //    Gizmos.DrawWireSphere(transform.position, detectionLossRange);
 
-            // Debug drawing a wire cube to visualise the attack box of the Enemy.
-            if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
-                Gizmos.color = Color.green;
-            else
-                Gizmos.color = Color.red;
+        //    // Debug drawing a wire cube to visualise the attack box of the Enemy.
+        //    if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
+        //        Gizmos.color = Color.green;
+        //    else
+        //        Gizmos.color = Color.red;
 
-            Gizmos.DrawWireCube(attackBox.transform.position, Vector3.one * attackRange);
-        }
+        //    Gizmos.DrawWireCube(attackBox.transform.position, Vector3.one * attackRange);
+        //}
     }
 
     //Enumerator to define the Enemy Type, used by the Wave Manager to determine which enemies to spawn.

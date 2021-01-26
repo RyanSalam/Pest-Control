@@ -19,22 +19,4 @@ public abstract class AltFireAttachment : ScriptableObject
     }
 }
 
-[CreateAssetMenu(fileName = "New ProjectileAttachment", menuName = "Attachment/Projectile")]
-public class ProjectileAttachment : AltFireAttachment
-{
-    [SerializeField] protected Rigidbody projectilePrefab;
-    public override void AltShoot()
-    {
-        Instantiate(projectilePrefab, weapon.FirePoint.position, weapon.FirePoint.rotation);
-    }
-}
-
-public class RayCastAttachment : AltFireAttachment
-{
-    public override void AltShoot()
-    {
-        
-    }
-}
-
 

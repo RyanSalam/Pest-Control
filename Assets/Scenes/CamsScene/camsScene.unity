@@ -72596,7 +72596,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_GrenadeLauncherWeapon
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3110827224654224194, guid: c98dc00c8544d2444ae621085be14d2f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c98dc00c8544d2444ae621085be14d2f, type: 3}
 --- !u!1001 &6852412233189058817
 PrefabInstance:

@@ -20,7 +20,11 @@ public class PortalSender : MonoBehaviour
     private float currentDelayTime = 0.0f;
     [SerializeField] private float delayTime;
 
-   
+    private void Start()
+    {
+        actP = LevelManager.Instance.Player;
+    }
+
     void Update()
     {
         // A quick delay before the player can teleport again
