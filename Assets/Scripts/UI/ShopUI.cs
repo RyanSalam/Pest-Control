@@ -9,7 +9,7 @@ public class ShopUI : MonoBehaviour
 {
     //public static ShopUI instance;
 
-    [SerializeField] private TextMeshProUGUI customerEnergy = null;
+    [SerializeField] private TMP_Text customerEnergy = null;
     [SerializeField] private Text itemDescription = null;
 
     [SerializeField] private GameObject inventoryPanel = null;

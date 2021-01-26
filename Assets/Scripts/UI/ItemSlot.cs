@@ -41,14 +41,13 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         // To prevent duplicates
         if (LevelManager.Instance.InventoryList.Contains(item)) return;
 
-        Actor_Player buyer = shop.Customer;
+        Actor_Player buyer = LevelManager.Instance.Player;
 
         Debug.Log("Bought item: " + itemName.text);
 
-        LevelManager.Instance.InventoryAdd(item);
-
         // TODO: Add functionality for purchasing using Energy
 
+        LevelManager.Instance.InventoryAdd(item);
 
         shop.RefreshEnergyText();
     }
