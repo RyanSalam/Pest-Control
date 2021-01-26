@@ -8,13 +8,20 @@ public class GrenadierScript : MonoBehaviour
     public Rigidbody Projectile { get { return projectile; } }
 
     //counter to track our bounces
-    int bounceCount;
+    [SerializeField] int bounceCount;
 
     //max counts for our grenade
-    int maxBounceCount;
+    [SerializeField] int maxBounceCount;
 
     //scalar value for our addForce();
-    int projectileForce = 10;
+    [SerializeField] int projectileForce = 10;
+
+    //explosion radius 
+    [SerializeField] int radius = 15;
+
+    [SerializeField] int damage = 10;
+
+    LayerMask enemyLayerMask;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +30,8 @@ public class GrenadierScript : MonoBehaviour
         bounceCount = 0;
 
         maxBounceCount = 2;
+
+        enemyLayerMask = LayerMask.GetMask("Enemy");
 
         projectile.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
     }
@@ -44,8 +53,22 @@ public class GrenadierScript : MonoBehaviour
 
         if (bounceCount >= maxBounceCount)
         {
-            Debug.Log("Kaboom?");
-            Destroy(gameObject);
+            damageEnemies();
+            Destroy(gameObject, 0.25f);
+        }
+    }
+
+    void damageEnemies()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius, enemyLayerMask);
+
+        if (colliders != null)
+        {
+            foreach (Collider c in colliders)
+            {
+                Debug.Log("Damaging enemies");
+                c.gameObject.GetComponent<Actor_Enemy>().TakeDamage(damage);
+            }
         }
     }
 }
