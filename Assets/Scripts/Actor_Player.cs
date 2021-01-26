@@ -1,0 +1,232 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(CharacterController))]
+public class Actor_Player : Actor
+{
+    [Header("Input Variables")]
+    public bool controlsEnabled = true;
+    public float mouseSensitivity = 100.0f;
+    protected Vector2 moveVector;
+    protected Vector2 mouseVector;
+    [HideInInspector] public Vector2 externalMouseForce;
+    private float _camRot = 0.0f;
+
+    [SerializeField] protected float jumpStrength = 4.0f;
+    [SerializeField] private float _minJumpDuration = 0.75f;
+    [SerializeField] private float _maxJumpDuration = 2.0f;
+    private float _verticalVel = 0.0f;
+    private bool _jumpRequest = false;
+    private float _jumpElapsed = 0.0f;
+
+    //physical attributes
+    public float mass = 1f;
+
+    //impact 
+    Vector3 impactVector = Vector3.zero;
+    bool isFlying = false;
+
+    //states   
+    public bool airtime = false;
+    bool jumping = false;
+
+    // Components
+    [SerializeField] private Camera _playerCam;
+    protected CharacterController controller;
+    public Camera PlayerCam { get { return _playerCam; } }
+    public CharacterController Controller { get { return controller; } }
+
+    [Header("Abilities")]
+    [SerializeField] private Ability _abilityOne;
+    [SerializeField] private Ability _abilityTwo;
+
+    [SerializeField] protected Transform _abilitySpawnPoint;
+    public Transform AbilitySpawnPoint { get { return _abilitySpawnPoint; } }
+    public Ability AbilityOne { get { return _abilityOne; } }
+    public Ability AbilityTwo { get { return _abilityTwo; } }
+
+    [Header("Weapon")]
+    [SerializeField] private Transform _weaponHolder;
+    [SerializeField] private Transform _trapHolder;
+    [SerializeField] private IEquippable _currentEquiped;
+    private int itemIndex = 0;
+
+    public Transform WeaponHolder { get { return _weaponHolder; } }
+    public Transform TrapHolder { get { return _trapHolder; } }
+    private IEquippable CurrentEquipped { get { return _currentEquiped; } }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        controller = GetComponent<CharacterController>();
+
+        if (AbilityOne != null)
+            AbilityOne.Initialize(gameObject);
+
+        if (AbilityTwo != null)
+            AbilityTwo.Initialize(gameObject);
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    protected virtual void Update()
+    {
+        HandleInputs();
+        HandleRotation();
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        HandleMovement();
+    }
+
+    private void HandleInputs()
+    {
+        if (!controlsEnabled) return;
+
+        // We're storing our mouse and movement inputs in vectors
+        // Helps us know 
+        moveVector.x = Input.GetAxis("Horizontal");
+        moveVector.y = Input.GetAxis("Vertical");
+
+        mouseVector.x = Input.GetAxis("Mouse X") + externalMouseForce.x * mouseSensitivity * Time.deltaTime;
+        mouseVector.y = Input.GetAxis("Mouse Y") + externalMouseForce.y * mouseSensitivity * Time.deltaTime;
+
+        _camRot -= mouseVector.y;
+        _camRot = Mathf.Clamp(_camRot, -45f, 45f);
+
+        // This allows us to control our jump
+        // Meaning the longer we hold it, the higher we can jump
+        if (Input.GetButtonDown("Jump") && controller.isGrounded) 
+            _jumpRequest = true;
+
+        
+        if (Input.GetButtonUp("Jump"))
+        {
+            _jumpRequest = false;
+        }
+        
+        
+
+        if (AbilityOne != null && AbilityTwo != null)
+        {
+            if (Input.GetButtonDown(AbilityOne.AbilityButton) && AbilityOne.CanExecute())
+                AbilityOne.Execute();
+
+            if (Input.GetButtonDown(AbilityTwo.AbilityButton) && AbilityTwo.CanExecute())
+                AbilityTwo.Execute();
+        }
+
+        float mouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
+        if (mouseWheel != 0)
+        {
+            Debug.Log(mouseWheel);
+            itemIndex += (int)Input.GetAxis("Mouse ScrollWheel");
+            // We modulus it so we can never go above the max number of items we have in our inventory
+            itemIndex %= LevelManager.Instance.InventoryList.Count; 
+            LevelManager.Instance.InventoryList[itemIndex].Use();
+        }
+
+        if (_currentEquiped != null)
+        {
+            if (_currentEquiped.PrimaryFireCheck())
+                _currentEquiped.PrimaryFire();
+
+            if (_currentEquiped.SecondaryFireCheck())
+                _currentEquiped.SecondaryFire();
+        }
+    }
+
+    private void HandleMovement()
+    {
+        Vector3 movement = transform.right * moveVector.x + transform.forward * moveVector.y;
+        movement *= moveSpeed * Time.fixedDeltaTime;
+
+
+        _verticalVel = controller.isGrounded ? -0.5f : _verticalVel + -9.81f * Time.fixedDeltaTime;
+
+        // Condition to make sure we've let the jump button go
+        // And we've at least covered some minimum ground 
+        // Otherwise just tapping and letting it go would seem hella lame
+        if (_jumpRequest || _jumpElapsed.IsWithin(Mathf.Epsilon, _minJumpDuration) && _jumpElapsed <= _maxJumpDuration)
+        {
+            _jumpElapsed += Time.fixedDeltaTime;
+            _verticalVel = (jumpStrength * _jumpElapsed * 2.3f) + (0.5f * -9.81f * _jumpElapsed * _jumpElapsed);
+            //_verticalVel = (jumpStrength) ;
+            // _jumpRequest = false;
+        }
+
+        else
+            //_verticalVel = (-9.81f);
+            _jumpElapsed = 0.0f;
+
+
+        movement += Vector3.up * _verticalVel * Time.fixedDeltaTime;
+
+        controller.Move(movement);
+
+    }
+
+    private void HandleRotation()
+    {
+        // We rotate the player Camera vertically using the cached camRot
+        // We rotate the player horizontally using 
+        PlayerCam.transform.localRotation = Quaternion.Euler(_camRot, 0.0f, 0.0f);
+        transform.Rotate(Vector3.up * mouseVector.x);
+    }
+
+    protected virtual void Ondisable()
+    {
+        controlsEnabled = false;
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        controlsEnabled = true;
+    }
+
+    public void EquipWeapon(IEquippable newWeapon)
+    {
+        if (newWeapon == CurrentEquipped) return;
+        // We will first unequip our previous weapon
+        // We then make our new weapon a child of our weaponHolder transform
+        // then reset the local position so it snaps directly to it's parent position
+
+        if (_currentEquiped != null)
+            _currentEquiped.Unequip();
+
+        newWeapon.Equip();
+        _currentEquiped = newWeapon;
+    }
+
+    bool CheckSlope()
+    {
+        RaycastHit rayOut;
+        bool checkRayHit = Physics.Raycast(transform.position, Vector3.down, out rayOut, 2f); // hardcoded to player's height; add variable later
+        if (checkRayHit && rayOut.normal != Vector3.up)
+            return true;
+        return false;
+    }
+    public void AddImpact(float impactForce, Vector3 direction)
+    {
+        impactVector = Vector3.zero;
+        _verticalVel = impactForce;
+        isFlying = true;
+        jumping = false;
+        impactVector = direction;
+        impactVector.Normalize();
+        impactVector.y = 0f;
+        impactVector *= impactForce * Mathf.Sin(Vector3.Angle(transform.up, direction)) / (0.5f * mass);
+        _verticalVel = impactForce / mass;
+        
+    }
+
+}
