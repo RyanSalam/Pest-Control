@@ -8,6 +8,8 @@ using TMPro;
 
 public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    private ShopUI shop;
+
     [SerializeField] private Image BorderImage = null;
     [SerializeField] private Image ItemIcon = null;
     [SerializeField] private TMP_Text itemName = null;
@@ -20,6 +22,11 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private bool purchased = false;
 
+    private void Awake()
+    {
+        shop = GetComponentInParent<ShopUI>();
+    }
+
     private void Start()
     {
         itemName.text = item.itemName;
@@ -28,13 +35,24 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         itemCost.text = item.itemCost.ToString();
     }
 
+    // Buying a shop item
     public void BuyItem()
     {
+        // To prevent duplicates
         if (LevelManager.Instance.InventoryList.Contains(item)) return;
 
-        Debug.Log("Inventory Button Pressed");
+        Actor_Player buyer = shop.Customer;
+
+        Debug.Log("Bought item: " + itemName.text);
+
         LevelManager.Instance.InventoryAdd(item);
+
+        // TODO: Add functionality for purchasing using Energy
+
+
+        shop.RefreshEnergyText();
     }
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {

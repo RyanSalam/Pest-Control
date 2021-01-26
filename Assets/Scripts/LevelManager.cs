@@ -18,6 +18,17 @@ public class LevelManager : MonoSingleton<LevelManager>
         get { return _player; }
     }
 
+    private int _currentEnergy = 200;
+    public int CurrentEnergy
+    {
+        get { return _currentEnergy; }
+        set
+        {
+            _currentEnergy = value;
+            // Call UI Update Here 
+        }
+    }
+
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private float respawnTimer = 2.0f;
     private bool isRespawning = false;
@@ -110,6 +121,8 @@ public class LevelManager : MonoSingleton<LevelManager>
         if (Input.GetKeyDown(KeyCode.I))
         {
             shopUI.ToggleMenu();
+            shopUI.UpdateItemUI();
+            shopUI.RefreshEnergyText();
         }
     }
 
