@@ -59,7 +59,7 @@ public class PoisonCloudScript : MonoBehaviour
                 //reset our clock
                 timeSinceLastDamage = Time.time;
 
-                if (enemyList != null)
+                if (enemyList.Count > 0)
                 {
                     //damage enemy
                     foreach (Actor_Enemy enemy in enemyList)
@@ -101,7 +101,12 @@ public class PoisonCloudScript : MonoBehaviour
         //load all our colliders into our enemies to damage array by grabbing the component
         foreach (Collider c in colliders)
         {
-            enemyList.Add(c.gameObject.GetComponent<Actor_Enemy>());
+            //store our potential actor_enemy in temp variable
+            Actor_Enemy temp = c.gameObject.GetComponent<Actor_Enemy>();
+
+            //if temp is not null add it to the list
+            if (temp != null)
+                enemyList.Add(temp);
             
             enemyCount++;
 

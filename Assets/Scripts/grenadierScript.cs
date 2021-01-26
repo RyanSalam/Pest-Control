@@ -62,12 +62,18 @@ public class GrenadierScript : MonoBehaviour
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius, enemyLayerMask);
 
-        if (colliders != null)
+        if (colliders.Length > 0)
         {
             foreach (Collider c in colliders)
             {
-                Debug.Log("Damaging enemies");
-                c.gameObject.GetComponent<Actor_Enemy>().TakeDamage(damage);
+                //temporary actor enemy so we can null check
+                Actor_Enemy temp = c.gameObject.GetComponent<Actor_Enemy>();
+                
+                //if the enemyActor component exists damage it
+                if (temp != null)
+                {
+                    temp.TakeDamage(damage);
+                }
             }
         }
     }
