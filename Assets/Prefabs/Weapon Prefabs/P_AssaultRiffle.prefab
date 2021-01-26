@@ -144,7 +144,7 @@ MonoBehaviour:
   recoilSpeed: 1
   fireRate: 1
   Damage: 1
-  auto: 0
+  auto: 1
   currentShots: 0
   maxShots: 20
   shotIncrease: 1
@@ -167,9 +167,27 @@ MonoBehaviour:
   RecoilKickBack: {x: 0.007, y: 0, z: -0.008}
   bloomX: 1
   bloomY: 1
-  animCurve:
+  spreadCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 5.016876
+      value: 2.9646683
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
