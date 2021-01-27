@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
   itemName: Assault Rifle
-  itemCost: 0
+  itemCost: 20
   itemIcon: {fileID: 21300000, guid: a02ba8184dd47574cba2d6fc1d7a7165, type: 3}
   itemDescription: 
   equipSound: {fileID: 0}
