@@ -34174,6 +34174,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.00001}
+--- !u!1 &988863230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6852412233157675776, guid: 5a1d76bd2f010ec4793b09149005bd25,
+    type: 3}
+  m_PrefabInstance: {fileID: 6852412233189058817}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &991477105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73044,6 +73050,11 @@ PrefabInstance:
       objectReference: {fileID: 579050615}
     - target: {fileID: 8402986662682793176, guid: 566d321ad4cb7e84f9b13a7abff087a8,
         type: 3}
+      propertyPath: hudUI
+      value: 
+      objectReference: {fileID: 988863230}
+    - target: {fileID: 8402986662682793176, guid: 566d321ad4cb7e84f9b13a7abff087a8,
+        type: 3}
       propertyPath: shopUI
       value: 
       objectReference: {fileID: 1009325405}
@@ -73052,6 +73063,11 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 1533388541}
+    - target: {fileID: 8402986662682793176, guid: 566d321ad4cb7e84f9b13a7abff087a8,
+        type: 3}
+      propertyPath: combatHUD
+      value: 
+      objectReference: {fileID: 988863230}
     - target: {fileID: 8402986662682793176, guid: 566d321ad4cb7e84f9b13a7abff087a8,
         type: 3}
       propertyPath: StartingItem
