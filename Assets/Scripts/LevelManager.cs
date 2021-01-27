@@ -125,6 +125,7 @@ public class LevelManager : MonoSingleton<LevelManager>
             shopUI.ToggleMenu();
             shopUI.UpdateItemUI();
             shopUI.RefreshEnergyText();
+            Player.EquipWeapon(Equipables[InventoryList[0]]);
         }
     }
 
@@ -209,6 +210,9 @@ public class LevelManager : MonoSingleton<LevelManager>
         //checks to see if the inventory contains and item
         if (m_inventoryList.Contains(item))
         {
+            if (Player.CurrentEquipped == Equipables[item])
+                Player.CurrentEquipped.Unequip();
+
             m_inventoryList.Remove(item); // removes item from inventory 
             onItemChangeCallback?.Invoke(); //calling delgate function "onItemChangeCallback" "?" is !=null
         }

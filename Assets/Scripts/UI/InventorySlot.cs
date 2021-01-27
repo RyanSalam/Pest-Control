@@ -31,7 +31,7 @@ public class InventorySlot : MonoBehaviour
     // TODO: Implement refunding
     public void RefundItem()
     {
-        if (item != null)
+        if (item != null && LevelManager.Instance.InventoryList.Count > 1)
         {
             int refundingAmount = item.itemCost / 2;
             LevelManager.Instance.CurrentEnergy += refundingAmount;
