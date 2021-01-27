@@ -58,7 +58,7 @@ public abstract class EnemyController : Actor
     protected NavMeshPath _currentPath;
     public NavMeshPath CurrentPath
     {
-        get { _currentPath; }
+        get { return _currentPath; }
     }
 
     protected override void Start()
