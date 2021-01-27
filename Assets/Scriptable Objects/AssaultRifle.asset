@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68f6bb7368e37c408c710d9af0cf4ca, type: 3}
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
-  itemName: Assult Rifle
+  itemName: Assault Rifle
   itemCost: 0
   itemIcon: {fileID: 21300000, guid: a02ba8184dd47574cba2d6fc1d7a7165, type: 3}
   itemDescription: 

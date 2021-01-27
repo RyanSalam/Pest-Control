@@ -7,12 +7,9 @@ using TMPro;
 
 public class ShopUI : MonoBehaviour
 {
-    //public static ShopUI instance;
-
     [SerializeField] private TMP_Text customerEnergy = null;
-    [SerializeField] private Text itemDescription = null;
-
-    [SerializeField] private GameObject inventoryPanel = null;
+    //[SerializeField] private Text itemDescription = null;
+    //[SerializeField] private GameObject inventoryPanel = null;
     public Actor_Player Customer;
     [SerializeField] private GameObject shopUI;
 
@@ -60,6 +57,6 @@ public class ShopUI : MonoBehaviour
 
     public void RefreshEnergyText()
     {
-        customerEnergy.text = "ENERGY: " + LevelManager.Instance.CurrentEnergy.ToString();
+        customerEnergy.text = "ENERGY " + LevelManager.Instance.CurrentEnergy.ToString();
     }
 }

@@ -20,7 +20,7 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private Sprite selectedSprite = null;
     [SerializeField] private Sprite unselectedSprite = null;
 
-    private bool purchased = false;
+    //private bool purchased = false;
 
     private void Awake()
     {
@@ -56,10 +56,12 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.localScale = Vector3.one * 1.25f;
+        BorderImage.sprite = selectedSprite;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         transform.localScale = Vector3.one;
+        BorderImage.sprite = unselectedSprite;
     }
 }
