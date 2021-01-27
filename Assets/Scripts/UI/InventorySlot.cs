@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    [SerializeField] private ShopUI shop;
+    private ShopUI shop;
 
     [SerializeField] private Item item;
     [SerializeField] private Image itemIcon;
@@ -31,18 +31,17 @@ public class InventorySlot : MonoBehaviour
     // TODO: Implement refunding
     public void RefundItem()
     {
-        if (item != null)
+        if (item != null && LevelManager.Instance.InventoryList.Count > 1)
         {
             int refundingAmount = item.itemCost / 2;
             LevelManager.Instance.CurrentEnergy += refundingAmount;
             LevelManager.Instance.InventoryRemove(item);
-            //ClearSlot();
-            Debug.Log("50% of item cost refunded: " + refundingAmount + " Energy");
-            shop.UpdateItemUI();
-            
-            // TODO: ADD ENERGY TEXT TO SHOP AND UPDATE IT HERE
-            shop.RefreshEnergyText();
 
+            //Debug.Log("50% of item cost refunded: " + refundingAmount + " Energy");
+
+            ClearSlot();
+            shop.UpdateItemUI();
+            shop.RefreshEnergyText();
         }
         else
         {

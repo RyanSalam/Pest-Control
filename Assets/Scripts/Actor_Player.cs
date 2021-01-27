@@ -54,7 +54,7 @@ public class Actor_Player : Actor
 
     public Transform WeaponHolder { get { return _weaponHolder; } }
     public Transform TrapHolder { get { return _trapHolder; } }
-    private IEquippable CurrentEquipped { get { return _currentEquiped; } }
+    public IEquippable CurrentEquipped { get { return _currentEquiped; } }
 
     protected override void Awake()
     {

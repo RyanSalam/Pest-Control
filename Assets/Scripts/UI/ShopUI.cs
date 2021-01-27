@@ -7,14 +7,12 @@ using TMPro;
 
 public class ShopUI : MonoBehaviour
 {
-    //public static ShopUI instance;
-
     [SerializeField] private TMP_Text customerEnergy = null;
-    [SerializeField] private Text itemDescription = null;
-
-    [SerializeField] private GameObject inventoryPanel = null;
+    //[SerializeField] private Text itemDescription = null;
+    //[SerializeField] private GameObject inventoryPanel = null;
     public Actor_Player Customer;
     [SerializeField] private GameObject shopUI;
+    [SerializeField] private GameObject combatHUD;
 
     private void Awake()
     {
@@ -31,6 +29,7 @@ public class ShopUI : MonoBehaviour
     public void ToggleMenu()
     {
         gameObject.SetActive(!gameObject.activeSelf);
+        combatHUD.SetActive(!combatHUD.activeSelf);
 
         Time.timeScale = gameObject.activeSelf ? 0.0f : 1.0f;
         Cursor.lockState = gameObject.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
@@ -60,6 +59,6 @@ public class ShopUI : MonoBehaviour
 
     public void RefreshEnergyText()
     {
-        customerEnergy.text = "ENERGY: " + LevelManager.Instance.CurrentEnergy.ToString();
+        customerEnergy.text = "ENERGY " + LevelManager.Instance.CurrentEnergy.ToString();
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using DG.Tweening;
 
 public class LevelManager : MonoSingleton<LevelManager>
 {
@@ -35,6 +36,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     [SerializeField] private Camera spectatorCamera;
     [SerializeField] private GameObject EndGameMenu;
+    [SerializeField] private TMP_Text EndGameText;
 
     [Header("Inventory System")]
     [SerializeField] private Item StartingItem;
@@ -123,6 +125,7 @@ public class LevelManager : MonoSingleton<LevelManager>
             shopUI.ToggleMenu();
             shopUI.UpdateItemUI();
             shopUI.RefreshEnergyText();
+            Player.EquipWeapon(Equipables[InventoryList[0]]);
         }
     }
 
@@ -158,8 +161,11 @@ public class LevelManager : MonoSingleton<LevelManager>
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        Player.controlsEnabled = false;
+
         EndGameMenu.SetActive(true);
-        //EndGameMenu DoTween here 
+        EndGameMenu.transform.DOScale(Vector3.one, 0.2f).From(Vector3.zero).OnComplete(() => Time.timeScale = 0.0f);
+        EndGameText.text = playerWon ? "Victory!" : "Defeat!";
     }
 
     public void OnRestartButton()
@@ -204,6 +210,9 @@ public class LevelManager : MonoSingleton<LevelManager>
         //checks to see if the inventory contains and item
         if (m_inventoryList.Contains(item))
         {
+            if (Player.CurrentEquipped == Equipables[item])
+                Player.CurrentEquipped.Unequip();
+
             m_inventoryList.Remove(item); // removes item from inventory 
             onItemChangeCallback?.Invoke(); //calling delgate function "onItemChangeCallback" "?" is !=null
         }
