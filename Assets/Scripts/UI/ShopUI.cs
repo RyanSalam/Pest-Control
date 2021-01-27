@@ -12,6 +12,7 @@ public class ShopUI : MonoBehaviour
     //[SerializeField] private GameObject inventoryPanel = null;
     public Actor_Player Customer;
     [SerializeField] private GameObject shopUI;
+    [SerializeField] private GameObject combatHUD;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class ShopUI : MonoBehaviour
     public void ToggleMenu()
     {
         gameObject.SetActive(!gameObject.activeSelf);
+        combatHUD.SetActive(!combatHUD.activeSelf);
 
         Time.timeScale = gameObject.activeSelf ? 0.0f : 1.0f;
         Cursor.lockState = gameObject.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;

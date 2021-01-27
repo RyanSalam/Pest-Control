@@ -473,6 +473,7 @@ MonoBehaviour:
   customerEnergy: {fileID: 7010836529440967099}
   Customer: {fileID: 0}
   shopUI: {fileID: 0}
+  combatHUD: {fileID: 6852412233157675776}
 --- !u!1 &270807466
 GameObject:
   m_ObjectHideFlags: 0

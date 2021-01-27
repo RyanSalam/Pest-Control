@@ -55,7 +55,6 @@ public class LevelManager : MonoSingleton<LevelManager>
     public Dictionary<Item, IEquippable> Equipables => m_equipables;
 
     [SerializeField] ShopUI shopUI;
-    [SerializeField] GameObject combatHUD;
 
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
@@ -74,7 +73,6 @@ public class LevelManager : MonoSingleton<LevelManager>
             InventoryAdd(StartingItem);
             _player.EquipWeapon(m_equipables[StartingItem]);
         }
-        combatHUD.SetActive(true);
 
         #region PlayerSetupInitialization
 
@@ -125,7 +123,6 @@ public class LevelManager : MonoSingleton<LevelManager>
             shopUI.ToggleMenu();
             shopUI.UpdateItemUI();
             shopUI.RefreshEnergyText();
-            combatHUD.SetActive(!combatHUD.activeSelf);
         }
     }
 
