@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,7 +38,11 @@ public class Weapon_Hitscan : Weapon
 
     Vector2 weaponRecoil;
 
-    [SerializeField] protected AnimationCurve animCurve;
+    float timeTillMaxSpread = 4;
+    float maxSpreadAngle = 2;
+
+
+    [SerializeField] protected AnimationCurve spreadCurve;
     [SerializeField] protected float timeFiring = 0f;
 
 
@@ -64,24 +69,30 @@ public class Weapon_Hitscan : Weapon
             muzzleFlashParticle.Play();
 
         ACue.PlayAudioCue();
-        //Ray mouseRay = playerCam.ScreenPointToRay(Input.mousePosition);
-        //Vector2 mousePosition = new Vector2(Random.Range(-bloomX, bloomX)
+
+        timeFiring += Time.deltaTime;
+
+        //float percent = timeFiring / timeTillMaxSpread;
+        float spread = spreadCurve.Evaluate(timeFiring);
+        float currentSpreadAngle = spread * maxSpreadAngle;
+
+        Vector3 mousePosition = playerCam.ScreenToWorldPoint(Input.mousePosition);
+
         
-        //Random spread along axis
-        float spreadX = Random.Range(-bloomX, bloomX);
-        float spreadY = Random.Range(-bloomY, bloomY);
 
-        //converting vector2 to vector3 so it can be used with mouseposition
-        Vector3 spreadVector = new Vector2(spreadX, spreadY);
+        float randAnglePitch = Random.Range(-currentSpreadAngle, currentSpreadAngle);
+        float randAngleYaw = Random.Range(-currentSpreadAngle, currentSpreadAngle);
 
-        //adding bloom to the mouse position
-        Vector3 mousePosition = playerCam.ScreenToWorldPoint(Input.mousePosition + spreadVector);
+        Debug.Log("randAnglePitch: " + randAnglePitch);
+        Debug.Log("randAngleYaw: " + randAngleYaw);
+   
 
-        Ray ray = new Ray(mousePosition, playerCam.transform.forward + recoil);
+
+        Quaternion spreadAxis = Quaternion.AngleAxis(randAnglePitch, Vector3.right) * Quaternion.AngleAxis(randAngleYaw, Vector3.up);
+
+        Ray ray = new Ray(mousePosition, spreadAxis * playerCam.transform.forward);
         RaycastHit hit;
-        Debug.DrawRay(mousePosition, playerCam.transform.forward * range, Color.red);
-
-        
+        Debug.DrawRay(FirePoint.position, spreadAxis * playerCam.transform.forward, Color.green);
 
         if (Physics.Raycast(ray, out hit, range))
         {
@@ -109,8 +120,6 @@ public class Weapon_Hitscan : Weapon
             if (ImpactParticle != null)
                 Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
 
-            
-
         }
 
     }
@@ -118,7 +127,7 @@ public class Weapon_Hitscan : Weapon
     public override void Release()
     {
         base.Release();
-
+        timeFiring = 0f;
         //reseting our recoil
         muzzleFlashParticle.Stop();
     }
@@ -149,12 +158,16 @@ public class Weapon_Hitscan : Weapon
             rotationalRecoil += new Vector3(-RecoilRotation.x, Random.Range(-RecoilRotation.y, RecoilRotation.y), Random.Range(-RecoilRotation.z, RecoilRotation.z));
             positionalRecoil += new Vector3(Random.Range(-RecoilKickBack.x, RecoilKickBack.x), Random.Range(-RecoilKickBack.y, RecoilKickBack.y), RecoilKickBack.z);
 
+            timeFiring += Time.deltaTime;
+            
+
         }
         else //if we are not firing we need to go back to normal
         {
             //weapon recoil script
             rotationalRecoil = Vector3.Lerp(rotationalRecoil, Vector3.zero, rotationalReturnSpeed * Time.deltaTime);
             positionalRecoil = Vector3.Lerp(positionalRecoil, Vector3.zero, positionalReturnSpeed * Time.deltaTime);
+            
         }
 
         transform.localPosition = positionalRecoil;
