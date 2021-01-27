@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using DG.Tweening;
 
 public class LevelManager : MonoSingleton<LevelManager>
 {
@@ -35,6 +36,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     [SerializeField] private Camera spectatorCamera;
     [SerializeField] private GameObject EndGameMenu;
+    [SerializeField] private TMP_Text EndGameText;
 
     [Header("Inventory System")]
     [SerializeField] private Item StartingItem;
@@ -158,8 +160,11 @@ public class LevelManager : MonoSingleton<LevelManager>
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        Player.controlsEnabled = false;
+
         EndGameMenu.SetActive(true);
-        //EndGameMenu DoTween here 
+        EndGameMenu.transform.DOScale(Vector3.one, 0.2f).From(Vector3.zero).OnComplete(() => Time.timeScale = 0.0f);
+        EndGameText.text = playerWon ? "Victory!" : "Defeat!";
     }
 
     public void OnRestartButton()

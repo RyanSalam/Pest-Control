@@ -72766,6 +72766,11 @@ PrefabInstance:
       propertyPath: m_text
       value: For the Story Brad
       objectReference: {fileID: 0}
+    - target: {fileID: 3361883749855457633, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6852412232306000854, guid: 5a1d76bd2f010ec4793b09149005bd25,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -72863,6 +72868,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1d76bd2f010ec4793b09149005bd25, type: 3}
+--- !u!114 &6852412233189058818 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5530356716760499033, guid: 5a1d76bd2f010ec4793b09149005bd25,
+    type: 3}
+  m_PrefabInstance: {fileID: 6852412233189058817}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6852412233189058819 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4191029740505409352, guid: 5a1d76bd2f010ec4793b09149005bd25,
+    type: 3}
+  m_PrefabInstance: {fileID: 6852412233189058817}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8402986661879953320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73068,6 +73091,16 @@ PrefabInstance:
       propertyPath: combatHUD
       value: 
       objectReference: {fileID: 988863230}
+    - target: {fileID: 8402986662682793176, guid: 566d321ad4cb7e84f9b13a7abff087a8,
+        type: 3}
+      propertyPath: EndGameMenu
+      value: 
+      objectReference: {fileID: 6852412233189058819}
+    - target: {fileID: 8402986662682793176, guid: 566d321ad4cb7e84f9b13a7abff087a8,
+        type: 3}
+      propertyPath: EndGameText
+      value: 
+      objectReference: {fileID: 6852412233189058818}
     - target: {fileID: 8402986662682793176, guid: 566d321ad4cb7e84f9b13a7abff087a8,
         type: 3}
       propertyPath: StartingItem
