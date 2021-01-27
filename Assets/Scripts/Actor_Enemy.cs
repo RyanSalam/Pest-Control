@@ -144,6 +144,8 @@ public class Actor_Enemy : Actor
         {
             _target = newTarget;
         }
+
+        EnemyManager.Instance.ReassesTargets(null);
     }
 
     // On taking damage, increase the hits recieved and if enemy is a grunt it will persue and attack their attacker.
