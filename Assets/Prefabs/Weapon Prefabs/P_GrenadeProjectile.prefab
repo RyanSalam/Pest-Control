@@ -123,4 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d8bf6dd7f22464ea9092f85425fb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 7513803429035349772}
+  bounceCount: 0
+  maxBounceCount: 2
+  projectileForce: 10
+  radius: 15
+  damage: 10

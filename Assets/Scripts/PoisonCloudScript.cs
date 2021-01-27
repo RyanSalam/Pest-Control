@@ -24,6 +24,7 @@ public class PoisonCloudScript : MonoBehaviour
     //enemies to damage array
     Collider[] colliders;
     Actor_Enemy[] enemiesToDamage;
+    List<Actor_Enemy> enemyList = new List<Actor_Enemy>();
 
     Rigidbody projectile;
 
@@ -58,11 +59,12 @@ public class PoisonCloudScript : MonoBehaviour
                 //reset our clock
                 timeSinceLastDamage = Time.time;
 
-                if (enemiesToDamage != null)
+                if (enemyList.Count > 0)
                 {
                     //damage enemy
-                    foreach (Actor_Enemy enemy in enemiesToDamage)
+                    foreach (Actor_Enemy enemy in enemyList)
                     {
+                        Debug.Log("Enemy taking damage");
                         enemy.TakeDamage(damageAmount);
                     }
                 }
@@ -93,14 +95,22 @@ public class PoisonCloudScript : MonoBehaviour
 
         int enemyCount = 0;
 
+        //clear existing enemies - re assigning
+        enemyList.Clear();
+
         //load all our colliders into our enemies to damage array by grabbing the component
         foreach (Collider c in colliders)
         {
-            //THESE ARE CAUSING NULL REFERENCES AND I DONT KNOW WHY
+            //store our potential actor_enemy in temp variable
+            Actor_Enemy temp = c.gameObject.GetComponent<Actor_Enemy>();
 
-            //enemiesToDamage[enemyCount] = colliders[enemyCount].GetComponentInParent<Actor_Enemy>();
-            //enemiesToDamage[enemyCount] = colliders[enemyCount].GetComponent<Actor_Enemy>();
+            //if temp is not null add it to the list
+            if (temp != null)
+                enemyList.Add(temp);
+            
             enemyCount++;
+
+            Debug.Log("Enemy found, enemyList = " + enemyList.Count);
         }
 
     }
