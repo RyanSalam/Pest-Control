@@ -75,7 +75,9 @@ public class Weapon_Charge : Weapon
             isCharging = true;
 
             // Play chargeHold vFX
+            chargeHold.Play();
             // Play charging vFX
+            charging.Play();
 
             currentChargeCoroutine = StartCoroutine(Charge());
 
@@ -110,7 +112,10 @@ public class Weapon_Charge : Weapon
         if (tempProjectile == null) return;
 
         // Stop charging animations
+        chargeHold.Stop();
+        charging.Stop();
         // Play release animation
+        release.Play();
 
         isCharging = false;
 
