@@ -9,6 +9,7 @@ public class Weapon_Charge : Weapon
     [SerializeField] protected float chargeModifier = 1.5f;
     [SerializeField] protected float projForce;
     protected float currentCharge = 0f;
+    protected float chargeTimer = 0.0f;
     [SerializeField] protected float chargeThreshold;
     protected bool reachedThreshold = false;
     protected bool isCharging = false;
@@ -38,6 +39,9 @@ public class Weapon_Charge : Weapon
                     reachedThreshold = false;
                 }
             }
+            chargeTimer += Time.deltaTime;
+            if (chargeTimer >= 4.5f)
+                Release();
         }
 
         if (!reachedThreshold)
@@ -139,5 +143,6 @@ public class Weapon_Charge : Weapon
 
         lastFired = Time.time;
         currentCharge = 0;
+        chargeTimer = 0.0f;
     }
 }
