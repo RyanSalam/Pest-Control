@@ -4,19 +4,41 @@ using UnityEngine;
 
 public class GrenadeAmmo : MonoBehaviour
 {
-    Rigidbody rigidbody;
+    LayerMask enemyMask;
 
-    float projectileForce = 20f;
+    public float radius;
+    public float damage;
 
     private void Start()
     {
-       // rigidbody.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
+        enemyMask = LayerMask.GetMask("Enemy");
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision c)
     {
-        Destroy(gameObject);
-
         //here we would add VFX 
         //also call a damage enemy function to see results
+        
+        //pass the point the grenade hit something
+        damageEnemies(c.GetContact(0).normal);
+        
+        Destroy(gameObject, 0.15f);
+
+    }
+
+    void damageEnemies(Vector3 hitPoint)
+    {
+        //overlap sphere to try and find enemies
+        Collider[] colliders = Physics.OverlapSphere(hitPoint, radius, enemyMask);
+
+        foreach (Collider c in colliders)
+        {
+            Actor_Enemy temp = c.gameObject.GetComponent<Actor_Enemy>();
+
+            if (temp != null)
+            {
+                Debug.Log("Enemy taking damage");
+                temp.TakeDamage(damage);
+            }
+        }
     }
 }
