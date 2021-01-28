@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Weapon_Charge : Weapon
 {
@@ -80,11 +81,6 @@ public class Weapon_Charge : Weapon
             charging.Play();
 
             currentChargeCoroutine = StartCoroutine(Charge());
-
-            if (tempProjectile != null)
-            {
-
-            }
         }
     }
 
@@ -97,7 +93,7 @@ public class Weapon_Charge : Weapon
 
         while (currentCharge < maxChargeDuration)
         {
-            currentCharge += Time.deltaTime;
+            currentCharge += Time.fixedDeltaTime;
             float scaleFactor = bulletScaleCurve.Evaluate(currentCharge / maxChargeDuration);
             tempProjectile.transform.localScale += Vector3.one * scaleFactor;            
 
@@ -138,6 +134,8 @@ public class Weapon_Charge : Weapon
         tempProjectile.Initialize(data);
         tempProjectile.GetComponent<Collider>().enabled = true;
         tempProjectile.RB.AddForce(data.direction * projForce, ForceMode.Impulse);
+
+        //LevelManager.Instance.Player.PlayerCam.DOShakePosition(currentCharge / 2, new Vector3(1, 0, .5f), (int)currentCharge);
 
         lastFired = Time.time;
         currentCharge = 0;
