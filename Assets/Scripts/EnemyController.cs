@@ -5,62 +5,78 @@ using UnityEngine.AI;
 
 public abstract class EnemyController : Actor
 {
-    // Components
+    #region Variables
+    // Navigation variables
+    [SerializeField] protected Transform currentTarget;
+    [SerializeField] protected Vector3 currentDestination;
 
-    [SerializeField] protected NavMeshAgent m_agent;
+    // Agent reference for navigation
+    protected NavMeshAgent m_agent;
 
+    // Player and core reference for easy target switching
+    private Actor_Player m_player;
+    private Actor_Core m_core;
+
+    // Damage data reference to track last damage instance
+    protected DamageData _lastCachedDamage;
+
+    // Nav mesh path to track current path for vector manipulation
+    protected NavMeshPath _currentPath;
+
+    // Behviour variables
     [SerializeField] protected float attackRange = 2.5f;
     [SerializeField] protected float damage = 1.0f;
     [SerializeField] protected bool bIsSearching = false;
 
+    // Interger defining how much energy enemy will drop upon death
     [SerializeField] protected int energyDrop = 10;
 
     #region Getters
-
+    // Agent getter for out of class access
     public NavMeshAgent Agent
     {
         get { return m_agent; }
     }
 
-    #endregion
-
-    [SerializeField] protected Transform currentTarget;
-    [SerializeField] protected Vector3 currentDestination;
-
-    public Transform CurrentTarget 
+    // Current target getter for out of class access
+    public Transform CurrentTarget
     {
         get { return currentTarget; }
     }
+
+    // Current destination getter for out of class access
     public Vector3 CurrentDestination
     {
         get { return currentDestination; }
     }
 
-
-    private Actor_Player m_player;
+    // Player getter for out of class access
     public Actor_Player Player
     {
         get { return m_player; }
     }
 
-    private Actor_Core m_core;
+    // Core getter for out of class access
     public Actor_Core Core
     {
         get { return m_core; }
     }
 
-    protected DamageData _lastCachedDamage;
+    // Last cached damage getter for out of class access
     public DamageData LastCachedDamage
     {
         get { return _lastCachedDamage; }
     }
 
-    protected NavMeshPath _currentPath;
+    // Current path getter for out of class access
     public NavMeshPath CurrentPath
     {
         get { return _currentPath; }
     }
+    #endregion
+    #endregion
 
+    // Start to initialise variables
     protected override void Start()
     {
         base.Start();
@@ -74,9 +90,17 @@ public abstract class EnemyController : Actor
         OnDeath += () => LevelManager.Instance.CurrentEnergy += energyDrop;
     }
 
-    // Function 
+    protected virtual void LateUpdate()
+    {
+        // Setting the animator booleans according to their corresponding conditions
+        Anim.SetBool("hasArrived", Agent.pathStatus == NavMeshPathStatus.PathComplete);
+        Anim.SetBool("hasTarget", currentTarget != null);
+    }
+
+    // Function to define a behaviour that will run upon path completion
     public abstract void OnPathCompleted();
 
+    // Function to change target to the passed new target & update the pathfinding
     public void SwitchTarget(Transform newTarget)
     {
         if (currentTarget == newTarget) return;
@@ -85,6 +109,7 @@ public abstract class EnemyController : Actor
         currentDestination = newTarget.position;
     }
 
+    // Function to randomise a position around the target to better vary pathfinding between enemies
     public bool GetRandomPointAroundTarget(Vector3 target, float range, out Vector3 result)
     {
         for(int i = 0; i < 30; i++)
@@ -103,6 +128,7 @@ public abstract class EnemyController : Actor
         return false;
     }
 
+    // Function to set the destination according to the random point function
     public void SetDestinationAroundTarget(Vector3 targetPos, float range)
     {
         Vector3 result;

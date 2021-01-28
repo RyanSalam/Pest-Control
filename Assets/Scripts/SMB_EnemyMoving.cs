@@ -16,14 +16,14 @@ public class SMB_EnemyMoving : StateMachineBehaviour
         thisEnemy = animator.GetComponentInParent<Actor_Enemy>();
 
         // Allow the enemy agent to move.
-        thisEnemy.agent.isStopped = false;
+        thisEnemy.Agent.isStopped = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(thisEnemy.target)
-            thisEnemy.agent.SetDestination(thisEnemy.target.transform.position);
+        if(thisEnemy.CurrentTarget)
+            thisEnemy.Agent.SetDestination(thisEnemy.CurrentTarget.transform.position);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
