@@ -109,6 +109,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 10
   damage: 1
+  explosionVFX: {fileID: 198147648432052724, guid: ac2312a3e32471549882f1a6da5568e6,
+    type: 3}
 --- !u!54 &2221685402508476846
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -9,6 +9,8 @@ public class GrenadeAmmo : MonoBehaviour
     public float radius;
     public float damage;
 
+    [SerializeField] ParticleSystem explosionVFX;
+
     private void Start()
     {
         enemyMask = LayerMask.GetMask("Enemy");
@@ -27,6 +29,7 @@ public class GrenadeAmmo : MonoBehaviour
 
     void damageEnemies(Vector3 hitPoint)
     {
+        Instantiate(explosionVFX, hitPoint, Quaternion.identity);
         //overlap sphere to try and find enemies
         Collider[] colliders = Physics.OverlapSphere(hitPoint, radius, enemyMask);
 

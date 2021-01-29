@@ -118,7 +118,11 @@ public class Weapon_Hitscan : Weapon
 
             //instantiating our impact particles for now - hope for an object pool down the line
             if (ImpactParticle != null)
-                Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
+            {
+                var temp = Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(temp.gameObject, 1f); // replaced with object pool
+            }
+                
         }
 
         if (!auto) // Ryan Was Here

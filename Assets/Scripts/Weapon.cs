@@ -111,8 +111,8 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     public virtual void Shoot()
     {
         //if these are not true we do not do anything, so nothing below will get run
-        if (!(Time.time > fireRate + lastFired && canFire == true))
-            return;
+        //if (!(Time.time > fireRate + lastFired && canFire == true))
+        //    return;
 
         //update our weapon variables
         lastFired = Time.time; //reset our last fired
@@ -123,6 +123,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         if (currentShots >= maxShots)
         {
             canFire = false; //we cannot fire now
+            Release();
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
             StartCoroutine(WeaponCooldown());
             
@@ -195,10 +196,10 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         //should trigger our weapon overheating-breaking animation
         if (currentShots >= maxShots)
         {
+            isFiring = false;
             canFire = false; //we cannot fire now
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
             StartCoroutine(WeaponCooldown());
-
         }
     }
 

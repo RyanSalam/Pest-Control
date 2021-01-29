@@ -94,7 +94,7 @@ MonoBehaviour:
   _bIsSearching: 0
   _playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   _energyDrop: 10
   scanIntervals: 0.5
 --- !u!1 &7864417394028300082

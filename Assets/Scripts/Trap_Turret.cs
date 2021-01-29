@@ -85,11 +85,11 @@ public class Trap_Turret : Trap
         base.Activate();
     }
 
-    private void EditorGizmo(Transform transform)
-    {
-        Color c = new Color(0, 0, 0.7f, 0.4f);
+    //private void EditorGizmo(Transform transform)
+    //{
+    //    Color c = new Color(0, 0, 0.7f, 0.4f);
 
-        UnityEditor.Handles.color = c;
-        Vector3 rotatedForward = Quaternion.Euler(0, -detectionAngle * 0.5f, 0) * transform.forward;
-    }
+    //    UnityEditor.Handles.color = c;
+    //    Vector3 rotatedForward = Quaternion.Euler(0, -detectionAngle * 0.5f, 0) * transform.forward;
+    //}
 }

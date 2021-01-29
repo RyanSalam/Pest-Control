@@ -142,20 +142,21 @@ MonoBehaviour:
   vRecoil: 0
   hRecoil: 0
   recoilSpeed: 1
-  fireRate: 1
+  fireRate: 0.1
   Damage: 1
   auto: 1
   currentShots: 0
-  maxShots: 20
+  maxShots: 40
   shotIncrease: 1
   timeTillWeaponCooldown: 3
   fireSound: {fileID: 0}
-  ImpactParticle: {fileID: 0}
+  ImpactParticle: {fileID: 198707351522894782, guid: 91fb7ab2ef38317499700fcf6b971451,
+    type: 3}
   muzzleFlashParticle: {fileID: 1075289908}
   lastFired: 0
   canFire: 1
   isFiring: 0
-  weaponAttachment: {fileID: 11400000, guid: dbcb79a4f59b1a541b57d4e3ab887e21, type: 2}
+  weaponAttachment: {fileID: 11400000, guid: d05d3cbff221f3b48b7b6169c7080f8e, type: 2}
   firePoint: {fileID: 1005532296260209577}
   recoilPosition: {fileID: 1070349915}
   rotationPoint: {fileID: 1273709577}
