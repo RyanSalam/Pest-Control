@@ -114,7 +114,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     private void Start()
     {
-
+        Core.OnDeath += () => GameOver(false);
     }
 
     public void Update()

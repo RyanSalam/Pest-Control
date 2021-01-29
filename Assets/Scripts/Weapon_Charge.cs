@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Weapon_Charge : Weapon
 {
@@ -8,6 +9,7 @@ public class Weapon_Charge : Weapon
     [SerializeField] protected float chargeModifier = 1.5f;
     [SerializeField] protected float projForce;
     protected float currentCharge = 0f;
+    protected float chargeTimer = 0.0f;
     [SerializeField] protected float chargeThreshold;
     protected bool reachedThreshold = false;
     protected bool isCharging = false;
@@ -37,6 +39,9 @@ public class Weapon_Charge : Weapon
                     reachedThreshold = false;
                 }
             }
+            chargeTimer += Time.deltaTime;
+            if (chargeTimer >= 4.5f)
+                Release();
         }
 
         if (!reachedThreshold)
@@ -75,14 +80,11 @@ public class Weapon_Charge : Weapon
             isCharging = true;
 
             // Play chargeHold vFX
+            chargeHold.Play();
             // Play charging vFX
+            charging.Play();
 
             currentChargeCoroutine = StartCoroutine(Charge());
-
-            if (tempProjectile != null)
-            {
-
-            }
         }
     }
 
@@ -95,7 +97,7 @@ public class Weapon_Charge : Weapon
 
         while (currentCharge < maxChargeDuration)
         {
-            currentCharge += Time.deltaTime;
+            currentCharge += Time.fixedDeltaTime;
             float scaleFactor = bulletScaleCurve.Evaluate(currentCharge / maxChargeDuration);
             tempProjectile.transform.localScale += Vector3.one * scaleFactor;            
 
@@ -110,7 +112,10 @@ public class Weapon_Charge : Weapon
         if (tempProjectile == null) return;
 
         // Stop charging animations
+        chargeHold.Stop();
+        charging.Stop();
         // Play release animation
+        release.Play();
 
         isCharging = false;
 
@@ -134,7 +139,10 @@ public class Weapon_Charge : Weapon
         tempProjectile.GetComponent<Collider>().enabled = true;
         tempProjectile.RB.AddForce(data.direction * projForce, ForceMode.Impulse);
 
+        //LevelManager.Instance.Player.PlayerCam.DOShakePosition(currentCharge / 2, new Vector3(1, 0, .5f), (int)currentCharge);
+
         lastFired = Time.time;
         currentCharge = 0;
+        chargeTimer = 0.0f;
     }
 }
