@@ -76,6 +76,8 @@ public class LevelManager : MonoSingleton<LevelManager>
             _player.EquipWeapon(m_equipables[StartingItem]);
         }
 
+
+
         #region PlayerSetupInitialization
 
         //if (_player == null)
@@ -108,7 +110,8 @@ public class LevelManager : MonoSingleton<LevelManager>
         //_player.OnDeath += Respawn;
 
         #endregion
-
+        Player.controlsEnabled = true;
+        shopUI.pauseMenu.SetActive(false);
 
     }
 
@@ -120,13 +123,35 @@ public class LevelManager : MonoSingleton<LevelManager>
     public void Update()
     {
         // Quick test will be removed in the future.
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I) && !shopUI.pauseMenu.activeSelf)
         {
-            shopUI.ToggleMenu();
-            shopUI.UpdateItemUI();
-            shopUI.RefreshEnergyText();
-            Player.EquipWeapon(Equipables[InventoryList[0]]);
+            ToggleShop();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !shopUI.gameObject.activeSelf)
+        {
+            TogglePause();
+        }
+    }
+
+    public void TogglePause()
+    {
+        shopUI.pauseMenu.SetActive(!shopUI.pauseMenu.activeSelf);
+        shopUI.combatHUD.SetActive(!shopUI.combatHUD.activeSelf);
+
+        Time.timeScale = shopUI.pauseMenu.gameObject.activeSelf ? 0.0f : 1.0f;
+        Cursor.lockState = shopUI.pauseMenu.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = gameObject.activeSelf;
+
+        Player.controlsEnabled = !shopUI.pauseMenu.activeSelf;
+    }
+
+    public void ToggleShop()
+    {
+        shopUI.ToggleMenu();
+        shopUI.UpdateItemUI();
+        shopUI.RefreshEnergyText();
+        Player.EquipWeapon(Equipables[InventoryList[0]]);
     }
 
     #region GameLoop
@@ -172,6 +197,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         string scene = SceneManager.GetActiveScene().name;
         GameManager.Instance.LoadScene(scene);
+        Time.timeScale = 1;
     }
 
     public void OnQuitButton()

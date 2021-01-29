@@ -10,9 +10,27 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] private Item item;
     [SerializeField] private Image itemIcon;
 
+    [SerializeField] private Image borderImage;
+    [SerializeField] private Sprite inventoryOccupied;
+    [SerializeField] private Sprite inventoryEmpty;
+
     private void Awake()
     {
         shop = GetComponentInParent<ShopUI>();
+    }
+
+    private void Update()
+    {
+        UpdateFrame();
+    }
+
+    private void UpdateFrame()
+    {
+        if (item != null)
+            borderImage.sprite = inventoryOccupied;
+        else
+            borderImage.sprite = inventoryEmpty;
+
     }
 
     public void AddItem(Item newItem)
