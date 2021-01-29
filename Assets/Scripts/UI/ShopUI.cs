@@ -12,18 +12,25 @@ public class ShopUI : MonoBehaviour
     //[SerializeField] private GameObject inventoryPanel = null;
     public Actor_Player Customer;
     [SerializeField] private GameObject shopUI;
-    [SerializeField] private GameObject combatHUD;
+    [SerializeField] public GameObject combatHUD;
+    [SerializeField] public GameObject pauseMenu;
 
     private void Awake()
     {
         if (shopUI == null)
             shopUI = this.gameObject;
+
     }
 
     private void Start()
     {
         LevelManager.Instance.onItemChangeCallback += UpdateItemUI;
         Customer = LevelManager.Instance.Player;
+    }
+
+    public void ToggleShop()
+    {
+        LevelManager.Instance.ToggleShop();
     }
 
     public void ToggleMenu()
