@@ -83,8 +83,7 @@ public class Weapon_Hitscan : Weapon
         float randAnglePitch = Random.Range(-currentSpreadAngle, currentSpreadAngle);
         float randAngleYaw = Random.Range(-currentSpreadAngle, currentSpreadAngle);
 
-        Debug.Log("randAnglePitch: " + randAnglePitch);
-        Debug.Log("randAngleYaw: " + randAngleYaw);
+      
    
 
 

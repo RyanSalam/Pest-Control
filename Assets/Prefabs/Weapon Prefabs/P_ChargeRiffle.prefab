@@ -91,13 +91,12 @@ MonoBehaviour:
   lastFired: 0
   canFire: 1
   isFiring: 0
-  weaponAttachment: {fileID: 0}
+  weaponAttachment: {fileID: 11400000, guid: d05d3cbff221f3b48b7b6169c7080f8e, type: 2}
   firePoint: {fileID: 6965653023597013632}
   maxChargeDuration: 1
   chargeModifier: 1.5
   projForce: 30
   chargeThreshold: 0.4
-  reachedThreshold: 0
   projectilePrefab: {fileID: 3679318245965258635, guid: e9bb6861f0e3e5d48b6e0696298b13e5,
     type: 3}
   chargeHold: {fileID: 0}
