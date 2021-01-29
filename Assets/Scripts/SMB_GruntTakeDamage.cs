@@ -16,10 +16,10 @@ public class SMB_GruntTakeDamage : StateMachineBehaviour
         thisEnemy = animator.GetComponentInParent<Actor_Enemy>();
 
         // Ensure the Enemy is stopped as they search.
-        thisEnemy.agent.isStopped = true;
+        thisEnemy.Agent.isStopped = true;
 
         // Reset the hits recieved.
-        thisEnemy.hitsRecieved = 0;
+        //thisEnemy.hitsRecieved = 0;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

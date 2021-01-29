@@ -23,7 +23,7 @@ public class Enemy_AttackEvent : MonoBehaviour
 
         // Initialise damage data according to the enemy's properties.
         data = new DamageData();
-        data.damageAmount = (int)thisEnemy.attackDamage;
+        data.damageAmount = (int)thisEnemy.Damage;
         data.damager = thisEnemy;
         data.direction = thisEnemy.transform.forward;
         data.damageSource = transform.position;
@@ -31,14 +31,14 @@ public class Enemy_AttackEvent : MonoBehaviour
 
     private void Update()
     {
-        // Make an artifical trigger box that will damage any players within it.
-        Collider[] targets = Physics.OverlapBox(thisEnemy.attackBox.transform.position, Vector3.one * thisEnemy.attackRange, thisEnemy.transform.rotation, thisEnemy.playerLayer);
+        //// Make an artifical trigger box that will damage any players within it.
+        //Collider[] targets = Physics.OverlapBox(thisEnemy.attackBox.transform.position, Vector3.one * thisEnemy.AttackRange, thisEnemy.transform.rotation, thisEnemy.PlayerLayer);
 
-        if (targets.Length > 0)
-        {
-            targets[0].GetComponentInParent<Actor_Player>().TakeDamage(data);
-            enabled = false;
-        }
+        //if (targets.Length > 0)
+        //{
+        //    targets[0].GetComponentInParent<Actor_Player>().TakeDamage(data);
+        //    enabled = false;
+        //}
     }
 
     public void EndAttack()
