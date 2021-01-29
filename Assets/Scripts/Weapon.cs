@@ -187,10 +187,6 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     }
     public virtual void PrimaryFire()
     {
-        //if these are not true we do not do anything, so nothing below will get run
-        if (!(Time.time > fireRate + lastFired && canFire == true))
-            return;
-
         //update our weapon variables
         lastFired = Time.time; //reset our last fired
         isFiring = true; //we are firing

@@ -112,7 +112,7 @@ MonoBehaviour:
   vRecoil: 0
   hRecoil: 0
   recoilSpeed: 1
-  fireRate: 1
+  fireRate: 0.25
   Damage: 1
   auto: 0
   currentShots: 0
@@ -120,7 +120,8 @@ MonoBehaviour:
   shotIncrease: 1
   timeTillWeaponCooldown: 3
   fireSound: {fileID: 0}
-  ImpactParticle: {fileID: 0}
+  ImpactParticle: {fileID: 198594848535981848, guid: 8b78bf871862d08409f84a0bac02efdd,
+    type: 3}
   muzzleFlashParticle: {fileID: 477785412443062808, guid: cde4185c39bc8964eb20d569b7f289dd,
     type: 3}
   lastFired: 0
@@ -138,7 +139,7 @@ MonoBehaviour:
   RecoilKickBack: {x: 0.015, y: 0, z: -0.02}
   bloomX: 1
   bloomY: 1
-  animCurve:
+  spreadCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2

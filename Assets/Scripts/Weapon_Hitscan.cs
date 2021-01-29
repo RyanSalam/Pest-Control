@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+﻿
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Weapon_Hitscan : Weapon
 {
@@ -58,11 +58,18 @@ public class Weapon_Hitscan : Weapon
         base.Awake();
     }
 
+    Coroutine releaseCurrent;
     public override void PrimaryFire()
     {
+        //if these are not true we do not do anything, so nothing below will get run
+        if (!(Time.time > fireRate + lastFired && canFire == true))
+            return;
+
         //our base shoot function is what oversees our weapon heating and cooldown (reload) functionality
-        //it increments shots -> overheats -> cooldowns
-        base.PrimaryFire();
+        //it increments shots -> overheats -> cooldowns        
+
+        if (releaseCurrent != null)
+            StopCoroutine(releaseCurrent);
 
         //muzzle flash creation
         if (muzzleFlashParticle != null)
@@ -77,16 +84,9 @@ public class Weapon_Hitscan : Weapon
         float currentSpreadAngle = spread * maxSpreadAngle;
 
         Vector3 mousePosition = playerCam.ScreenToWorldPoint(Input.mousePosition);
-
         
-
         float randAnglePitch = Random.Range(-currentSpreadAngle, currentSpreadAngle);
         float randAngleYaw = Random.Range(-currentSpreadAngle, currentSpreadAngle);
-
-        Debug.Log("randAnglePitch: " + randAnglePitch);
-        Debug.Log("randAngleYaw: " + randAngleYaw);
-   
-
 
         Quaternion spreadAxis = Quaternion.AngleAxis(randAnglePitch, Vector3.right) * Quaternion.AngleAxis(randAngleYaw, Vector3.up);
 
@@ -119,16 +119,33 @@ public class Weapon_Hitscan : Weapon
             //instantiating our impact particles for now - hope for an object pool down the line
             if (ImpactParticle != null)
                 Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
-
         }
 
+        if (!auto) // Ryan Was Here
+        {
+            Release();
+            //playerCam.transform.DORotate(Vector3.right * -3.5f, 0.25f);
+            playerCam.transform.DOPunchRotation(Vector3.right * -2.5f, 0.25f);
+            //playerCam.transform.DOShakeRotation(0.25f, transform.right * 5.0f, 10, 1);
+        }
+            
+
+        base.PrimaryFire();
     }
 
+    
     public override void Release()
     {
         base.Release();
+        
+        releaseCurrent = StartCoroutine(ReleaseDelay());
+    }
+
+    IEnumerator ReleaseDelay()
+    {
+        yield return new WaitForSeconds(fireRate + 0.3f);
         timeFiring = 0f;
-        //reseting our recoil
+        isFiring = false;
         muzzleFlashParticle.Stop();
     }
 

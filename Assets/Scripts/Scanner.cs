@@ -6,7 +6,7 @@ public class Scanner<T> where T : MonoBehaviour
 {
     [SerializeField] [Range(1, 20)] private float detectionRadius = 10f;
     [SerializeField] [Range(0, 360)] private float detectionAngle = 75f;
-    [SerializeField] LayerMask targetMask;
+    public LayerMask targetMask;
 
     private T m_currentTarget;
     private Transform m_transform;

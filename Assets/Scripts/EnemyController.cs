@@ -31,6 +31,8 @@ public abstract class EnemyController : Actor
     // Interger defining how much energy enemy will drop upon death
     [SerializeField] protected int energyDrop = 10;
 
+
+
     #region Getters
     // Agent getter for out of class access
     public NavMeshAgent Agent
@@ -87,6 +89,8 @@ public abstract class EnemyController : Actor
         m_agent = GetComponent<NavMeshAgent>();
         m_agent.updateRotation = true;
 
+
+
         OnDeath += () => LevelManager.Instance.CurrentEnergy += energyDrop;
     }
 
@@ -96,6 +100,8 @@ public abstract class EnemyController : Actor
         Anim.SetBool("hasArrived", Agent.pathStatus == NavMeshPathStatus.PathComplete);
         Anim.SetBool("hasTarget", currentTarget != null);
     }
+
+    public virtual void OnBtwnIntervals() { }
 
     // Function to define a behaviour that will run upon path completion
     public abstract void OnPathCompleted();

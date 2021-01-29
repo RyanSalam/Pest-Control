@@ -65,7 +65,6 @@ public class LevelManager : MonoSingleton<LevelManager>
         if (_player == null)
         {
             _player = FindObjectOfType<Actor_Player>();
-            Debug.Log("Level Manager Return error");
         }
 
         m_equipables = new Dictionary<Item, IEquippable>();

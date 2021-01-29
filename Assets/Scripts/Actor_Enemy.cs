@@ -5,157 +5,6 @@ using UnityEngine.AI;
 
 public abstract class Actor_Enemy : Actor
 {
-    //#region Variables
-    //[Header("Enemy Type")]
-    //[Tooltip("The type of enemy, used in spawning considerations.")]
-    //public EnemyType enemyType;
-
-    //[Header("Enemy Navigation Variables")]
-    //// Navigation agent, used to handle movement calculations.
-    //private NavMeshAgent _agent;
-    //public NavMeshAgent agent { get { return _agent; } }
-
-    //// Animator component, used to handle state machine and animations.
-    //private Animator _animator;
-    //public Animator animator { get { return _animator; } }
-
-    //// Target reference, used to switch the character's pathfinding destination.
-    //private Actor _target;
-    //public Actor target { get { return _target; } }
-
-    //// Boolean to track if the enemy is retaliating against an attacker.
-    //[HideInInspector] public bool isRetaliating;
-
-
-    //[Header("Behaviour Variables")]
-    //[Tooltip("Float determining the amount of damage resisted when attacked outside the hit angle.")]
-    //public float armourStrength;
-
-    //[Tooltip("Float determining the amount of energy dropped upon the enemy's death.")]
-    //public float energyCarried;
-
-    //[Tooltip("Trigger box that activates upon the Enemy's attack.")]
-    //public GameObject attackBox;
-
-    //[Tooltip("Float determining the amount of damage the enemy will do on attack.")]
-    //public float attackDamage;
-
-    //[Tooltip("Float determining the cooldown time between successive attacks.")]
-    //public float rateOfFire;
-
-    //[Tooltip("Float determining the range the target has to be within for the Enemy to attack.")]
-    //public float attackRange;
-
-    //[Tooltip("Layer that the players will be on for detection purposes.")]
-    //public LayerMask playerLayer;
-
-    //[Tooltip("Float determining the range the enemy can detect the player from, unless retaliating.")]
-    //public float detectionRadius;
-
-    //[Tooltip("Float determining the distance the player must be away from the enemy before the enemy loses aggro.")]
-    //public float detectionLossRange;
-
-    //[Tooltip("Hard references for player and core to aid in target switching.")]
-    //public Actor player;
-    //public Actor_Core core;
-
-    //// Int to track how many times the enemy has been hit.
-    //[HideInInspector] public int hitsRecieved = 0;
-    //#endregion
-
-    //protected override void Start()
-    //{
-    //    base.Start();
-    //    // Run the initialise function.
-
-    //    // Agent and Animator reference.
-    //    _agent = GetComponent<NavMeshAgent>();
-
-    //    // Set the agent stopping distance to half the size of the attack box.
-    //    _agent.stoppingDistance = attackRange;
-
-    //    // Setting the movement speed of the Enemy's agent to the value of the Enemy's movement speed.
-    //    _agent.speed = moveSpeed;
-
-    //    // Player and Core reference
-    //    player = LevelManager.Instance.Player;
-    //    core = LevelManager.Instance.Core;
-    //}
-
-    //protected override void Awake()
-    //{
-    //    base.Awake();
-    //    // Run the initialise function
-    //}
-
-    //private void Update()
-    //{ 
-    //    // Set the target on the animator accordingly.
-    //    if (target)
-    //        Anim.SetBool("hasTarget", true);
-    //    else
-    //        Anim.SetBool("hasTarget", false);
-    //}
-
-    //public void Search()
-    //{
-    //    // Create an overlap sphere to search the area around the enemy for any colliders on the player layer.
-    //    Collider[] targets = Physics.OverlapSphere(transform.position, detectionRadius, playerLayer);
-
-    //    Debug.Log("Searching");
-
-    //    // If any targets are found set newTarget to the first found player.
-    //    if (targets.Length > 0 && Vector3.Distance(core.transform.position, transform.position) > detectionRadius)
-    //    {
-    //        SwitchTarget(player);
-    //        Debug.Log("Targting Player");
-    //    }
-    //    else
-    //    {
-    //        SwitchTarget(core);
-    //        Debug.Log("Targeting Core");
-    //    }
-    //}    
-
-    //public void SwitchTarget(Actor newTarget)
-    //{
-    //    if(_target != newTarget)
-    //    {
-    //        _target = newTarget;
-    //    }
-
-    //    EnemyManager.Instance.ReassesTargets(null);
-    //}
-
-    //// On taking damage, increase the hits recieved and if enemy is a grunt it will persue and attack their attacker.
-    //public override void TakeDamage(DamageData data)
-    //{
-    //    base.TakeDamage(data);
-    //    hitsRecieved++;
-    //    Anim.SetInteger("hitsRecieved", hitsRecieved);
-
-    //    if(enemyType == EnemyType.Grunt)
-    //    {
-    //        SwitchTarget(data.damager);
-    //        isRetaliating = true;
-    //    }
-    //}
-
-    //protected override void Death()
-    //{
-    //    base.Death();
-
-    //    Destroy(gameObject);
-    //}
-
-    ////Enumerator to define the Enemy Type, used by the Wave Manager to determine which enemies to spawn.
-    //public enum EnemyType
-    //{
-    //    Grunt,
-    //    Tank,
-    //    Drone
-    //}
-
     #region Variables
     // Navigation variables
     [SerializeField] protected Transform currentTarget;
@@ -182,6 +31,9 @@ public abstract class Actor_Enemy : Actor
 
     // Interger defining how much energy enemy will drop upon death
     [SerializeField] protected int _energyDrop = 10;
+
+    protected Timer _intervalTimer;
+    [SerializeField] protected float scanIntervals = 2.0f;
 
     #region Getters
     // Agent getter for out of class access
@@ -238,13 +90,25 @@ public abstract class Actor_Enemy : Actor
         get { return _attackRange; }
     }
 
-    // Player Layer getter for out of class access
-    public float PlayerLayer
+    public Timer IntervalTimer
     {
-        get { return _attackRange; }
+        get { return _intervalTimer; }
     }
     #endregion
     #endregion
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        m_agent = GetComponent<NavMeshAgent>();
+        m_agent.updateRotation = true;
+
+        OnDeath += () => LevelManager.Instance.CurrentEnergy += _energyDrop;
+
+        _intervalTimer = new Timer(scanIntervals);
+        _intervalTimer.OnTimerEnd += OnBtwnIntervals;
+    }
 
     // Start to initialise variables
     protected override void Start()
@@ -253,19 +117,19 @@ public abstract class Actor_Enemy : Actor
 
         m_player = LevelManager.Instance.Player;
         m_core = LevelManager.Instance.Core;
-
-        m_agent = GetComponent<NavMeshAgent>();
-        m_agent.updateRotation = true;
-
-        OnDeath += () => LevelManager.Instance.CurrentEnergy += _energyDrop;
     }
 
     protected virtual void LateUpdate()
     {
         // Setting the animator booleans according to their corresponding conditions
-        Anim.SetBool("hasArrived", Agent.pathStatus == NavMeshPathStatus.PathComplete);
+        Anim.SetBool("hasArrived", Mathf.Approximately(m_agent.remainingDistance, Mathf.Epsilon));
         Anim.SetBool("hasTarget", currentTarget != null);
     }
+
+    // Function that gets called each time the timer has finished ticking. 
+    // Could be used for various reasons such as redirecting path 
+    // scanning for player
+    public virtual void OnBtwnIntervals() { }
 
     // Function to define a behaviour that will run upon path completion
     public abstract void OnPathCompleted();

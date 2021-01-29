@@ -104,8 +104,12 @@ public class Actor_Player : Actor
 
         // This allows us to control our jump
         // Meaning the longer we hold it, the higher we can jump
-        if (Input.GetButtonDown("Jump") && controller.isGrounded) 
+        if (Input.GetButtonDown("Jump") && controller.isGrounded)
+        {
+            _jumpElapsed += Time.fixedDeltaTime * 10;
             _jumpRequest = true;
+        }
+           
 
         
         if (Input.GetButtonUp("Jump"))
@@ -150,7 +154,7 @@ public class Actor_Player : Actor
         movement *= moveSpeed * Time.fixedDeltaTime;
 
 
-        _verticalVel = controller.isGrounded ? -0.5f : _verticalVel + -9.81f * Time.fixedDeltaTime;
+        _verticalVel = controller.isGrounded ? -0.5f : _verticalVel + -15f * Time.fixedDeltaTime;
 
         // Condition to make sure we've let the jump button go
         // And we've at least covered some minimum ground 
@@ -158,7 +162,7 @@ public class Actor_Player : Actor
         if (_jumpRequest || _jumpElapsed.IsWithin(Mathf.Epsilon, _minJumpDuration) && _jumpElapsed <= _maxJumpDuration)
         {
             _jumpElapsed += Time.fixedDeltaTime;
-            _verticalVel = (jumpStrength * _jumpElapsed * 2.3f) + (0.5f * -9.81f * _jumpElapsed * _jumpElapsed);
+            _verticalVel = (jumpStrength * _jumpElapsed * 2.3f) + (0.5f * -15f * _jumpElapsed * _jumpElapsed);
             //_verticalVel = (jumpStrength) ;
             // _jumpRequest = false;
         }
