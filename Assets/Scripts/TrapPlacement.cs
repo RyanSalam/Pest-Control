@@ -11,6 +11,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     [SerializeField] protected LayerMask whatIsBuildable; // detecting groundlayer for raycast 
     [SerializeField] protected int trapPrice;
     public bool isDebugging;
+    public Material Hologram;
 
 
     //Audio Settings
@@ -37,9 +38,13 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         Debug.DrawRay(transform.position, Vector3.down, Color.green);
         if (Physics.Raycast(floorCast, out outHit, verticalSearch, whatIsBuildable))
         {
-           trapModel.position = outHit.transform.position; // assigning the trap to raycast hit position
+           trapModel.position = outHit.transform.position;
+           Hologram.SetColor("Color_F3B47044", Color.blue); //assigning placeable trap colour to blue 
         }
-       
+        else
+        {
+            Hologram.SetColor("Color_F3B47044", Color.red); // Changing the colour of the trap to red if it can't be placed
+        }       
     }
 
     public void PrimaryFire()
