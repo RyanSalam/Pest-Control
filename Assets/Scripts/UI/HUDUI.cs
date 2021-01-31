@@ -16,23 +16,30 @@ public class HUDUI : MonoBehaviour
     Actor_Core core;
     [SerializeField] Image coreFill;
     [SerializeField] TMP_Text enemyCount;
+    [SerializeField] float coreCurrentHealth;
+    [SerializeField] float coreMaxHealth;
 
     private void Start()
     {
         core = LevelManager.Instance.Core;
+        core.OnHealthChanged += UpdateCoreHealth;
     }
 
     private void Update()
     {
-        UpdateCoreHealth();
         UpdateEnemyCount();
         UpdateWaveNumber();
     }
 
     #region Updating HUD UI
-    private void UpdateCoreHealth()
+    // subscribe this function to core.OnHealthChanged on start to update the core health info
+    private void UpdateCoreHealth(float max, float current)
     {
-        coreFill.fillAmount = core.CurrentHealth / core.MaxHealth;
+        coreCurrentHealth = current;
+        coreMaxHealth = max;
+
+        // Setting the core's health bar
+        coreFill.fillAmount = coreCurrentHealth / coreMaxHealth;
     }
 
     private void UpdateEnemyCount()

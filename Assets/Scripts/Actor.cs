@@ -18,8 +18,6 @@ public abstract class Actor : MonoBehaviour
     public event Action OnDeath;
 
     [SerializeField] protected float maxHealth = 10.0f;
-    public float MaxHealth { get { return maxHealth; } }
-
     private float m_currentHealth;
     public float CurrentHealth // Getter Setter for currentHealth which clamps it for us
     {
