@@ -66,6 +66,6 @@ public class ShopUI : MonoBehaviour
 
     public void RefreshEnergyText()
     {
-        customerEnergy.text = "ENERGY " + LevelManager.Instance.CurrentEnergy.ToString();
+        customerEnergy.text = LevelManager.Instance.CurrentEnergy.ToString();
     }
 }

@@ -70,6 +70,7 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     // Interger index to track which wave we're in
     private int _waveIndex = 0;
+    public int WaveNumber { get { return _waveIndex + 1; } }
 
     // Current wave variable to track which wave we're in
     private Wave currentWave;
@@ -83,6 +84,7 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     // Interger to track the enemies remaining in a wave
     private int _enemiesRemaining;
+    public int EnemiesRemaining { get { return _enemiesRemaining; } }
     #endregion
 
     // Creating the timer and initiating it to 0. Subscribing the Spawner Coroutine to run at the end of the build phase, then starts the first wave
