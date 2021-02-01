@@ -24,4 +24,9 @@ public class Ability_Animation : Ability
     {
         throw new System.NotImplementedException();
     }
+
+    public override void OnLifetimeEnd()
+    {
+        throw new System.NotImplementedException();
+    }
 }

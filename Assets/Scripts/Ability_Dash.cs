@@ -42,8 +42,15 @@ public class Ability_Dash : Ability
         dashCounter--;
         if (dashCounter != 0)
         {
-            abilityTimer.PlayFromStart();
+            cooldownTimer.PlayFromStart();
         }
+
+
         //throw new System.NotImplementedException();
+    }
+
+    public override void OnLifetimeEnd()
+    {
+       
     }
 }

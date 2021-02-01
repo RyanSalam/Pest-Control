@@ -27,7 +27,7 @@ public class Ability_Portal : Ability
 
     public override bool CanExecute()
     {
-        return portalCount < portalList.Count;
+        return portalCount < portalList.Count && pA.Controller.isGrounded;
     }
 
     public override void Initialize(GameObject abilitySource)
@@ -63,6 +63,11 @@ public class Ability_Portal : Ability
     {
         // Reset portals
         portalCount = 0;
+        
+    }
+
+    public override void OnLifetimeEnd()
+    {
         foreach (PortalSender portal in portalList)
         {
             portal.gameObject.SetActive(false);
