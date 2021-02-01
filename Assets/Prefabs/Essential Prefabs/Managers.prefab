@@ -149,6 +149,7 @@ MonoBehaviour:
   StartingItem: {fileID: 11400000, guid: 4f88f77044a3d9145a225026b2b4297c, type: 2}
   inventoryLimit: 4
   shopUI: {fileID: 3136140622686278095}
+  weaponUI: {fileID: 2328511621631068442}
 --- !u!114 &8402986662682793158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,6 +855,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3136140622813290153}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2328511621631068442 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 852666578624649139, guid: 5a1d76bd2f010ec4793b09149005bd25,
+    type: 3}
+  m_PrefabInstance: {fileID: 3136140622813290153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a9afcac2b6b86f48acb38888786d4cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3136140622686278095 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 144052070, guid: 5a1d76bd2f010ec4793b09149005bd25,

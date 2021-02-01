@@ -5,14 +5,4 @@ using UnityEngine;
 public class Weapon_Rifle : Weapon_Hitscan
 {
 
-    public override void Shoot()
-    {
-        base.Shoot();
-
-        //add specific recoil based off of rifle fire rate
-
-
-
-    }
-
 }
