@@ -57,6 +57,8 @@ public class LevelManager : MonoSingleton<LevelManager>
     public Dictionary<Item, IEquippable> Equipables => m_equipables;
 
     [SerializeField] ShopUI shopUI;
+    [SerializeField] WeaponUI weaponUI;
+    public WeaponUI WeaponUI { get { return weaponUI; } }
 
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {

@@ -72,6 +72,10 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     //our reference to the players Camera
     protected Camera playerCam;
 
+    private Coroutine currentCooldown;
+    private float currentRatio;
+    private Timer cooldownDelayTimer;
+
     //this is set on our weapon script when we shoot
     //this will maybe be changed to if proj -> projFire() elseif raycast ->
 
@@ -81,10 +85,8 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         playerCam = player.PlayerCam;
     }
 
-
     protected virtual void Start()
     {
-
         //grab our muzzle flash component, 
         //and animator   
         muzzleFlashParticle = GetComponentInChildren<ParticleSystem>();
@@ -93,6 +95,9 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         //initializing our weapon
         if (weaponAttachment != null)
             weaponAttachment.initialize(this);
+
+        cooldownDelayTimer = new Timer(timeTillWeaponCooldown / 2, false);
+        cooldownDelayTimer.OnTimerEnd += () => currentCooldown = StartCoroutine(WeaponCooldown(currentRatio));
     }
 
     protected virtual void Update()
@@ -101,68 +106,40 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         {
             if (Input.GetButtonUp("Fire1"))
             {
-                Debug.Log("Button is released.");
                 Release();
             }
-                
         }
+
+        cooldownDelayTimer.Tick(Time.deltaTime);
     }
-
-    public virtual void Shoot()
-    {
-        //if these are not true we do not do anything, so nothing below will get run
-        //if (!(Time.time > fireRate + lastFired && canFire == true))
-        //    return;
-
-        //update our weapon variables
-        lastFired = Time.time; //reset our last fired
-        isFiring = true; //we are firing
-        currentShots += shotIncrease; //increment our current shots
-
-        //should trigger our weapon overheating-breaking animation
-        if (currentShots >= maxShots)
-        {
-            canFire = false; //we cannot fire now
-            Release();
-            //temporary coroutine until we get smarter - coroutine toggles our weapon variables
-            StartCoroutine(WeaponCooldown());
-            
-        }
-           
-    }
-
 
     public virtual void Release()
     {
         isFiring = false;
+        cooldownDelayTimer.PlayFromStart();
     }
     protected float GetHeatRatio()
     {
-        Debug.Log("Heat Ratio is: " + (float)currentShots / (float)maxShots);
-        return (float)currentShots / (float)maxShots;
-
+        return ((float)currentShots / (float)maxShots);
     }
 
-    IEnumerator WeaponCooldown()
+    IEnumerator WeaponCooldown(float percentage)
     {
-        float elapsed = timeTillWeaponCooldown;
-
-        canFire = false; //re-assurance
+        float elapsed = timeTillWeaponCooldown * percentage;
 
         while (elapsed > 0)
         {
             
             elapsed -= Time.deltaTime;
+            float p = maxShots * currentRatio;
+            currentShots = Mathf.RoundToInt(p);
 
             //this line is for updating our UI, uiVar is a ui element
-             // uiVar = elapsed / shotReloadDelay;
+            LevelManager.Instance.WeaponUI.UpdateHeatBar(elapsed, timeTillWeaponCooldown);
+            currentRatio = elapsed / timeTillWeaponCooldown;
             yield return null;
         }
-
-        //reset our weapon variables 
-        canFire = true;
-        currentShots = 0;
-        Release(); //may not need this 
+        ResetWeaponStats(elapsed <= 0);
     }
 
     public virtual void Equip()
@@ -188,10 +165,14 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     }
     public virtual void PrimaryFire()
     {
-        //update our weapon variables
+        if (currentCooldown != null)
+            StopCoroutine(currentCooldown);
+
         lastFired = Time.time; //reset our last fired
         isFiring = true; //we are firing
         currentShots += shotIncrease; //increment our current shots
+        LevelManager.Instance.WeaponUI.UpdateHeatBar((float)currentShots, (float)maxShots);
+        currentRatio = GetHeatRatio();
 
         //should trigger our weapon overheating-breaking animation
         if (currentShots >= maxShots)
@@ -199,7 +180,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
             isFiring = false;
             canFire = false; //we cannot fire now
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
-            StartCoroutine(WeaponCooldown());
+            currentCooldown = StartCoroutine(WeaponCooldown(GetHeatRatio()));
         }
     }
 
@@ -210,10 +191,38 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     public virtual void SecondaryFire()
     {
-        //if (player.energy > weaponAttachment.energyCost)
-            //player.energy -=  weaponAttachment.energyCost
-        weaponAttachment.AltShoot();
-  
+        if (LevelManager.Instance.CurrentEnergy > weaponAttachment.energyCostPerFire)
+        {
+            LevelManager.Instance.CurrentEnergy -= weaponAttachment.energyCostPerFire;
+            weaponAttachment.AltShoot();
+        }
+    }
+
+    private void OnEnable()
+    {
+        LevelManager.Instance.WeaponUI.UpdateHeatBar((float)currentShots, (float)maxShots);
+
+        if (currentCooldown != null)
+        {
+            StartCoroutine(WeaponCooldown(currentRatio));
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (currentCooldown != null)
+            StopCoroutine(currentCooldown);
+    }
+
+    private void ResetWeaponStats(bool shouldReset)
+    {
+        if (shouldReset)
+        {
+            //reset our weapon variables 
+            canFire = true;
+            currentShots = 0;
+            currentCooldown = null;
+        }
     }
 }
 
