@@ -8,10 +8,12 @@ using TMPro;
 public class MenuHandler : MonoBehaviour
 {
     public Character character;
+    public string levelname;
 
     //Character Panel
     [SerializeField] TMP_Text charName;
     [SerializeField] TMP_Text charDesc;
+    [SerializeField] Image charProfile;
     [SerializeField] Image A1_image;
     [SerializeField] TMP_Text A1_text;
     [SerializeField] Image A2_image;
@@ -56,6 +58,7 @@ public class MenuHandler : MonoBehaviour
         character = c;
         charName.text = c.c_name;
         charDesc.text = c.c_desc;
+        charProfile.sprite = c.c_profile;
         A1_image.sprite = c.A1_image;
         A1_text.text = c.A1_text;
         A2_image.sprite = c.A2_image;
@@ -69,6 +72,10 @@ public class MenuHandler : MonoBehaviour
     public void SelectLevel(string text)
     {
         maptitle.text = text;
+    }
+    public void SelectScene(string scene)
+    {
+        levelname = scene;
     }
 
 
