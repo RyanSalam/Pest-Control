@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class TrapPlacement : MonoBehaviour, IEquippable
@@ -8,11 +9,14 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     public Transform trapModel;
     [SerializeField] protected float offset;
     [SerializeField] protected float verticalSearch; //max distance for raycast
-    [SerializeField] protected LayerMask whatIsBuildable; // detecting groundlayer for raycast 
+    [SerializeField] protected LayerMask whatIsBuildable;// detecting groundlayer for raycast 
+    [SerializeField] protected LayerMask obstacleMasks;
     [SerializeField] protected int trapPrice;
     public bool isDebugging;
     public Material Hologram;
+    public bool CanPlace;
 
+    [SerializeField] private float obstacleDetectionRange = 3;
 
     //Audio Settings
     AudioCue ACue;
@@ -36,27 +40,46 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         RaycastHit outHit;
         Ray floorCast = new Ray(transform.position, Vector3.down); //cast from trap to spawn 
         Debug.DrawRay(transform.position, Vector3.down, Color.green);
+
+        Collider[] obstacles = Physics.OverlapBox(trapModel.position, Vector3.one * obstacleDetectionRange, Quaternion.identity, obstacleMasks);
+
+        //CanPlace = (Physics.Raycast(floorCast, out outHit, verticalSearch, whatIsBuildable) && obstacles.Length <= 0);
+
         if (Physics.Raycast(floorCast, out outHit, verticalSearch, whatIsBuildable))
         {
-           trapModel.position = outHit.transform.position;
-           Hologram.SetColor("Color_F3B47044", Color.blue); //assigning placeable trap colour to blue 
+            trapModel.position = outHit.transform.position;
+            
+        }
+
+        CanPlace = obstacles.Length <= 0;
+
+        if (CanPlace)
+        {
+            trapModel.position = outHit.transform.position;
+            Hologram.SetColor("Color_F3B47044", Color.blue); //assigning placeable trap colour to blue 
         }
         else
-        {
-            Hologram.SetColor("Color_F3B47044", Color.red); // Changing the colour of the trap to red if it can't be placed
-        }       
+        { 
+            
+            Hologram.SetColor("Color_F3B47044", Color.red);// Changing the colour of the trap to red if it can't be placed
+            CanPlace = false;
+        }
+        
     }
-
     public void PrimaryFire()
     {
-        //setting the trap GameObject to spawn on raycast's position 
-        GameObject tempTrap = Instantiate(trapToSpawn, trapModel.position, transform.rotation); //instantiating trap 
-        ACue.PlayAudioCue();
+        //setting the trap GameObject to spawn on raycast's position IF its on whatIsbuildable
+        if (CanPlace)
+        {
+
+            GameObject tempTrap = Instantiate(trapToSpawn, trapModel.position, transform.rotation); //instantiating trap 
+            ACue.PlayAudioCue();
+        }
     }
 
     public bool PrimaryFireCheck()
     {
-        return Input.GetButtonDown("Fire1");
+        return Input.GetButtonDown("Fire1");             
     }
 
     public void SecondaryFire()
@@ -80,6 +103,8 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         {
             Debug.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - verticalSearch, transform.position.z), Color.green);
         }
+
+        Gizmos.DrawWireCube(trapModel.position, Vector3.one * obstacleDetectionRange);
     }
 
     protected void Start()
