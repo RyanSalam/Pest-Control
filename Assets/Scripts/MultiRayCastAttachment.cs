@@ -18,7 +18,6 @@ public class MultiRayCastAttachment : AltFireAttachment
 
         Vector3 fireDirection;
 
-        Debug.Log("Firing shotgun");
 
         Debug.DrawRay(weapon.FirePoint.position, weapon.FirePoint.forward, Color.red);
 
@@ -29,7 +28,6 @@ public class MultiRayCastAttachment : AltFireAttachment
             int randAngleYaw = Random.Range(-spreadAngle, spreadAngle);
             
 
-            Debug.Log("randAngle: " + randAnglePitch);
 
             Quaternion spreadAxis = Quaternion.AngleAxis(randAnglePitch, Vector3.right) * Quaternion.AngleAxis(randAngleYaw, Vector3.up);
             
@@ -50,14 +48,14 @@ public class MultiRayCastAttachment : AltFireAttachment
                     //create our damageData struct, things we need to hurt enemies
                     DamageData damageData = new DamageData
                     {
-                        //damager = player,
+                        damager = weapon.Player,
                         damageAmount = secondaryDamage,
                         direction = weapon.FirePoint.position,
                         damageSource = weapon.FirePoint.position,
                         damagedActor = enemyHit,
                     };
                     //apply damage to our enemy
-                    enemyHit.TakeDamage(damageData);
+                    enemyHit.TakeDamage(damageData); //null reference
 
                 }
             }

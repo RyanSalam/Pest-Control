@@ -56,6 +56,7 @@ public class Weapon_Hitscan : Weapon
     protected override void Awake()
     {
         base.Awake();
+        
     }
 
     Coroutine releaseCurrent;

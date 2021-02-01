@@ -189,7 +189,6 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     public virtual void PrimaryFire()
     {
         //update our weapon variables
-        lastFired = Time.time; //reset our last fired
         isFiring = true; //we are firing
         currentShots += shotIncrease; //increment our current shots
 
@@ -201,6 +200,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
             StartCoroutine(WeaponCooldown());
         }
+        lastFired = Time.time; //reset our last fired
     }
 
     public virtual bool SecondaryFireCheck()

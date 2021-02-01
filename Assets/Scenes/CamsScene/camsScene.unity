@@ -2039,27 +2039,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa949a7289d1ff4597c0f8812e45291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  moveSpeed: 10
-  hitAngle: 360
-  hitForwardRot: 360
-  isDebugging: 0
-  enemyType: 2
-  isRetaliating: 0
-  armourStrength: 0
-  energyCarried: 0
-  attackBox: {fileID: 0}
-  attackDamage: 0
-  rateOfFire: 0
-  attackRange: 0
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  detectionRadius: 0
-  detectionLossRange: 0
-  player: {fileID: 0}
-  core: {fileID: 0}
-  hitsRecieved: 0
 --- !u!195 &52308513
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2154,7 +2133,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &52626986
 PrefabInstance:
@@ -71350,27 +71329,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa949a7289d1ff4597c0f8812e45291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  moveSpeed: 10
-  hitAngle: 360
-  hitForwardRot: 360
-  isDebugging: 0
-  enemyType: 0
-  isRetaliating: 0
-  armourStrength: 0
-  energyCarried: 0
-  attackBox: {fileID: 0}
-  attackDamage: 0
-  rateOfFire: 0
-  attackRange: 0
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  detectionRadius: 0
-  detectionLossRange: 0
-  player: {fileID: 0}
-  core: {fileID: 0}
-  hitsRecieved: 0
 --- !u!65 &2092652895
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71443,7 +71401,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2094426868
 PrefabInstance:
@@ -73382,6 +73340,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -12.25
       objectReference: {fileID: 0}
+    - target: {fileID: 8402986661978494378, guid: 566d321ad4cb7e84f9b13a7abff087a8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8402986662682793157, guid: 566d321ad4cb7e84f9b13a7abff087a8,
         type: 3}
       propertyPath: m_Name
@@ -73554,7 +73517,7 @@ PrefabInstance:
         type: 3}
       propertyPath: StartingItem
       value: 
-      objectReference: {fileID: 11400000, guid: 27ec0857478401b45aff755050c41f2a,
+      objectReference: {fileID: 11400000, guid: 4f88f77044a3d9145a225026b2b4297c,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 566d321ad4cb7e84f9b13a7abff087a8, type: 3}
