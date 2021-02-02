@@ -3,7 +3,10 @@ guid: e4547b9474c0ba043ab55a96059850dd
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - trapToSpawn: {instanceID: 0}
+  - trapModel: {instanceID: 0}
+  - Hologram: {fileID: 2100000, guid: 3c852c0492ffc54488c16540cdd99acb, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
