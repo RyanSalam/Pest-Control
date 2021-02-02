@@ -15,6 +15,7 @@ MonoBehaviour:
   player: {fileID: 0}
   c_name: Alice
   c_desc: Frost
+  c_profile: {fileID: 21300000, guid: b2828565d03a36640bec54c64650bfc6, type: 3}
   A1_image: {fileID: 21300000, guid: 227be678fbd7e3940a5496b5815edf57, type: 3}
   A1_text: Cryo
   A2_image: {fileID: 21300000, guid: 4249c063e30d5cf4799897b7e3d2c273, type: 3}
