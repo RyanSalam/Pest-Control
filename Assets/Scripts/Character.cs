@@ -24,6 +24,12 @@ public class Character : ScriptableObject
     public Ability ab2;
 
 
+    [Header("Dialogue")]
+    public AudioCueSO CharacterChosen;
+    public AudioCueSO EnemyKill;
+    public AudioCueSO PurchaseItem;
+    public AudioCueSO WaveStart;
+    public AudioCueSO WeaponOverheat;
 
 
 

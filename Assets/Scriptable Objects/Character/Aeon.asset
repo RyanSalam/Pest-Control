@@ -22,3 +22,8 @@ MonoBehaviour:
   A2_text: Portal
   ab1: {fileID: 11400000, guid: 56dd13d55c659f94aacbe6f99aa06512, type: 2}
   ab2: {fileID: 11400000, guid: f1a96881bf115c04ab530474e4edffc6, type: 2}
+  CharacterChosen: {fileID: 11400000, guid: 957cb18ade27bf345bd353fd47dcfe94, type: 2}
+  EnemyKill: {fileID: 11400000, guid: cb393108763e17046bf4ee53f5295024, type: 2}
+  PurchaseItem: {fileID: 11400000, guid: ef4211dc063fab545b227836c07390d7, type: 2}
+  WaveStart: {fileID: 11400000, guid: 5833175701b8f6248a20f1e77eea1e9d, type: 2}
+  WeaponOverheat: {fileID: 11400000, guid: e958aeb3b30f4864c9da445ef3006e0f, type: 2}
