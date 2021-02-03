@@ -30,6 +30,15 @@ public abstract class Ability : ScriptableObject
         lifetimeTimer.OnTimerEnd += () => cooldownTimer.PlayFromStart();
         cooldownTimer.OnTimerEnd += OnCooldownEnd;
     }
+
+    public virtual void HandleInput() 
+    {
+        if (!CanExecute()) return;
+
+        if (Input.GetButtonDown(AbilityButton))
+            Execute();
+    }
+
     public virtual void Execute()
     {
         lifetimeTimer.PlayFromStart();

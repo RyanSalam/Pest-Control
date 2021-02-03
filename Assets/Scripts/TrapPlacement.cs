@@ -26,24 +26,19 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         gameObject.SetActive(false);
     }
 
-    public void Equip()
+    protected void Start()
     {
-        transform.SetParent(LevelManager.Instance.Player.TrapHolder);
-        transform.localPosition = Vector3.zero + transform.forward * offset; //resetting gameObject's position
-        gameObject.SetActive(true); //setting trap to activate when equiping 
+        ACue = GetComponent<AudioCue>();
     }
 
     private void Update()
     {
-        //transform.position = new Vector3(offset, LevelManager.Instance.Player.transform.position.y, 0); //setting the offset of trap in front of player
 
         RaycastHit outHit;
         Ray floorCast = new Ray(transform.position, Vector3.down); //cast from trap to spawn 
         Debug.DrawRay(transform.position, Vector3.down, Color.green);
 
         Collider[] obstacles = Physics.OverlapBox(trapModel.position, Vector3.one * obstacleDetectionRange, Quaternion.identity, obstacleMasks);
-
-        //CanPlace = (Physics.Raycast(floorCast, out outHit, verticalSearch, whatIsBuildable) && obstacles.Length <= 0);
 
         if (Physics.Raycast(floorCast, out outHit, verticalSearch, whatIsBuildable))
         {
@@ -66,30 +61,36 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         }
         
     }
-    public void PrimaryFire()
+
+    public virtual void HandleInput()
+    {
+        if (Input.GetButtonDown("Fire1"))
+            PlaceTrap();
+
+        if (Input.GetButtonDown("Fire2"))
+            RotateTrap();
+    }
+
+    protected void PlaceTrap()
     {
         //setting the trap GameObject to spawn on raycast's position IF its on whatIsbuildable
         if (CanPlace)
         {
-
             GameObject tempTrap = Instantiate(trapToSpawn, trapModel.position, transform.rotation); //instantiating trap 
             ACue.PlayAudioCue();
         }
     }
 
-    public bool PrimaryFireCheck()
-    {
-        return Input.GetButtonDown("Fire1");             
-    }
-
-    public void SecondaryFire()
+    public void RotateTrap()
     {
         transform.Rotate(transform.rotation.eulerAngles + Quaternion.Euler(0, 90, 0).eulerAngles); //rotating trap by 90 degrees clockwise 
     }
 
-    public bool SecondaryFireCheck()
+    public void Equip()
     {
-        return Input.GetButtonDown("Fire2");
+        transform.SetParent(LevelManager.Instance.Player.TrapHolder);
+        transform.localPosition = Vector3.zero + transform.forward * offset; //resetting gameObject's position
+        gameObject.SetActive(true); //setting trap to activate when equiping 
     }
 
     public void Unequip()
@@ -105,10 +106,5 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         }
 
         Gizmos.DrawWireCube(trapModel.position, Vector3.one * obstacleDetectionRange);
-    }
-
-    protected void Start()
-    {
-        ACue = GetComponent<AudioCue>();
     }
 }

@@ -89,10 +89,6 @@ public class Weapon_Charge : Weapon
         base.PrimaryFire();
     }
 
-    public override bool PrimaryFireCheck()
-    {
-        return Input.GetButtonDown("Fire1");
-    }
 
     private Coroutine currentChargeCoroutine;
 
