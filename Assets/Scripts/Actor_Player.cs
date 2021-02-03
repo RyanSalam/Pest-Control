@@ -131,7 +131,7 @@ public class Actor_Player : Actor
             Debug.Log(mouseWheel);
             itemIndex += (int)Input.GetAxis("Mouse ScrollWheel");
             // We modulus it so we can never go above the max number of items we have in our inventory            
-            itemIndex %= LevelManager.Instance.InventoryList.Count - 1;
+            itemIndex %= LevelManager.Instance.InventoryList.Count;
             var _currentItem = LevelManager.Instance.InventoryList[itemIndex];
             _currentItem.Use();
         }
