@@ -196,14 +196,13 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void OnRestartButton()
     {
-        string scene = SceneManager.GetActiveScene().name;
-        GameManager.Instance.LoadScene(scene);
+        GameManager.Instance.LoadScene();
         Time.timeScale = 1;
     }
 
     public void OnQuitButton()
     {
-        GameManager.Instance.OnQuitButton();
+        GameManager.Instance.ReturnToMenu();
     }
 
     #endregion

@@ -78,6 +78,14 @@ public class MenuHandler : MonoBehaviour
         levelname = scene;
     }
 
+    public Character GetCharacter()
+    {
+        return character;
+    }
+    public String GetLevel()
+    {
+        return levelname;
+    }
 
     
 }
