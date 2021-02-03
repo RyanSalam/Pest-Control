@@ -107,9 +107,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e02f2006978aeaf49a24c31b4e3fa1b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 10
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 512
+  radius: 15
   damage: 1
-  explosionVFX: {fileID: 198147648432052724, guid: ac2312a3e32471549882f1a6da5568e6,
+  explosionVFX: {fileID: 1416136211686774, guid: 2eb45cbb5c5e9d549ac5e123909fff4b,
     type: 3}
 --- !u!54 &2221685402508476846
 Rigidbody:

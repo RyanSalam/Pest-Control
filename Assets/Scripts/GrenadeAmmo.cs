@@ -4,32 +4,31 @@ using UnityEngine;
 
 public class GrenadeAmmo : MonoBehaviour
 {
-    LayerMask enemyMask;
+    [SerializeField] LayerMask enemyMask;
 
     public float radius;
     public float damage;
 
-    [SerializeField] ParticleSystem explosionVFX;
+    [SerializeField] GameObject explosionVFX;
 
     private void Start()
     {
         enemyMask = LayerMask.GetMask("Enemy");
     }
+
     private void OnCollisionEnter(Collision c)
     {
         //here we would add VFX 
-        //also call a damage enemy function to see results
-        
+        GameObject tempVFX = Instantiate(explosionVFX, transform.position, transform.rotation);
+        tempVFX.transform.localScale *= 5f;
+        Destroy(tempVFX, 0.15f);
         //pass the point the grenade hit something
-        damageEnemies(c.GetContact(0).normal);
-        
-        Destroy(gameObject, 0.15f);
-
+        damageEnemies(this.transform.position);
+ 
     }
 
     void damageEnemies(Vector3 hitPoint)
     {
-        Instantiate(explosionVFX, hitPoint, Quaternion.identity);
         //overlap sphere to try and find enemies
         Collider[] colliders = Physics.OverlapSphere(hitPoint, radius, enemyMask);
 
@@ -43,5 +42,7 @@ public class GrenadeAmmo : MonoBehaviour
                 temp.TakeDamage(damage);
             }
         }
+
+        Destroy(gameObject);
     }
 }
