@@ -125,7 +125,7 @@ MonoBehaviour:
   isFiring: 0
   weaponAttachment: {fileID: 11400000, guid: e84381d79513e7047924a3b38efde32b, type: 2}
   firePoint: {fileID: 8568025554495181573}
-  projectilePrefab: {fileID: 8235868235497369977, guid: 1edf587009face445b35f8249288e796,
+  projectilePrefab: {fileID: 5491038871089590036, guid: 53445aa1f69d8d842af4ad1e55704092,
     type: 3}
   projectileSpawnPoint: {fileID: 8568025554495181573}
   bulletVFX: {fileID: 0}
@@ -153,7 +153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5518550631049950974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.625}
+  m_LocalPosition: {x: 0, y: 0, z: 0.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6895657399882834686}
