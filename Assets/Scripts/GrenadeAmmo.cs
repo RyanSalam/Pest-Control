@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GrenadeAmmo : MonoBehaviour
 {
-    LayerMask enemyMask;
+    public LayerMask layermask;
 
     public float radius;
     public float damage;
@@ -13,7 +13,7 @@ public class GrenadeAmmo : MonoBehaviour
 
     private void Start()
     {
-        enemyMask = LayerMask.GetMask("Enemy");
+        layermask = LayerMask.GetMask("Enemy");
     }
     private void OnCollisionEnter(Collision c)
     {
@@ -31,7 +31,7 @@ public class GrenadeAmmo : MonoBehaviour
     {
         Instantiate(explosionVFX, hitPoint, Quaternion.identity);
         //overlap sphere to try and find enemies
-        Collider[] colliders = Physics.OverlapSphere(hitPoint, radius, enemyMask);
+        Collider[] colliders = Physics.OverlapSphere(hitPoint, radius, layermask);
 
         foreach (Collider c in colliders)
         {

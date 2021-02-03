@@ -18,7 +18,7 @@ public class MultiRayCastAttachment : AltFireAttachment
 
         Vector3 fireDirection;
 
-        Debug.Log("Firing shotgun");
+        //Debug.Log("Firing shotgun");
 
         Debug.DrawRay(weapon.FirePoint.position, weapon.FirePoint.forward, Color.red);
 
@@ -29,7 +29,7 @@ public class MultiRayCastAttachment : AltFireAttachment
             int randAngleYaw = Random.Range(-spreadAngle, spreadAngle);
             
 
-            Debug.Log("randAngle: " + randAnglePitch);
+            //Debug.Log("randAngle: " + randAnglePitch);
 
             Quaternion spreadAxis = Quaternion.AngleAxis(randAnglePitch, Vector3.right) * Quaternion.AngleAxis(randAngleYaw, Vector3.up);
             
