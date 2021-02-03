@@ -35,7 +35,6 @@ public class Weapon_ASMD_Ammo : MonoBehaviour
                     enemy.TakeDamage(damageData);
             }
         }
-        Debug.Log("kill me");
         Destroy(gameObject);
     }
 
