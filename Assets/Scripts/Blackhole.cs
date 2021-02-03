@@ -6,7 +6,7 @@ public class Blackhole : MonoBehaviour
 {
     [SerializeField] protected float launchForwardForce = 5f;
     [SerializeField] protected float launchUpWardForce = 5f;
-    [SerializeField] protected float lifeTime = 5f;
+   // [SerializeField] protected float lifeTime = 5f;
     [SerializeField] protected float timeToSuck = 2.0f;
     [SerializeField] protected float areaOfEffect = 8.0f;
     [SerializeField] protected float pullStrength = 5.0f;

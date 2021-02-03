@@ -8,10 +8,17 @@ using TMPro;
 public class MenuHandler : MonoBehaviour
 {
     public Character character;
+    public string levelname;
+
+    public GameObject settingsPanel;
+    public GameObject characterPanel;
+    public GameObject levelPanel;
+    
 
     //Character Panel
     [SerializeField] TMP_Text charName;
     [SerializeField] TMP_Text charDesc;
+    [SerializeField] Image charProfile;
     [SerializeField] Image A1_image;
     [SerializeField] TMP_Text A1_text;
     [SerializeField] Image A2_image;
@@ -21,12 +28,18 @@ public class MenuHandler : MonoBehaviour
     [SerializeField] TMP_Text maptitle;
     [SerializeField] Image map;
 
+    private void Awake()
+    {
+       
+    }
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        settingsPanel.SetActive(true);
+        settingsPanel.GetComponent<SettingsManager>().LoadAudioLevels();
+        settingsPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -56,6 +69,7 @@ public class MenuHandler : MonoBehaviour
         character = c;
         charName.text = c.c_name;
         charDesc.text = c.c_desc;
+        charProfile.sprite = c.c_profile;
         A1_image.sprite = c.A1_image;
         A1_text.text = c.A1_text;
         A2_image.sprite = c.A2_image;
@@ -70,7 +84,19 @@ public class MenuHandler : MonoBehaviour
     {
         maptitle.text = text;
     }
+    public void SelectScene(string scene)
+    {
+        levelname = scene;
+    }
 
+    public Character GetCharacter()
+    {
+        return character;
+    }
+    public String GetLevel()
+    {
+        return levelname;
+    }
 
     
 }

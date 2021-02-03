@@ -9,14 +9,15 @@ public class Ability_Projectile : Ability
     public GameObject spawnedProjectile;
     private Actor_Player pA;
 
-    [SerializeField] protected float lifeTime = 5f;
+    //[SerializeField] protected float lifeTime = 5f;
 
     // Start is called before the first frame update
     public override void Execute()
     {
         base.Execute();
+        
         spawnedProjectile = Instantiate(prefabToSpawn, pA.AbilitySpawnPoint.position, pA.AbilitySpawnPoint.rotation);
-
+       
     }
 
     public override void Initialize(GameObject abilitySource)
@@ -28,11 +29,18 @@ public class Ability_Projectile : Ability
 
     public override bool CanExecute()
     {
-        return spawnedProjectile == null;
+        
+        return spawnedProjectile == null && !isAbilityOnCoolDown;
     }
 
     public override void OnCooldownEnd()
     {
+        isAbilityOnCoolDown = false;
+    }
+
+    public override void OnLifetimeEnd()
+    {
         Destroy(spawnedProjectile);
+        isAbilityOnCoolDown = true;
     }
 }

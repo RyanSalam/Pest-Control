@@ -9,8 +9,10 @@ public abstract class Ability : ScriptableObject
     [Multiline(5)]public string abilityDesc = "Description";
     public Sprite abilitySprite;
 
-    public Timer abilityTimer;
-    public float coolDownDuration = 5.0f;
+    public Timer lifetimeTimer;
+    public Timer cooldownTimer;
+    public float lifetimeDuration;
+    public float cooldownDuration;
     public string AbilityButton = "Button Name";
     public bool isAbilityOnCoolDown = false;
 
@@ -21,12 +23,25 @@ public abstract class Ability : ScriptableObject
     /// <param name="abilitySource"></param>
     public virtual void Initialize(GameObject abilitySource)
     {
-        abilityTimer = new Timer(coolDownDuration, false);
-        abilityTimer.OnTimerEnd += OnCooldownEnd;
+        lifetimeTimer = new Timer(lifetimeDuration, false);
+        cooldownTimer = new Timer(cooldownDuration, false);
+        //lifetimeTimer.OnTimerEnd += OnCooldownEnd;
+        lifetimeTimer.OnTimerEnd += OnLifetimeEnd;
+        lifetimeTimer.OnTimerEnd += () => cooldownTimer.PlayFromStart();
+        cooldownTimer.OnTimerEnd += OnCooldownEnd;
     }
+
+    public virtual void HandleInput() 
+    {
+        if (!CanExecute()) return;
+
+        if (Input.GetButtonDown(AbilityButton))
+            Execute();
+    }
+
     public virtual void Execute()
     {
-        abilityTimer.PlayFromStart();
+        lifetimeTimer.PlayFromStart();
     }
     /// <summary>
     /// Conditions that must be met for our ability to be triggered.
@@ -41,4 +56,6 @@ public abstract class Ability : ScriptableObject
     /// <returns></returns>
     /// 
     public abstract void OnCooldownEnd();
+
+    public abstract void OnLifetimeEnd();
 }

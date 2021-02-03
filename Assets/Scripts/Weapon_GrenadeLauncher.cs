@@ -68,9 +68,7 @@ public class Weapon_GrenadeLauncher : Weapon
 
     public override void PrimaryFire()
     {
-        base.PrimaryFire();
-
-        if (Time.time  > lastFired)
+        if (Time.time  > lastFired + fireRate)
         {
             shootPhase1();
 
@@ -83,8 +81,10 @@ public class Weapon_GrenadeLauncher : Weapon
             //    damageSource = firePoint.transform.position
             //};
 
-            lastFired = Time.time + fireRate;
+            lastFired = Time.time;
         }
+
+        base.PrimaryFire();
     }
 
 

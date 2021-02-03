@@ -57,6 +57,8 @@ public class LevelManager : MonoSingleton<LevelManager>
     public Dictionary<Item, IEquippable> Equipables => m_equipables;
 
     [SerializeField] ShopUI shopUI;
+    [SerializeField] WeaponUI weaponUI;
+    public WeaponUI WeaponUI { get { return weaponUI; } }
 
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
@@ -127,7 +129,7 @@ public class LevelManager : MonoSingleton<LevelManager>
             ToggleShop();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !shopUI.gameObject.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Escape) && !shopUI.gameObject.activeSelf && Core.CurrentHealth > 0)
         {
             TogglePause();
         }
@@ -194,14 +196,13 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void OnRestartButton()
     {
-        string scene = SceneManager.GetActiveScene().name;
-        GameManager.Instance.LoadScene(scene);
+        GameManager.Instance.LoadScene();
         Time.timeScale = 1;
     }
 
     public void OnQuitButton()
     {
-        GameManager.Instance.OnQuitButton();
+        GameManager.Instance.ReturnToMenu();
     }
 
     #endregion

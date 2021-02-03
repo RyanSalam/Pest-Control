@@ -20,8 +20,8 @@ public class CharacterUI : MonoBehaviour
         ability1_Icon.sprite = player.AbilityOne.abilitySprite;
         ability2_Icon.sprite = player.AbilityTwo.abilitySprite;
 
-        player.AbilityOne.abilityTimer.OnTimerEnd += () => ability1_Clock.fillAmount = 0;
-        player.AbilityTwo.abilityTimer.OnTimerEnd += () => ability2_Clock.fillAmount = 0;
+        player.AbilityOne.cooldownTimer.OnTimerEnd += () => ability1_Clock.fillAmount = 0;
+        player.AbilityTwo.cooldownTimer.OnTimerEnd += () => ability2_Clock.fillAmount = 0;
     }
 
     // Update is called once per frame
@@ -30,18 +30,20 @@ public class CharacterUI : MonoBehaviour
         // Update current energy on UI
         playerEnergy.text = LevelManager.Instance.CurrentEnergy.ToString();
         //Tick the player ability timers
-        player.AbilityOne.abilityTimer.Tick(Time.deltaTime);
-        player.AbilityTwo.abilityTimer.Tick(Time.deltaTime);
+        player.AbilityOne.lifetimeTimer.Tick(Time.deltaTime);
+        player.AbilityOne.cooldownTimer.Tick(Time.deltaTime);
+        player.AbilityTwo.lifetimeTimer.Tick(Time.deltaTime);
+        player.AbilityTwo.cooldownTimer.Tick(Time.deltaTime);
 
         // Display cooldown clock for abilities
-        if (player.AbilityOne.abilityTimer.isPlaying)
+        if (player.AbilityOne.cooldownTimer.isPlaying)
         {
-            ability1_Clock.fillAmount = 1 - player.AbilityOne.abilityTimer.GetProgress();
+            ability1_Clock.fillAmount = 1 - player.AbilityOne.cooldownTimer.GetProgress();
         }
-        if (player.AbilityTwo.abilityTimer.isPlaying)
+        if (player.AbilityTwo.cooldownTimer.isPlaying)
         {
  
-            ability2_Clock.fillAmount = 1 - player.AbilityTwo.abilityTimer.GetProgress();
+            ability2_Clock.fillAmount = 1 - player.AbilityTwo.cooldownTimer.GetProgress();
         }
 
     }

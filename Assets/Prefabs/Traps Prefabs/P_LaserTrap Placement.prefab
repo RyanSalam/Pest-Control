@@ -225,7 +225,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8abfef6d045af51469fc2c66dadf4947, type: 2}
+  - {fileID: 2100000, guid: 3c852c0492ffc54488c16540cdd99acb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -781,9 +781,14 @@ MonoBehaviour:
   whatIsBuildable:
     serializedVersion: 2
     m_Bits: 1024
+  obstacleMasks:
+    serializedVersion: 2
+    m_Bits: 4864
   trapPrice: 0
   isDebugging: 1
-  Hologram: {fileID: 2100000, guid: 8abfef6d045af51469fc2c66dadf4947, type: 2}
+  Hologram: {fileID: 2100000, guid: 3c852c0492ffc54488c16540cdd99acb, type: 2}
+  CanPlace: 0
+  obstacleDetectionRange: 2
 --- !u!114 &551121752816470550
 MonoBehaviour:
   m_ObjectHideFlags: 0
