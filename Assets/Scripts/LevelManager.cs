@@ -129,7 +129,7 @@ public class LevelManager : MonoSingleton<LevelManager>
             ToggleShop();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !shopUI.gameObject.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Escape) && !shopUI.gameObject.activeSelf && Core.CurrentHealth > 0)
         {
             TogglePause();
         }
