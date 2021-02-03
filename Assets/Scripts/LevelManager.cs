@@ -60,6 +60,9 @@ public class LevelManager : MonoSingleton<LevelManager>
     [SerializeField] WeaponUI weaponUI;
     public WeaponUI WeaponUI { get { return weaponUI; } }
 
+    private Item _currentlyEquipped;
+    public Item CurrentlyEquipped { get { return _currentlyEquipped; } }
+
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
         base.Awake();
@@ -74,7 +77,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         if (StartingItem != null)
         {
             InventoryAdd(StartingItem);
-            _player.EquipWeapon(m_equipables[StartingItem]);
+            StartingItem.Use();
         }
 
 
@@ -251,6 +254,8 @@ public class LevelManager : MonoSingleton<LevelManager>
             var newEquip = m_equipables[itemToUse];
             Player.EquipWeapon(newEquip);
         }
+        _currentlyEquipped = itemToUse;
+        weaponUI.UpdateEquippedWeapon();
     }
 
     #endregion
