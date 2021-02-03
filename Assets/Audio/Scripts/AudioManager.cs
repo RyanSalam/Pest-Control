@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
 	[SerializeField] private AudioCueEventChannelSO _SFXEventChannel = default;
 	[Tooltip("The SoundManager listens to this event, fired by objects in any scene, to play Music")]
 	[SerializeField] private AudioCueEventChannelSO _musicEventChannel = default;
-
+ 
 	[Header("Audio control")]
 	[SerializeField]  private AudioMixer audioMixer = default;
 	[SerializeField] [Range(0f, 1f)] private float _masterVolume;
