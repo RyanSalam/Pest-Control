@@ -36,6 +36,9 @@ public class Actor_Player : Actor
     protected CharacterController controller;
     public Camera PlayerCam { get { return _playerCam; } }
     public CharacterController Controller { get { return controller; } }
+    public AudioCue audio;
+    public Character _character;
+
 
     [Header("Abilities")]
     [SerializeField] private Ability _abilityOne;
@@ -74,6 +77,8 @@ public class Actor_Player : Actor
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        audio = GetComponent<AudioCue>();
+        _character = GameManager.selectedPlayer;
     }
 
     protected virtual void Update()
