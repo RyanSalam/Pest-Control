@@ -5,8 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-Dylan-Drone
-  - Trap
+  - ASMDammo
   layers:
   - Default
   - TransparentFX
@@ -19,8 +18,8 @@ Dylan-Drone
   - Player
   - Enemy
   - Ground
-  - Ground OffPath
-  - Trap
+  - 
+  - 
   - 
   - 
   - 
