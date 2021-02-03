@@ -9258,7 +9258,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.8
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -10243,8 +10243,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e12c9c2f191174285759c0dd0a64dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
+  character: {fileID: 11400000, guid: be75f10a45952414abc772df1cd0e7f6, type: 2}
   levelname: 
+  settingsPanel: {fileID: 675851325}
+  characterPanel: {fileID: 1120649136}
+  levelPanel: {fileID: 289577172}
   charName: {fileID: 1179161258}
   charDesc: {fileID: 1336477323}
   charProfile: {fileID: 1072442186}

@@ -10,6 +10,11 @@ public class MenuHandler : MonoBehaviour
     public Character character;
     public string levelname;
 
+    public GameObject settingsPanel;
+    public GameObject characterPanel;
+    public GameObject levelPanel;
+    
+
     //Character Panel
     [SerializeField] TMP_Text charName;
     [SerializeField] TMP_Text charDesc;
@@ -23,12 +28,18 @@ public class MenuHandler : MonoBehaviour
     [SerializeField] TMP_Text maptitle;
     [SerializeField] Image map;
 
+    private void Awake()
+    {
+       
+    }
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        settingsPanel.SetActive(true);
+        settingsPanel.GetComponent<SettingsManager>().LoadAudioLevels();
+        settingsPanel.SetActive(false);
     }
 
     // Update is called once per frame
