@@ -45,7 +45,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     protected Vector3 recoil;
     protected Vector3 initialCamPos;
 
-    [HideInInspector] public bool canFire = true; //if we can fire or not
+    public bool canFire = true; //if we can fire or not
     [SerializeField] protected bool isFiring = false; //are we currently firing ?
     [SerializeField] protected AltFireAttachment weaponAttachment;
     [SerializeField] protected Transform firePoint;
@@ -72,8 +72,8 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     //our reference to the players Camera
     protected Camera playerCam;
 
-    private Coroutine currentCooldown;
-    private float currentRatio;
+    protected Coroutine currentCooldown;
+    protected float currentRatio;
     private Timer cooldownDelayTimer;
 
     //this is set on our weapon script when we shoot
@@ -147,7 +147,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         return ((float)currentShots / (float)maxShots);
     }
 
-    IEnumerator WeaponCooldown(float percentage)
+    protected IEnumerator WeaponCooldown(float percentage)
     {
         float elapsed = timeTillWeaponCooldown * percentage;
 
@@ -168,7 +168,6 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     public virtual void Equip()
     {
-
         transform.SetParent(player.WeaponHolder);
         transform.localPosition = Vector3.zero;
         transform.localRotation = player.WeaponHolder.localRotation;

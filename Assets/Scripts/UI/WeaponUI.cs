@@ -10,6 +10,8 @@ public class WeaponUI : MonoBehaviour
     [SerializeField] Image hitmarkerImage;
     [SerializeField] float hitmarkerTime;
 
+    [SerializeField] Image equippedWeaponIcon;
+
     // Update heat bar - called when heat level changes
     /// <summary>
     /// Update the heat bar. Call when heat level changes. Takes in current heat level and max heat level
@@ -45,6 +47,11 @@ public class WeaponUI : MonoBehaviour
     {
         yield return new WaitForSeconds(hitmarkerTime);
         hitmarkerImage.enabled = false;
+    }
+
+    public void UpdateEquippedWeapon()
+    {
+        equippedWeaponIcon.sprite = LevelManager.Instance.CurrentlyEquipped.itemIcon;
     }
 
 }

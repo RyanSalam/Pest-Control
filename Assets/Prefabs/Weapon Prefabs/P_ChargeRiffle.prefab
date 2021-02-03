@@ -9728,7 +9728,7 @@ MonoBehaviour:
   Damage: 1
   auto: 1
   currentShots: 0
-  maxShots: 20
+  maxShots: 25
   shotIncrease: 1
   timeTillWeaponCooldown: 3
   fireSound: {fileID: 0}

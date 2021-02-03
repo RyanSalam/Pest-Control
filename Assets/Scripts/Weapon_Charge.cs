@@ -86,7 +86,6 @@ public class Weapon_Charge : Weapon
 
             currentChargeCoroutine = StartCoroutine(Charge());
         }
-        base.PrimaryFire();
     }
 
 
@@ -117,7 +116,8 @@ public class Weapon_Charge : Weapon
         chargeHold.Stop();
         charging.Stop();
         // Play release animation
-        release.Play();
+        if (isCharging)
+            release.Play();
 
         isCharging = false;
 
@@ -126,7 +126,25 @@ public class Weapon_Charge : Weapon
 
         tempProjectile.transform.SetParent(null);
 
-        // Play audio
+        if (currentCooldown != null)
+            StopCoroutine(currentCooldown);
+
+        //Debug.Log("currentShots += " + currentCharge * 4);
+        lastFired = Time.time; //reset our last fired
+        LevelManager.Instance.WeaponUI.UpdateHeatBar((float)currentShots, (float)maxShots);
+        if (Mathf.RoundToInt(currentCharge * 4) < 1)
+            currentShots++; //increment our current shots by 1 (minimum)
+        else
+            currentShots += Mathf.RoundToInt(currentCharge * 4); //increment our current shots
+        currentRatio = GetHeatRatio();
+
+        if (currentShots >= maxShots)
+        {
+            isFiring = false;
+            canFire = false; //we cannot fire now
+            //temporary coroutine until we get smarter - coroutine toggles our weapon variables
+            currentCooldown = StartCoroutine(WeaponCooldown(GetHeatRatio()));
+        }
 
         DamageData data = new DamageData
         {
