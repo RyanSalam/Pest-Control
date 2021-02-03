@@ -14,7 +14,7 @@ public abstract class Actor_Enemy : Actor
     protected NavMeshAgent m_agent;
 
     // Player and core reference for easy target switching
-    private Actor_Player m_player;
+    public Actor_Player m_player;
     private Actor_Core m_core;
 
     // Damage data reference to track last damage instance
