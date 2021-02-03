@@ -149,20 +149,7 @@ public class SettingsManager : MonoBehaviour
         else
             Screen.fullScreen = true;
 
-        if (PlayerPrefs.HasKey("MasterVolumePreference"))
-            MasterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolumePreference");
-        else
-            MasterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolumePreference");
-
-        if (PlayerPrefs.HasKey("MusicVolumePreference"))
-            MusicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolumePreference");
-        else
-            MusicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolumePreference");
-
-        if (PlayerPrefs.HasKey("SFXVolumePreference"))
-            SFXVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolumePreference");
-        else
-            SFXVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolumePreference");
+        LoadAudioLevels();
         
         //if (PlayerPrefs.HasKey("QualitySettingPreference"))
         //    qualityDropdown.value = PlayerPrefs.GetInt("QualitySettingPreference");
@@ -176,6 +163,33 @@ public class SettingsManager : MonoBehaviour
         //    aaDropdown.value = PlayerPrefs.GetInt("AntiAliasingPreference");
         //else
         //    aaDropdown.value = 1;
+    }
+
+    public void LoadAudioLevels()
+    {
+        if (PlayerPrefs.HasKey("MasterVolumePreference"))
+        {
+            MasterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolumePreference");
+            AM.SetGroupVolume("Master", MasterVolumeSlider.value);
+        }
+        else
+            MasterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolumePreference");
+
+        if (PlayerPrefs.HasKey("MusicVolumePreference"))
+        {
+            MusicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolumePreference");
+            AM.SetGroupVolume("Music", MusicVolumeSlider.value);
+        }
+        else
+            MusicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolumePreference");
+
+        if (PlayerPrefs.HasKey("SFXVolumePreference"))
+        {
+            SFXVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolumePreference");
+            AM.SetGroupVolume("SFX", SFXVolumeSlider.value);
+        }
+        else
+            SFXVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolumePreference");
 
 
     }
