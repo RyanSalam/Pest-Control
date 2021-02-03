@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3068646536275432135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.26258, y: 2.1, z: -1.52}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.47646, y: 0.47646, z: 0.47646}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 8b3ead8735a2d0040a9e04d3348e458c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,9 +138,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 5
-  explosionEffect: {fileID: 1498152551406518, guid: d6ebe1b9125e36747b5aaed57e503724,
+  explosionEffect: {fileID: 1834516428328612, guid: f39c43985f1039b47b3065f46848760e,
     type: 3}
-  explosionRadius: 30
+  explosionRadius: 15
   explosionDamage: 10
   enemyMask:
     serializedVersion: 2

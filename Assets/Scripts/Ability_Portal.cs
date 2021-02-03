@@ -11,25 +11,6 @@ public class Ability_Portal : Ability
     List<PortalSender> portalList;
     private int portalCount = 0;
 
-    public override void Execute()
-    {
-
-        portalList[portalCount].transform.position = pA.AbilitySpawnPoint.position + pA.AbilitySpawnPoint.transform.forward * 3;
-        portalList[portalCount].transform.rotation = pA.AbilitySpawnPoint.rotation;
-
-        portalList[portalCount].gameObject.SetActive(true);
-        portalCount++;
-
-        if (portalCount == portalList.Count)
-            // Call this when you want to start the cooldown
-            base.Execute();
-    }
-
-    public override bool CanExecute()
-    {
-        return portalCount < portalList.Count && pA.Controller.isGrounded;
-    }
-
     public override void Initialize(GameObject abilitySource)
     {
         base.Initialize(abilitySource);
@@ -50,13 +31,34 @@ public class Ability_Portal : Ability
                 //t.GetComponent<PortalSender>().actP = pA;
             }
         }
-        
+
         portalPrefab.gameObject.SetActive(false);
         portalCount = 0;
         foreach (PortalSender portal in portalList)
         {
             portal.gameObject.SetActive(false);
         }
+    }
+
+    public override void Execute()
+    {
+
+        portalList[portalCount].transform.position = pA.AbilitySpawnPoint.position + pA.AbilitySpawnPoint.transform.forward * 3;
+        portalList[portalCount].transform.rotation = pA.AbilitySpawnPoint.rotation;
+
+        portalList[portalCount].gameObject.SetActive(true);
+        portalCount++;
+
+        Debug.Log("Portal Count : " + portalCount);
+
+        if (portalCount == portalList.Count)
+            // Call this when you want to start the cooldown
+            base.Execute();
+    }
+
+    public override bool CanExecute()
+    {
+        return portalCount < portalList.Count && pA.Controller.isGrounded;
     }
 
     public override void OnCooldownEnd()

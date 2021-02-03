@@ -102,15 +102,39 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     protected virtual void Update()
     {
-        if (isFiring)
-        {
-            if (Input.GetButtonUp("Fire1"))
-            {
-                Release();
-            }
-        }
+        //if (isFiring)
+        //{
+        //    if (Input.GetButtonUp("Fire1"))
+        //    {
+        //        Release();
+        //    }
+        //}
 
         cooldownDelayTimer.Tick(Time.deltaTime);
+    }
+
+    public virtual void HandleInput()
+    {        
+        if (auto)
+        {
+            if (Input.GetButton("Fire1"))
+                PrimaryFire();
+        }
+
+        else
+        {
+            if (Input.GetButtonDown("Fire1"))
+                PrimaryFire();
+        }
+
+        if (Input.GetButtonUp("Fire1"))
+            Release();
+
+        if (weaponAttachment != null)
+        {
+            if (Input.GetButtonDown("Fire2"))
+                weaponAttachment.AltShoot();
+        }
     }
 
     public virtual void Release()
@@ -144,6 +168,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     public virtual void Equip()
     {
+
         transform.SetParent(player.WeaponHolder);
         transform.localPosition = Vector3.zero;
         transform.localRotation = player.WeaponHolder.localRotation;
@@ -158,11 +183,6 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         gameObject.SetActive(false);
     }
 
-    public virtual bool PrimaryFireCheck()
-    {
-        if (auto) return Input.GetButton("Fire1");
-        else return Input.GetButtonDown("Fire1");
-    }
     public virtual void PrimaryFire()
     {
         if (currentCooldown != null)
@@ -182,11 +202,6 @@ public abstract class Weapon : MonoBehaviour, IEquippable
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
             currentCooldown = StartCoroutine(WeaponCooldown(GetHeatRatio()));
         }
-    }
-
-    public virtual bool SecondaryFireCheck()
-    {
-        return Input.GetButtonDown("Fire2");
     }
 
     public virtual void SecondaryFire()

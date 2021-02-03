@@ -116,36 +116,28 @@ public class Actor_Player : Actor
         {
             _jumpRequest = false;
         }
-        
-        
 
-        if (AbilityOne != null && AbilityTwo != null)
+        if (AbilityOne != null)
         {
-            if (Input.GetButtonDown(AbilityOne.AbilityButton) && AbilityOne.CanExecute())
-                AbilityOne.Execute();
-
-            if (Input.GetButtonDown(AbilityTwo.AbilityButton) && AbilityTwo.CanExecute())
-                AbilityTwo.Execute();
+            AbilityOne.HandleInput();
         }
+
+        if (AbilityTwo != null)
+            AbilityTwo.HandleInput();
 
         float mouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
         if (mouseWheel != 0)
         {
             Debug.Log(mouseWheel);
             itemIndex += (int)Input.GetAxis("Mouse ScrollWheel");
-            // We modulus it so we can never go above the max number of items we have in our inventory
-            itemIndex %= LevelManager.Instance.InventoryList.Count; 
-            LevelManager.Instance.InventoryList[itemIndex].Use();
+            // We modulus it so we can never go above the max number of items we have in our inventory            
+            itemIndex %= LevelManager.Instance.InventoryList.Count - 1;
+            var _currentItem = LevelManager.Instance.InventoryList[itemIndex];
+            _currentItem.Use();
         }
 
         if (_currentEquiped != null)
-        {
-            if (_currentEquiped.PrimaryFireCheck())
-                _currentEquiped.PrimaryFire();
-
-            if (_currentEquiped.SecondaryFireCheck())
-                _currentEquiped.SecondaryFire();
-        }
+            _currentEquiped.HandleInput();
     }
 
     private void HandleMovement()

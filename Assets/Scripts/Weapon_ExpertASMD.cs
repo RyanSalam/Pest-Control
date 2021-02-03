@@ -22,11 +22,6 @@ public class Weapon_ExpertASMD : Weapon
         base.PrimaryFire();
     }
 
-    public override bool PrimaryFireCheck()
-    {
-        return Input.GetButtonDown("Fire1");
-    }
-
     public override void Release()
     {
         base.Release();

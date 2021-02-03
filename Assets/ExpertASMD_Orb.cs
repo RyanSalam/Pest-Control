@@ -31,8 +31,9 @@ public class ExpertASMD_Orb : MonoBehaviour
             if (explosionEffect)
             {
                 GameObject tempVFX = explosionEffect;
-                tempVFX.transform.localScale *= 3;
-                GameObject tempExplosion = Instantiate(explosionEffect, transform.position, transform.rotation);
+                //tempVFX.transform.localScale *=  2;
+                GameObject tempExplosion = Instantiate(tempVFX, transform.position, transform.rotation);
+                tempExplosion.transform.localScale *= 3f;
                 Destroy(tempExplosion, 1.5f);
             }
 
