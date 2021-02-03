@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MallLevel(thatGabiDestroyed).unity
     guid: 15f87ded28372224abcd35a9fb218a12
   - enabled: 1
+    path: Assets/Scenes/BuildScenes/Main Menu.unity
+    guid: 2e6271ccc8142844981a095a5e0f4d63
+  - enabled: 0
     path: Assets/Scenes/MallLevel.unity
     guid: 65bd7ef300d993e46af7d60dd0a3e8bd
   - enabled: 0

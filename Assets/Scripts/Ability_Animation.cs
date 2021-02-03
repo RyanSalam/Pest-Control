@@ -22,11 +22,11 @@ public class Ability_Animation : Ability
 
     public override void OnCooldownEnd()
     {
-        throw new System.NotImplementedException();
+        isAbilityOnCoolDown = false;
     }
 
     public override void OnLifetimeEnd()
     {
-        throw new System.NotImplementedException();
+        isAbilityOnCoolDown = true;
     }
 }

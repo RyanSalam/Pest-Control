@@ -71,7 +71,7 @@ public class Weapon_Charge : Weapon
 
     public override void PrimaryFire()
     {
-        base.PrimaryFire();
+        if (canFire == false) return;
 
         if (isCharging == false)
         {
@@ -86,6 +86,7 @@ public class Weapon_Charge : Weapon
 
             currentChargeCoroutine = StartCoroutine(Charge());
         }
+        base.PrimaryFire();
     }
 
     public override bool PrimaryFireCheck()
