@@ -8,25 +8,29 @@ public class Trap_Turret : Trap
     [SerializeField] Transform turretRotHinge; 
     [SerializeField] Transform turretVerHinge;
     [SerializeField] Rigidbody projectile;
+
     private Actor_Enemy enemyTarget;
+    Scanner<Actor_Enemy> enemyScanner;
+    [SerializeField] private LayerMask enemyLayer;
 
     [SerializeField] float rateOfFire = 0.1f;
     [SerializeField] float bulletSpeed = 10.0f;
     [SerializeField] int bulletCount = 10;
     int currentBullet = 0;
 
+    /*
     [Header("Detection Attributes")]
     [SerializeField] float maxRange = 5.0f;
     [Range(0.0f, 360.0f)]
     [SerializeField] private float detectionAngle = 270;
-    [SerializeField] private float heightOffset = 1;
     [SerializeField] private float detectionDelay = 1.2f;
-    [SerializeField] private LayerMask enemyLayer;
+    */
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        
+        enemyScanner = new Scanner<Actor_Enemy>(transform);
+        enemyScanner.targetMask = enemyLayer;
     }
 
     // Update is called once per frame
@@ -64,8 +68,8 @@ public class Trap_Turret : Trap
     private void FindClosestEnemy()
     {
         // find enemy through sight cone 
-
         //set enemy target to the closet enemy found on sight cone
+        enemyTarget = enemyScanner.Detect();
 
         if(enemyTarget != null)
         {
