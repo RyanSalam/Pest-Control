@@ -13,10 +13,14 @@ public class Trap : MonoBehaviour
     protected Animator anim;
 
 
-    protected virtual void Start()
+
+    protected virtual void Awake()
     {
         buildTimer = new Timer(buildDuration, false);
         buildTimer.OnTimerEnd += () => isTrapBuilt = true; //lamda expression: delegates without parameters and dont have an excessive function 
+    }
+    protected virtual void Start()
+    {
         anim = GetComponent<Animator>();
     }
 
@@ -28,6 +32,7 @@ public class Trap : MonoBehaviour
             buildTimer.Tick(Time.deltaTime); //increasing build timer before the trap is built
             return;
         }
+        
     }
 
     public virtual void Activate()

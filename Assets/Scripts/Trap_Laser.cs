@@ -5,31 +5,26 @@ using UnityEngine;
 public class Trap_Laser : Trap
 {
     // Start is called before the first frame update
-    [SerializeField] float TrapDamage;
+    //[SerializeField] float TrapDamage;
     private Actor_Enemy enemyTarget;
-    Animator animator;
+    //Animator animator;
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-    protected override void Update()
-    {
-        base.Update();
-    }
     public override void Activate()
     {
-        /*if (!isTrapBuilt) // need nayeems push to reference base trap script 
+        if (!isTrapBuilt)
         {
             return;
-        }*/
-        animator.SetTrigger("Lasers");
-        enemyTarget.TakeDamage(TrapDamage); //damage enemy 
+        }
+        base.Activate();
+        //animator.SetTrigger("Lasers");
+        Debug.Log("FUCK");
+        enemyTarget.TakeDamage(trapDamage); //damage enemy 
         enemyTarget = null; //reseting enemy back to null
-        base.Activate(); 
+        //base.Activate();
     }
     private void OnTriggerEnter(Collider trigger)
     {
+        Debug.Log("DOUBLEFUCK");
         enemyTarget = GetComponent<Actor_Enemy>();
         if (enemyTarget != null) //if the enemy actor collides with trap
         {
