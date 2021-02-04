@@ -28,6 +28,8 @@ public class PoisonCloudScript : MonoBehaviour
 
     Rigidbody projectile;
 
+    [SerializeField] GameObject gameObjectVFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,6 +87,14 @@ public class PoisonCloudScript : MonoBehaviour
         isDeployingPoison = true;
 
         projectile.constraints = RigidbodyConstraints.FreezeAll;
+
+        if (gameObjectVFX != null)
+        {
+            GameObject tempVFX = Instantiate(gameObjectVFX, transform.position, transform.rotation);
+            tempVFX.transform.localScale *= 5f;
+
+            Destroy(tempVFX, lifetime);
+        }
     }
 
 

@@ -89,6 +89,7 @@ MonoBehaviour:
   hitForwardRot: 360
   currentTarget: {fileID: 0}
   currentDestination: {x: 0, y: 0, z: 0}
+  m_player: {fileID: 0}
   _attackRange: 2.5
   _damage: 1
   _bIsSearching: 0

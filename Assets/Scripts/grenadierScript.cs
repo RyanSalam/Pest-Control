@@ -21,6 +21,8 @@ public class GrenadierScript : MonoBehaviour
 
     [SerializeField] int damage = 10;
 
+    public GameObject explosionVFX;
+
     LayerMask enemyLayerMask;
 
     // Start is called before the first frame update
@@ -36,12 +38,7 @@ public class GrenadierScript : MonoBehaviour
         projectile.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+   
     private void OnCollisionEnter(Collision collision)
     {
         //Vector3 newDirection = Vector3.Reflect(transform.position, collision.GetContact(0).normal);
@@ -53,8 +50,14 @@ public class GrenadierScript : MonoBehaviour
 
         if (bounceCount >= maxBounceCount)
         {
+            if (explosionVFX != null)
+            {
+                GameObject tempVFX = Instantiate(explosionVFX, transform.position, transform.rotation);
+                tempVFX.transform.localScale *= 5f;
+                Destroy(tempVFX, 0.15f);
+            }
             damageEnemies();
-            Destroy(gameObject, 0.25f);
+            
         }
     }
 
@@ -72,9 +75,12 @@ public class GrenadierScript : MonoBehaviour
                 //if the enemyActor component exists damage it
                 if (temp != null)
                 {
+                    Debug.Log("damaging enemies");
                     temp.TakeDamage(damage);
                 }
             }
         }
+
+        Destroy(gameObject, 0.25f);
     }
 }
