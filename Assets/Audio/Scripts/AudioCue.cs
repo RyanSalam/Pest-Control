@@ -32,7 +32,7 @@ public class AudioCue : MonoBehaviour
     {
 		int roll = Random.Range(1, 100);
 		
-		if (roll >= chance)
+		if (roll <= chance)
         {
 			Debug.Log("chance sound played with roll: " + roll);
 			_audioCueEventChannel.RaiseEvent(cue, _audioConfiguration, transform.position);

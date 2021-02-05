@@ -122,6 +122,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     private void Start()
     {
         Core.OnDeath += () => GameOver(false);
+        Player.OnDamageTaken += (DamageData) => Player._audioCue.PlayAudioCue(Player._cInfo.PlayerHit, 15);
         Time.timeScale = 1;
     }
 
@@ -143,6 +144,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         shopUI.pauseMenu.SetActive(!shopUI.pauseMenu.activeSelf);
         shopUI.combatHUD.SetActive(!shopUI.combatHUD.activeSelf);
+        
 
         Time.timeScale = shopUI.pauseMenu.gameObject.activeSelf ? 0.0f : 1.0f;
         Cursor.lockState = shopUI.pauseMenu.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
@@ -157,6 +159,8 @@ public class LevelManager : MonoSingleton<LevelManager>
         shopUI.UpdateItemUI();
         shopUI.RefreshEnergyText();
         Player.EquipWeapon(Equipables[InventoryList[0]]);
+        
+        
     }
 
     #region GameLoop
@@ -182,7 +186,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         spectatorCamera.gameObject.SetActive(false);
         Player.gameObject.SetActive(true);
-
+        Player._audioCue.PlayAudioCue(Player._cInfo.PlayerRespawn);
         isRespawning = false;
     }
 
@@ -196,6 +200,12 @@ public class LevelManager : MonoSingleton<LevelManager>
         EndGameMenu.SetActive(true);
         EndGameMenu.transform.DOScale(Vector3.one, 0.2f).From(Vector3.zero).OnComplete(() => Time.timeScale = 0.0f);
         EndGameText.text = playerWon ? "Victory!" : "Defeat!";
+        if(playerWon)
+            Player._audioCue.PlayAudioCue(Player._cInfo.MissionWin);
+        if(!playerWon)
+            Player._audioCue.PlayAudioCue(Player._cInfo.MissionLoss);
+
+
     }
 
     public void OnRestartButton()

@@ -9,6 +9,7 @@ public class MenuHandler : MonoBehaviour
 {
     public Character character;
     public string levelname;
+    AudioCue Cues;
 
     public GameObject settingsPanel;
     public GameObject characterPanel;
@@ -40,6 +41,7 @@ public class MenuHandler : MonoBehaviour
         settingsPanel.SetActive(true);
         settingsPanel.GetComponent<SettingsManager>().LoadAudioLevels();
         settingsPanel.SetActive(false);
+        Cues = GetComponent<AudioCue>();
     }
 
     // Update is called once per frame
@@ -73,7 +75,8 @@ public class MenuHandler : MonoBehaviour
         A1_image.sprite = c.A1_image;
         A1_text.text = c.A1_text;
         A2_image.sprite = c.A2_image;
-        A2_text.text = c.A2_text; 
+        A2_text.text = c.A2_text;
+        Cues.PlayAudioCue(c.CharacterChosen);
     }
 
     public void SelectMap(Sprite mapImage)
