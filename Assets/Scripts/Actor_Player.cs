@@ -36,9 +36,6 @@ public class Actor_Player : Actor
     protected CharacterController controller;
     public Camera PlayerCam { get { return _playerCam; } }
     public CharacterController Controller { get { return controller; } }
-    public AudioCue audio;
-    public Character _character;
-
 
     [Header("Abilities")]
     [SerializeField] private Ability _abilityOne;
@@ -59,6 +56,18 @@ public class Actor_Player : Actor
     public Transform TrapHolder { get { return _trapHolder; } }
     public IEquippable CurrentEquipped { get { return _currentEquiped; } }
 
+    protected AudioCue _audioCue;
+    [SerializeField] protected Character _charInfo;
+
+    public AudioCue AudioCue
+    {
+        get { return _audioCue; }
+    }
+    public Character CharacterInfo
+    {
+        get { return _charInfo; }
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -77,8 +86,8 @@ public class Actor_Player : Actor
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        audio = GetComponent<AudioCue>();
-        _character = GameManager.selectedPlayer;
+        _audioCue = GetComponent<AudioCue>();
+        _charInfo = GameManager.selectedPlayer;
     }
 
     protected virtual void Update()
@@ -133,7 +142,6 @@ public class Actor_Player : Actor
         float mouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
         if (mouseWheel != 0)
         {
-            Debug.Log(mouseWheel);
             itemIndex += (int)Input.GetAxis("Mouse ScrollWheel");
             // We modulus it so we can never go above the max number of items we have in our inventory            
             itemIndex %= LevelManager.Instance.InventoryList.Count;
@@ -150,7 +158,6 @@ public class Actor_Player : Actor
         Vector3 movement = transform.right * moveVector.x + transform.forward * moveVector.y;
         movement *= moveSpeed * Time.fixedDeltaTime;
 
-
         _verticalVel = controller.isGrounded ? -0.5f : _verticalVel + -15f * Time.fixedDeltaTime;
 
         // Condition to make sure we've let the jump button go
@@ -160,19 +167,15 @@ public class Actor_Player : Actor
         {
             _jumpElapsed += Time.fixedDeltaTime;
             _verticalVel = (jumpStrength * _jumpElapsed * 2.3f) + (0.5f * -15f * _jumpElapsed * _jumpElapsed);
-            //_verticalVel = (jumpStrength) ;
-            // _jumpRequest = false;
         }
 
         else
-            //_verticalVel = (-9.81f);
             _jumpElapsed = 0.0f;
 
 
         movement += Vector3.up * _verticalVel * Time.fixedDeltaTime;
 
         controller.Move(movement);
-
     }
 
     private void HandleRotation()
@@ -206,6 +209,13 @@ public class Actor_Player : Actor
 
         newWeapon.Equip();
         _currentEquiped = newWeapon;
+    }
+
+    public void PlayDialogue(AudioCueSO dialogue)
+    {
+        if (_charInfo == null || _audioCue == null) return;
+
+        _audioCue.PlayAudioCue(dialogue);
     }
 
     bool CheckSlope()

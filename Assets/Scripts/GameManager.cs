@@ -23,11 +23,7 @@ public class GameManager : MonoSingleton<GameManager>
     public void ReturnToMenu()
     {
         SceneManager.LoadScene("Main Menu");
-    }
-    
-
-    
-    
+    }    
 
     public void OnQuitButton()
     {

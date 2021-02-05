@@ -53,7 +53,7 @@ public class ShopUI : MonoBehaviour
         {
             if (i < LevelManager.Instance.InventoryList.Count)
             {
-                Debug.Log(LevelManager.Instance.InventoryList[i].ToString());
+                //Debug.Log(LevelManager.Instance.InventoryList[i].ToString());
                 slots[i].AddItem(LevelManager.Instance.InventoryList[i]);
             }
 
