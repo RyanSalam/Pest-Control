@@ -15,11 +15,13 @@ public class Weapon_ExpertASMD : Weapon
     public override void PrimaryFire()
     {
         //base.PrimaryFire();
-        //if (Time.time > fireRate + lastFired)
-        tempProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+        if (Time.time > fireRate + lastFired && canFire)
+        {
+            tempProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
 
 
-        base.PrimaryFire();
+            base.PrimaryFire();
+        }
     }
 
     public override void Release()

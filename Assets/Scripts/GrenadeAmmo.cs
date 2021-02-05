@@ -9,7 +9,7 @@ public class GrenadeAmmo : MonoBehaviour
     public float radius;
     public float damage;
 
-    [SerializeField] ParticleSystem explosionVFX;
+    [SerializeField] GameObject explosionVFX;
 
     private void Start()
     {
@@ -19,12 +19,16 @@ public class GrenadeAmmo : MonoBehaviour
     {
         //here we would add VFX 
         //also call a damage enemy function to see results
-        
-        //pass the point the grenade hit something
-        damageEnemies(c.GetContact(0).normal);
-        
-        Destroy(gameObject, 0.15f);
+        if (explosionVFX != null)
+        {
+            GameObject tempVFX = Instantiate(explosionVFX, transform.position, transform.rotation);
+            tempVFX.transform.localScale *= 5;
+            Destroy(tempVFX, 0.15f);
+        }
 
+        //pass the point the grenade hit something
+        damageEnemies(transform.position);
+       
     }
 
     void damageEnemies(Vector3 hitPoint)
@@ -39,9 +43,10 @@ public class GrenadeAmmo : MonoBehaviour
 
             if (temp != null)
             {
-                Debug.Log("Enemy taking damage");
                 temp.TakeDamage(damage);
             }
         }
+
+        Destroy(gameObject, 0.15f);
     }
 }

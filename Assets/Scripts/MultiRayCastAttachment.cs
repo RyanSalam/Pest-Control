@@ -9,6 +9,9 @@ public class MultiRayCastAttachment : AltFireAttachment
 
     [SerializeField] int spreadAngle = 10;
 
+    [SerializeField] GameObject muzzleFlash;
+    [SerializeField] GameObject impactEffect;
+
     public override void AltShoot()
     {
 
@@ -20,7 +23,9 @@ public class MultiRayCastAttachment : AltFireAttachment
 
         //Debug.Log("Firing shotgun");
 
-        Debug.DrawRay(weapon.FirePoint.position, weapon.FirePoint.forward, Color.red);
+        //vfx- muzzle flash
+        GameObject tempVFX = Instantiate(muzzleFlash, firePos, weapon.FirePoint.rotation);
+        Destroy(tempVFX, 0.15f);
 
         //loop as many times as we want to shoot - pellet count
         for (int i = 0; i < shotgunPellets; i++)
@@ -36,8 +41,6 @@ public class MultiRayCastAttachment : AltFireAttachment
 
             fireDirection = spreadAxis * weapon.FirePoint.forward;
           
-
-            Debug.DrawRay(weapon.FirePoint.position, fireDirection, Color.green);
 
             //now do our raycast with new coordinates
             if (Physics.Raycast(weapon.FirePoint.position, fireDirection, out RaycastHit hit, range))
@@ -56,9 +59,20 @@ public class MultiRayCastAttachment : AltFireAttachment
                         damageSource = weapon.FirePoint.position,
                         damagedActor = enemyHit,
                     };
-                    //apply damage to our enemy
-                    enemyHit.TakeDamage(damageData);
 
+                    if (enemyHit != null)
+                    {
+                        //apply damage to our enemy
+                        enemyHit.TakeDamage(damageData);
+                    }
+                }
+
+                if (impactEffect != null)
+                {
+                    GameObject impactVFX = impactEffect;
+                    impactVFX.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
+                    impactVFX = Instantiate(impactVFX, hit.point, Quaternion.LookRotation(hit.point));
+                    Destroy(impactVFX, 0.15f);
                 }
             }
         }

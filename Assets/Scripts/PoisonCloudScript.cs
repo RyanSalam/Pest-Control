@@ -91,7 +91,7 @@ public class PoisonCloudScript : MonoBehaviour
         if (gameObjectVFX != null)
         {
             GameObject tempVFX = Instantiate(gameObjectVFX, transform.position, transform.rotation);
-            tempVFX.transform.localScale *= 5f;
+            tempVFX.transform.localScale *= 10f;
 
             Destroy(tempVFX, lifetime);
         }
