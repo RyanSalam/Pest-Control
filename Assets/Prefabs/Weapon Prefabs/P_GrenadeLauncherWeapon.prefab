@@ -77,13 +77,13 @@ MonoBehaviour:
   vRecoil: 0
   hRecoil: 0
   recoilSpeed: 1
-  fireRate: 1
-  Damage: 1
+  fireRate: 2.5
+  Damage: 2
   auto: 0
   currentShots: 0
-  maxShots: 20
+  maxShots: 5
   shotIncrease: 1
-  timeTillWeaponCooldown: 3
+  timeTillWeaponCooldown: 2
   fireSound: {fileID: 0}
   ImpactParticle: {fileID: 0}
   muzzleFlashParticle: {fileID: 0}
@@ -185,7 +185,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7151869070914382769}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
