@@ -39,7 +39,9 @@ public class Actor_Core : Actor
             {
                 bIsRotating = false;
                 ring.transform.DORotate(restRotation, interpolateDuration).OnComplete(() => 
-                    ring.isKinematic = false);                
+                    ring.isKinematic = false);
+                Actor_Player p = FindObjectOfType<Actor_Player>();
+                p._audioCue.PlayAudioCue(p._cInfo.CoreDamaged);
             }
         }
     }
@@ -54,6 +56,7 @@ public class Actor_Core : Actor
         foreach (CoreRing ring in rings)
         {
             OnHealthChanged += ring.CheckThreshold;
+            
         }
     }
 
@@ -64,4 +67,6 @@ public class Actor_Core : Actor
             ring.HandleRingRotation();
         }
     }
+
+    
 }
