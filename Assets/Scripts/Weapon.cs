@@ -206,7 +206,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     public virtual void SecondaryFire()
     {
-        if (LevelManager.Instance.CurrentEnergy > weaponAttachment.energyCostPerFire)
+        if (LevelManager.Instance.CurrentEnergy >= weaponAttachment.energyCostPerFire)
         {
             LevelManager.Instance.CurrentEnergy -= weaponAttachment.energyCostPerFire;
             weaponAttachment.AltShoot();
