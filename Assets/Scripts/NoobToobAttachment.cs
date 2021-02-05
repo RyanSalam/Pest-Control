@@ -75,7 +75,7 @@ public class NoobToobAttachment : MonoBehaviour
                 //if the enemyActor component exists damage it
                 if (temp != null)
                 {
-                    Debug.Log("damaging enemies");
+                    //Debug.Log("damaging enemies");
                     temp.TakeDamage(damage);
                 }
             }
