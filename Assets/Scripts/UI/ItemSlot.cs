@@ -45,7 +45,6 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (LevelManager.Instance.CurrentEnergy >= item.itemCost)
         {
             LevelManager.Instance.InventoryAdd(item);
-            LevelManager.Instance.CurrentEnergy -= item.itemCost;
             purchased = true;
             item.ItemPurchased();
 

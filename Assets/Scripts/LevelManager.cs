@@ -122,6 +122,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     private void Start()
     {
         Core.OnDeath += () => GameOver(false);
+        Time.timeScale = 1;
     }
 
     public void Update()
@@ -199,7 +200,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void OnRestartButton()
     {
-        GameManager.Instance.LoadScene();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
     }
 
@@ -215,11 +216,11 @@ public class LevelManager : MonoSingleton<LevelManager>
     public void InventoryAdd(Item item) //function that adds an item from the Item class to the inventory 
     {
         //checks to see if the inventory count is less then the limit and checks if it dose not contain the item
-        if (m_inventoryList.Count <= inventoryLimit && !m_inventoryList.Contains(item))
+        if (m_inventoryList.Count < inventoryLimit && !m_inventoryList.Contains(item))
         {
             m_inventoryList.Add(item);  //adds item to inventory 
             onItemChangeCallback?.Invoke(); //calling delgate function "onItemChangeCallback" "?" is !=null
-
+            CurrentEnergy -= item.itemCost;
             // We instantiate the gameobject for this item as soon as we add it to the inventory.
             // Helps us create the object as we need it rather than creating them on start.
             // We only need to instantiate once and should not need to destroy them when we remove.

@@ -83,6 +83,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     {
         player = LevelManager.Instance.Player;
         playerCam = player.PlayerCam;
+        gameObject.SetActive(false);
     }
 
     protected virtual void Start()
@@ -133,7 +134,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         if (weaponAttachment != null)
         {
             if (Input.GetButtonDown("Fire2"))
-                weaponAttachment.AltShoot();
+                SecondaryFire();
         }
     }
 
@@ -205,7 +206,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     public virtual void SecondaryFire()
     {
-        if (LevelManager.Instance.CurrentEnergy > weaponAttachment.energyCostPerFire)
+        if (LevelManager.Instance.CurrentEnergy >= weaponAttachment.energyCostPerFire)
         {
             LevelManager.Instance.CurrentEnergy -= weaponAttachment.energyCostPerFire;
             weaponAttachment.AltShoot();

@@ -265,11 +265,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 330607815, guid: 5a1d76bd2f010ec4793b09149005bd25, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 500
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 330607815, guid: 5a1d76bd2f010ec4793b09149005bd25, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -90
+      value: -290
       objectReference: {fileID: 0}
     - target: {fileID: 739832815, guid: 5a1d76bd2f010ec4793b09149005bd25, type: 3}
       propertyPath: m_AnchorMax.y
@@ -289,11 +289,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 739832815, guid: 5a1d76bd2f010ec4793b09149005bd25, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 700
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 739832815, guid: 5a1d76bd2f010ec4793b09149005bd25, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -90
+      value: -290
       objectReference: {fileID: 0}
     - target: {fileID: 748910422, guid: 5a1d76bd2f010ec4793b09149005bd25, type: 3}
       propertyPath: m_AnchorMax.y
@@ -522,6 +522,36 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3441714795551705671, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3441714795551705671, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3441714795551705671, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3441714795551705671, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3441714795551705671, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 3441714795551705671, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -125
+      objectReference: {fileID: 0}
     - target: {fileID: 3864578355919304039, guid: 5a1d76bd2f010ec4793b09149005bd25,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -591,6 +621,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775886820155223150, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775886820155223150, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775886820155223150, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775886820155223150, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775886820155223150, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 925
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775886820155223150, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -125
       objectReference: {fileID: 0}
     - target: {fileID: 4789707351749144218, guid: 5a1d76bd2f010ec4793b09149005bd25,
         type: 3}
