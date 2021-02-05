@@ -20,6 +20,17 @@ public class Enemy_Grunt : Actor_Enemy
         }
     }
 
+    protected override void Update()
+    {
+        base.Update();
+
+        Vector3 dir = currentTarget.position - transform.position;
+        dir.y = 0;
+
+        Quaternion rot = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rot, 0.6f);
+    }
+
     public override void OnBtwnIntervals()
     {
         base.OnBtwnIntervals();
@@ -32,10 +43,7 @@ public class Enemy_Grunt : Actor_Enemy
             SwitchTarget(p.transform);
         }
 
-        else
-        {
-            _intervalTimer.PlayFromStart();
-        }
+        IntervalTimer.PlayFromStart();
     }
 
     protected override void Death()
