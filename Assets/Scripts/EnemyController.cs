@@ -98,7 +98,7 @@ public abstract class EnemyController : Actor
     {
         // Setting the animator booleans according to their corresponding conditions
         Anim.SetBool("hasArrived", Agent.pathStatus == NavMeshPathStatus.PathComplete);
-        Anim.SetBool("hasTarget", currentTarget != null);
+        Anim.SetBool("hasTarget", currentTarget != Core.transform);
     }
 
     public virtual void OnBtwnIntervals() { }
