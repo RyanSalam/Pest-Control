@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c04269c8150901a429efa8db7281493a, type: 3}
-  m_Name: Aeon_WeaponOverheat
+  m_Name: Aeon_MissionWin
   m_EditorClassIdentifier: 
   looping: 0
   _audioClipGroups:
   - sequenceMode: 0
     audioClips:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: b7519d91a3103844993ff1374f313291, type: 3}
+    - {fileID: 8300000, guid: bad62abdf13cf9d439d1040779efa39f, type: 3}
+    - {fileID: 8300000, guid: 68146d0bb18831f4898eed3da261933d, type: 3}
