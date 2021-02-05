@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3096881278932849828}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000000022351742, y: 0.089, z: 0.369}
+  m_LocalPosition: {x: 0.000000022351742, y: 0.133, z: 0.369}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 922396192194762793}
@@ -111,14 +111,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vRecoil: 0
   hRecoil: 0
-  recoilSpeed: 1
-  fireRate: 0.25
-  Damage: 1
+  recoilSpeed: 1.25
+  fireRate: 0.4
+  Damage: 3
   auto: 0
   currentShots: 0
-  maxShots: 20
+  maxShots: 8
   shotIncrease: 1
-  timeTillWeaponCooldown: 3
+  timeTillWeaponCooldown: 1.5
   fireSound: {fileID: 0}
   ImpactParticle: {fileID: 198594848535981848, guid: 8b78bf871862d08409f84a0bac02efdd,
     type: 3}

@@ -194,6 +194,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   timeFiring: 0
   range: 80
+  muzzleFlash: {fileID: 1616087419151336, guid: 91fb7ab2ef38317499700fcf6b971451,
+    type: 3}
 --- !u!114 &-6923104602310492009
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -87,9 +87,13 @@ public class WaveManager : MonoSingleton<WaveManager>
     public int EnemiesRemaining { get { return _enemiesRemaining; } }
     #endregion
 
+    private Actor_Player player;
+
     // Creating the timer and initiating it to 0. Subscribing the Spawner Coroutine to run at the end of the build phase, then starts the first wave
     private void Start()
     {
+        player = LevelManager.Instance.Player;
+
         buildPhaseTimer = new Timer(0, false);
         buildPhaseTimer.OnTimerEnd += () => StartCoroutine(SpawnerCoroutine());
         WaveStart();
@@ -118,7 +122,10 @@ public class WaveManager : MonoSingleton<WaveManager>
 
         // Setting the enemies remaining tracker to the total of enemies being spawned this wave
         _enemiesRemaining = currentWave.TotalEnemies();
-        LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.WaveStart);
+
+        player.PlayDialogue(player.CharacterInfo.WaveStart);
+
+        //LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.WaveStart);
     }
 
     // Cleanup for each wave and beginning of next wave
@@ -134,7 +141,8 @@ public class WaveManager : MonoSingleton<WaveManager>
         }
         else
         {
-            LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.EnemyKill);
+            player.PlayDialogue(player.CharacterInfo.EnemyKill);
+            //LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.EnemyKill);
             WaveStart();
         }
     }
