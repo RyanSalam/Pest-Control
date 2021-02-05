@@ -25,14 +25,11 @@ public class SMB_EnemyAttacking : StateMachineBehaviour
         
         Vector3 dist = self.transform.position - self.CurrentTarget.position;
         dist.y = 0;
-
-        Quaternion rotationToLookAt = Quaternion.LookRotation(dist, Vector3.up);
-        self.transform.rotation = Quaternion.Slerp(self.transform.rotation, rotationToLookAt, lookAtSmoothness);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        self.Agent.isStopped = false;
+    }
 }

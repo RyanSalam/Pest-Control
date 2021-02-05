@@ -49,7 +49,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -90,7 +90,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   currentDestination: {x: 0, y: 0, z: 0}
   m_player: {fileID: 0}
-  _attackRange: 2.5
+  _attackRange: 5
   _damage: 1
   _bIsSearching: 0
   _playerLayer:
@@ -98,6 +98,7 @@ MonoBehaviour:
     m_Bits: 256
   _energyDrop: 10
   scanIntervals: 0.5
+  movementSpeed: 3.5
 --- !u!1 &7864417394028300082
 GameObject:
   m_ObjectHideFlags: 0
