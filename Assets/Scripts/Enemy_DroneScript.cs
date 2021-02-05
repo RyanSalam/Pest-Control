@@ -16,8 +16,6 @@ public class Enemy_DroneScript : Actor_Enemy
 
     public Queue<GameObject> targetQueue;
 
-    public GameObject player;
-
     public int bombsToDrop = 5;
     public float bombDropDelay = 0.1f;
     public float bombDamageToPlayer = 0.25f;
@@ -26,36 +24,29 @@ public class Enemy_DroneScript : Actor_Enemy
     // Start is called before the first frame update
     protected override void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        base.Start();
+
         targetQueue = new Queue<GameObject>();
         SearchForTraps();
         dbc = GetComponentInChildren<DroneBombCarrier>();
     }
 
     // Update is called once per frame
-    protected virtual void Update()
+    protected override void Update()
     {
+        base.Update();
+    }
 
+    protected override void LateUpdate()
+    {
+        Anim.SetBool("hasArrived", Vector3.Distance(transform.position, currentTarget.position) <= _attackRange);
+        Anim.SetBool("hasTarget", currentTarget != Player.transform);
     }
 
     public void Attack()
     {
         //Instantiate(droneBomb, droneBombSpawnpoint.transform.position, droneBombSpawnpoint.transform.rotation);
         dbc.BeginAttack(tempTarget);
-    }
-
-    public int SearchForTrapss()
-    {
-        traps = GameObject.FindGameObjectsWithTag("Trap");
-        Debug.Log(traps.Length);
-        if (traps.Length > 0)
-        {
-            foreach (GameObject go in traps)
-            {
-                targetQueue.Enqueue(go);
-            }
-        }
-        return traps.Length;
     }
 
     public bool SearchForTraps()
@@ -82,6 +73,12 @@ public class Enemy_DroneScript : Actor_Enemy
     {
         if (temp == targetQueue.Peek()) return true;
         else return false;
+    }
+
+    protected override void Death()
+    {
+        base.Death();
+        Destroy(gameObject);
     }
 
     public override void OnPathCompleted()

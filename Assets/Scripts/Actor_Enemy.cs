@@ -108,7 +108,6 @@ public abstract class Actor_Enemy : Actor
         m_agent.speed = movementSpeed;
 
         OnDeath += () => LevelManager.Instance.CurrentEnergy += _energyDrop;
-        OnDeath += () => LevelManager.Instance.Player._audioCue.PlayAudioCue(Player._cInfo.EnemyKill, 10);
 
         _intervalTimer = new Timer(scanIntervals);
         _intervalTimer.OnTimerEnd += OnBtwnIntervals;
@@ -121,6 +120,8 @@ public abstract class Actor_Enemy : Actor
 
         m_player = LevelManager.Instance.Player;
         m_core = LevelManager.Instance.Core;
+
+        OnDeath += () => LevelManager.Instance.Player._audioCue.PlayAudioCue(Player._cInfo.EnemyKill, 10);
     }
 
     protected virtual void Update()

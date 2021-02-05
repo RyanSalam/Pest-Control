@@ -9,22 +9,34 @@ public class SMB_DroneSetTarget : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //Debug.Log("Finding target...");
         enemyDrone = animator.GetComponentInParent<Enemy_DroneScript>();
+
         if (!enemyDrone.SearchForTraps())
         {
-            //Debug.Log("Trap not found");
-            enemyDrone.SwitchTarget(enemyDrone.player.transform);
-            enemyDrone.tempTarget = enemyDrone.player;
-            animator.SetBool("HasTarget", false);
+            enemyDrone.SwitchTarget(enemyDrone.Player.transform);
         }
+
         else
         {
-            //Debug.Log("Trap found");
-            enemyDrone.SwitchTarget(enemyDrone.targetQueue.Peek().transform);
-            enemyDrone.tempTarget = enemyDrone.targetQueue.Peek();
-            animator.SetBool("HasTarget", true);
+            enemyDrone.SwitchTarget(enemyDrone.targetQueue.Dequeue().transform);
         }
+
+        //Debug.Log("Finding target...");
+        //enemyDrone = animator.GetComponentInParent<Enemy_DroneScript>();
+        //if (!enemyDrone.SearchForTraps())
+        //{
+        //    //Debug.Log("Trap not found");
+        //    enemyDrone.SwitchTarget(enemyDrone.player.transform);
+        //    enemyDrone.tempTarget = enemyDrone.player;
+        //    animator.SetBool("HasTarget", false);
+        //}
+        //else
+        //{
+        //    //Debug.Log("Trap found");
+        //    enemyDrone.SwitchTarget(enemyDrone.targetQueue.Peek().transform);
+        //    enemyDrone.tempTarget = enemyDrone.targetQueue.Peek();
+        //    animator.SetBool("HasTarget", true);
+        //}
         
     }
 

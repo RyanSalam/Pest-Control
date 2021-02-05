@@ -231,7 +231,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4170628562088871640}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -344,7 +344,8 @@ MonoBehaviour:
   _abilitySpawnPoint: {fileID: 8422927109470140873}
   _weaponHolder: {fileID: 8025575011193713661}
   _trapHolder: {fileID: 8586339961259611175}
-  _charInfo: {fileID: 11400000, guid: be75f10a45952414abc772df1cd0e7f6, type: 2}
+  _audioCue: {fileID: 0}
+  _cInfo: {fileID: 11400000, guid: be75f10a45952414abc772df1cd0e7f6, type: 2}
 --- !u!114 &1394492705354489218
 MonoBehaviour:
   m_ObjectHideFlags: 0

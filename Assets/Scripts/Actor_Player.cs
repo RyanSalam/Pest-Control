@@ -75,6 +75,8 @@ public class Actor_Player : Actor
         base.Awake();
         controller = GetComponent<CharacterController>();
 
+        _audioCue = GetComponent<AudioCue>();
+
         if (AbilityOne != null)
             AbilityOne.Initialize(gameObject);
 
@@ -88,8 +90,6 @@ public class Actor_Player : Actor
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        _audioCue = GetComponent<AudioCue>();
-        _cInfo = GameManager.selectedPlayer;
     }
 
     protected virtual void Update()

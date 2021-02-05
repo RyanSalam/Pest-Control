@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SMB_GruntChase : StateMachineBehaviour
 {
-    Enemy_Grunt self;
+    Actor_Enemy self;
 
     public float chaseSpeed = 5.0f;
     public float loseAggroDistance = 10.0f;
@@ -12,7 +12,7 @@ public class SMB_GruntChase : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        self = animator.GetComponentInParent<Enemy_Grunt>();
+        self = animator.GetComponentInParent<Actor_Enemy>();
         self.IntervalTimer.OnTimerEnd += HandleChase;
 
         self.Agent.isStopped = false;
