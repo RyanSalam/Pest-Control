@@ -26,14 +26,14 @@ public class ExpertASMD_Orb : MonoBehaviour
         //explosionss???
         if (other.gameObject.tag == "ASMDammo")
         {
-            Debug.Log("explosionss???");
+
            
             if (explosionEffect)
             {
                 GameObject tempVFX = explosionEffect;
                 //tempVFX.transform.localScale *=  2;
                 GameObject tempExplosion = Instantiate(tempVFX, transform.position, transform.rotation);
-                tempExplosion.transform.localScale *= 3f;
+                tempExplosion.transform.localScale *= 5f;
                 Destroy(tempExplosion, 1.5f);
             }
 
@@ -43,9 +43,8 @@ public class ExpertASMD_Orb : MonoBehaviour
 
     private void explode(Vector3 hitPoint)
     {
-        Debug.Log("yes explosionss");
         //sphere cast for enemies
-        Destroy(gameObject);
+       
 
         Collider[] colliders = Physics.OverlapSphere(hitPoint, explosionRadius, enemyMask);
 
@@ -56,5 +55,7 @@ public class ExpertASMD_Orb : MonoBehaviour
             if (tempEnemy)
                 tempEnemy.TakeDamage(explosionDamage);
         }
+
+        Destroy(gameObject);
     }
 }
