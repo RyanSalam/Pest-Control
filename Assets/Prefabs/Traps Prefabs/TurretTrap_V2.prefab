@@ -337,11 +337,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trapDamage: 1
   maxUses: 10
-  buildDuration: 0
+  buildDuration: 3
   bulletSpawn: {fileID: 2565074226590723098}
   turretRotHinge: {fileID: 0}
   turretVerHinge: {fileID: 0}
-  projectile: {fileID: 0}
+  projectile: {fileID: -6831115600125466467, guid: ccab36001f8356744a6541d1803a08fe,
+    type: 3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
