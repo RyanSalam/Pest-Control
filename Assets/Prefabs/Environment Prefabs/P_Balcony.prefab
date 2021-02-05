@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1697105958983495617}
   m_Layer: 0
-  m_Name: SM_Balcony (3)
+  m_Name: P_Balcony
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -425,7 +425,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4fb70dcb85d420648bb130d5b470ff11, type: 2}
+  - {fileID: 2100000, guid: da590161fea7b27409592f526ef20550, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
