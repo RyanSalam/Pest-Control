@@ -58,7 +58,7 @@ public class CharacterUI : MonoBehaviour
 
     public void FadeAbilityEffect(float time)
     {
-        Debug.Log("Fading alpha");
+        //Debug.Log("Fading alpha");
 
         effectTimer += Time.deltaTime;
         if (effectTimer < time && !isUsed)
