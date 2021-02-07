@@ -59,6 +59,8 @@ public class LevelManager : MonoSingleton<LevelManager>
     [SerializeField] ShopUI shopUI;
     [SerializeField] WeaponUI weaponUI;
     public WeaponUI WeaponUI { get { return weaponUI; } }
+    [SerializeField] CharacterUI characterUI;
+    public CharacterUI CharacterUI { get { return characterUI; } }
 
     private Item _currentlyEquipped;
     public Item CurrentlyEquipped { get { return _currentlyEquipped; } }

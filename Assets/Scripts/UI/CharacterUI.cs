@@ -11,7 +11,12 @@ public class CharacterUI : MonoBehaviour
     [SerializeField] Image ability2_Icon;
     [SerializeField] Image ability1_Clock;
     [SerializeField] Image ability2_Clock;
-    [SerializeField] TMP_Text playerEnergy; 
+    [SerializeField] TMP_Text playerEnergy;
+
+    [SerializeField] public Image abilityEffect;
+    private float effectTimer = 0.0f;
+    public bool abilityActive = false;
+    private bool isUsed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +27,10 @@ public class CharacterUI : MonoBehaviour
 
         player.AbilityOne.cooldownTimer.OnTimerEnd += () => ability1_Clock.fillAmount = 0;
         player.AbilityTwo.cooldownTimer.OnTimerEnd += () => ability2_Clock.fillAmount = 0;
+
+        abilityEffect.color = new Color(abilityEffect.color.r, abilityEffect.color.g, abilityEffect.color.b, 0.01f);
+        effectTimer = 0.0f;
+        isUsed = false;
     }
 
     // Update is called once per frame
@@ -45,6 +54,32 @@ public class CharacterUI : MonoBehaviour
  
             ability2_Clock.fillAmount = 1 - player.AbilityTwo.cooldownTimer.GetProgress();
         }
-
     }
+
+    public void FadeAbilityEffect(float time)
+    {
+        Debug.Log("Fading alpha");
+
+        effectTimer += Time.deltaTime;
+        if (effectTimer < time && !isUsed)
+        {
+            abilityEffect.CrossFadeAlpha(255f, time, true);
+            abilityActive = true;
+        }
+        else
+        {
+            abilityActive = false;
+            isUsed = true;
+        }
+    }
+
+    public void ResetAlphaValue()
+    {
+        abilityEffect.CrossFadeAlpha(0.01f, 0.5f, true);
+        abilityActive = false;
+        isUsed = false;
+        effectTimer = 0.0f;
+    }
+
+
 }
