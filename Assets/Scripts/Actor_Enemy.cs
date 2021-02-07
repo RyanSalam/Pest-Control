@@ -35,6 +35,8 @@ public abstract class Actor_Enemy : Actor
     protected Timer _intervalTimer;
     [SerializeField] protected float scanIntervals = 2.0f;
 
+    public float movementSpeed = 3.5f;
+
     #region Getters
     // Agent getter for out of class access
     public NavMeshAgent Agent
@@ -103,6 +105,7 @@ public abstract class Actor_Enemy : Actor
 
         m_agent = GetComponent<NavMeshAgent>();
         m_agent.updateRotation = true;
+        m_agent.speed = movementSpeed;
 
         OnDeath += () => LevelManager.Instance.CurrentEnergy += _energyDrop;
 
@@ -117,13 +120,20 @@ public abstract class Actor_Enemy : Actor
 
         m_player = LevelManager.Instance.Player;
         m_core = LevelManager.Instance.Core;
+
+        OnDeath += () => LevelManager.Instance.Player._audioCue.PlayAudioCue(Player._cInfo.EnemyKill, 10);
+    }
+
+    protected virtual void Update()
+    {
+        _intervalTimer.Tick(Time.deltaTime);
     }
 
     protected virtual void LateUpdate()
     {
         // Setting the animator booleans according to their corresponding conditions
-        Anim.SetBool("hasArrived", Mathf.Approximately(m_agent.remainingDistance, Mathf.Epsilon));
-        Anim.SetBool("hasTarget", currentTarget != null);
+        Anim.SetBool("hasArrived", Vector3.Distance(transform.position, currentTarget.position) <= _attackRange);
+        Anim.SetBool("hasTarget", currentTarget != Core.transform);
     }
 
     // Function that gets called each time the timer has finished ticking. 
@@ -141,6 +151,11 @@ public abstract class Actor_Enemy : Actor
 
         currentTarget = newTarget;
         currentDestination = newTarget.position;
+
+        if (GetRandomPointAroundTarget(currentTarget.position, _attackRange, out currentDestination))
+        {
+            Agent.SetDestination(currentDestination);
+        }
     }
 
     // Function to randomise a position around the target to better vary pathfinding between enemies

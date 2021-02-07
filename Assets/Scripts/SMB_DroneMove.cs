@@ -11,6 +11,8 @@ public class SMB_DroneMove : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemyDrone = animator.GetComponentInParent<Enemy_DroneScript>();
+
+
         hasTraps = enemyDrone.SearchForTraps();
         if (hasTraps)
         {
@@ -21,7 +23,7 @@ public class SMB_DroneMove : StateMachineBehaviour
         }
         else
         {
-            enemyDrone.tempTarget = enemyDrone.player;
+            enemyDrone.tempTarget = enemyDrone.Player.gameObject;
         }
     }
 

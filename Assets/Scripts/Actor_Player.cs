@@ -56,8 +56,10 @@ public class Actor_Player : Actor
     public Transform TrapHolder { get { return _trapHolder; } }
     public IEquippable CurrentEquipped { get { return _currentEquiped; } }
 
-    protected AudioCue _audioCue;
-    [SerializeField] protected Character _charInfo;
+    //Audio Params
+    public AudioCue _audioCue;
+    public Character _cInfo;
+
 
     public AudioCue AudioCue
     {
@@ -65,13 +67,15 @@ public class Actor_Player : Actor
     }
     public Character CharacterInfo
     {
-        get { return _charInfo; }
+        get { return _cInfo; }
     }
 
     protected override void Awake()
     {
         base.Awake();
         controller = GetComponent<CharacterController>();
+
+        _audioCue = GetComponent<AudioCue>();
 
         if (AbilityOne != null)
             AbilityOne.Initialize(gameObject);
@@ -86,8 +90,6 @@ public class Actor_Player : Actor
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        _audioCue = GetComponent<AudioCue>();
-        _charInfo = GameManager.selectedPlayer;
     }
 
     protected virtual void Update()
@@ -211,12 +213,6 @@ public class Actor_Player : Actor
         _currentEquiped = newWeapon;
     }
 
-    public void PlayDialogue(AudioCueSO dialogue)
-    {
-        if (_charInfo == null || _audioCue == null) return;
-
-        _audioCue.PlayAudioCue(dialogue);
-    }
 
     bool CheckSlope()
     {

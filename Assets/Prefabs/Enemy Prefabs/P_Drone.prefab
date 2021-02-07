@@ -92,8 +92,9 @@ GameObject:
   - component: {fileID: 49455962050927236}
   - component: {fileID: 49455962050927241}
   - component: {fileID: 49455962050927238}
+  - component: {fileID: 8510662353574387204}
   m_Layer: 9
-  m_Name: Drone
+  m_Name: P_Drone
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,6 +152,7 @@ MonoBehaviour:
     m_Bits: 0
   _energyDrop: 10
   scanIntervals: 2
+  movementSpeed: 3.5
   attackRange2: 5
   fleeRange: 5
   droneBombSpawnpoint: {fileID: 49455960525657428}
@@ -158,6 +160,12 @@ MonoBehaviour:
     type: 3}
   tempTarget: {fileID: 0}
   traps: []
+  dbc: {fileID: 0}
+  player: {fileID: 0}
+  bombsToDrop: 5
+  bombDropDelay: 0.1
+  bombDamageToPlayer: 0.25
+  bombDamageToPlayerRadius: 5
 --- !u!195 &49455962050927238
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -180,6 +188,19 @@ NavMeshAgent:
   m_BaseOffset: 3.48
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &8510662353574387204
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49455962050927247}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.82
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1821209873068292557
 PrefabInstance:
   m_ObjectHideFlags: 0
