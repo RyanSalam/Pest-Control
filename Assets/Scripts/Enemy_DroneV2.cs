@@ -22,6 +22,10 @@ public class Enemy_DroneV2 : Actor_Enemy
     protected override void Update()
     {
         base.Update();
+
+        //we need to check for obstacle detection - 
+        //ex. if we run into a doorframe/roof we need to adjust our agent-offset so the droneModel can go through it
+        //without going through the wall
     }
 
     public Transform searchForTarget()
@@ -30,6 +34,8 @@ public class Enemy_DroneV2 : Actor_Enemy
         //IF FOUND SET TRAP T-FORM TO TARGET
         //ELSE  SET PLAYER T-FORM AS TARGET 
         GameObject[] trapsInScene = GameObject.FindGameObjectsWithTag("Trap");
+        //here we can add a shuffle funtion ? -shuffle the array, then add to queue
+
 
         if (trapsInScene.Length > 0) //we have found traps
         {
@@ -37,7 +43,7 @@ public class Enemy_DroneV2 : Actor_Enemy
             {
                 trapQueue.Enqueue(go.transform);
             }
-            return trapQueue.Dequeue(); //return/remove the trap item at top of queue 
+             return trapQueue.Dequeue(); //return/remove the trap item at top of queue 
         }
         else //we didnt find any traps so we target player
         {
@@ -55,4 +61,11 @@ public class Enemy_DroneV2 : Actor_Enemy
     {
         Debug.Log("release da fookin hounds");
     }
+
+    protected override void Death()
+    {
+        base.Death();
+        Destroy(gameObject);
+    }
+
 }
