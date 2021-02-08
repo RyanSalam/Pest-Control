@@ -46,7 +46,8 @@ public class Enemy_DroneScript : Actor_Enemy
     public void Attack()
     {
         //Instantiate(droneBomb, droneBombSpawnpoint.transform.position, droneBombSpawnpoint.transform.rotation);
-        dbc.BeginAttack(tempTarget);
+        if (tempTarget != null && dbc != null)
+            dbc.BeginAttack(tempTarget);
     }
 
     public bool SearchForTraps()
