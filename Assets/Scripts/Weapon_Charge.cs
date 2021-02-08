@@ -132,7 +132,7 @@ public class Weapon_Charge : Weapon
         //Debug.Log("currentShots += " + currentCharge * 4);
         lastFired = Time.time; //reset our last fired
         LevelManager.Instance.WeaponUI.UpdateHeatBar((float)currentShots, (float)maxShots);
-        if (Mathf.RoundToInt(currentCharge * 4) < 1)
+        if (Mathf.RoundToInt(currentCharge * 4) < 20)
             currentShots++; //increment our current shots by 1 (minimum)
         else
             currentShots += Mathf.RoundToInt(currentCharge * 4); //increment our current shots
