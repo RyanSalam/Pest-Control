@@ -201,6 +201,20 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     {
         transform.SetParent(null);
         gameObject.SetActive(false);
+
+        if (auto)
+        {
+            player.playerInputs.actions["Fire"].performed -= (context) => isFiring = true;
+        }
+
+        else
+        {
+            player.playerInputs.actions["Fire"].performed -= (context) => PrimaryFire();
+        }
+
+        player.playerInputs.actions["Fire"].canceled -= (context) => Release();
+
+        player.playerInputs.actions["Alt Fire"].started -= (context) => SecondaryFire();
     }
 
     public virtual void PrimaryFire()
