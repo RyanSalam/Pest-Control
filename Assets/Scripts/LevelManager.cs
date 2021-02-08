@@ -136,6 +136,9 @@ public class LevelManager : MonoSingleton<LevelManager>
             ToggleShop();
         }
 
+        if (shopUI.gameObject.activeSelf && !WaveManager.Instance.IsBuildPhase)
+            shopUI.CloseShop();
+
         if (Input.GetKeyDown(KeyCode.Escape) && !shopUI.gameObject.activeSelf && Core.CurrentHealth > 0)
         {
             TogglePause();
@@ -157,12 +160,13 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void ToggleShop()
     {
-        shopUI.ToggleMenu();
-        shopUI.UpdateItemUI();
-        shopUI.RefreshEnergyText();
-        Player.EquipWeapon(Equipables[InventoryList[0]]);
-        
-        
+        if (WaveManager.Instance.IsBuildPhase)
+        {
+            shopUI.ToggleMenu();
+            shopUI.UpdateItemUI();
+            shopUI.RefreshEnergyText();
+            Player.EquipWeapon(Equipables[InventoryList[0]]);
+        }
     }
 
     #region GameLoop

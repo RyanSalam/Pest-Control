@@ -71,5 +71,10 @@ public class Timer
         return remainingSeconds / totalSeconds;
     }
 
+    public float GetRemaining()
+    {
+        return totalSeconds - remainingSeconds;
+    }
+
     public event Action OnTimerEnd;
 }
