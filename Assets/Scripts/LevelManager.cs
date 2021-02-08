@@ -146,7 +146,8 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void Update()
     {
-
+        if (shopUI.gameObject.activeSelf && !WaveManager.Instance.IsBuildPhase)
+            shopUI.CloseShop();
     }
 
     public void TogglePause()
