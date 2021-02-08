@@ -18,6 +18,8 @@ public class TrapPlacement : MonoBehaviour, IEquippable
 
     [SerializeField] private float obstacleDetectionRange = 3;
 
+    Actor_Player player;
+
     //Audio Settings
     AudioCue ACue;
 
@@ -64,11 +66,10 @@ public class TrapPlacement : MonoBehaviour, IEquippable
 
     public virtual void HandleInput()
     {
-        if (Input.GetButtonDown("Fire1"))
-            PlaceTrap();
+        player = LevelManager.Instance.Player;
 
-        if (Input.GetButtonDown("Fire2"))
-            RotateTrap();
+        player.playerInputs.actions["Fire"].started += (context) => PlaceTrap();
+        player.playerInputs.actions["Alt Fire"].started += (context) => RotateTrap();
     }
 
     protected void PlaceTrap()
@@ -96,6 +97,9 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     public void Unequip()
     {
         gameObject.SetActive(false); //setting trap to deActivate when unEquipping 
+
+        player.playerInputs.actions["Fire"].started -= (context) => PlaceTrap();
+        player.playerInputs.actions["Alt Fire"].started -= (context) => RotateTrap();
     }
 
     protected void OnDrawGizmos()

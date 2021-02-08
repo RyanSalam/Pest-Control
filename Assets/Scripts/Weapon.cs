@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class Weapon : MonoBehaviour, IEquippable
 {
@@ -103,39 +104,66 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     protected virtual void Update()
     {
-        //if (isFiring)
-        //{
-        //    if (Input.GetButtonUp("Fire1"))
-        //    {
-        //        Release();
-        //    }
-        //}
-
         cooldownDelayTimer.Tick(Time.deltaTime);
+
+        if (auto && isFiring)
+            PrimaryFire();
+    }
+
+    public virtual void Equip()
+    {
+        transform.SetParent(player.WeaponHolder);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = player.WeaponHolder.localRotation;
+        gameObject.SetActive(true);
+
+        lastFired = 0.0f;
+
+        HandleInput();
     }
 
     public virtual void HandleInput()
-    {        
+    {
+        if (player == null)
+            player = LevelManager.Instance.Player;
+
+        if (player == null)
+            player = FindObjectOfType<Actor_Player>();
+
         if (auto)
         {
-            if (Input.GetButton("Fire1"))
-                PrimaryFire();
+            player.playerInputs.actions["Fire"].performed += (context) => isFiring = true;
         }
 
         else
         {
-            if (Input.GetButtonDown("Fire1"))
-                PrimaryFire();
+            player.playerInputs.actions["Fire"].performed += (context) => PrimaryFire();
         }
+        
+        player.playerInputs.actions["Fire"].canceled += (context) => Release();
 
-        if (Input.GetButtonUp("Fire1"))
-            Release();
+        player.playerInputs.actions["Alt Fire"].started += (context) => SecondaryFire();
 
-        if (weaponAttachment != null)
-        {
-            if (Input.GetButtonDown("Fire2"))
-                SecondaryFire();
-        }
+        //if (auto)
+        //{
+        //    if (Input.GetButton("Fire1"))
+        //        PrimaryFire();
+        //}
+
+        //else
+        //{
+        //    if (Input.GetButtonDown("Fire1"))
+        //        PrimaryFire();
+        //}
+
+        //if (Input.GetButtonUp("Fire1"))
+        //    Release();
+
+        //if (weaponAttachment != null)
+        //{
+        //    if (Input.GetButtonDown("Fire2"))
+        //        SecondaryFire();
+        //}
     }
 
     public virtual void Release()
@@ -167,20 +195,26 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         ResetWeaponStats(elapsed <= 0);
     }
 
-    public virtual void Equip()
-    {
-        transform.SetParent(player.WeaponHolder);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = player.WeaponHolder.localRotation;
-        gameObject.SetActive(true);
 
-        lastFired = 0.0f;
-    }
 
     public virtual void Unequip()
     {
         transform.SetParent(null);
         gameObject.SetActive(false);
+
+        if (auto)
+        {
+            player.playerInputs.actions["Fire"].performed -= (context) => isFiring = true;
+        }
+
+        else
+        {
+            player.playerInputs.actions["Fire"].performed -= (context) => PrimaryFire();
+        }
+
+        player.playerInputs.actions["Fire"].canceled -= (context) => Release();
+
+        player.playerInputs.actions["Alt Fire"].started -= (context) => SecondaryFire();
     }
 
     public virtual void PrimaryFire()
