@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046cc0ee1a51e9541b81acf4d89b1f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 50
   moveSpeed: 10
   hitAngle: 360
   hitForwardRot: 360
@@ -161,7 +161,6 @@ MonoBehaviour:
   tempTarget: {fileID: 0}
   traps: []
   dbc: {fileID: 0}
-  player: {fileID: 0}
   bombsToDrop: 5
   bombDropDelay: 0.1
   bombDamageToPlayer: 0.25

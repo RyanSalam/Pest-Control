@@ -49,7 +49,7 @@ MonoBehaviour:
   hRecoil: 0
   recoilSpeed: 1
   fireRate: 1.25
-  Damage: 1
+  Damage: 25
   auto: 0
   currentShots: 0
   maxShots: 10

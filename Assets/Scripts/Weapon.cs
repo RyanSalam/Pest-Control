@@ -199,8 +199,6 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     public virtual void Unequip()
     {
-        transform.SetParent(null);
-        gameObject.SetActive(false);
 
         if (auto)
         {
@@ -210,11 +208,18 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         else
         {
             player.playerInputs.actions["Fire"].performed -= (context) => PrimaryFire();
+
+
         }
 
         player.playerInputs.actions["Fire"].canceled -= (context) => Release();
 
         player.playerInputs.actions["Alt Fire"].started -= (context) => SecondaryFire();
+
+        transform.SetParent(null);
+        gameObject.SetActive(false);
+
+      
     }
 
     public virtual void PrimaryFire()
