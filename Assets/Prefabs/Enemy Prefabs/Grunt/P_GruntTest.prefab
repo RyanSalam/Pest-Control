@@ -100,6 +100,8 @@ MonoBehaviour:
   _energyDrop: 10
   scanIntervals: 0.5
   movementSpeed: 3.5
+  detectionRad: 10.32
+  detectionAngle: 90
 --- !u!54 &-1733453893914788994
 Rigidbody:
   m_ObjectHideFlags: 0
