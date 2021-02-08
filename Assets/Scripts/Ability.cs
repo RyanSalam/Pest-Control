@@ -33,7 +33,7 @@ public abstract class Ability : ScriptableObject
         isAbilityOnCoolDown = false;
 
         Actor_Player player = abilitySource.GetComponent<Actor_Player>();
-        player.playerInputs.actions[AbilityButton].started += (context) => HandleInput();
+        player.playerInputs.actions[AbilityButton].performed += (context) => HandleInput();
     }
     public virtual void HandleInput() 
     {
