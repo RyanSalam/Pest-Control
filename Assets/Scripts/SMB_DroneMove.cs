@@ -23,7 +23,9 @@ public class SMB_DroneMove : StateMachineBehaviour
         }
         else
         {
-            enemyDrone.tempTarget = enemyDrone.Player.gameObject;
+            Debug.Log("Wtf did u do?");
+            //enemyDrone.tempTarget = enemyDrone.Player.gameObject;
+            enemyDrone.tempTarget = LevelManager.Instance.Player.gameObject;
         }
     }
 
@@ -31,6 +33,7 @@ public class SMB_DroneMove : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if(!hasTraps) enemyDrone.SetDestinationAroundTarget(enemyDrone.tempTarget.transform.position, enemyDrone.attackRange2);
+       
         //Debug.Log(Vector3.Distance(animator.gameObject.transform.position, enemyDrone.tempTarget.transform.position));
         if (Vector3.Distance(animator.gameObject.transform.position, enemyDrone.tempTarget.transform.position) < enemyDrone.attackRange2)
         {

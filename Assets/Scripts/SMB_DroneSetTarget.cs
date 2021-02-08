@@ -11,32 +11,21 @@ public class SMB_DroneSetTarget : StateMachineBehaviour
     {
         enemyDrone = animator.GetComponentInParent<Enemy_DroneScript>();
 
+        //if we dont find any traps target player
         if (!enemyDrone.SearchForTraps())
         {
-            enemyDrone.SwitchTarget(enemyDrone.Player.transform);
+            Debug.Log("no traps found making player target");
+            //enemyDrone.SwitchTarget(enemyDrone.Player.transform);
+            enemyDrone.SwitchTarget(LevelManager.Instance.Player.transform);
+            animator.SetBool("HasTarget", false);
         }
-
+        //if we find traps get the trap at the top of the queue
         else
         {
+            Debug.Log(" traps found making trap target");
             enemyDrone.SwitchTarget(enemyDrone.targetQueue.Dequeue().transform);
         }
 
-        //Debug.Log("Finding target...");
-        //enemyDrone = animator.GetComponentInParent<Enemy_DroneScript>();
-        //if (!enemyDrone.SearchForTraps())
-        //{
-        //    //Debug.Log("Trap not found");
-        //    enemyDrone.SwitchTarget(enemyDrone.player.transform);
-        //    enemyDrone.tempTarget = enemyDrone.player;
-        //    animator.SetBool("HasTarget", false);
-        //}
-        //else
-        //{
-        //    //Debug.Log("Trap found");
-        //    enemyDrone.SwitchTarget(enemyDrone.targetQueue.Peek().transform);
-        //    enemyDrone.tempTarget = enemyDrone.targetQueue.Peek();
-        //    animator.SetBool("HasTarget", true);
-        //}
         
     }
 
