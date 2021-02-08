@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class Actor_Player : Actor
@@ -37,6 +39,8 @@ public class Actor_Player : Actor
     public Camera PlayerCam { get { return _playerCam; } }
     public CharacterController Controller { get { return controller; } }
 
+    public PlayerInput playerInputs;
+
     [Header("Abilities")]
     [SerializeField] private Ability _abilityOne;
     [SerializeField] private Ability _abilityTwo;
@@ -60,7 +64,6 @@ public class Actor_Player : Actor
     public AudioCue _audioCue;
     public Character _cInfo;
 
-
     public AudioCue AudioCue
     {
         get { return _audioCue; }
@@ -73,16 +76,29 @@ public class Actor_Player : Actor
     protected override void Awake()
     {
         base.Awake();
+        playerInputs = GetComponent<PlayerInput>();
+        playerInputs.ActivateInput();
+
         controller = GetComponent<CharacterController>();
+
+        playerInputs.actions["Jump"].started += (context) => HandleJump(true);
+        playerInputs.actions["Jump"].canceled += (context) => HandleJump(false);
+
+        playerInputs.actions["Weapon Switch"].performed += HandleWeaponSwap;
 
         _audioCue = GetComponent<AudioCue>();
 
         if (AbilityOne != null)
+        {
             AbilityOne.Initialize(gameObject);
+        }
+            
 
         if (AbilityTwo != null)
             AbilityTwo.Initialize(gameObject);
     }
+
+
 
     protected override void Start()
     {
@@ -109,50 +125,70 @@ public class Actor_Player : Actor
 
         // We're storing our mouse and movement inputs in vectors
         // Helps us know 
-        moveVector.x = Input.GetAxis("Horizontal");
-        moveVector.y = Input.GetAxis("Vertical");
+        moveVector = playerInputs.actions["Move"].ReadValue<Vector2>();
 
-        mouseVector.x = Input.GetAxis("Mouse X") + externalMouseForce.x * mouseSensitivity * Time.deltaTime;
-        mouseVector.y = Input.GetAxis("Mouse Y") + externalMouseForce.y * mouseSensitivity * Time.deltaTime;
+        mouseVector = playerInputs.actions["Look"].ReadValue<Vector2>();
+        mouseVector *= mouseSensitivity * Time.deltaTime;
 
         _camRot -= mouseVector.y;
         _camRot = Mathf.Clamp(_camRot, -45f, 45f);
 
         // This allows us to control our jump
         // Meaning the longer we hold it, the higher we can jump
-        if (Input.GetButtonDown("Jump") && controller.isGrounded)
-        {
-            _jumpElapsed += Time.fixedDeltaTime * 10;
-            _jumpRequest = true;
-        }
            
 
         
-        if (Input.GetButtonUp("Jump"))
-        {
-            _jumpRequest = false;
-        }
+        //if (Input.GetButtonUp("Jump"))
+        //{
+            
+        //}
 
-        if (AbilityOne != null)
-        {
-            AbilityOne.HandleInput();
-        }
+        //if (AbilityOne != null)
+        //{
+        //    AbilityOne.HandleInput();
+        //}
 
-        if (AbilityTwo != null)
-            AbilityTwo.HandleInput();
+        //if (AbilityTwo != null)
+        //    AbilityTwo.HandleInput();
 
-        float mouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
+
+
+        //if (_currentEquiped != null)
+        //    _currentEquiped.HandleInput();
+    }
+
+    private void HandleWeaponSwap(InputAction.CallbackContext context)
+    {
+        float mouseWheel = context.ReadValue<float>();
         if (mouseWheel != 0)
         {
-            itemIndex += (int)Input.GetAxis("Mouse ScrollWheel");
+            itemIndex += (int)mouseWheel;
             // We modulus it so we can never go above the max number of items we have in our inventory            
             itemIndex %= LevelManager.Instance.InventoryList.Count;
             var _currentItem = LevelManager.Instance.InventoryList[itemIndex];
             _currentItem.Use();
         }
+    }
 
-        if (_currentEquiped != null)
-            _currentEquiped.HandleInput();
+    protected void HandleJump(bool value)
+    {
+        if (value == true && controller.isGrounded)
+        {
+            _jumpElapsed += Time.fixedDeltaTime * 10;
+            _jumpRequest = true;
+        }
+
+        else
+        {
+            _jumpRequest = false;
+        }
+    }
+
+    private void DisableControls()
+    {
+        playerInputs.DeactivateInput();
+        mouseVector = Vector2.zero;
+        moveVector = Vector2.zero;
     }
 
     private void HandleMovement()

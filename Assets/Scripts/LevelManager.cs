@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoSingleton<LevelManager>
 {
@@ -126,6 +127,21 @@ public class LevelManager : MonoSingleton<LevelManager>
         Core.OnDeath += () => GameOver(false);
         Player.OnDamageTaken += (DamageData) => Player._audioCue.PlayAudioCue(Player._cInfo.PlayerHit, 15);
         Time.timeScale = 1;
+
+        Player.playerInputs.actions["Pause"].started += (context) => HandlePause();
+        Player.playerInputs.actions["Shop"].started += (context) => HandleShop();
+    }
+
+    private void HandlePause()
+    {
+        if (!shopUI.gameObject.activeSelf && Core.CurrentHealth > 0)
+            TogglePause();
+    }
+
+    private void HandleShop()
+    {
+        if (!shopUI.pauseMenu.activeSelf)
+            ToggleShop();
     }
 
     public void Update()
