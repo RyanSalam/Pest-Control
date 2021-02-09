@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class MenuHandler : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class MenuHandler : MonoBehaviour
     [SerializeField] TMP_Text maptitle;
     [SerializeField] Image map;
 
+    [SerializeField] GameObject startingButton;
+
     private void Awake()
     {
        
@@ -42,6 +45,8 @@ public class MenuHandler : MonoBehaviour
         settingsPanel.GetComponent<SettingsManager>().LoadAudioLevels();
         settingsPanel.SetActive(false);
         Cues = GetComponent<AudioCue>();
+
+        SetSelectedButton(startingButton);
     }
 
     // Update is called once per frame
@@ -54,6 +59,11 @@ public class MenuHandler : MonoBehaviour
     {
         obj.SetActive(true);
         Debug.Log("clicked");
+    }
+
+    public void SetSelectedButton(GameObject obj)
+    {
+        EventSystem.current.SetSelectedGameObject(obj);
     }
 
     public void TurnObjectOff(GameObject obj)
