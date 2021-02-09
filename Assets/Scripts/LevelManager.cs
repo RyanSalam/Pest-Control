@@ -160,18 +160,6 @@ public class LevelManager : MonoSingleton<LevelManager>
         }
     }
 
-    private void HandlePause()
-    {
-        if (!shopUI.gameObject.activeSelf && Core.CurrentHealth > 0)
-            TogglePause();
-    }
-
-    private void HandleShop()
-    {
-        if (!shopUI.pauseMenu.activeSelf)
-            ToggleShop();
-    }
-
     public void Update()
     {
         if (shopUI.gameObject.activeSelf && !WaveManager.Instance.IsBuildPhase)
