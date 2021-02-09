@@ -49,6 +49,7 @@ public class ShopUI : MonoBehaviour
         Cursor.visible = false;
 
         LevelManager.Instance.Player.controlsEnabled = true;
+        LevelManager.Instance.Player.playerInputs.SwitchCurrentActionMap("Player");
     }
 
     // Toggles shop menu

@@ -66,6 +66,9 @@ public class LevelManager : MonoSingleton<LevelManager>
     private Item _currentlyEquipped;
     public Item CurrentlyEquipped { get { return _currentlyEquipped; } }
 
+    [SerializeField] GameObject ShopStartingButton;
+    [SerializeField] GameObject PauseStartingButton;
+
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
         base.Awake();
@@ -161,6 +164,16 @@ public class LevelManager : MonoSingleton<LevelManager>
         Cursor.visible = gameObject.activeSelf;
 
         Player.controlsEnabled = !shopUI.pauseMenu.activeSelf;
+
+        if (shopUI.pauseMenu.activeSelf)
+        {
+            Player.playerInputs.SwitchCurrentActionMap("UI");
+            EventSystem.current.SetSelectedGameObject(PauseStartingButton);
+        }
+            
+
+        else
+            Player.playerInputs.SwitchCurrentActionMap("Player");
     }
 
     public void ToggleShop()
@@ -172,6 +185,18 @@ public class LevelManager : MonoSingleton<LevelManager>
             shopUI.RefreshEnergyText();
             Player.EquipWeapon(Equipables[InventoryList[0]]);
         }
+
+        Time.timeScale = shopUI.gameObject.activeSelf ? 0.0f : 1.0f;
+
+        if (shopUI.gameObject.activeSelf)
+        {
+            Player.playerInputs.SwitchCurrentActionMap("UI");
+            EventSystem.current.SetSelectedGameObject(ShopStartingButton);
+        }
+
+
+        else
+            Player.playerInputs.SwitchCurrentActionMap("Player");
     }
 
     #region GameLoop
