@@ -142,10 +142,12 @@ public abstract class Weapon : MonoBehaviour, IEquippable
                 break;
 
             case "Alt Fire":
-
-                if (weaponAttachment != null)
-                    SecondaryFire();
-
+                if(context.phase == InputActionPhase.Performed)
+                {
+                    if (weaponAttachment != null)
+                        SecondaryFire();
+                }
+               
                 break;
         }
     }

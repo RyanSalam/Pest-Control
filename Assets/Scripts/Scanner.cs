@@ -36,19 +36,23 @@ public class Scanner<T> where T : MonoBehaviour
 
             if (Vector3.Angle(forward, pos) > detectionAngle / 2)
             {
-                // Assign the collider to a temp variable
-                temp = col.GetComponent<T>();
+               
 
                 // Raycast to check for any obstructions to line of sight
                 Ray lineOfSight = new Ray(m_transform.position, m_transform.forward);
                 RaycastHit hit;
-                if (!Physics.Raycast(lineOfSight, out hit, detectionRadius))
+                if (!Physics.Raycast(lineOfSight, out hit, detectionRadius, ~targetMask))
                 {
+                    // Assign the collider to a temp variable
+                    temp = col.GetComponent<T>();
+                    
                     if (temp != null)
                     {
+                       
                         return temp;
                     }
                 }
+               
             }
         }
 

@@ -59,7 +59,7 @@
                     "id": "738b379b-8232-4571-90f7-d8fec704e3b8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Tap"
                 },
                 {
                     "name": "Jump",
