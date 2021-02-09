@@ -188,6 +188,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         transform.SetParent(null);
         gameObject.SetActive(false);        
+
     }
 
     public virtual void PrimaryFire()
