@@ -68,6 +68,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     [SerializeField] GameObject ShopStartingButton;
     [SerializeField] GameObject PauseStartingButton;
+    [SerializeField] GameObject GameOverStartingButton;
 
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
@@ -131,8 +132,32 @@ public class LevelManager : MonoSingleton<LevelManager>
         Player.OnDamageTaken += (DamageData) => Player._audioCue.PlayAudioCue(Player._cInfo.PlayerHit, 15);
         Time.timeScale = 1;
 
-        Player.playerInputs.actions["Pause"].started += (context) => HandlePause();
-        Player.playerInputs.actions["Shop"].started += (context) => HandleShop();
+        Player.playerInputs.onActionTriggered += HandleInput;
+    }
+
+    private void SetSelectedButton(GameObject newSelectedObj)
+    {
+        if (Gamepad.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(newSelectedObj);
+        }
+    }
+
+    public void HandleInput(InputAction.CallbackContext context)
+    {
+        switch (context.action.name)
+        {
+            case "Pause":
+                // Couldn't find a simple hold for now. Handling automatic firing in update.
+                if (context.phase == InputActionPhase.Performed)
+                    TogglePause();
+                break;
+
+            case "Shop":
+                if (context.phase == InputActionPhase.Performed)
+                    ToggleShop();
+                break;
+        }
     }
 
     private void HandlePause()
@@ -168,7 +193,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         if (shopUI.pauseMenu.activeSelf)
         {
             Player.playerInputs.SwitchCurrentActionMap("UI");
-            EventSystem.current.SetSelectedGameObject(PauseStartingButton);
+            SetSelectedButton(PauseStartingButton);
         }
             
 
@@ -191,7 +216,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         if (shopUI.gameObject.activeSelf)
         {
             Player.playerInputs.SwitchCurrentActionMap("UI");
-            EventSystem.current.SetSelectedGameObject(ShopStartingButton);
+            SetSelectedButton(ShopStartingButton);
         }
 
 
@@ -241,7 +266,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         if(!playerWon)
             Player._audioCue.PlayAudioCue(Player._cInfo.MissionLoss);
 
-
+        SetSelectedButton(GameOverStartingButton);
     }
 
     public void OnRestartButton()
