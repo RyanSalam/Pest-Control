@@ -119,51 +119,35 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         lastFired = 0.0f;
 
-        HandleInput();
+        // Registering inputs when we equip this.
+        player.playerInputs.onActionTriggered += HandleInput;
     }
 
-    public virtual void HandleInput()
+    public virtual void HandleInput(InputAction.CallbackContext context)
     {
-        if (player == null)
-            player = LevelManager.Instance.Player;
-
-        if (player == null)
-            player = FindObjectOfType<Actor_Player>();
-
-        if (auto)
+        switch (context.action.name)
         {
-            player.playerInputs.actions["Fire"].performed += (context) => isFiring = true;
+            case "Fire":
+                // Couldn't find a simple hold for now. Handling automatic firing in update.
+                if (context.phase == InputActionPhase.Started)
+                    if (auto)
+                        isFiring = true;
+
+                    else
+                        PrimaryFire();
+
+                if (context.phase == InputActionPhase.Canceled)
+                    Release();
+
+                break;
+
+            case "Alt Fire":
+
+                if (weaponAttachment != null)
+                    SecondaryFire();
+
+                break;
         }
-
-        else
-        {
-            player.playerInputs.actions["Fire"].performed += (context) => PrimaryFire();
-        }
-        
-        player.playerInputs.actions["Fire"].canceled += (context) => Release();
-
-        player.playerInputs.actions["Alt Fire"].started += (context) => SecondaryFire();
-
-        //if (auto)
-        //{
-        //    if (Input.GetButton("Fire1"))
-        //        PrimaryFire();
-        //}
-
-        //else
-        //{
-        //    if (Input.GetButtonDown("Fire1"))
-        //        PrimaryFire();
-        //}
-
-        //if (Input.GetButtonUp("Fire1"))
-        //    Release();
-
-        //if (weaponAttachment != null)
-        //{
-        //    if (Input.GetButtonDown("Fire2"))
-        //        SecondaryFire();
-        //}
     }
 
     public virtual void Release()
@@ -199,22 +183,11 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     public virtual void Unequip()
     {
+        // Deregistering inputs when we unequip this.
+        player.playerInputs.onActionTriggered -= HandleInput;
+
         transform.SetParent(null);
-        gameObject.SetActive(false);
-
-        if (auto)
-        {
-            player.playerInputs.actions["Fire"].performed -= (context) => isFiring = true;
-        }
-
-        else
-        {
-            player.playerInputs.actions["Fire"].performed -= (context) => PrimaryFire();
-        }
-
-        player.playerInputs.actions["Fire"].canceled -= (context) => Release();
-
-        player.playerInputs.actions["Alt Fire"].started -= (context) => SecondaryFire();
+        gameObject.SetActive(false);        
     }
 
     public virtual void PrimaryFire()

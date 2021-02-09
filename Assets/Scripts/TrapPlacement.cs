@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TrapPlacement : MonoBehaviour, IEquippable
 {
@@ -35,6 +33,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
 
     private void Update()
     {
+        transform.position = LevelManager.Instance.Player.TrapHolder.position + (LevelManager.Instance.Player.transform.forward * offset);
 
         RaycastHit outHit;
         Ray floorCast = new Ray(transform.position, Vector3.down); //cast from trap to spawn 
@@ -64,16 +63,28 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         
     }
 
-    public virtual void HandleInput()
+    public virtual void HandleInput(InputAction.CallbackContext context)
     {
-        player = LevelManager.Instance.Player;
+        switch (context.action.name)
+        {
+            case "Fire":
 
-        player.playerInputs.actions["Fire"].started += (context) => PlaceTrap();
-        player.playerInputs.actions["Alt Fire"].started += (context) => RotateTrap();
+                if (context.phase == InputActionPhase.Performed)
+                    PlaceTrap();
+
+                break;
+
+            case "Alt Fire":
+
+                if (context.phase == InputActionPhase.Performed)
+                    RotateTrap();
+
+                break;
+        }
     }
-
     protected void PlaceTrap()
     {
+        Debug.Log("IS THIS BEING CALLED");
         //setting the trap GameObject to spawn on raycast's position IF its on whatIsbuildable
         if (CanPlace)
         {
@@ -89,17 +100,23 @@ public class TrapPlacement : MonoBehaviour, IEquippable
 
     public void Equip()
     {
+        //resetting gameObject's position then push it a bit forward
         transform.SetParent(LevelManager.Instance.Player.TrapHolder);
-        transform.localPosition = Vector3.zero + transform.forward * offset; //resetting gameObject's position
+        transform.localPosition = Vector3.zero;
+        transform.localPosition += transform.forward * offset;
+        transform.SetParent(null);
         gameObject.SetActive(true); //setting trap to activate when equiping 
+
+        // Registering inputs when we equip this.
+        LevelManager.Instance.Player.playerInputs.onActionTriggered += HandleInput;
     }
 
     public void Unequip()
     {
         gameObject.SetActive(false); //setting trap to deActivate when unEquipping 
 
-        player.playerInputs.actions["Fire"].started -= (context) => PlaceTrap();
-        player.playerInputs.actions["Alt Fire"].started -= (context) => RotateTrap();
+        // Deregistering inputs when we unequip this.
+        LevelManager.Instance.Player.playerInputs.onActionTriggered -= HandleInput;
     }
 
     protected void OnDrawGizmos()
