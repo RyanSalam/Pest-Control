@@ -73,31 +73,31 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnMove(AxisEventData eventData)
     {
-        if (eventData.selectedObject == gameObject)
-        {
-            transform.localScale = Vector3.one * 1.25f;
-            BorderImage.sprite = selectedSprite;
-        }
+        //if (eventData.selectedObject == gameObject)
+        //{
+        //    transform.localScale = Vector3.one * 1.25f;
+        //    BorderImage.sprite = selectedSprite;
+        //}
 
-        else
-        {
-            transform.localScale = Vector3.one;
-            BorderImage.sprite = unselectedSprite;
-        }
+        //else
+        //{
+        //    transform.localScale = Vector3.one;
+        //    BorderImage.sprite = unselectedSprite;
+        //}
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        if (eventData.selectedObject == gameObject)
-        {
-            transform.localScale = Vector3.one * 1.25f;
-            BorderImage.sprite = selectedSprite;
-        }
+        //if (eventData.selectedObject == gameObject)
+        //{
+        //    transform.localScale = Vector3.one * 1.25f;
+        //    BorderImage.sprite = selectedSprite;
+        //}
 
-        else
-        {
-            transform.localScale = Vector3.one;
-            BorderImage.sprite = unselectedSprite;
-        }
+        //else
+        //{
+        //    transform.localScale = Vector3.one;
+        //    BorderImage.sprite = unselectedSprite;
+        //}
     }
 }
