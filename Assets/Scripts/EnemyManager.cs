@@ -45,7 +45,6 @@ public class EnemyManager : MonoSingleton<EnemyManager>
         {
             enemiesOnCore[0].SwitchTarget(LevelManager.Instance.Player.transform);
             RegisterEnemy(enemiesOnCore[0]);
-            
         }
     }
 }
