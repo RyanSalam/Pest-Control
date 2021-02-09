@@ -188,8 +188,6 @@ public class LevelManager : MonoSingleton<LevelManager>
             Player.EquipWeapon(Equipables[InventoryList[0]]);
         }
 
-        Time.timeScale = shopUI.gameObject.activeSelf ? 0.0f : 1.0f;
-
         if (shopUI.gameObject.activeSelf)
         {
             Player.playerInputs.SwitchCurrentActionMap("UI");
