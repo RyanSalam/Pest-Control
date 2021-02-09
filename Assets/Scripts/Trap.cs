@@ -61,8 +61,7 @@ public class Trap : MonoBehaviour
         {
             isTrapBuilt = true; //if its on build phase instantly built the trap 
         }
-        currentUses = 0; //this should always occur when you spawn a trap so that it resets its current uses and dosent destroy instantly 
-
+        currentUses = 0; //this should always occur when you spawn a trap so that it resets its current uses and dosent destroy instantly
     }
 
     protected virtual void OnDrawGizmos()
