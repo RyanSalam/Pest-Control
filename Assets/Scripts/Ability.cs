@@ -31,14 +31,15 @@ public abstract class Ability : ScriptableObject
         cooldownTimer.OnTimerEnd += OnCooldownEnd;
 
         isAbilityOnCoolDown = false;
-    }
 
+        Actor_Player player = abilitySource.GetComponent<Actor_Player>();
+        player.playerInputs.actions[AbilityButton].performed += (context) => HandleInput();
+    }
     public virtual void HandleInput() 
     {
         if (!CanExecute()) return;
 
-        if (Input.GetButtonDown(AbilityButton))
-            Execute();
+        Execute();
     }
 
     public virtual void Execute()

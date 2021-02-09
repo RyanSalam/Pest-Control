@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4cb253b523b9e4cb4fa7d786e8a1ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
   moveSpeed: 10
   hitAngle: 360
   hitForwardRot: 360
@@ -92,7 +92,7 @@ MonoBehaviour:
   currentDestination: {x: 0, y: 0, z: 0}
   m_player: {fileID: 0}
   _attackRange: 5
-  _damage: 1
+  _damage: 12
   _bIsSearching: 0
   _playerLayer:
     serializedVersion: 2
@@ -100,6 +100,8 @@ MonoBehaviour:
   _energyDrop: 10
   scanIntervals: 0.5
   movementSpeed: 3.5
+  detectionRad: 10.32
+  detectionAngle: 90
 --- !u!54 &-1733453893914788994
 Rigidbody:
   m_ObjectHideFlags: 0

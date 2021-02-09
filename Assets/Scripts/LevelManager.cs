@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoSingleton<LevelManager>
 {
@@ -59,9 +60,14 @@ public class LevelManager : MonoSingleton<LevelManager>
     [SerializeField] ShopUI shopUI;
     [SerializeField] WeaponUI weaponUI;
     public WeaponUI WeaponUI { get { return weaponUI; } }
+    [SerializeField] CharacterUI characterUI;
+    public CharacterUI CharacterUI { get { return characterUI; } }
 
     private Item _currentlyEquipped;
     public Item CurrentlyEquipped { get { return _currentlyEquipped; } }
+
+    [SerializeField] GameObject ShopStartingButton;
+    [SerializeField] GameObject PauseStartingButton;
 
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
@@ -124,20 +130,27 @@ public class LevelManager : MonoSingleton<LevelManager>
         Core.OnDeath += () => GameOver(false);
         Player.OnDamageTaken += (DamageData) => Player._audioCue.PlayAudioCue(Player._cInfo.PlayerHit, 15);
         Time.timeScale = 1;
+
+        Player.playerInputs.actions["Pause"].started += (context) => HandlePause();
+        Player.playerInputs.actions["Shop"].started += (context) => HandleShop();
+    }
+
+    private void HandlePause()
+    {
+        if (!shopUI.gameObject.activeSelf && Core.CurrentHealth > 0)
+            TogglePause();
+    }
+
+    private void HandleShop()
+    {
+        if (!shopUI.pauseMenu.activeSelf)
+            ToggleShop();
     }
 
     public void Update()
     {
-        // Quick test will be removed in the future.
-        if (Input.GetKeyDown(KeyCode.I) && !shopUI.pauseMenu.activeSelf)
-        {
-            ToggleShop();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape) && !shopUI.gameObject.activeSelf && Core.CurrentHealth > 0)
-        {
-            TogglePause();
-        }
+        if (shopUI.gameObject.activeSelf && !WaveManager.Instance.IsBuildPhase)
+            shopUI.CloseShop();
     }
 
     public void TogglePause()
@@ -151,16 +164,39 @@ public class LevelManager : MonoSingleton<LevelManager>
         Cursor.visible = gameObject.activeSelf;
 
         Player.controlsEnabled = !shopUI.pauseMenu.activeSelf;
+
+        if (shopUI.pauseMenu.activeSelf)
+        {
+            Player.playerInputs.SwitchCurrentActionMap("UI");
+            EventSystem.current.SetSelectedGameObject(PauseStartingButton);
+        }
+            
+
+        else
+            Player.playerInputs.SwitchCurrentActionMap("Player");
     }
 
     public void ToggleShop()
     {
-        shopUI.ToggleMenu();
-        shopUI.UpdateItemUI();
-        shopUI.RefreshEnergyText();
-        Player.EquipWeapon(Equipables[InventoryList[0]]);
-        
-        
+        if (WaveManager.Instance.IsBuildPhase)
+        {
+            shopUI.ToggleMenu();
+            shopUI.UpdateItemUI();
+            shopUI.RefreshEnergyText();
+            Player.EquipWeapon(Equipables[InventoryList[0]]);
+        }
+
+        Time.timeScale = shopUI.gameObject.activeSelf ? 0.0f : 1.0f;
+
+        if (shopUI.gameObject.activeSelf)
+        {
+            Player.playerInputs.SwitchCurrentActionMap("UI");
+            EventSystem.current.SetSelectedGameObject(ShopStartingButton);
+        }
+
+
+        else
+            Player.playerInputs.SwitchCurrentActionMap("Player");
     }
 
     #region GameLoop

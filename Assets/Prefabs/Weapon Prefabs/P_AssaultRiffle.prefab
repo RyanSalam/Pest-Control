@@ -143,7 +143,7 @@ MonoBehaviour:
   hRecoil: 0
   recoilSpeed: 1
   fireRate: 0.1
-  Damage: 1
+  Damage: 25
   auto: 1
   currentShots: 0
   maxShots: 40
@@ -194,8 +194,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   timeFiring: 0
   range: 80
-  muzzleFlash: {fileID: 1616087419151336, guid: 91fb7ab2ef38317499700fcf6b971451,
-    type: 3}
 --- !u!114 &-6923104602310492009
 MonoBehaviour:
   m_ObjectHideFlags: 0

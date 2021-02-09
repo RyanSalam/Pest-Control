@@ -81,6 +81,7 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     // Timer to track the amount of time passed in the build phase
     Timer buildPhaseTimer;
+    public Timer BuildPhaseTimer { get { return buildPhaseTimer; } }
 
     // Interger to track the enemies remaining in a wave
     private int _enemiesRemaining;
@@ -88,6 +89,9 @@ public class WaveManager : MonoSingleton<WaveManager>
     #endregion
 
     private Actor_Player player;
+
+    [SerializeField] private HUDUI hudUI;
+    public HUDUI HudUI {  get { return hudUI; } }
 
     // Creating the timer and initiating it to 0. Subscribing the Spawner Coroutine to run at the end of the build phase, then starts the first wave
     private void Start()
@@ -108,7 +112,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         }
     }
 
-    // Initialiser for each wave
+    // This is when build phase starts
     private void WaveStart()
     {
         // Setting the current wave variable
@@ -126,6 +130,9 @@ public class WaveManager : MonoSingleton<WaveManager>
         player._audioCue.PlayAudioCue(player._cInfo.WaveStart, 30);
 
         //LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.WaveStart);
+
+        // Display the build phase on UI
+        StartCoroutine(hudUI.BuildPhase());
     }
 
     // Cleanup for each wave and beginning of next wave
@@ -135,7 +142,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         _waveIndex++;
 
         // Game win condition
-        if (_waveIndex > waveList.Count)
+        if (_waveIndex >= waveList.Count)
         {
             LevelManager.Instance.GameOver(true);
         }
@@ -158,8 +165,12 @@ public class WaveManager : MonoSingleton<WaveManager>
     }
 
     // Spawner coroutine to handle enemy spawns
+    // Build phase ends here ; moving to the defence phase
     private IEnumerator SpawnerCoroutine()
     {
+        // Display the defence phase on UI
+        StartCoroutine(hudUI.DefensePhase());
+
         int enemiesToSpawn = currentWave.TotalEnemies();
         _isBuildPhase = false;
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class Weapon : MonoBehaviour, IEquippable
 {
@@ -103,38 +104,49 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     protected virtual void Update()
     {
-        //if (isFiring)
-        //{
-        //    if (Input.GetButtonUp("Fire1"))
-        //    {
-        //        Release();
-        //    }
-        //}
-
         cooldownDelayTimer.Tick(Time.deltaTime);
+
+        if (auto && isFiring)
+            PrimaryFire();
     }
 
-    public virtual void HandleInput()
-    {        
-        if (auto)
-        {
-            if (Input.GetButton("Fire1"))
-                PrimaryFire();
-        }
+    public virtual void Equip()
+    {
+        transform.SetParent(player.WeaponHolder);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = player.WeaponHolder.localRotation;
+        gameObject.SetActive(true);
 
-        else
-        {
-            if (Input.GetButtonDown("Fire1"))
-                PrimaryFire();
-        }
+        lastFired = 0.0f;
 
-        if (Input.GetButtonUp("Fire1"))
-            Release();
+        // Registering inputs when we equip this.
+        player.playerInputs.onActionTriggered += HandleInput;
+    }
 
-        if (weaponAttachment != null)
+    public virtual void HandleInput(InputAction.CallbackContext context)
+    {
+        switch (context.action.name)
         {
-            if (Input.GetButtonDown("Fire2"))
-                SecondaryFire();
+            case "Fire":
+                // Couldn't find a simple hold for now. Handling automatic firing in update.
+                if (context.phase == InputActionPhase.Started)
+                    if (auto)
+                        isFiring = true;
+
+                    else
+                        PrimaryFire();
+
+                if (context.phase == InputActionPhase.Canceled)
+                    Release();
+
+                break;
+
+            case "Alt Fire":
+
+                if (weaponAttachment != null)
+                    SecondaryFire();
+
+                break;
         }
     }
 
@@ -167,20 +179,16 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         ResetWeaponStats(elapsed <= 0);
     }
 
-    public virtual void Equip()
-    {
-        transform.SetParent(player.WeaponHolder);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = player.WeaponHolder.localRotation;
-        gameObject.SetActive(true);
 
-        lastFired = 0.0f;
-    }
 
     public virtual void Unequip()
     {
+        // Deregistering inputs when we unequip this.
+        player.playerInputs.onActionTriggered -= HandleInput;
+
         transform.SetParent(null);
-        gameObject.SetActive(false);
+        gameObject.SetActive(false);        
+
     }
 
     public virtual void PrimaryFire()

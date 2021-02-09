@@ -137,11 +137,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef250492c158e04786aede305cc79b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 5
+  force: 8
   explosionEffect: {fileID: 1834516428328612, guid: f39c43985f1039b47b3065f46848760e,
     type: 3}
   explosionRadius: 15
-  explosionDamage: 10
+  explosionDamage: 100
   enemyMask:
     serializedVersion: 2
     m_Bits: 512

@@ -37,7 +37,7 @@ public abstract class Actor : MonoBehaviour
     [Header("Hit Box Properties")]
     [Tooltip("Determines The area where this Actor can take damage from")]
     [Range(0.0f, 360.0f)]
-    [SerializeField] protected float hitAngle = 360.0f;
+    [SerializeField] public float hitAngle = 360.0f;
 
     [Tooltip("Determines where your hit angle starts from.")]
     [Range(0.0f, 360.0f)]

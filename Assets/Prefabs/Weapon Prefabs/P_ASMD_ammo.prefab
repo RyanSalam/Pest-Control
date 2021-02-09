@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  projForce: 15
+  projForce: 50
 --- !u!65 &8855913537942772735
 BoxCollider:
   m_ObjectHideFlags: 0

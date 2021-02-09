@@ -14,4 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BuildScenes/OsirisMall.unity
     guid: 154184e26edb39049bdede4ff84bc4b6
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: b1b0033028841194a84f162e3868abc7,
+      type: 2}
