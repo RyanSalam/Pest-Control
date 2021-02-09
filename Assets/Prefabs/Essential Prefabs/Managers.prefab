@@ -151,6 +151,8 @@ MonoBehaviour:
   shopUI: {fileID: 3136140622686278095}
   weaponUI: {fileID: 2328511621631068442}
   characterUI: {fileID: 8218958576270700263}
+  ShopStartingButton: {fileID: 3136140621590705029}
+  PauseStartingButton: {fileID: 4445807850305677669}
 --- !u!114 &8402986662682793158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,6 +967,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2a7d614505eec439b63e7d6f37e0eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3136140621590705029 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1340304684, guid: 5a1d76bd2f010ec4793b09149005bd25,
+    type: 3}
+  m_PrefabInstance: {fileID: 3136140622813290153}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1273472095868254689 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4191029740505409352, guid: 5a1d76bd2f010ec4793b09149005bd25,
@@ -983,6 +991,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4445807850305677669 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1600855844120541132, guid: 5a1d76bd2f010ec4793b09149005bd25,
+    type: 3}
+  m_PrefabInstance: {fileID: 3136140622813290153}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7657696093789250195
 PrefabInstance:
   m_ObjectHideFlags: 0
