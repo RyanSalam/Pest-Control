@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Trap_Turret : Trap
 {
+    [Header("Detection Attributes")]
+    [SerializeField] float maxRange = 5.0f;
+    [Range(0.0f, 360.0f)]
+    [SerializeField] private float detectionAngle = 270;
+    //[SerializeField] private float detectionDelay = 1.2f;
+
     [SerializeField] Transform bulletSpawn;
-    [SerializeField] Transform turretRotHinge; 
-    [SerializeField] Transform turretVerHinge;
+    [SerializeField] Transform turretRotHinge; // rotating 
+    [SerializeField] Transform turretVerHinge; // rotating on the x-axis
     [SerializeField] Rigidbody projectile;
 
     private Actor_Enemy enemyTarget;
@@ -18,19 +24,16 @@ public class Trap_Turret : Trap
     [SerializeField] int bulletCount = 10;
     int currentBullet = 0;
 
-    /*
-    [Header("Detection Attributes")]
-    [SerializeField] float maxRange = 5.0f;
-    [Range(0.0f, 360.0f)]
-    [SerializeField] private float detectionAngle = 270;
-    [SerializeField] private float detectionDelay = 1.2f;
-    */
+
+   
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         enemyScanner = new Scanner<Actor_Enemy>(transform);
         enemyScanner.targetMask = enemyLayer;
+        enemyScanner.detectionRadius = maxRange;
+        enemyScanner.detectionAngle = detectionAngle;
     }
 
     // Update is called once per frame
@@ -47,11 +50,16 @@ public class Trap_Turret : Trap
     {
         //roatating turret hinge 
         /*
-        var lookPos = target.transform.position - transform.position;
-        lookPos.y = 0;
-        var rotation = Quaternion.LookRotation(lookPos, Vector3.up);
+        Vector3 turretLookPos = enemyTarget.transform.position - transform.position;
+        turretLookPos.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(turretLookPos, Vector3.up);
         turretRotHinge.rotation = Quaternion.Slerp(turretRotHinge.rotation, rotation, Time.deltaTime * 2);
         */
+        
+        var lookPos = enemyTarget.transform.position - transform.position;
+        lookPos.y = 0;
+        var rotation = Quaternion.LookRotation(lookPos, Vector3.up);
+        turretRotHinge.rotation = Quaternion.Slerp(turretRotHinge.rotation, rotation, Time.deltaTime * 2); 
     }
 
     IEnumerator Fire()
@@ -70,10 +78,12 @@ public class Trap_Turret : Trap
         // find enemy through sight cone 
         //set enemy target to the closet enemy found on sight cone
         enemyTarget = enemyScanner.Detect();
-
-        if(enemyTarget != null)
+        if (enemyTarget != null)
         {
+            Debug.Log("Enemy Detected" + enemyTarget.name);
+            Debug.Log("Shoot the target!");
             Activate();
+            AimAtTarget();
         }
     }
 
@@ -87,6 +97,15 @@ public class Trap_Turret : Trap
         StartCoroutine(Fire()); //starts the couroutine to fire when 
 
         base.Activate();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if(enemyScanner != null)
+        {
+           enemyScanner.EditorGizmo(transform);
+        }
+        
     }
 
     //private void EditorGizmo(Transform transform)

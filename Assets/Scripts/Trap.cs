@@ -7,7 +7,7 @@ public class Trap : MonoBehaviour
     [SerializeField] protected int trapDamage = 1;
     [SerializeField] protected int maxUses = 10;
     [SerializeField] protected float buildDuration;
-    protected int currentUses;
+    public int currentUses;
     protected bool isTrapBuilt;
     Timer buildTimer;
     protected Animator anim;
@@ -62,6 +62,7 @@ public class Trap : MonoBehaviour
             isTrapBuilt = true; //if its on build phase instantly built the trap 
         }
         currentUses = 0; //this should always occur when you spawn a trap so that it resets its current uses and dosent destroy instantly
+        LevelManager.Instance.AssessTraps(this); 
     }
 
     protected virtual void OnDrawGizmos()

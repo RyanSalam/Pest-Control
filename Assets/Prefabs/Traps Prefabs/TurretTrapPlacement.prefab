@@ -1002,6 +1002,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912835596169340282}
   - component: {fileID: 3534766479455180807}
+  - component: {fileID: 5682298086490993956}
   m_Layer: 0
   m_Name: TurretTrapPlacement
   m_TagString: Untagged
@@ -1052,6 +1053,24 @@ MonoBehaviour:
   Hologram: {fileID: 2100000, guid: 3c852c0492ffc54488c16540cdd99acb, type: 2}
   CanPlace: 0
   obstacleDetectionRange: 3
+--- !u!114 &5682298086490993956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5721319057133748160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f4dcd5da0291c4b914bd20a115beb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioCue: {fileID: 11400000, guid: 786d701e37c926945b2eb9ad49a3ba31, type: 2}
+  _playOnStart: 0
+  _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
+    type: 2}
+  _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
+    type: 2}
 --- !u!1 &5875878395571708372
 GameObject:
   m_ObjectHideFlags: 0
