@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Trap_Laser : Trap
 {
-    // Start is called before the first frame update
-    //[SerializeField] float TrapDamage;
+
     private Actor_Enemy enemyTarget;
-    //Animator animator;
 
     public override void Activate()
     {
@@ -16,20 +14,22 @@ public class Trap_Laser : Trap
             return;
         }
         base.Activate();
-        //animator.SetTrigger("Lasers");
-        Debug.Log("FUCK");
         enemyTarget.TakeDamage(trapDamage); //damage enemy 
         enemyTarget = null; //reseting enemy back to null
-        //base.Activate();
+        
     }
     private void OnTriggerEnter(Collider trigger)
     {
-        Debug.Log("DOUBLEFUCK");
-        enemyTarget = GetComponent<Actor_Enemy>();
-        if (enemyTarget != null) //if the enemy actor collides with trap
+        if (trigger.gameObject.tag == "Enemy") //if the enemy actor collides with trap
         {
-            Activate(); //when triggered activate
+
+            enemyTarget = trigger.gameObject.GetComponent<Actor_Enemy>();
+            if (enemyTarget != null)
+            {
+                Activate(); //when triggered activate
+            }
         }
+
     }
 }
 
