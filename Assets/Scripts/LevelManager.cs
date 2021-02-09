@@ -149,12 +149,12 @@ public class LevelManager : MonoSingleton<LevelManager>
         {
             case "Pause":
                 // Couldn't find a simple hold for now. Handling automatic firing in update.
-                if (context.phase == InputActionPhase.Performed)
+                if (context.phase == InputActionPhase.Performed && !shopUI.gameObject.activeSelf && Core.CurrentHealth > 0)
                     TogglePause();
                 break;
 
             case "Shop":
-                if (context.phase == InputActionPhase.Performed)
+                if (context.phase == InputActionPhase.Performed && !shopUI.pauseMenu.activeSelf)
                     ToggleShop();
                 break;
         }
