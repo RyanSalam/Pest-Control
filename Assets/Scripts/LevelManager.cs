@@ -52,6 +52,8 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public Action onItemChangeCallback; //delgate void for when an item is changed from inventory 
 
+    [HideInInspector] public List<Trap> activeTraps = new List<Trap>();
+
     // Dictionary to store all the item classes and bind them to a gameobject that gets spawned 
     // when an item is added to the inventory.
     private Dictionary<Item, IEquippable> m_equipables;
@@ -186,8 +188,6 @@ public class LevelManager : MonoSingleton<LevelManager>
             Player.EquipWeapon(Equipables[InventoryList[0]]);
         }
 
-        Time.timeScale = shopUI.gameObject.activeSelf ? 0.0f : 1.0f;
-
         if (shopUI.gameObject.activeSelf)
         {
             Player.playerInputs.SwitchCurrentActionMap("UI");
@@ -197,6 +197,15 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         else
             Player.playerInputs.SwitchCurrentActionMap("Player");
+    }
+
+    // Takes passed trap and checks to see if it is already in the active traps list. If it is then remove it, if not add it.
+    public void AssessTraps(Trap trap)
+    {
+        if (activeTraps.Contains(trap))
+            activeTraps.Remove(trap);
+        else
+            activeTraps.Add(trap);
     }
 
     #region GameLoop
