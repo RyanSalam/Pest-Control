@@ -772,8 +772,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.826788, y: 2.2845564, z: 2.6636467}
-  m_Center: {x: 0.020031929, y: 0.7177465, z: 0.1466465}
+  m_Size: {x: 1.1775379, y: 1.6326563, z: 1.1855164}
+  m_Center: {x: -0.015593529, y: 0.31632817, z: 0.03680992}
 --- !u!114 &-7431271187095337397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,9 +789,6 @@ MonoBehaviour:
   trapDamage: 50
   maxUses: 10
   buildDuration: 1
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!1 &7102626379882069075
 GameObject:
   m_ObjectHideFlags: 0
