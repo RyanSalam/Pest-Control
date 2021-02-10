@@ -22,7 +22,6 @@ public class Trap_Turret : Trap
     [SerializeField] float rateOfFire = 0.1f;
     [SerializeField] float bulletSpeed = 10.0f;
     [SerializeField] int bulletCount = 10;
-    int currentBullet = 0;
 
 
    
@@ -42,26 +41,39 @@ public class Trap_Turret : Trap
         base.Update();
         if (enemyTarget == null)
         {
+            Debug.Log("Finding Enemy");
             FindClosestEnemy();
         }
     }
-
+    public override void Activate()
+    {
+        if (!isTrapBuilt) //checks if the trap is not built 
+        {
+            return;
+        }
+        base.Activate();
+        StartCoroutine(Fire()); //starts the couroutine to fire when trap is activated
+    }
+    private void FindClosestEnemy()
+    {
+        // find enemy through sight cone 
+        //set enemy target to the closet enemy found on sight cone
+        enemyTarget = TurretDetection();
+        if (enemyTarget != null)
+        {
+            Debug.Log("Shoot the target!");
+            AimAtTarget();
+            Activate();
+        }
+    }
     void AimAtTarget()
     {
         //roatating turret hinge 
-        /*
         Vector3 turretLookPos = enemyTarget.transform.position - transform.position;
         turretLookPos.y = 0;
         Quaternion rotation = Quaternion.LookRotation(turretLookPos, Vector3.up);
         turretRotHinge.rotation = Quaternion.Slerp(turretRotHinge.rotation, rotation, Time.deltaTime * 2);
-        */
-        
-        var lookPos = enemyTarget.transform.position - transform.position;
-        lookPos.y = 0;
-        var rotation = Quaternion.LookRotation(lookPos, Vector3.up);
-        turretRotHinge.rotation = Quaternion.Slerp(turretRotHinge.rotation, rotation, Time.deltaTime * 2); 
     }
-
     IEnumerator Fire()
     { 
         for (int i = 0; i < bulletCount; i++)
@@ -73,46 +85,39 @@ public class Trap_Turret : Trap
         enemyTarget = null;
     }
 
-    private void FindClosestEnemy()
+    Actor_Enemy TurretDetection()
     {
-        // find enemy through sight cone 
-        //set enemy target to the closet enemy found on sight cone
-        enemyTarget = enemyScanner.Detect();
-        if (enemyTarget != null)
+        Collider[] cols = Physics.OverlapSphere(transform.position, maxRange, enemyLayer);
+
+        foreach (Collider col in cols)
         {
-            Debug.Log("Enemy Detected" + enemyTarget.name);
-            Debug.Log("Shoot the target!");
-            Activate();
-            AimAtTarget();
+            Vector3 forward = transform.forward;
+            forward = Quaternion.AngleAxis(detectionAngle, transform.up) * forward;
+
+            Vector3 pos = col.transform.position - transform.position;
+            pos -= transform.up * Vector3.Dot(transform.up, pos);
+
+            if (Vector3.Angle(forward, pos) > detectionAngle / 2)
+            {
+                // Assign the collider to a temp variable
+                Actor_Enemy temp = col.GetComponent<Actor_Enemy>();
+
+                if (temp != null)
+                {
+
+                    return temp;
+                }
+            }
         }
+        return null; 
     }
 
-    public override void Activate()
-    {
-        if (!isTrapBuilt) //checks if the trap is not built 
-        {
-            return;
-        }
-
-        StartCoroutine(Fire()); //starts the couroutine to fire when 
-
-        base.Activate();
-    }
-
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         if(enemyScanner != null)
         {
            enemyScanner.EditorGizmo(transform);
-        }
-        
+        }   
     }
 
-    //private void EditorGizmo(Transform transform)
-    //{
-    //    Color c = new Color(0, 0, 0.7f, 0.4f);
-
-    //    UnityEditor.Handles.color = c;
-    //    Vector3 rotatedForward = Quaternion.Euler(0, -detectionAngle * 0.5f, 0) * transform.forward;
-    //}
 }
