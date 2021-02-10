@@ -5,7 +5,7 @@ using UnityEngine;
 public class SMB_DroneAttackV2 : StateMachineBehaviour
 {
     Enemy_DroneV2 drone;
-    float attackDelay = 2f;
+    float attackDelay = 4f;
     float timeAtAttack;
     
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -25,8 +25,9 @@ public class SMB_DroneAttackV2 : StateMachineBehaviour
     {
         //i want them to stop for x seconds while they are dropping bombs
         if (Time.time > timeAtAttack + attackDelay)
-           animator.SetTrigger("reset");
-        
+        { 
+            animator.SetTrigger("reset");
+        }
     }
    
 }

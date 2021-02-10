@@ -7,7 +7,9 @@ public class Enemy_DroneV2 : Actor_Enemy
     //queue of our traps to attack
     public Queue<Transform> trapQueue;
 
-    
+    [SerializeField] GameObject droneBombProjectile;
+    [SerializeField] Transform bombSpawnPoint;
+    public Transform distanceChecker;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -59,7 +61,10 @@ public class Enemy_DroneV2 : Actor_Enemy
 
     public void droneAttack()
     {
-        Debug.Log("release da fookin hounds");
+        if (droneBombProjectile != null)
+            Instantiate(droneBombProjectile, bombSpawnPoint.position, bombSpawnPoint.rotation);
+       
+            
     }
 
     protected override void Death()
