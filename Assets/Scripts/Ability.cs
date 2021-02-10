@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class Ability : ScriptableObject
 {   
@@ -33,13 +34,17 @@ public abstract class Ability : ScriptableObject
         isAbilityOnCoolDown = false;
 
         Actor_Player player = abilitySource.GetComponent<Actor_Player>();
-        player.playerInputs.actions[AbilityButton].performed += (context) => HandleInput();
+        player.playerInputs.onActionTriggered += HandleInput;
     }
-    public virtual void HandleInput() 
+    public virtual void HandleInput(InputAction.CallbackContext context) 
     {
         if (!CanExecute()) return;
 
-        Execute();
+        if (context.action.name == AbilityButton)
+        {
+            if (context.phase == InputActionPhase.Performed)
+                Execute();
+        }
     }
 
     public virtual void Execute()

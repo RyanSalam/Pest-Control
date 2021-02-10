@@ -263,6 +263,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         if(!playerWon)
             Player._audioCue.PlayAudioCue(Player._cInfo.MissionLoss);
 
+        Player.playerInputs.SwitchCurrentActionMap("UI");
         SetSelectedButton(GameOverStartingButton);
     }
 
@@ -270,6 +271,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
+        Player.playerInputs.SwitchCurrentActionMap("Player");
     }
 
     public void OnQuitButton()

@@ -45,11 +45,8 @@ public class Ability_Portal : Ability
 
         portalList[portalCount].transform.position = pA.AbilitySpawnPoint.position + pA.AbilitySpawnPoint.transform.forward * 3;
         portalList[portalCount].transform.rotation = pA.AbilitySpawnPoint.rotation;
-
         portalList[portalCount].gameObject.SetActive(true);
         portalCount++;
-
-        Debug.Log("Portal Count : " + portalCount);
 
         if (portalCount == portalList.Count)
             // Call this when you want to start the cooldown
