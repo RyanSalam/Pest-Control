@@ -9740,7 +9740,7 @@ MonoBehaviour:
   weaponAttachment: {fileID: 0}
   firePoint: {fileID: 6965653023597013632}
   maxChargeDuration: 1.5
-  chargeModifier: 1.5
+  chargeModifier: 15
   projForce: 30
   chargeThreshold: 0.3
   projectilePrefab: {fileID: 3679318245965258635, guid: e9bb6861f0e3e5d48b6e0696298b13e5,
@@ -9772,6 +9772,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  cooldownActive: 0
 --- !u!1 &7310577104350773672
 GameObject:
   m_ObjectHideFlags: 0
