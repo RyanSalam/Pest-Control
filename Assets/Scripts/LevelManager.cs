@@ -72,6 +72,8 @@ public class LevelManager : MonoSingleton<LevelManager>
     [SerializeField] GameObject PauseStartingButton;
     [SerializeField] GameObject GameOverStartingButton;
 
+    protected bool gameOver = false;
+
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
         base.Awake();
@@ -88,8 +90,6 @@ public class LevelManager : MonoSingleton<LevelManager>
             InventoryAdd(StartingItem);
             StartingItem.Use();
         }
-
-
 
         #region PlayerSetupInitialization
 
@@ -125,6 +125,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         #endregion
         Player.controlsEnabled = true;
         shopUI.pauseMenu.SetActive(false);
+        gameOver = false;
 
     }
 
@@ -151,12 +152,12 @@ public class LevelManager : MonoSingleton<LevelManager>
         {
             case "Pause":
                 // Couldn't find a simple hold for now. Handling automatic firing in update.
-                if (context.phase == InputActionPhase.Performed && !shopUI.gameObject.activeSelf && Core.CurrentHealth > 0)
+                if (context.phase == InputActionPhase.Performed && !shopUI.gameObject.activeSelf && Core.CurrentHealth > 0 && !gameOver)
                     TogglePause();
                 break;
 
             case "Shop":
-                if (context.phase == InputActionPhase.Performed && !shopUI.pauseMenu.activeSelf)
+                if (context.phase == InputActionPhase.Performed && !shopUI.pauseMenu.activeSelf && !gameOver)
                     ToggleShop();
                 break;
         }
@@ -254,6 +255,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         Cursor.visible = true;
 
         Player.controlsEnabled = false;
+        gameOver = true;
 
         EndGameMenu.SetActive(true);
         EndGameMenu.transform.DOScale(Vector3.one, 0.2f).From(Vector3.zero).OnComplete(() => Time.timeScale = 0.0f);
@@ -272,6 +274,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
         Player.playerInputs.SwitchCurrentActionMap("Player");
+        gameOver = false;
     }
 
     public void OnQuitButton()
