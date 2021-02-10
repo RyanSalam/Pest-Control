@@ -75,7 +75,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     protected Coroutine currentCooldown;
     protected float currentRatio;
-    private Timer cooldownDelayTimer;
+    protected Timer cooldownDelayTimer;
 
     //this is set on our weapon script when we shoot
     //this will maybe be changed to if proj -> projFire() elseif raycast ->
