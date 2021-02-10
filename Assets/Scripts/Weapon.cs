@@ -77,6 +77,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     protected float currentRatio;
     protected Timer cooldownDelayTimer;
 
+    // WARNING: This bool is only used by the ChargeRifle!
     protected bool isCanceled = false;
 
     //this is set on our weapon script when we shoot
