@@ -77,6 +77,8 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     protected float currentRatio;
     protected Timer cooldownDelayTimer;
 
+    protected bool isCanceled = false;
+
     //this is set on our weapon script when we shoot
     //this will maybe be changed to if proj -> projFire() elseif raycast ->
 
@@ -137,7 +139,10 @@ public abstract class Weapon : MonoBehaviour, IEquippable
                         PrimaryFire();
 
                 if (context.phase == InputActionPhase.Canceled)
+                {
+                    isCanceled = true;
                     Release();
+                }
 
                 break;
 

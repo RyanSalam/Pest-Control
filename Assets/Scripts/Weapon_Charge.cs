@@ -30,7 +30,7 @@ public class Weapon_Charge : Weapon
     {
         if (isCharging)
         {
-            if (Input.GetButtonUp("Fire1"))
+            if (Input.GetButtonUp("Fire1") || isCanceled)
             {
                 // Release the bullet if it has passed the threshold
                 if (PassedThreshold())
@@ -134,6 +134,8 @@ public class Weapon_Charge : Weapon
         base.Release();
 
         if (tempProjectile == null) return;
+
+        isCanceled = false;
 
         // Stop charging animations
         chargeHold.Stop();
