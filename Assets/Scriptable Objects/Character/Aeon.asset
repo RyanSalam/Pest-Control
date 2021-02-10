@@ -16,9 +16,11 @@ MonoBehaviour:
   c_name: Aeon
   c_desc: Mercenary
   c_profile: {fileID: 21300000, guid: afa21f0468e0955459821d29885bb901, type: 3}
-  A1_image: {fileID: 21300000, guid: 9fe367bc3b403894c99ef43531f4f9e6, type: 3}
+  A1_image: {fileID: 21300000, guid: 55b1a259fb54df04d8604e49d1c67f1e, type: 3}
+  A1_name: Blackhole
   A1_text: Blackhole
-  A2_image: {fileID: 21300000, guid: 4a825ecec741ef549bdd52b722ebb512, type: 3}
+  A2_image: {fileID: 21300000, guid: 22dbff54e07f3f34e9b50c38fbf6ef4c, type: 3}
+  A2_name: Portal
   A2_text: Portal
   ab1: {fileID: 11400000, guid: 56dd13d55c659f94aacbe6f99aa06512, type: 2}
   ab2: {fileID: 11400000, guid: f1a96881bf115c04ab530474e4edffc6, type: 2}
