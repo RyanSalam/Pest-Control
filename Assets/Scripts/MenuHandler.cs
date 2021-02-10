@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.EventSystems;
 
@@ -23,8 +24,10 @@ public class MenuHandler : MonoBehaviour
     [SerializeField] Image charProfile;
     [SerializeField] Image A1_image;
     [SerializeField] TMP_Text A1_text;
+    [SerializeField] TMP_Text A1_name;
     [SerializeField] Image A2_image;
     [SerializeField] TMP_Text A2_text;
+    [SerializeField] TMP_Text A2_name;
 
     //Level Panel
     [SerializeField] TMP_Text maptitle;
@@ -63,6 +66,7 @@ public class MenuHandler : MonoBehaviour
 
     public void SetSelectedButton(GameObject obj)
     {
+        if(Gamepad.current != null)
         EventSystem.current.SetSelectedGameObject(obj);
     }
 
@@ -84,8 +88,10 @@ public class MenuHandler : MonoBehaviour
         charProfile.sprite = c.c_profile;
         A1_image.sprite = c.A1_image;
         A1_text.text = c.A1_text;
+        A1_name.text = c.A1_name;
         A2_image.sprite = c.A2_image;
         A2_text.text = c.A2_text;
+        A2_name.text = c.A2_name;
         Cues.PlayAudioCue(c.CharacterChosen);
     }
 
