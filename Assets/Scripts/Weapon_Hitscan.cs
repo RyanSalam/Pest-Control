@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class Weapon_Hitscan : Weapon
 {
@@ -83,7 +84,7 @@ public class Weapon_Hitscan : Weapon
         float spread = spreadCurve.Evaluate(timeFiring);
         float currentSpreadAngle = spread * maxSpreadAngle;
 
-        Vector3 mousePosition = playerCam.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePosition = playerCam.ScreenToWorldPoint(player.playerInputs.actions["Mouse Pos"].ReadValue<Vector2>());
         
         float randAnglePitch = Random.Range(-currentSpreadAngle, currentSpreadAngle);
         float randAngleYaw = Random.Range(-currentSpreadAngle, currentSpreadAngle);
@@ -128,9 +129,7 @@ public class Weapon_Hitscan : Weapon
         if (!auto) // Ryan Was Here
         {
             Release();
-            //playerCam.transform.DORotate(Vector3.right * -3.5f, 0.25f);
             playerCam.transform.DOPunchRotation(Vector3.right * -2.5f, 0.25f);
-            //playerCam.transform.DOShakeRotation(0.25f, transform.right * 5.0f, 10, 1);
         }
             
 

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using TMPro;
 
-public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler
 {
     private ShopUI shop;
 
@@ -69,5 +69,35 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         transform.localScale = Vector3.one;
         BorderImage.sprite = unselectedSprite;
+    }
+
+    public void OnMove(AxisEventData eventData)
+    {
+        //if (eventData.selectedObject == gameObject)
+        //{
+        //    transform.localScale = Vector3.one * 1.25f;
+        //    BorderImage.sprite = selectedSprite;
+        //}
+
+        //else
+        //{
+        //    transform.localScale = Vector3.one;
+        //    BorderImage.sprite = unselectedSprite;
+        //}
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        //if (eventData.selectedObject == gameObject)
+        //{
+        //    transform.localScale = Vector3.one * 1.25f;
+        //    BorderImage.sprite = selectedSprite;
+        //}
+
+        //else
+        //{
+        //    transform.localScale = Vector3.one;
+        //    BorderImage.sprite = unselectedSprite;
+        //}
     }
 }

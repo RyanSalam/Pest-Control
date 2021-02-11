@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6895657399882834686}
   - component: {fileID: 1090415844491856933}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: P_ExpertASMD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ MonoBehaviour:
   hRecoil: 0
   recoilSpeed: 1
   fireRate: 1.25
-  Damage: 1
+  Damage: 25
   auto: 0
   currentShots: 0
   maxShots: 10
@@ -76,7 +76,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8568025554495181573}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: weaponSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,20 +159,100 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8462709953001013040, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -8459236965844117759, guid: 27e2d44a24971984eb597af2063f40c7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d06779bc01ede6846927e675de5e1d06, type: 2}
+    - target: {fileID: -5921505478000457673, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -5177053933666454174, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -4593130486874181694, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -4225914887560890740, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -3068240195741245191, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -2502033269833227400, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -1916899210259106318, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -1592289475483123607, guid: 27e2d44a24971984eb597af2063f40c7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e7694aa7d8d4be84b83664b0a711f718, type: 2}
+    - target: {fileID: -1237892347586123680, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -1108834091609025227, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -884236584058637453, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 27e2d44a24971984eb597af2063f40c7,
         type: 3}
       propertyPath: m_Name
       value: temp_AssaultRiffle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295968560826993268, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822306268441950433, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6619225641134156614, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053421877332046286, guid: 27e2d44a24971984eb597af2063f40c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8736054615233459941, guid: 27e2d44a24971984eb597af2063f40c7,
         type: 3}

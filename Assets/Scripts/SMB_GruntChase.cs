@@ -46,7 +46,6 @@ public class SMB_GruntChase : StateMachineBehaviour
             Vector3 destination;
             if (self.GetRandomPointAroundTarget(self.CurrentTarget.position, self.AttackRange, out destination))
             {
-                Debug.Log(destination);
                 self.Agent.SetDestination(destination);
             }
         }

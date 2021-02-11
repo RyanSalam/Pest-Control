@@ -33,7 +33,7 @@ public class SMB_droneFindTarg : StateMachineBehaviour
             drone.Agent.SetDestination(drone.CurrentTarget.position); //needed to add this so it can update position - kiting
 
             //here we will do a distance comparison to see if we should enter attack state
-            bool inAttackRange = Vector3.Distance(animator.gameObject.transform.position, drone.CurrentTarget.position) < drone.AttackRange;
+            bool inAttackRange = Vector3.Distance(drone.distanceChecker.position, drone.CurrentTarget.position) < drone.AttackRange;
 
             //this is being triggered way too much adding a second bool
             if (inAttackRange && canAttack)

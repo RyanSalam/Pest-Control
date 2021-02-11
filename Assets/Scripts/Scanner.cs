@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Scanner<T> where T : MonoBehaviour
 {
-    [SerializeField] [Range(1, 20)] private float detectionRadius = 10f;
-    [SerializeField] [Range(0, 360)] private float detectionAngle = 75f;
+    [SerializeField] [Range(1, 20)] public float detectionRadius = 10f;
+    [SerializeField] [Range(0, 360)] public float detectionAngle = 75f;
     public LayerMask targetMask;
 
     private T m_currentTarget;
+    private T temp;
     private Transform m_transform;
 
     public T CurrentTarget
@@ -23,7 +24,7 @@ public class Scanner<T> where T : MonoBehaviour
 
     public T Detect()
     {
-        Collider[] cols = Physics.OverlapSphere(m_transform.position, detectionRadius);
+        Collider[] cols = Physics.OverlapSphere(m_transform.position, detectionRadius, targetMask);
 
         foreach (Collider col in cols)
         {
@@ -35,14 +36,23 @@ public class Scanner<T> where T : MonoBehaviour
 
             if (Vector3.Angle(forward, pos) > detectionAngle / 2)
             {
-                T temp = col.GetComponent<T>();
+               
 
-                if (temp != null && temp != m_currentTarget)
+                // Raycast to check for any obstructions to line of sight
+                Ray lineOfSight = new Ray(m_transform.position, m_transform.forward);
+                RaycastHit hit;
+                if (!Physics.Raycast(lineOfSight, out hit, detectionRadius, ~targetMask))
                 {
-                    m_currentTarget = temp;
-                    return temp;
+                    // Assign the collider to a temp variable
+                    temp = col.GetComponent<T>();
+                    
+                    if (temp != null)
+                    {
+                       
+                        return temp;
+                    }
                 }
-                               
+               
             }
         }
 
@@ -60,6 +70,8 @@ public class Scanner<T> where T : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position + Vector3.up, 0.2f);
+        if (temp != null)
+            Debug.DrawRay(m_transform.position, m_transform.forward * detectionRadius, Color.red);
     }
 
 #endif

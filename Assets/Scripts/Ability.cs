@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class Ability : ScriptableObject
 {   
@@ -31,14 +32,19 @@ public abstract class Ability : ScriptableObject
         cooldownTimer.OnTimerEnd += OnCooldownEnd;
 
         isAbilityOnCoolDown = false;
-    }
 
-    public virtual void HandleInput() 
+        Actor_Player player = abilitySource.GetComponent<Actor_Player>();
+        player.playerInputs.onActionTriggered += HandleInput;
+    }
+    public virtual void HandleInput(InputAction.CallbackContext context) 
     {
         if (!CanExecute()) return;
 
-        if (Input.GetButtonDown(AbilityButton))
-            Execute();
+        if (context.action.name == AbilityButton)
+        {
+            if (context.phase == InputActionPhase.Performed)
+                Execute();
+        }
     }
 
     public virtual void Execute()

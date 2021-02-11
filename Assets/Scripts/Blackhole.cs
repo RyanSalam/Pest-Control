@@ -76,7 +76,7 @@ public class Blackhole : MonoBehaviour
 
     void DetectEnemies()
     {
-        Debug.Log("Looking for alien scum");
+        //Debug.Log("Looking for alien scum");
         Collider[] allEnemies = Physics.OverlapSphere(transform.position, TargetRadius);
         foreach (Collider enemy in allEnemies)
 

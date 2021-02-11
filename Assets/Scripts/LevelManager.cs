@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoSingleton<LevelManager>
 {
@@ -51,6 +52,8 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public Action onItemChangeCallback; //delgate void for when an item is changed from inventory 
 
+    [HideInInspector] public List<Trap> activeTraps = new List<Trap>();
+
     // Dictionary to store all the item classes and bind them to a gameobject that gets spawned 
     // when an item is added to the inventory.
     private Dictionary<Item, IEquippable> m_equipables;
@@ -64,6 +67,12 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     private Item _currentlyEquipped;
     public Item CurrentlyEquipped { get { return _currentlyEquipped; } }
+
+    [SerializeField] GameObject ShopStartingButton;
+    [SerializeField] GameObject PauseStartingButton;
+    [SerializeField] GameObject GameOverStartingButton;
+
+    protected bool gameOver = false;
 
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
@@ -81,8 +90,6 @@ public class LevelManager : MonoSingleton<LevelManager>
             InventoryAdd(StartingItem);
             StartingItem.Use();
         }
-
-
 
         #region PlayerSetupInitialization
 
@@ -118,6 +125,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         #endregion
         Player.controlsEnabled = true;
         shopUI.pauseMenu.SetActive(false);
+        gameOver = false;
 
     }
 
@@ -126,20 +134,39 @@ public class LevelManager : MonoSingleton<LevelManager>
         Core.OnDeath += () => GameOver(false);
         Player.OnDamageTaken += (DamageData) => Player._audioCue.PlayAudioCue(Player._cInfo.PlayerHit, 15);
         Time.timeScale = 1;
+
+        Player.playerInputs.onActionTriggered += HandleInput;
+    }
+
+    private void SetSelectedButton(GameObject newSelectedObj)
+    {
+        if (Gamepad.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(newSelectedObj);
+        }
+    }
+
+    public void HandleInput(InputAction.CallbackContext context)
+    {
+        switch (context.action.name)
+        {
+            case "Pause":
+                // Couldn't find a simple hold for now. Handling automatic firing in update.
+                if (context.phase == InputActionPhase.Performed && !shopUI.gameObject.activeSelf && Core.CurrentHealth > 0 && !gameOver)
+                    TogglePause();
+                break;
+
+            case "Shop":
+                if (context.phase == InputActionPhase.Performed && !shopUI.pauseMenu.activeSelf && !gameOver)
+                    ToggleShop();
+                break;
+        }
     }
 
     public void Update()
     {
-        // Quick test will be removed in the future.
-        if (Input.GetKeyDown(KeyCode.I) && !shopUI.pauseMenu.activeSelf)
-        {
-            ToggleShop();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape) && !shopUI.gameObject.activeSelf && Core.CurrentHealth > 0)
-        {
-            TogglePause();
-        }
+        if (shopUI.gameObject.activeSelf && !WaveManager.Instance.IsBuildPhase)
+            shopUI.CloseShop();
     }
 
     public void TogglePause()
@@ -153,16 +180,46 @@ public class LevelManager : MonoSingleton<LevelManager>
         Cursor.visible = gameObject.activeSelf;
 
         Player.controlsEnabled = !shopUI.pauseMenu.activeSelf;
+
+        if (shopUI.pauseMenu.activeSelf)
+        {
+            Player.playerInputs.SwitchCurrentActionMap("UI");
+            SetSelectedButton(PauseStartingButton);
+        }
+            
+
+        else
+            Player.playerInputs.SwitchCurrentActionMap("Player");
     }
 
     public void ToggleShop()
     {
-        shopUI.ToggleMenu();
-        shopUI.UpdateItemUI();
-        shopUI.RefreshEnergyText();
-        Player.EquipWeapon(Equipables[InventoryList[0]]);
-        
-        
+        if (WaveManager.Instance.IsBuildPhase)
+        {
+            shopUI.ToggleMenu();
+            shopUI.UpdateItemUI();
+            shopUI.RefreshEnergyText();
+            Player.EquipWeapon(Equipables[InventoryList[0]]);
+        }
+
+        if (shopUI.gameObject.activeSelf)
+        {
+            Player.playerInputs.SwitchCurrentActionMap("UI");
+            SetSelectedButton(ShopStartingButton);
+        }
+
+
+        else
+            Player.playerInputs.SwitchCurrentActionMap("Player");
+    }
+
+    // Takes passed trap and checks to see if it is already in the active traps list. If it is then remove it, if not add it.
+    public void AssessTraps(Trap trap)
+    {
+        if (activeTraps.Contains(trap))
+            activeTraps.Remove(trap);
+        else
+            activeTraps.Add(trap);
     }
 
     #region GameLoop
@@ -198,6 +255,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         Cursor.visible = true;
 
         Player.controlsEnabled = false;
+        gameOver = true;
 
         EndGameMenu.SetActive(true);
         EndGameMenu.transform.DOScale(Vector3.one, 0.2f).From(Vector3.zero).OnComplete(() => Time.timeScale = 0.0f);
@@ -207,13 +265,16 @@ public class LevelManager : MonoSingleton<LevelManager>
         if(!playerWon)
             Player._audioCue.PlayAudioCue(Player._cInfo.MissionLoss);
 
-
+        Player.playerInputs.SwitchCurrentActionMap("UI");
+        SetSelectedButton(GameOverStartingButton);
     }
 
     public void OnRestartButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
+        Player.playerInputs.SwitchCurrentActionMap("Player");
+        gameOver = false;
     }
 
     public void OnQuitButton()

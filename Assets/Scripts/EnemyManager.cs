@@ -13,8 +13,9 @@ public class EnemyManager : MonoSingleton<EnemyManager>
     WaveManager.Wave currentWave;
     #endregion
 
+    #region Grunt Management
     // Assign the enemy to it's relevant list
-    public void RegisterEnemy(Actor_Enemy enemyA)
+    public void RegisterGrunt(Actor_Enemy enemyA)
     {
         if (enemyA.CurrentTarget == LevelManager.Instance.Core)
             enemiesOnCore.Add(enemyA);
@@ -23,7 +24,7 @@ public class EnemyManager : MonoSingleton<EnemyManager>
     }
 
     // Reevaluate enemies' target based upon ratios & removes passed enemies from their lists
-    public void ReassesTargets(Actor_Enemy enemyA)
+    public void ReassessGrunts(Actor_Enemy enemyA)
     {
         // If fed an enemy reference will remove it from it's relevant list
         if (enemyA)
@@ -38,14 +39,28 @@ public class EnemyManager : MonoSingleton<EnemyManager>
         if (enemiesOnCore.Count/currentWave.TotalEnemies() < currentWave.minCoreThresh)
         {
             enemiesOnPlayer[0].SwitchTarget(LevelManager.Instance.Core.transform);
-            RegisterEnemy(enemiesOnPlayer[0]);
+            RegisterGrunt(enemiesOnPlayer[0]);
             return;
         }
         else if(enemiesOnPlayer.Count/currentWave.TotalEnemies() < currentWave.minPlayerThresh && enemiesOnCore.Count/currentWave.TotalEnemies() < currentWave.minCoreThresh)
         {
             enemiesOnCore[0].SwitchTarget(LevelManager.Instance.Player.transform);
-            RegisterEnemy(enemiesOnCore[0]);
-            
+            RegisterGrunt(enemiesOnCore[0]);
         }
     }
+    #endregion
+
+    #region Drone Management
+    // Return a random target for the drone to follow
+    public Trap GetDroneTarget()
+    {
+        Trap target;
+
+        int randIndex = Random.Range(0, LevelManager.Instance.activeTraps.Count);
+
+        target = LevelManager.Instance.activeTraps[randIndex];
+
+        return target;
+    }
+    #endregion
 }
