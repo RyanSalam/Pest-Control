@@ -74,8 +74,8 @@ public class Enemy_Grunt : Actor_Enemy
         //}
     }
 
-    private void OnDrawGizmos()
-    {
-        playerScanner.EditorGizmo(transform);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    playerScanner.EditorGizmo(transform);
+    //}
 }
