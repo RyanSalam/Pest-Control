@@ -45,6 +45,8 @@ public class Enemy_Grunt : Actor_Enemy
         {
             _bIsSearching = false;
             SwitchTarget(p.transform);
+            EnemyManager.Instance.ReassessGrunts(this);
+            EnemyManager.Instance.RegisterGrunt(this);
         }
 
         IntervalTimer.PlayFromStart();
@@ -53,6 +55,7 @@ public class Enemy_Grunt : Actor_Enemy
     protected override void Death()
     {
         base.Death();
+        EnemyManager.Instance.ReassessGrunts(this);
         Destroy(gameObject);
     }
 

@@ -26,10 +26,10 @@ public class WaveManager : MonoSingleton<WaveManager>
         public List<WaveManager.EnemyInfo> enemiesToSpawn;
 
         [Tooltip("Minimum percentage of enemies that will prioritise the core")]
-        [Range(0,1)] public int minCoreThresh;
+        [Range(0, 1)] public float minCoreThresh;
 
         [Tooltip("Minimum number of enemies that will prioritise the player, after the core's threshold has been met")]
-        [Range(0,1)] public int minPlayerThresh;
+        [Range(0, 1)] public float minPlayerThresh;
 
         [Tooltip("Amount of time before enemies begin spawning in a wave for reinforcing and preparations")]
         [Range(0, 60)] public int buildDuration = 5;
@@ -50,7 +50,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         public int TotalEnemies()
         {
             int maxEnemies = 0;
-            foreach(EnemyInfo enemy in enemiesToSpawn)
+            foreach (EnemyInfo enemy in enemiesToSpawn)
             {
                 maxEnemies += (int)enemy.numberToSpawn;
             }
@@ -73,7 +73,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     public int WaveNumber { get { return _waveIndex + 1; } }
 
     // Current wave variable to track which wave we're in
-    private Wave currentWave;
+    [HideInInspector] public Wave currentWave;
 
     // Boolean to track what phase of the wave we're in
     private bool _isBuildPhase;
@@ -91,7 +91,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     private Actor_Player player;
 
     [SerializeField] private HUDUI hudUI;
-    public HUDUI HudUI {  get { return hudUI; } }
+    public HUDUI HudUI { get { return hudUI; } }
 
     // Creating the timer and initiating it to 0. Subscribing the Spawner Coroutine to run at the end of the build phase, then starts the first wave
     private void Start()
@@ -106,7 +106,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     private void Update()
     {
         // If in the build phase then tick the build phase timer
-        if(IsBuildPhase)
+        if (IsBuildPhase)
         {
             buildPhaseTimer.Tick(Time.deltaTime);
         }
@@ -197,6 +197,11 @@ public class WaveManager : MonoSingleton<WaveManager>
 
             //Adds the enemy tracker function to the enemyAI's death event
             toSpawn.OnDeath += UpdateRemEnemies;
+
+            if (!toSpawn.GetComponent<Enemy_DroneScript>())
+            {
+                EnemyManager.Instance.ReassessGrunts(null);
+            }
 
             //Waits for the set spawndelay before spawning again.
             yield return new WaitForSeconds(currentWave.spawnDelay);
