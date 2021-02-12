@@ -53,7 +53,7 @@ public class Trap : MonoBehaviour
     protected virtual void OnEnable()
     {
         //function that gets called when a trap is placed
-        if(WaveManager.Instance.IsBuildPhase == false) // checking if it is not on the build phase 
+        if(WaveManager.Instance.isBuildPhase == false) // checking if it is not on the build phase 
         {
             buildTimer.PlayFromStart(); //starting buildTimer
         }

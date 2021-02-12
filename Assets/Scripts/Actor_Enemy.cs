@@ -50,6 +50,11 @@ public abstract class Actor_Enemy : Actor
         get { return currentTarget; }
     }
 
+    public bool isPlayerTarget
+    {
+        get { return (currentTarget == LevelManager.Instance.Player); }
+    }
+
     // Current destination getter for out of class access
     public Vector3 CurrentDestination
     {
@@ -111,6 +116,11 @@ public abstract class Actor_Enemy : Actor
 
         _intervalTimer = new Timer(scanIntervals);
         _intervalTimer.OnTimerEnd += OnBtwnIntervals;
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
     }
 
     // Start to initialise variables

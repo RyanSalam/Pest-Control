@@ -24,7 +24,6 @@ public class EnemyManager : MonoSingleton<EnemyManager>
 
     private void Update()
     {
-        
         _intervalTimer.Tick(Time.deltaTime);
     }
 
