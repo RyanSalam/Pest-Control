@@ -6,7 +6,7 @@ public class Blackhole : MonoBehaviour
 {
     [SerializeField] protected float launchForwardForce = 5f;
     [SerializeField] protected float launchUpWardForce = 5f;
-    [SerializeField] protected float lifeTime = 5f;
+   // [SerializeField] protected float lifeTime = 5f;
     [SerializeField] protected float timeToSuck = 2.0f;
     [SerializeField] protected float areaOfEffect = 8.0f;
     [SerializeField] protected float pullStrength = 5.0f;
@@ -76,7 +76,7 @@ public class Blackhole : MonoBehaviour
 
     void DetectEnemies()
     {
-        Debug.Log("Looking for alien scum");
+        //Debug.Log("Looking for alien scum");
         Collider[] allEnemies = Physics.OverlapSphere(transform.position, TargetRadius);
         foreach (Collider enemy in allEnemies)
 

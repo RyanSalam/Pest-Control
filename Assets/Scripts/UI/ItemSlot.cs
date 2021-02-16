@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using TMPro;
 
-public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler
 {
     private ShopUI shop;
 
@@ -41,14 +41,20 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         // To prevent duplicates
         if (LevelManager.Instance.InventoryList.Contains(item)) return;
 
-        Actor_Player buyer = LevelManager.Instance.Player;
+        // Checking if player has enough energy to make the purchase
+        if (LevelManager.Instance.CurrentEnergy >= item.itemCost)
+        {
+            LevelManager.Instance.InventoryAdd(item);
+            purchased = true;
+            item.ItemPurchased();
 
-        Debug.Log("Bought item: " + itemName.text);
-
-        // TODO: Add functionality for purchasing using Energy
-
-        LevelManager.Instance.InventoryAdd(item);
-
+            //Debug.Log("Bought item: " + itemName.text + " for " + item.itemCost.ToString() + " Energy.");
+        }
+        else
+        {
+            // Player does not have enough energy
+            Debug.Log("You don't have enough Energy to purchase this item!");
+        }
         shop.RefreshEnergyText();
     }
 
@@ -56,10 +62,42 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.localScale = Vector3.one * 1.25f;
+        BorderImage.sprite = selectedSprite;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         transform.localScale = Vector3.one;
+        BorderImage.sprite = unselectedSprite;
+    }
+
+    public void OnMove(AxisEventData eventData)
+    {
+        //if (eventData.selectedObject == gameObject)
+        //{
+        //    transform.localScale = Vector3.one * 1.25f;
+        //    BorderImage.sprite = selectedSprite;
+        //}
+
+        //else
+        //{
+        //    transform.localScale = Vector3.one;
+        //    BorderImage.sprite = unselectedSprite;
+        //}
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        //if (eventData.selectedObject == gameObject)
+        //{
+        //    transform.localScale = Vector3.one * 1.25f;
+        //    BorderImage.sprite = selectedSprite;
+        //}
+
+        //else
+        //{
+        //    transform.localScale = Vector3.one;
+        //    BorderImage.sprite = unselectedSprite;
+        //}
     }
 }

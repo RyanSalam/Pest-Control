@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1276595699964514502}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2955010615129653358}
   - component: {fileID: 7027731481850693599}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: P_GrenadeLauncherWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,13 +77,13 @@ MonoBehaviour:
   vRecoil: 0
   hRecoil: 0
   recoilSpeed: 1
-  fireRate: 1
-  Damage: 1
+  fireRate: 2.5
+  Damage: 2
   auto: 0
   currentShots: 0
-  maxShots: 20
+  maxShots: 5
   shotIncrease: 1
-  timeTillWeaponCooldown: 3
+  timeTillWeaponCooldown: 2
   fireSound: {fileID: 0}
   ImpactParticle: {fileID: 0}
   muzzleFlashParticle: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 3119743452478886175}
   - component: {fileID: 304753583105211225}
   - component: {fileID: 2219978795519642140}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GrenadeLauncherBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7151869070914382769}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0054779053, y: 0.054041684, z: 0.431}
+  m_LocalPosition: {x: 0.489, y: 0.054, z: 0.431}
   m_LocalScale: {x: 0.13285, y: 0.17359, z: 0.9004}
   m_Children:
   - {fileID: 1276595699964514502}
@@ -185,7 +185,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7151869070914382769}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}

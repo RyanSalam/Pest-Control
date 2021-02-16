@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Enemy_AttackEvent : MonoBehaviour
 {
-    #region Variables
     Actor_Enemy thisEnemy;
-    DamageData data;
-    #endregion
-
+    int damage;
     private void Start()
     {
         // Assign the enemy reference accordingly.
         thisEnemy = GetComponentInParent<Actor_Enemy>();
+        damage = (int)thisEnemy.Damage;
         enabled = false;
     }
 
@@ -22,22 +20,36 @@ public class Enemy_AttackEvent : MonoBehaviour
         enabled = true;
 
         // Initialise damage data according to the enemy's properties.
-        data = new DamageData();
-        data.damageAmount = (int)thisEnemy.attackDamage;
-        data.damager = thisEnemy;
-        data.direction = thisEnemy.transform.forward;
-        data.damageSource = transform.position;
+
     }
 
     private void Update()
     {
-        // Make an artifical trigger box that will damage any players within it.
-        Collider[] targets = Physics.OverlapBox(thisEnemy.attackBox.transform.position, Vector3.one * thisEnemy.attackRange, thisEnemy.transform.rotation, thisEnemy.playerLayer);
+        //// Make an artifical trigger box that will damage any players within it.
+        Collider[] targets = Physics.OverlapBox(transform.position, Vector3.one * thisEnemy.AttackRange, thisEnemy.transform.rotation);
 
-        if (targets.Length > 0)
+        foreach ( Collider col in targets)
         {
-            targets[0].GetComponentInParent<Actor_Player>().TakeDamage(data);
-            enabled = false;
+            if (!col.CompareTag("Enemy"))
+            {
+                Actor actor = col.GetComponent<Actor>();
+
+                if (actor != null)
+                {
+                    DamageData data = new DamageData()
+                    {
+                        damageAmount = damage,
+                        damager = thisEnemy,
+                        damagedActor = actor,
+                        direction = transform.forward,
+                        damageSource = transform.position
+                    };
+
+                    actor.TakeDamage(data);
+                    EndAttack(); // May Remove Later
+                    break;
+                }
+            }
         }
     }
 

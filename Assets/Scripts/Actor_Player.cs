@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class Actor_Player : Actor
@@ -37,6 +39,8 @@ public class Actor_Player : Actor
     public Camera PlayerCam { get { return _playerCam; } }
     public CharacterController Controller { get { return controller; } }
 
+    public PlayerInput playerInputs;
+
     [Header("Abilities")]
     [SerializeField] private Ability _abilityOne;
     [SerializeField] private Ability _abilityTwo;
@@ -54,19 +58,47 @@ public class Actor_Player : Actor
 
     public Transform WeaponHolder { get { return _weaponHolder; } }
     public Transform TrapHolder { get { return _trapHolder; } }
-    private IEquippable CurrentEquipped { get { return _currentEquiped; } }
+    public IEquippable CurrentEquipped { get { return _currentEquiped; } }
+
+    //Audio Params
+    public AudioCue _audioCue;
+    public Character _cInfo;
+
+    public AudioCue AudioCue
+    {
+        get { return _audioCue; }
+    }
+    public Character CharacterInfo
+    {
+        get { return _cInfo; }
+    }
 
     protected override void Awake()
     {
         base.Awake();
+        playerInputs = GetComponent<PlayerInput>();
+        playerInputs.ActivateInput();
+
         controller = GetComponent<CharacterController>();
 
+        playerInputs.actions["Jump"].started += (context) => HandleJump(true);
+        playerInputs.actions["Jump"].canceled += (context) => HandleJump(false);
+
+        playerInputs.actions["Weapon Switch"].performed += HandleWeaponSwap;
+
+        _audioCue = GetComponent<AudioCue>();
+
         if (AbilityOne != null)
+        {
             AbilityOne.Initialize(gameObject);
+        }
+            
 
         if (AbilityTwo != null)
             AbilityTwo.Initialize(gameObject);
     }
+
+
 
     protected override void Start()
     {
@@ -93,64 +125,79 @@ public class Actor_Player : Actor
 
         // We're storing our mouse and movement inputs in vectors
         // Helps us know 
-        moveVector.x = Input.GetAxis("Horizontal");
-        moveVector.y = Input.GetAxis("Vertical");
+       // moveVector = playerInputs.actions["Move"].ReadValue<Vector2>();
 
-        mouseVector.x = Input.GetAxis("Mouse X") + externalMouseForce.x * mouseSensitivity * Time.deltaTime;
-        mouseVector.y = Input.GetAxis("Mouse Y") + externalMouseForce.y * mouseSensitivity * Time.deltaTime;
+      //  mouseVector = playerInputs.actions["Look"].ReadValue<Vector2>();
+       // mouseVector *= mouseSensitivity * Time.deltaTime;
 
-        _camRot -= mouseVector.y;
-        _camRot = Mathf.Clamp(_camRot, -45f, 45f);
+        //_camRot -= mouseVector.y;
+      //  _camRot = Mathf.Clamp(_camRot, -45f, 45f);
 
         // This allows us to control our jump
         // Meaning the longer we hold it, the higher we can jump
-        if (Input.GetButtonDown("Jump") && controller.isGrounded) 
-            _jumpRequest = true;
+           
 
         
-        if (Input.GetButtonUp("Jump"))
+        //if (Input.GetButtonUp("Jump"))
+        //{
+            
+        //}
+
+        //if (AbilityOne != null)
+        //{
+        //    AbilityOne.HandleInput();
+        //}
+
+        //if (AbilityTwo != null)
+        //    AbilityTwo.HandleInput();
+
+
+
+        //if (_currentEquiped != null)
+        //    _currentEquiped.HandleInput();
+    }
+
+    private void HandleWeaponSwap(InputAction.CallbackContext context)
+    {
+        float mouseWheel = context.ReadValue<float>();
+        if (mouseWheel != 0)
+        {
+            itemIndex += (int)mouseWheel;
+            // We modulus it so we can never go above the max number of items we have in our inventory            
+            itemIndex %= LevelManager.Instance.InventoryList.Count;
+            var _currentItem = LevelManager.Instance.InventoryList[itemIndex];
+            _currentItem.Use();
+        }
+    }
+
+    protected void HandleJump(bool value)
+    {
+        if (value == true && controller.isGrounded)
+        {
+            _jumpElapsed += Time.fixedDeltaTime * 10;
+            _jumpRequest = true;
+        }
+
+        else
         {
             _jumpRequest = false;
         }
-        
-        
+    }
 
-        if (AbilityOne != null && AbilityTwo != null)
-        {
-            if (Input.GetButtonDown(AbilityOne.AbilityButton) && AbilityOne.CanExecute())
-                AbilityOne.Execute();
-
-            if (Input.GetButtonDown(AbilityTwo.AbilityButton) && AbilityTwo.CanExecute())
-                AbilityTwo.Execute();
-        }
-
-        float mouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
-        if (mouseWheel != 0)
-        {
-            Debug.Log(mouseWheel);
-            itemIndex += (int)Input.GetAxis("Mouse ScrollWheel");
-            // We modulus it so we can never go above the max number of items we have in our inventory
-            itemIndex %= LevelManager.Instance.InventoryList.Count; 
-            LevelManager.Instance.InventoryList[itemIndex].Use();
-        }
-
-        if (_currentEquiped != null)
-        {
-            if (_currentEquiped.PrimaryFireCheck())
-                _currentEquiped.PrimaryFire();
-
-            if (_currentEquiped.SecondaryFireCheck())
-                _currentEquiped.SecondaryFire();
-        }
+    private void DisableControls()
+    {
+        playerInputs.DeactivateInput();
+        mouseVector = Vector2.zero;
+        moveVector = Vector2.zero;
     }
 
     private void HandleMovement()
     {
+        moveVector = playerInputs.actions["Move"].ReadValue<Vector2>();
         Vector3 movement = transform.right * moveVector.x + transform.forward * moveVector.y;
         movement *= moveSpeed * Time.fixedDeltaTime;
 
-
-        _verticalVel = controller.isGrounded ? -0.5f : _verticalVel + -9.81f * Time.fixedDeltaTime;
+        _verticalVel = controller.isGrounded ? -0.5f : _verticalVel + -15f * Time.fixedDeltaTime;
 
         // Condition to make sure we've let the jump button go
         // And we've at least covered some minimum ground 
@@ -158,24 +205,26 @@ public class Actor_Player : Actor
         if (_jumpRequest || _jumpElapsed.IsWithin(Mathf.Epsilon, _minJumpDuration) && _jumpElapsed <= _maxJumpDuration)
         {
             _jumpElapsed += Time.fixedDeltaTime;
-            _verticalVel = (jumpStrength * _jumpElapsed * 2.3f) + (0.5f * -9.81f * _jumpElapsed * _jumpElapsed);
-            //_verticalVel = (jumpStrength) ;
-            // _jumpRequest = false;
+            _verticalVel = (jumpStrength * _jumpElapsed * 2.3f) + (0.5f * -15f * _jumpElapsed * _jumpElapsed);
         }
 
         else
-            //_verticalVel = (-9.81f);
             _jumpElapsed = 0.0f;
 
 
         movement += Vector3.up * _verticalVel * Time.fixedDeltaTime;
 
         controller.Move(movement);
-
     }
 
     private void HandleRotation()
     {
+
+        mouseVector = playerInputs.actions["Look"].ReadValue<Vector2>();
+        mouseVector *= mouseSensitivity * Time.deltaTime;
+
+        _camRot -= mouseVector.y;
+        _camRot = Mathf.Clamp(_camRot, -45f, 45f);
         // We rotate the player Camera vertically using the cached camRot
         // We rotate the player horizontally using 
         PlayerCam.transform.localRotation = Quaternion.Euler(_camRot, 0.0f, 0.0f);
@@ -206,6 +255,7 @@ public class Actor_Player : Actor
         newWeapon.Equip();
         _currentEquiped = newWeapon;
     }
+
 
     bool CheckSlope()
     {

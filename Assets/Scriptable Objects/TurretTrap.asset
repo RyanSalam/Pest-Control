@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68f6bb7368e37c408c710d9af0cf4ca, type: 3}
+  m_Name: TurretTrap
+  m_EditorClassIdentifier: 
+  itemName: 
+  itemCost: 0
+  itemIcon: {fileID: 0}
+  itemDescription: 
+  equipSound: {fileID: 0}
+  EquipableToSpawn: {fileID: 5721319057133748160, guid: 083914ab8699ae14ab9c67a33209a136,
+    type: 3}

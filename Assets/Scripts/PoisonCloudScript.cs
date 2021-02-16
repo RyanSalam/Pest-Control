@@ -5,7 +5,7 @@ using UnityEngine;
 public class PoisonCloudScript : MonoBehaviour
 {
     //variables for our posion damage
-    float damageAmount = 1f;
+    float damageAmount = 5f;
     float timeSinceLastDamage = 0f;
     float damageDelay = 2f;
     float projectileForce = 10.0f;
@@ -27,6 +27,8 @@ public class PoisonCloudScript : MonoBehaviour
     List<Actor_Enemy> enemyList = new List<Actor_Enemy>();
 
     Rigidbody projectile;
+
+    [SerializeField] GameObject gameObjectVFX;
 
     // Start is called before the first frame update
     void Start()
@@ -85,6 +87,14 @@ public class PoisonCloudScript : MonoBehaviour
         isDeployingPoison = true;
 
         projectile.constraints = RigidbodyConstraints.FreezeAll;
+
+        if (gameObjectVFX != null)
+        {
+            GameObject tempVFX = Instantiate(gameObjectVFX, transform.position, transform.rotation);
+            tempVFX.transform.localScale *= 10f;
+
+            Destroy(tempVFX, lifetime);
+        }
     }
 
 

@@ -7,16 +7,20 @@ public class Trap : MonoBehaviour
     [SerializeField] protected int trapDamage = 1;
     [SerializeField] protected int maxUses = 10;
     [SerializeField] protected float buildDuration;
-    protected int currentUses;
+    public int currentUses;
     protected bool isTrapBuilt;
     Timer buildTimer;
     protected Animator anim;
 
 
-    protected virtual void Start()
+
+    protected virtual void Awake()
     {
         buildTimer = new Timer(buildDuration, false);
         buildTimer.OnTimerEnd += () => isTrapBuilt = true; //lamda expression: delegates without parameters and dont have an excessive function 
+    }
+    protected virtual void Start()
+    {
         anim = GetComponent<Animator>();
     }
 
@@ -28,6 +32,7 @@ public class Trap : MonoBehaviour
             buildTimer.Tick(Time.deltaTime); //increasing build timer before the trap is built
             return;
         }
+        
     }
 
     public virtual void Activate()
@@ -56,8 +61,8 @@ public class Trap : MonoBehaviour
         {
             isTrapBuilt = true; //if its on build phase instantly built the trap 
         }
-        currentUses = 0; //this should always occur when you spawn a trap so that it resets its current uses and dosent destroy instantly 
-
+        currentUses = 0; //this should always occur when you spawn a trap so that it resets its current uses and dosent destroy instantly
+        LevelManager.Instance.AssessTraps(this); 
     }
 
     protected virtual void OnDrawGizmos()

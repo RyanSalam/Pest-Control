@@ -54,7 +54,7 @@ public class AliceBlizzard : MonoBehaviour
             foreach (Collider enemy in enemiesHit)
             {
                 Debug.Log(enemy.name + " is being slowed down");
-                enemy.GetComponent<Actor_Enemy>().agent.speed *= speedReductionMultiplier;
+                enemy.GetComponent<Actor_Enemy>().Agent.speed *= speedReductionMultiplier;
             }
             Invoke("ResetEnemySpeed", blizzardEffectTime);
         }
@@ -65,7 +65,7 @@ public class AliceBlizzard : MonoBehaviour
         Debug.Log("Resetting speed");
         foreach (Collider enemy in enemiesHit)
         {
-            enemy.GetComponent<Actor_Enemy>().agent.speed /= speedReductionMultiplier;
+            enemy.GetComponent<Actor_Enemy>().Agent.speed /= speedReductionMultiplier;
         }
     }
 }

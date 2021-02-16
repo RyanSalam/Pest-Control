@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class Weapon : MonoBehaviour, IEquippable
 {
@@ -45,7 +46,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     protected Vector3 recoil;
     protected Vector3 initialCamPos;
 
-    [HideInInspector] public bool canFire = true; //if we can fire or not
+    public bool canFire = true; //if we can fire or not
     [SerializeField] protected bool isFiring = false; //are we currently firing ?
     [SerializeField] protected AltFireAttachment weaponAttachment;
     [SerializeField] protected Transform firePoint;
@@ -72,6 +73,13 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     //our reference to the players Camera
     protected Camera playerCam;
 
+    protected Coroutine currentCooldown;
+    protected float currentRatio;
+    protected Timer cooldownDelayTimer;
+
+    // WARNING: This bool is only used by the ChargeRifle!
+    protected bool isCanceled = false;
+
     //this is set on our weapon script when we shoot
     //this will maybe be changed to if proj -> projFire() elseif raycast ->
 
@@ -79,12 +87,11 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     {
         player = LevelManager.Instance.Player;
         playerCam = player.PlayerCam;
+        gameObject.SetActive(false);
     }
-
 
     protected virtual void Start()
     {
-
         //grab our muzzle flash component, 
         //and animator   
         muzzleFlashParticle = GetComponentInChildren<ParticleSystem>();
@@ -93,75 +100,17 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         //initializing our weapon
         if (weaponAttachment != null)
             weaponAttachment.initialize(this);
+
+        cooldownDelayTimer = new Timer(timeTillWeaponCooldown / 2, false);
+        cooldownDelayTimer.OnTimerEnd += () => currentCooldown = StartCoroutine(WeaponCooldown(currentRatio));
     }
 
     protected virtual void Update()
     {
-        if (isFiring)
-        {
-            if (Input.GetButtonUp("Fire1"))
-            {
-                Debug.Log("Button is released.");
-                Release();
-            }
-                
-        }
-    }
+        cooldownDelayTimer.Tick(Time.deltaTime);
 
-    public virtual void Shoot()
-    {
-        //if these are not true we do not do anything, so nothing below will get run
-        if (!(Time.time > fireRate + lastFired && canFire == true))
-            return;
-
-        //update our weapon variables
-        lastFired = Time.time; //reset our last fired
-        isFiring = true; //we are firing
-        currentShots += shotIncrease; //increment our current shots
-
-        //should trigger our weapon overheating-breaking animation
-        if (currentShots >= maxShots)
-        {
-            canFire = false; //we cannot fire now
-            //temporary coroutine until we get smarter - coroutine toggles our weapon variables
-            StartCoroutine(WeaponCooldown());
-            
-        }
-           
-    }
-
-
-    public virtual void Release()
-    {
-        isFiring = false;
-    }
-    protected float GetHeatRatio()
-    {
-        Debug.Log("Heat Ratio is: " + (float)currentShots / (float)maxShots);
-        return (float)currentShots / (float)maxShots;
-
-    }
-
-    IEnumerator WeaponCooldown()
-    {
-        float elapsed = timeTillWeaponCooldown;
-
-        canFire = false; //re-assurance
-
-        while (elapsed > 0)
-        {
-            
-            elapsed -= Time.deltaTime;
-
-            //this line is for updating our UI, uiVar is a ui element
-             // uiVar = elapsed / shotReloadDelay;
-            yield return null;
-        }
-
-        //reset our weapon variables 
-        canFire = true;
-        currentShots = 0;
-        Release(); //may not need this 
+        if (auto && isFiring)
+            PrimaryFire();
     }
 
     public virtual void Equip()
@@ -172,51 +121,139 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         gameObject.SetActive(true);
 
         lastFired = 0.0f;
+
+        // Registering inputs when we equip this.
+        player.playerInputs.onActionTriggered += HandleInput;
     }
+
+    public virtual void HandleInput(InputAction.CallbackContext context)
+    {
+        switch (context.action.name)
+        {
+            case "Fire":
+                // Couldn't find a simple hold for now. Handling automatic firing in update.
+                if (context.phase == InputActionPhase.Started)
+                    if (auto)
+                        isFiring = true;
+
+                    else
+                        PrimaryFire();
+
+                if (context.phase == InputActionPhase.Canceled)
+                {
+                    isCanceled = true;
+                    Release();
+                }
+
+                break;
+
+            case "Alt Fire":
+                if(context.phase == InputActionPhase.Performed)
+                {
+                    if (weaponAttachment != null)
+                        SecondaryFire();
+                }
+               
+                break;
+        }
+    }
+
+    public virtual void Release()
+    {
+        isFiring = false;
+        cooldownDelayTimer.PlayFromStart();
+    }
+    protected float GetHeatRatio()
+    {
+        return ((float)currentShots / (float)maxShots);
+    }
+
+    protected IEnumerator WeaponCooldown(float percentage)
+    {
+        float elapsed = timeTillWeaponCooldown * percentage;
+
+        while (elapsed > 0)
+        {
+            
+            elapsed -= Time.deltaTime;
+            float p = maxShots * currentRatio;
+            currentShots = Mathf.RoundToInt(p);
+
+            //this line is for updating our UI, uiVar is a ui element
+            LevelManager.Instance.WeaponUI.UpdateHeatBar(elapsed, timeTillWeaponCooldown);
+            currentRatio = elapsed / timeTillWeaponCooldown;
+            yield return null;
+        }
+        ResetWeaponStats(elapsed <= 0);
+    }
+
+
 
     public virtual void Unequip()
     {
+        // Deregistering inputs when we unequip this.
+        player.playerInputs.onActionTriggered -= HandleInput;
+
         transform.SetParent(null);
-        gameObject.SetActive(false);
+        gameObject.SetActive(false);        
+
     }
 
-    public virtual bool PrimaryFireCheck()
-    {
-        if (auto) return Input.GetButton("Fire1");
-        else return Input.GetButtonDown("Fire1");
-    }
     public virtual void PrimaryFire()
     {
-        //if these are not true we do not do anything, so nothing below will get run
-        if (!(Time.time > fireRate + lastFired && canFire == true))
-            return;
+        if (currentCooldown != null)
+            StopCoroutine(currentCooldown);
 
-        //update our weapon variables
         lastFired = Time.time; //reset our last fired
         isFiring = true; //we are firing
         currentShots += shotIncrease; //increment our current shots
+        LevelManager.Instance.WeaponUI.UpdateHeatBar((float)currentShots, (float)maxShots);
+        currentRatio = GetHeatRatio();
 
         //should trigger our weapon overheating-breaking animation
         if (currentShots >= maxShots)
         {
+            isFiring = false;
             canFire = false; //we cannot fire now
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
-            StartCoroutine(WeaponCooldown());
-
+            currentCooldown = StartCoroutine(WeaponCooldown(GetHeatRatio()));
         }
-    }
-
-    public virtual bool SecondaryFireCheck()
-    {
-        return Input.GetButtonDown("Fire2");
     }
 
     public virtual void SecondaryFire()
     {
-        //if (player.energy > weaponAttachment.energyCost)
-            //player.energy -=  weaponAttachment.energyCost
-        weaponAttachment.AltShoot();
-  
+        if (LevelManager.Instance.CurrentEnergy >= weaponAttachment.energyCostPerFire)
+        {
+            LevelManager.Instance.CurrentEnergy -= weaponAttachment.energyCostPerFire;
+            weaponAttachment.AltShoot();
+        }
+    }
+
+    private void OnEnable()
+    {
+        LevelManager.Instance.WeaponUI.UpdateHeatBar((float)currentShots, (float)maxShots);
+
+        if (currentCooldown != null)
+        {
+            StartCoroutine(WeaponCooldown(currentRatio));
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (currentCooldown != null)
+            StopCoroutine(currentCooldown);
+    }
+
+    private void ResetWeaponStats(bool shouldReset)
+    {
+        if (shouldReset)
+        {
+            //reset our weapon variables 
+            canFire = true;
+            currentShots = 0;
+            currentCooldown = null;
+        }
     }
 }
 

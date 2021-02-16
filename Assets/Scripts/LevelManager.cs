@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoSingleton<LevelManager>
 {
@@ -35,6 +37,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     [SerializeField] private Camera spectatorCamera;
     [SerializeField] private GameObject EndGameMenu;
+    [SerializeField] private TMP_Text EndGameText;
 
     [Header("Inventory System")]
     [SerializeField] private Item StartingItem;
@@ -49,12 +52,27 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public Action onItemChangeCallback; //delgate void for when an item is changed from inventory 
 
+    [HideInInspector] public List<Trap> activeTraps = new List<Trap>();
+
     // Dictionary to store all the item classes and bind them to a gameobject that gets spawned 
     // when an item is added to the inventory.
     private Dictionary<Item, IEquippable> m_equipables;
     public Dictionary<Item, IEquippable> Equipables => m_equipables;
 
     [SerializeField] ShopUI shopUI;
+    [SerializeField] WeaponUI weaponUI;
+    public WeaponUI WeaponUI { get { return weaponUI; } }
+    [SerializeField] CharacterUI characterUI;
+    public CharacterUI CharacterUI { get { return characterUI; } }
+
+    private Item _currentlyEquipped;
+    public Item CurrentlyEquipped { get { return _currentlyEquipped; } }
+
+    [SerializeField] GameObject ShopStartingButton;
+    [SerializeField] GameObject PauseStartingButton;
+    [SerializeField] GameObject GameOverStartingButton;
+
+    protected bool gameOver = false;
 
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
@@ -63,7 +81,6 @@ public class LevelManager : MonoSingleton<LevelManager>
         if (_player == null)
         {
             _player = FindObjectOfType<Actor_Player>();
-            Debug.Log("Level Manager Return error");
         }
 
         m_equipables = new Dictionary<Item, IEquippable>();
@@ -71,7 +88,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         if (StartingItem != null)
         {
             InventoryAdd(StartingItem);
-            _player.EquipWeapon(m_equipables[StartingItem]);
+            StartingItem.Use();
         }
 
         #region PlayerSetupInitialization
@@ -106,24 +123,103 @@ public class LevelManager : MonoSingleton<LevelManager>
         //_player.OnDeath += Respawn;
 
         #endregion
-
+        Player.controlsEnabled = true;
+        shopUI.pauseMenu.SetActive(false);
+        gameOver = false;
 
     }
 
     private void Start()
     {
+        Core.OnDeath += () => GameOver(false);
+        Player.OnDamageTaken += (DamageData) => Player._audioCue.PlayAudioCue(Player._cInfo.PlayerHit, 15);
+        Time.timeScale = 1;
 
+        Player.playerInputs.onActionTriggered += HandleInput;
+    }
+
+    private void SetSelectedButton(GameObject newSelectedObj)
+    {
+        if (Gamepad.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(newSelectedObj);
+        }
+    }
+
+    public void HandleInput(InputAction.CallbackContext context)
+    {
+        switch (context.action.name)
+        {
+            case "Pause":
+                // Couldn't find a simple hold for now. Handling automatic firing in update.
+                if (context.phase == InputActionPhase.Performed && !shopUI.gameObject.activeSelf && Core.CurrentHealth > 0 && !gameOver)
+                    TogglePause();
+                break;
+
+            case "Shop":
+                if (context.phase == InputActionPhase.Performed && !shopUI.pauseMenu.activeSelf && !gameOver)
+                    ToggleShop();
+                break;
+        }
     }
 
     public void Update()
     {
-        // Quick test will be removed in the future.
-        if (Input.GetKeyDown(KeyCode.I))
+        if (shopUI.gameObject.activeSelf && !WaveManager.Instance.IsBuildPhase)
+            shopUI.CloseShop();
+    }
+
+    public void TogglePause()
+    {
+        shopUI.pauseMenu.SetActive(!shopUI.pauseMenu.activeSelf);
+        shopUI.combatHUD.SetActive(!shopUI.combatHUD.activeSelf);
+        
+
+        Time.timeScale = shopUI.pauseMenu.gameObject.activeSelf ? 0.0f : 1.0f;
+        Cursor.lockState = shopUI.pauseMenu.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = gameObject.activeSelf;
+
+        Player.controlsEnabled = !shopUI.pauseMenu.activeSelf;
+
+        if (shopUI.pauseMenu.activeSelf)
+        {
+            Player.playerInputs.SwitchCurrentActionMap("UI");
+            SetSelectedButton(PauseStartingButton);
+        }
+            
+
+        else
+            Player.playerInputs.SwitchCurrentActionMap("Player");
+    }
+
+    public void ToggleShop()
+    {
+        if (WaveManager.Instance.IsBuildPhase)
         {
             shopUI.ToggleMenu();
             shopUI.UpdateItemUI();
             shopUI.RefreshEnergyText();
+            Player.EquipWeapon(Equipables[InventoryList[0]]);
         }
+
+        if (shopUI.gameObject.activeSelf)
+        {
+            Player.playerInputs.SwitchCurrentActionMap("UI");
+            SetSelectedButton(ShopStartingButton);
+        }
+
+
+        else
+            Player.playerInputs.SwitchCurrentActionMap("Player");
+    }
+
+    // Takes passed trap and checks to see if it is already in the active traps list. If it is then remove it, if not add it.
+    public void AssessTraps(Trap trap)
+    {
+        if (activeTraps.Contains(trap))
+            activeTraps.Remove(trap);
+        else
+            activeTraps.Add(trap);
     }
 
     #region GameLoop
@@ -149,7 +245,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         spectatorCamera.gameObject.SetActive(false);
         Player.gameObject.SetActive(true);
-
+        Player._audioCue.PlayAudioCue(Player._cInfo.PlayerRespawn);
         isRespawning = false;
     }
 
@@ -158,19 +254,32 @@ public class LevelManager : MonoSingleton<LevelManager>
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        Player.controlsEnabled = false;
+        gameOver = true;
+
         EndGameMenu.SetActive(true);
-        //EndGameMenu DoTween here 
+        EndGameMenu.transform.DOScale(Vector3.one, 0.2f).From(Vector3.zero).OnComplete(() => Time.timeScale = 0.0f);
+        EndGameText.text = playerWon ? "Victory!" : "Defeat!";
+        if(playerWon)
+            Player._audioCue.PlayAudioCue(Player._cInfo.MissionWin);
+        if(!playerWon)
+            Player._audioCue.PlayAudioCue(Player._cInfo.MissionLoss);
+
+        Player.playerInputs.SwitchCurrentActionMap("UI");
+        SetSelectedButton(GameOverStartingButton);
     }
 
     public void OnRestartButton()
     {
-        string scene = SceneManager.GetActiveScene().name;
-        GameManager.Instance.LoadScene(scene);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
+        Player.playerInputs.SwitchCurrentActionMap("Player");
+        gameOver = false;
     }
 
     public void OnQuitButton()
     {
-        GameManager.Instance.OnQuitButton();
+        GameManager.Instance.ReturnToMenu();
     }
 
     #endregion
@@ -180,11 +289,11 @@ public class LevelManager : MonoSingleton<LevelManager>
     public void InventoryAdd(Item item) //function that adds an item from the Item class to the inventory 
     {
         //checks to see if the inventory count is less then the limit and checks if it dose not contain the item
-        if (m_inventoryList.Count <= inventoryLimit && !m_inventoryList.Contains(item))
+        if (m_inventoryList.Count < inventoryLimit && !m_inventoryList.Contains(item))
         {
             m_inventoryList.Add(item);  //adds item to inventory 
             onItemChangeCallback?.Invoke(); //calling delgate function "onItemChangeCallback" "?" is !=null
-
+            CurrentEnergy -= item.itemCost;
             // We instantiate the gameobject for this item as soon as we add it to the inventory.
             // Helps us create the object as we need it rather than creating them on start.
             // We only need to instantiate once and should not need to destroy them when we remove.
@@ -204,6 +313,9 @@ public class LevelManager : MonoSingleton<LevelManager>
         //checks to see if the inventory contains and item
         if (m_inventoryList.Contains(item))
         {
+            if (Player.CurrentEquipped == Equipables[item])
+                Player.CurrentEquipped.Unequip();
+
             m_inventoryList.Remove(item); // removes item from inventory 
             onItemChangeCallback?.Invoke(); //calling delgate function "onItemChangeCallback" "?" is !=null
         }
@@ -216,6 +328,8 @@ public class LevelManager : MonoSingleton<LevelManager>
             var newEquip = m_equipables[itemToUse];
             Player.EquipWeapon(newEquip);
         }
+        _currentlyEquipped = itemToUse;
+        weaponUI.UpdateEquippedWeapon();
     }
 
     #endregion

@@ -25,6 +25,12 @@ public class WaveManager : MonoSingleton<WaveManager>
         [Tooltip("List of enemies that will be spawned in this wave")]
         public List<WaveManager.EnemyInfo> enemiesToSpawn;
 
+        [Tooltip("Minimum percentage of enemies that will prioritise the core")]
+        [Range(0,1)] public int minCoreThresh;
+
+        [Tooltip("Minimum number of enemies that will prioritise the player, after the core's threshold has been met")]
+        [Range(0,1)] public int minPlayerThresh;
+
         [Tooltip("Amount of time before enemies begin spawning in a wave for reinforcing and preparations")]
         [Range(0, 60)] public int buildDuration = 5;
 
@@ -64,6 +70,7 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     // Interger index to track which wave we're in
     private int _waveIndex = 0;
+    public int WaveNumber { get { return _waveIndex + 1; } }
 
     // Current wave variable to track which wave we're in
     private Wave currentWave;
@@ -74,14 +81,23 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     // Timer to track the amount of time passed in the build phase
     Timer buildPhaseTimer;
+    public Timer BuildPhaseTimer { get { return buildPhaseTimer; } }
 
     // Interger to track the enemies remaining in a wave
     private int _enemiesRemaining;
+    public int EnemiesRemaining { get { return _enemiesRemaining; } }
     #endregion
+
+    private Actor_Player player;
+
+    [SerializeField] private HUDUI hudUI;
+    public HUDUI HudUI {  get { return hudUI; } }
 
     // Creating the timer and initiating it to 0. Subscribing the Spawner Coroutine to run at the end of the build phase, then starts the first wave
     private void Start()
     {
+        player = LevelManager.Instance.Player;
+
         buildPhaseTimer = new Timer(0, false);
         buildPhaseTimer.OnTimerEnd += () => StartCoroutine(SpawnerCoroutine());
         WaveStart();
@@ -96,7 +112,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         }
     }
 
-    // Initialiser for each wave
+    // This is when build phase starts
     private void WaveStart()
     {
         // Setting the current wave variable
@@ -110,6 +126,13 @@ public class WaveManager : MonoSingleton<WaveManager>
 
         // Setting the enemies remaining tracker to the total of enemies being spawned this wave
         _enemiesRemaining = currentWave.TotalEnemies();
+
+        player._audioCue.PlayAudioCue(player._cInfo.WaveStart, 30);
+
+        //LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.WaveStart);
+
+        // Display the build phase on UI
+        StartCoroutine(hudUI.BuildPhase());
     }
 
     // Cleanup for each wave and beginning of next wave
@@ -119,12 +142,16 @@ public class WaveManager : MonoSingleton<WaveManager>
         _waveIndex++;
 
         // Game win condition
-        if (_waveIndex > waveList.Count)
+        if (_waveIndex >= waveList.Count)
         {
             LevelManager.Instance.GameOver(true);
         }
         else
+        {
+            player._audioCue.PlayAudioCue(player._cInfo.BuildPhaseStart, 30);
+            //LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.EnemyKill);
             WaveStart();
+        }
     }
 
     // Decrease the enemies remaining and check for wave end
@@ -138,8 +165,12 @@ public class WaveManager : MonoSingleton<WaveManager>
     }
 
     // Spawner coroutine to handle enemy spawns
+    // Build phase ends here ; moving to the defence phase
     private IEnumerator SpawnerCoroutine()
     {
+        // Display the defence phase on UI
+        StartCoroutine(hudUI.DefensePhase());
+
         int enemiesToSpawn = currentWave.TotalEnemies();
         _isBuildPhase = false;
 
