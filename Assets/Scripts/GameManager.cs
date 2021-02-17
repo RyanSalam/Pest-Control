@@ -20,10 +20,17 @@ public class GameManager : MonoSingleton<GameManager>
         SceneManager.LoadScene(selectedLevel);
     }
 
+    
+
     public void ReturnToMenu()
     {
         SceneManager.LoadScene("Main Menu");
     }    
+
+    public Character GetCharacter()
+    {
+        return selectedPlayer;
+    }
 
     public void OnQuitButton()
     {

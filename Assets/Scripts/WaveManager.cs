@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,7 +17,11 @@ public class WaveManager : MonoSingleton<WaveManager>
         [Tooltip("Number of clones to spawn")]
         public int numberToSpawn;
     }
+    //[Tooltip("Event system for any custom events occuring on wave start, audio, or otherwise")]
+    public event System.Action OnWaveStarted;
 
+    //[Tooltip("Event system for any custom events occuring at the end of a wave")]
+    public event System.Action OnWaveEnded;
     // Wave info data struct to store relevant data
     [System.Serializable]
     public class Wave
@@ -40,11 +45,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         [Tooltip("List of accessible spawners from the spawnpoints list, defined by the spawn point element numbers")]
         public int[] availableSpawnPoints;
 
-        [Tooltip("Event system for any custom events occuring on wave start, audio, or otherwise")]
-        public UnityEvent onWaveStarted;
 
-        [Tooltip("Event system for any custom events occuring at the end of a wave")]
-        public UnityEvent onWaveEnded;
 
         // Function to evalutate the total number of enemiesin a wave
         public int TotalEnemies()
@@ -127,7 +128,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         // Setting the enemies remaining tracker to the total of enemies being spawned this wave
         _enemiesRemaining = currentWave.TotalEnemies();
 
-        player._audioCue.PlayAudioCue(player._cInfo.WaveStart, 30);
+
 
         //LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.WaveStart);
 
@@ -148,8 +149,8 @@ public class WaveManager : MonoSingleton<WaveManager>
         }
         else
         {
-            player._audioCue.PlayAudioCue(player._cInfo.BuildPhaseStart, 30);
-            //LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.EnemyKill);
+            OnWaveEnded?.Invoke();
+
             WaveStart();
         }
     }
@@ -168,6 +169,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     // Build phase ends here ; moving to the defence phase
     private IEnumerator SpawnerCoroutine()
     {
+        OnWaveStarted?.Invoke();
         // Display the defence phase on UI
         StartCoroutine(hudUI.DefensePhase());
 
