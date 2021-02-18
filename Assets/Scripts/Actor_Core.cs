@@ -20,6 +20,7 @@ public class Actor_Core : Actor
         [Tooltip("The time it will take to interpolate to it's resting rotation")]
         [SerializeField] float interpolateDuration = 0.3f;
 
+        public event System.Action CoreRingDestroyed;
         private bool bIsRotating = true;
 
         public void HandleRingRotation()
@@ -40,8 +41,8 @@ public class Actor_Core : Actor
                 bIsRotating = false;
                 ring.transform.DORotate(restRotation, interpolateDuration).OnComplete(() => 
                     ring.isKinematic = false);
-                Actor_Player p = FindObjectOfType<Actor_Player>();
-                p._audioCue.PlayAudioCue(p._cInfo.CoreDamaged);
+                CoreRingDestroyed?.Invoke();
+                
             }
         }
     }

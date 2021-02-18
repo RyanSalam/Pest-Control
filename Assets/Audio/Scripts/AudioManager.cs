@@ -46,17 +46,7 @@ public class AudioManager : MonoBehaviour
 
 		_pool.Prewarm(_initialSize);
 		_pool.SetParent(this.transform);
-		
-		//if (PlayerPrefs.HasKey("MasterVolumePreference"))
-		//	_masterVolume = PlayerPrefs.GetFloat("MasterVolumePreference");
-		
 
-		//if (PlayerPrefs.HasKey("MusicVolumePreference"))
-		//	_musicVolume = PlayerPrefs.GetFloat("MusicVolumePreference");
-		
-
-		//if (PlayerPrefs.HasKey("SFXVolumePreference"))
-		//	_sfxVolume = PlayerPrefs.GetFloat("SFXVolumePreference");
 		}
 		
 		else
@@ -79,9 +69,7 @@ public class AudioManager : MonoBehaviour
 	{
 		if (Application.isPlaying)
 		{
-			//SetGroupVolume("Master", _masterVolume);
-			//SetGroupVolume("Music", _musicVolume);
-			//SetGroupVolume("SFX", _sfxVolume);
+
 		}
 		Debug.Log("master: " + _masterVolume + "  music:  " + _musicVolume + "  sfx:  " + _sfxVolume);
 	}

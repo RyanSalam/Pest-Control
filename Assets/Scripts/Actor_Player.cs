@@ -61,17 +61,8 @@ public class Actor_Player : Actor
     public IEquippable CurrentEquipped { get { return _currentEquiped; } }
 
     //Audio Params
-    public AudioCue _audioCue;
-    public Character _cInfo;
+    
 
-    public AudioCue AudioCue
-    {
-        get { return _audioCue; }
-    }
-    public Character CharacterInfo
-    {
-        get { return _cInfo; }
-    }
 
     protected override void Awake()
     {
@@ -86,7 +77,7 @@ public class Actor_Player : Actor
 
         playerInputs.actions["Weapon Switch"].performed += HandleWeaponSwap;
 
-        _audioCue = GetComponent<AudioCue>();
+
 
         if (AbilityOne != null)
         {

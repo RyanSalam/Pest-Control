@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,7 +23,11 @@ public class WaveManager : MonoSingleton<WaveManager>
             Drone
         }
     }
+    //[Tooltip("Event system for any custom events occuring on wave start, audio, or otherwise")]
+    public event System.Action OnWaveStarted;
 
+    //[Tooltip("Event system for any custom events occuring at the end of a wave")]
+    public event System.Action OnWaveEnded;
     // Wave info data struct to store relevant data
     [System.Serializable]
     public class Wave
@@ -46,11 +51,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         [Tooltip("List of accessible spawners from the spawnpoints list, defined by the spawn point element numbers")]
         public Transform[] availableSpawnPoints;
 
-        [Tooltip("Event system for any custom events occuring on wave start, audio, or otherwise")]
-        public UnityEvent onWaveStarted;
 
-        [Tooltip("Event system for any custom events occuring at the end of a wave")]
-        public UnityEvent onWaveEnded;
 
         // Functions to evalutate the total number of enemies in a wave
         public int TotalEnemies()
@@ -169,9 +170,9 @@ public class WaveManager : MonoSingleton<WaveManager>
 
         // Setting the enemies remaining tracker to the total of enemies being spawned this wave
         _enemiesRemaining = currentWave.TotalEnemies();
+        //LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.WaveStart);
         _gruntsRemaining = currentWave.TotalGrunts();
         _dronesRemaining = currentWave.TotalDrones();
-
         // Display the build phase on UI
         StartCoroutine(hudUI.BuildPhase());
     }
@@ -190,12 +191,14 @@ public class WaveManager : MonoSingleton<WaveManager>
         else
         {
             WaveStart();
+            OnWaveEnded?.Invoke();
         }
     }
 
     // Spawner coroutine to activate enemies accordingly
     IEnumerator SpawnerCoroutine()
     {
+        OnWaveStarted?.Invoke();
         // Display the defence phase on UI
         StartCoroutine(hudUI.DefensePhase());
 
