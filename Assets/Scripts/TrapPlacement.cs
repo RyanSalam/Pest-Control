@@ -85,11 +85,15 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     protected void PlaceTrap()
     {
         Debug.Log("IS THIS BEING CALLED");
+        if (LevelManager.Instance.CurrentEnergy < trapPrice)
+            return;
+
         //setting the trap GameObject to spawn on raycast's position IF its on whatIsbuildable
         if (CanPlace)
         {
             GameObject tempTrap = Instantiate(trapToSpawn, trapModel.position, transform.rotation); //instantiating trap 
             ACue.PlayAudioCue();
+            LevelManager.Instance.CurrentEnergy -= trapPrice;
         }
     }
 

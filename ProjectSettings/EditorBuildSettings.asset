@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/BuildScenes/Main Menu.unity
     guid: 2e6271ccc8142844981a095a5e0f4d63
   - enabled: 1
-    path: Assets/Scenes/BuildScenes/OsirisMall 1.unity
-    guid: ef0704b0a2d16f64599fab4ea162ecaa
+    path: Assets/Scenes/BuildScenes/OsirisMall_UpdatedEnvironment.unity
+    guid: 403a51051fee4c14ca499e6ada510fa1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b1b0033028841194a84f162e3868abc7,
       type: 2}

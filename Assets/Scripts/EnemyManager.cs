@@ -9,9 +9,24 @@ public class EnemyManager : MonoSingleton<EnemyManager>
     List<Actor_Enemy> enemiesOnCore = new List<Actor_Enemy>();
     List<Actor_Enemy> enemiesOnPlayer = new List<Actor_Enemy>();
 
-    // Current wave reference to keep track of current values
-    WaveManager.Wave currentWave;
+    // Timer to track when to update the grunt targeting
+    Timer _intervalTimer;
+
+    // How long between targeting refreshes
+    public float targetRefreshDelay;
     #endregion
+
+    private void Start()
+    {
+        _intervalTimer = new Timer(targetRefreshDelay, true);
+        _intervalTimer.OnTimerEnd += () => ReassessGrunts(null);
+    }
+
+    private void Update()
+    {
+        _intervalTimer.Tick(Time.deltaTime);
+    }
+
 
     #region Grunt Management
     // Assign the enemy to it's relevant list
@@ -35,18 +50,23 @@ public class EnemyManager : MonoSingleton<EnemyManager>
                 enemiesOnPlayer.Remove(enemyA);
         }
 
-        // Rearragnes enemy priorities to meet the minimum thresholds
-        if (enemiesOnCore.Count/currentWave.TotalEnemies() < currentWave.minCoreThresh)
+        if (enemiesOnCore.Count > 1)
         {
-            enemiesOnPlayer[0].SwitchTarget(LevelManager.Instance.Core.transform);
-            RegisterGrunt(enemiesOnPlayer[0]);
-            return;
+            // Rearragnes enemy priorities to meet the minimum thresholds
+            if (enemiesOnCore.Count / WaveManager.Instance.currentWave.TotalEnemies() < WaveManager.Instance.currentWave.minCoreThresh * 100)
+            {
+                enemiesOnPlayer[0].SwitchTarget(LevelManager.Instance.Core.transform);
+                RegisterGrunt(enemiesOnPlayer[0]);
+                return;
+            }
+            else if (enemiesOnPlayer.Count / WaveManager.Instance.currentWave.TotalEnemies() < WaveManager.Instance.currentWave.minPlayerThresh * 100 && enemiesOnCore.Count / WaveManager.Instance.currentWave.TotalEnemies() < WaveManager.Instance.currentWave.minCoreThresh * 100)
+            {
+                enemiesOnCore[0].SwitchTarget(LevelManager.Instance.Player.transform);
+                RegisterGrunt(enemiesOnCore[0]);
+            }
         }
-        else if(enemiesOnPlayer.Count/currentWave.TotalEnemies() < currentWave.minPlayerThresh && enemiesOnCore.Count/currentWave.TotalEnemies() < currentWave.minCoreThresh)
-        {
-            enemiesOnCore[0].SwitchTarget(LevelManager.Instance.Player.transform);
-            RegisterGrunt(enemiesOnCore[0]);
-        }
+
+        _intervalTimer.PlayFromStart();
     }
     #endregion
 

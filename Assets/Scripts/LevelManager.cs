@@ -178,7 +178,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void Update()
     {
-        if (shopUI.gameObject.activeSelf && !WaveManager.Instance.IsBuildPhase)
+        if (shopUI.gameObject.activeSelf && !WaveManager.Instance.isBuildPhase)
             shopUI.CloseShop();
     }
 
@@ -207,7 +207,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void ToggleShop()
     {
-        if (WaveManager.Instance.IsBuildPhase)
+        if (WaveManager.Instance.isBuildPhase)
         {
             shopUI.ToggleMenu();
             shopUI.UpdateItemUI();

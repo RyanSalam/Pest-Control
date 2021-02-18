@@ -99,23 +99,24 @@ public class Enemy_DroneV2 : Actor_Enemy
         //SEARCH FOR TRAPS
         //IF FOUND SET TRAP T-FORM TO TARGET
         //ELSE  SET PLAYER T-FORM AS TARGET 
-        GameObject[] trapsInScene = GameObject.FindGameObjectsWithTag("Trap");
+        //GameObject[] trapsInScene = GameObject.FindGameObjectsWithTag("Trap");
         //here we can add a shuffle funtion ? -shuffle the array, then add to queue
 
 
-        if (trapsInScene.Length > 0) //we have found traps
-        {
-            foreach (GameObject go in trapsInScene) //add all our gameobjects to our key
-            {
-                trapQueue.Enqueue(go.transform);
-            }
-             return trapQueue.Dequeue(); //return/remove the trap item at top of queue 
-        }
-        else //we didnt find any traps so we target player
-        {
-            return LevelManager.Instance.Player.transform;
-        }
+        //if (trapsInScene.Length > 0) //we have found traps
+        //{
+        //    foreach (GameObject go in trapsInScene) //add all our gameobjects to our key
+        //    {
+        //        trapQueue.Enqueue(go.transform);
+        //    }
+        //     return trapQueue.Dequeue(); //return/remove the trap item at top of queue 
+        //}
+        //else //we didnt find any traps so we target player
+        //{
+        //    return LevelManager.Instance.Player.transform;
+        //}
 
+        return EnemyManager.Instance.GetDroneTarget().transform;
     }
 
     public override void OnPathCompleted()
@@ -127,14 +128,12 @@ public class Enemy_DroneV2 : Actor_Enemy
     {
         if (droneBombProjectile != null)
             Instantiate(droneBombProjectile, bombSpawnPoint.position, bombSpawnPoint.rotation);
-       
-            
     }
 
     protected override void Death()
     {
         base.Death();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
 

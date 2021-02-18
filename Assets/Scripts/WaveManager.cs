@@ -12,10 +12,16 @@ public class WaveManager : MonoSingleton<WaveManager>
     {
         [Header("Enemy Information")]
         [Tooltip("Game Object prefab to spawn")]
-        public Actor_Enemy enemyPrefab;
+        public enemyType enemyPrefab;
 
         [Tooltip("Number of clones to spawn")]
         public int numberToSpawn;
+
+        public enum enemyType
+        {
+            Grunt,
+            Drone
+        }
     }
     //[Tooltip("Event system for any custom events occuring on wave start, audio, or otherwise")]
     public event System.Action OnWaveStarted;
@@ -31,10 +37,10 @@ public class WaveManager : MonoSingleton<WaveManager>
         public List<WaveManager.EnemyInfo> enemiesToSpawn;
 
         [Tooltip("Minimum percentage of enemies that will prioritise the core")]
-        [Range(0,1)] public int minCoreThresh;
+        [Range(0, 1)] public float minCoreThresh;
 
         [Tooltip("Minimum number of enemies that will prioritise the player, after the core's threshold has been met")]
-        [Range(0,1)] public int minPlayerThresh;
+        [Range(0, 1)] public float minPlayerThresh;
 
         [Tooltip("Amount of time before enemies begin spawning in a wave for reinforcing and preparations")]
         [Range(0, 60)] public int buildDuration = 5;
@@ -43,116 +49,95 @@ public class WaveManager : MonoSingleton<WaveManager>
         [Range(0, 5)] public int spawnDelay = 5;
 
         [Tooltip("List of accessible spawners from the spawnpoints list, defined by the spawn point element numbers")]
-        public int[] availableSpawnPoints;
+        public Transform[] availableSpawnPoints;
 
 
 
-        // Function to evalutate the total number of enemiesin a wave
+        // Functions to evalutate the total number of enemies in a wave
         public int TotalEnemies()
         {
-            int maxEnemies = 0;
-            foreach(EnemyInfo enemy in enemiesToSpawn)
+            return TotalDrones() + TotalGrunts();
+        }
+
+        public int TotalGrunts()
+        {
+            int _maxGrunts = 0;
+            foreach (EnemyInfo enemy in enemiesToSpawn)
             {
-                maxEnemies += (int)enemy.numberToSpawn;
+                if (enemy.enemyPrefab == EnemyInfo.enemyType.Grunt)
+                    _maxGrunts += enemy.numberToSpawn;
             }
 
-            return maxEnemies;
+            return _maxGrunts;
+        }
+
+        public int TotalDrones()
+        {
+            int _maxDrones = 0;
+            foreach (EnemyInfo enemy in enemiesToSpawn)
+            {
+                if (enemy.enemyPrefab == EnemyInfo.enemyType.Drone)
+                    _maxDrones += enemy.numberToSpawn;
+            }
+
+            return _maxDrones;
         }
     }
 
     #region Variables
-    [Header("Spawn Points")]
-    [Tooltip("Available spawn locations for enemies")]
-    [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
+    // Private pool lists to track all enemies spawned
+    List<GameObject> _gruntPool = new List<GameObject>();
+    List<GameObject> _dronePool = new List<GameObject>();
 
-    [Header("Waves")]
-    [Tooltip("List of wave structs in order")]
-    [SerializeField] private List<Wave> waveList = new List<Wave>();
+    [Tooltip("Enemy prefabs available to be spawned across any wave")]
+    [SerializeField] GameObject gruntPrefab;
+    [SerializeField] GameObject dronePrefab;
 
-    // Interger index to track which wave we're in
-    private int _waveIndex = 0;
-    public int WaveNumber { get { return _waveIndex + 1; } }
+    [Tooltip("Gameobject to act as a parent to the enemies in order to tidy the hierarchy")]
+    [SerializeField] Transform enemyPoolParent;
 
-    // Current wave variable to track which wave we're in
-    private Wave currentWave;
+    [Tooltip("List of all waves in the level")]
+    [SerializeField] List<Wave> levelWaves = new List<Wave>();
 
-    // Boolean to track what phase of the wave we're in
-    private bool _isBuildPhase;
-    public bool IsBuildPhase { get { return _isBuildPhase; } }
+    // Interger and current wave to track which wave we are on
+    [HideInInspector] public int waveIndex = 0;
+    [HideInInspector] public Wave currentWave { get { return levelWaves[waveIndex]; } }
 
-    // Timer to track the amount of time passed in the build phase
-    Timer buildPhaseTimer;
-    public Timer BuildPhaseTimer { get { return buildPhaseTimer; } }
+    // Boolean to track whether or not we are in build phase
+    bool _isBuildPhase;
+    public bool isBuildPhase { get { return _isBuildPhase; } }
 
-    // Interger to track the enemies remaining in a wave
-    private int _enemiesRemaining;
-    public int EnemiesRemaining { get { return _enemiesRemaining; } }
+    // Timer to track how long build phase lasts
+    public Timer buildPhaseTimer;
+
+    // Interger to track how many enemies are left in the wave
+    int _enemiesRemaining;
+    public int enemiesRemaining {  get { return _enemiesRemaining; } }
+
+    int _gruntsRemaining;
+    public int gruntsRemaining {  get { return _gruntsRemaining; } }
+
+    int _dronesRemaining;
+    public int dronesRemaining { get { return _dronesRemaining; } }
+
+    // Hud reference for hud management
+    [SerializeField] private HUDUI hudUI;
+    public HUDUI HudUI { get { return hudUI; } }
     #endregion
 
-    private Actor_Player player;
-
-    [SerializeField] private HUDUI hudUI;
-    public HUDUI HudUI {  get { return hudUI; } }
-
-    // Creating the timer and initiating it to 0. Subscribing the Spawner Coroutine to run at the end of the build phase, then starts the first wave
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
-        player = LevelManager.Instance.Player;
+        // If we have the relevant prefabs then generate the relevant pools
+        if (gruntPrefab)
+            GenerateGruntPool();
 
+        if (dronePrefab)
+            GenerateDronePool();
+        // Properly set up the build phase timer and subscribe the activation coroutine to it's end
         buildPhaseTimer = new Timer(0, false);
         buildPhaseTimer.OnTimerEnd += () => StartCoroutine(SpawnerCoroutine());
         WaveStart();
-    }
-
-    private void Update()
-    {
-        // If in the build phase then tick the build phase timer
-        if(IsBuildPhase)
-        {
-            buildPhaseTimer.Tick(Time.deltaTime);
-        }
-    }
-
-    // This is when build phase starts
-    private void WaveStart()
-    {
-        // Setting the current wave variable
-        currentWave = waveList[_waveIndex];
-
-        _isBuildPhase = true;
-
-        // Set the duration of the build phase timer
-        buildPhaseTimer.SetDuration(currentWave.buildDuration);
-        buildPhaseTimer.PlayFromStart();
-
-        // Setting the enemies remaining tracker to the total of enemies being spawned this wave
-        _enemiesRemaining = currentWave.TotalEnemies();
-
-
-
-        //LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.WaveStart);
-
-        // Display the build phase on UI
-        StartCoroutine(hudUI.BuildPhase());
-    }
-
-    // Cleanup for each wave and beginning of next wave
-    private void WaveEnd()
-    {
-        // Increase wave index
-        _waveIndex++;
-
-        // Game win condition
-        if (_waveIndex >= waveList.Count)
-        {
-            LevelManager.Instance.GameOver(true);
-        }
-        else
-        {
-            OnWaveEnded?.Invoke();
-
-            WaveStart();
-        }
     }
 
     // Decrease the enemies remaining and check for wave end
@@ -162,47 +147,169 @@ public class WaveManager : MonoSingleton<WaveManager>
 
         if (_enemiesRemaining <= 0)
             WaveEnd();
-
     }
 
-    // Spawner coroutine to handle enemy spawns
-    // Build phase ends here ; moving to the defence phase
-    private IEnumerator SpawnerCoroutine()
+    // Update is called once per frame
+    void Update()
+    {
+        // If in the build phase then tick the build phase timer
+        if (isBuildPhase)
+        {
+            buildPhaseTimer.Tick(Time.deltaTime);
+        }
+    }
+
+    // This is when build phase starts
+    private void WaveStart()
+    {
+        _isBuildPhase = true;
+
+        // Set the duration of the build phase timer
+        buildPhaseTimer.SetDuration(currentWave.buildDuration);
+        buildPhaseTimer.PlayFromStart();
+
+        // Setting the enemies remaining tracker to the total of enemies being spawned this wave
+        _enemiesRemaining = currentWave.TotalEnemies();
+        //LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.WaveStart);
+        _gruntsRemaining = currentWave.TotalGrunts();
+        _dronesRemaining = currentWave.TotalDrones();
+        // Display the build phase on UI
+        StartCoroutine(hudUI.BuildPhase());
+    }
+
+    // Cleanup for each wave and beginning of next wave
+    private void WaveEnd()
+    {
+        // Increase wave index
+        waveIndex++;
+
+        // Game win condition
+        if (waveIndex >= levelWaves.Count)
+        {
+            LevelManager.Instance.GameOver(true);
+        }
+        else
+        {
+            WaveStart();
+            OnWaveEnded?.Invoke();
+        }
+    }
+
+    // Spawner coroutine to activate enemies accordingly
+    IEnumerator SpawnerCoroutine()
     {
         OnWaveStarted?.Invoke();
         // Display the defence phase on UI
         StartCoroutine(hudUI.DefensePhase());
 
-        int enemiesToSpawn = currentWave.TotalEnemies();
-        _isBuildPhase = false;
-
-        //Loops according to the wave's maximum amount of enemies
-        for (int i = 0; i < currentWave.TotalEnemies(); i++)
+        // Calculate how many enemies we spawn this wave and start a loop that will only activate that amount
+        int _enemiesToSpawn = _enemiesRemaining;
+        for(int i = 0; i < _enemiesToSpawn; i++)
         {
-            //Randomly assigning an index to both randomEnemy and randomTransform, to ensure that spawnpoints are randomised and 
-            //enemy types (according to the wave) are randomised
-            int randEnemy = Random.Range(0, currentWave.enemiesToSpawn.Count);
-            int randTransfrom = Random.Range(0, spawnPoints.Count);
+            // If we have both grunts and drones in the wave then randomly spawn from them
+            if(_gruntsRemaining > 0 && _dronesRemaining > 0)
+            {
+                int index = Random.Range(0, 1);
+                if (index == 0 && _gruntsRemaining > 0)
+                {
+                    foreach(GameObject grunt in _gruntPool)
+                    {
+                        if (!grunt.activeSelf)
+                        {
+                            grunt.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
+                            grunt.SetActive(true);
+                            grunt.GetComponent<Enemy_Grunt>().SwitchTarget(LevelManager.Instance.Core.transform);
+                            _gruntsRemaining--;
+                            break;
+                        }
+                    }
+                }
+                else if (index == 1 && _dronesRemaining > 0)
+                {
+                    foreach (GameObject drone in _dronePool)
+                    {
+                        if (!drone.activeSelf)
+                        {
+                            drone.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
+                            drone.SetActive(true);
+                            _dronesRemaining--;
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (_gruntsRemaining > 0)
+            {
+                foreach (GameObject grunt in _gruntPool)
+                {
+                    if (!grunt.activeSelf)
+                    {
+                        grunt.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
+                        grunt.SetActive(true);
+                        grunt.GetComponent<Enemy_Grunt>().SwitchTarget(LevelManager.Instance.Core.transform);
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                foreach (GameObject drone in _dronePool)
+                {
+                    if (!drone.activeSelf)
+                    {
+                        drone.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
+                        drone.SetActive(true);
+                        break;
+                    }
+                }
+            }
 
-            //Choosing a new enemy AI of corresponding type at corresponding point
-            var enemyType = currentWave.enemiesToSpawn[randEnemy];
-            Actor_Enemy toSpawn = enemyType.enemyPrefab;
-
-            enemiesToSpawn--;
-
-            if (enemiesToSpawn <= 0)
-                currentWave.enemiesToSpawn.Remove(enemyType);
-
-            Transform whereToSpawn = spawnPoints[randTransfrom];
-            //Spawning the enemy accordingly
-            toSpawn = Instantiate(toSpawn, whereToSpawn.position, whereToSpawn.rotation);
-
-            //Adds the enemy tracker function to the enemyAI's death event
-            toSpawn.OnDeath += UpdateRemEnemies;
-
-            //Waits for the set spawndelay before spawning again.
             yield return new WaitForSeconds(currentWave.spawnDelay);
         }
     }
-}
 
+    #region Object Pooling
+    void GenerateGruntPool()
+    {
+        int _gruntsToSpawn = 0;
+        // Determine the most amount of enemies we need to spawn in any wave
+        foreach (Wave wave in levelWaves)
+        {
+            if (_gruntsToSpawn < wave.TotalGrunts())
+                _gruntsToSpawn = wave.TotalGrunts();
+        }
+
+        // Instantiate the relevant number of grunts
+        for (int i = 0; i < _gruntsToSpawn; i++)
+        {
+            GameObject grunt = Instantiate(gruntPrefab, enemyPoolParent.transform);
+            grunt.GetComponent<Enemy_Grunt>().SwitchTarget(LevelManager.Instance.Player.transform);
+            _gruntPool.Add(grunt);
+            grunt.name = ("Grunt: " + i);
+            grunt.GetComponent<Actor_Enemy>().OnDeath += UpdateRemEnemies;
+            grunt.SetActive(false);
+        }
+    }
+
+    void GenerateDronePool()
+    {
+        int _dronesToSpawn = 0;
+        // Determine the most amount of enemies we need to spawn in any wave
+        foreach (Wave wave in levelWaves)
+        {
+            if (_dronesToSpawn < wave.TotalDrones())
+                _dronesToSpawn = wave.TotalDrones();
+        }
+
+        // Instantiate the relevant number of grunts
+        for (int i = 0; i < _dronesToSpawn; i++)
+        {
+            GameObject drone = Instantiate(dronePrefab, enemyPoolParent.transform);
+            _dronePool.Add(drone);
+            drone.name = ("Drone: " + i);
+            drone.GetComponent<Actor_Enemy>().OnDeath += UpdateRemEnemies;
+            drone.SetActive(false);
+        }
+    }
+    #endregion
+}
