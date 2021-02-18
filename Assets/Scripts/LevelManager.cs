@@ -20,6 +20,10 @@ public class LevelManager : MonoSingleton<LevelManager>
         get { return _player; }
     }
 
+    private Character Char_SO;
+    private AudioCue Cues;
+
+
     private int _currentEnergy = 200;
     public int CurrentEnergy
     {
@@ -83,6 +87,12 @@ public class LevelManager : MonoSingleton<LevelManager>
             _player = FindObjectOfType<Actor_Player>();
         }
 
+        //Copy reference to Char Info and AudioManager
+        Char_SO = FindObjectOfType<GameManager>().GetCharacter();
+        Cues = FindObjectOfType<AudioCue>();
+        
+        
+
         m_equipables = new Dictionary<Item, IEquippable>();
 
         if (StartingItem != null)
@@ -132,10 +142,13 @@ public class LevelManager : MonoSingleton<LevelManager>
     private void Start()
     {
         Core.OnDeath += () => GameOver(false);
-        Player.OnDamageTaken += (DamageData) => Player._audioCue.PlayAudioCue(Player._cInfo.PlayerHit, 15);
+        
         Time.timeScale = 1;
 
         Player.playerInputs.onActionTriggered += HandleInput;
+
+        SubscribeToAudioEvents();
+
     }
 
     private void SetSelectedButton(GameObject newSelectedObj)
@@ -245,7 +258,6 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         spectatorCamera.gameObject.SetActive(false);
         Player.gameObject.SetActive(true);
-        Player._audioCue.PlayAudioCue(Player._cInfo.PlayerRespawn);
         isRespawning = false;
     }
 
@@ -260,10 +272,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         EndGameMenu.SetActive(true);
         EndGameMenu.transform.DOScale(Vector3.one, 0.2f).From(Vector3.zero).OnComplete(() => Time.timeScale = 0.0f);
         EndGameText.text = playerWon ? "Victory!" : "Defeat!";
-        if(playerWon)
-            Player._audioCue.PlayAudioCue(Player._cInfo.MissionWin);
-        if(!playerWon)
-            Player._audioCue.PlayAudioCue(Player._cInfo.MissionLoss);
+
 
         Player.playerInputs.SwitchCurrentActionMap("UI");
         SetSelectedButton(GameOverStartingButton);
@@ -333,4 +342,19 @@ public class LevelManager : MonoSingleton<LevelManager>
     }
 
     #endregion
+
+    private void SubscribeToAudioEvents()
+    {
+        //Player.OnAbilityOneTriggered
+        //Player.OnAbilityTwoTriggered
+        Player.OnDamageTaken += (DamageData) => Cues.PlayAudioCue(Char_SO.PlayerHit, 10);
+        WaveManager.Instance.OnWaveEnded +=()=> Cues.PlayAudioCue(Char_SO.BuildPhaseStart, 30);
+        WaveManager.Instance.OnWaveStarted +=()=> Cues.PlayAudioCue(Char_SO.WaveStart, 30);
+        //CoreDamaged
+        foreach(Actor_Enemy enemy in FindObjectsOfType<Actor_Enemy>())
+        {
+            enemy.OnDeath += () => Cues.PlayAudioCue(Char_SO.EnemyKill, 5);
+        }
+
+    }
 }

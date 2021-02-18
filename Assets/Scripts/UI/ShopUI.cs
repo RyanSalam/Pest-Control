@@ -78,7 +78,6 @@ public class ShopUI : MonoBehaviour
             {
                 //Debug.Log(LevelManager.Instance.InventoryList[i].ToString());
                 slots[i].AddItem(LevelManager.Instance.InventoryList[i]);
-                LevelManager.Instance.Player._audioCue.PlayAudioCue(LevelManager.Instance.Player._cInfo.PurchaseItem, 35);
             }
             else
             {
