@@ -130,7 +130,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         //        Debug.LogError("THere's no player in your scene you cunt! Are you even trying?");
         //}
 
-        //_player.OnDeath += Respawn;
+        Player.OnDeath += Respawn;
 
         #endregion
         Player.controlsEnabled = true;
