@@ -127,7 +127,8 @@ public class WaveManagerOLD : MonoSingleton<WaveManager>
         // Setting the enemies remaining tracker to the total of enemies being spawned this wave
         _enemiesRemaining = currentWave.TotalEnemies();
 
-        player._audioCue.PlayAudioCue(player._cInfo.WaveStart, 30);
+        //player.ing
+        //    _audioCue.PlayAudioCue(player._cInfo.WaveStart, 30);
 
         //LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.WaveStart);
 
@@ -148,7 +149,7 @@ public class WaveManagerOLD : MonoSingleton<WaveManager>
         }
         else
         {
-            player._audioCue.PlayAudioCue(player._cInfo.BuildPhaseStart, 30);
+            //player._audioCue.PlayAudioCue(player._cInfo.BuildPhaseStart, 30);
             //LevelManager.Instance.Player.audio.PlayAudioCue(GameManager.selectedPlayer.EnemyKill);
             WaveStart();
         }
