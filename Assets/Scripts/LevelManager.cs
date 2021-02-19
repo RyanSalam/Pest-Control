@@ -88,7 +88,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         }
 
         //Copy reference to Char Info and AudioManager
-        Char_SO = FindObjectOfType<GameManager>().GetCharacter();
+        Char_SO = GameManager.Instance.GetCharacter();
         Cues = FindObjectOfType<AudioCue>();
         
         
