@@ -22,7 +22,7 @@ public class Enemy_DroneV2 : Actor_Enemy
     //reference to our agent / variables well need for our base offset
     NavMeshAgent agent;
 
-    
+    Transform droneBody;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -34,6 +34,13 @@ public class Enemy_DroneV2 : Actor_Enemy
 
         if (!agent)
             Debug.Log("Agent not found");
+
+        agent.updateRotation = true;
+
+        droneBody = transform.GetChild(0);
+
+        if (!droneBody)
+            Debug.Log("Body not found");
 
         base.Start();
     }
@@ -100,15 +107,19 @@ public class Enemy_DroneV2 : Actor_Enemy
 
 
         //here, if our agent is above a certain velocity we will rotate the model on the x axis so it appears its tilted/propelling towards its target - its max mag-Velocity is agents speed parameter
-        if (agent.velocity.magnitude > 3.2f)
+        if (agent.velocity.magnitude > 3.0f)
         {
             transform.Rotate(Vector3.right * 20); //rotating x axis by 15 degrees - should slowly increment this up too but quaternions are wild
+            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.right * 50f), 0.5f);
+            //droneBody.localEulerAngles = new Vector3(agent.velocity.y * 20, agent.velocity.x * 10f, transform.localEulerAngles.z);
         }
         else //slowing down
         {
-            float xVal = transform.rotation.x;
-            transform.rotation *= Quaternion.Euler(xVal -= 0.5f, 0, 0); //trying to slowly bring the x rotation back to 0
+            transform.rotation *= Quaternion.Euler( 0.5f, 0, 0); //trying to slowly bring the x rotation back to 0
+            //transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.Euler(0,transform.rotation.y,transform.rotation.z), 1f); //trying to slowly bring the x rotation back to 0
         }
+
+        
 
         base.Update();
     }
@@ -117,7 +128,6 @@ public class Enemy_DroneV2 : Actor_Enemy
     //{
     //    Gizmos.color = Color.yellow;
     //    Gizmos.DrawWireSphere(collisionChecker.position, 1.0f);
-        
     //}
 
     public Transform searchForTarget()
