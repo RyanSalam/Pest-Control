@@ -101,38 +101,8 @@ public class LevelManager : MonoSingleton<LevelManager>
             StartingItem.Use();
         }
 
-        #region PlayerSetupInitialization
+        Player.OnDeath += Respawn; // adding the respawn function to character after death 
 
-        //if (_player == null)
-        //    _player = FindObjectOfType<Actor_Player>();
-
-        //if (playerSpawnPoint == null)
-        //{
-        //    //Respawn Player if there is no Spawn Point Found
-        //    playerSpawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
-
-        //    if (playerSpawnPoint == null)
-        //        Debug.LogError("No Spawn Point Found you cunt!");
-        //}
-
-        //if (GameManager.selectedPlayer != null)
-        //{
-        //    // Spawn Player from gameManager.
-        //    _player = Instantiate(GameManager.selectedPlayer, playerSpawnPoint.transform.position, Quaternion.identity);            
-        //}
-
-        //else
-        //{
-        //    Debug.Log("No GameManager found, Searching for player here");
-
-
-        //    if (_player == null)
-        //        Debug.LogError("THere's no player in your scene you cunt! Are you even trying?");
-        //}
-
-        Player.OnDeath += Respawn;
-
-        #endregion
         Player.controlsEnabled = true;
         shopUI.pauseMenu.SetActive(false);
         gameOver = false;
