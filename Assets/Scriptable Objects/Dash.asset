@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Ability
   abilityDesc: Description
-  abilitySprite: {fileID: 21300000, guid: ed6fe42c81a3e194eb1ef3c0c8eafe05, type: 3}
-  coolDownDuration: 5
+  abilitySprite: {fileID: 21300000, guid: 73c1567ef2b42e940a654bb1cbf0452e, type: 3}
+  lifetimeDuration: 0
+  cooldownDuration: 0
   AbilityButton: Ability One
   isAbilityOnCoolDown: 0
