@@ -216,7 +216,7 @@ MonoBehaviour:
     - {fileID: 1894316907}
     - {fileID: 689711442}
   waveIndex: 0
-  hudUI: {fileID: 0}
+  hudUI: {fileID: 3695450296224022641}
 --- !u!114 &1036353162095221082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,6 +1115,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3136140622813290153}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3695450296224022641 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1787136513629150936, guid: 5a1d76bd2f010ec4793b09149005bd25,
+    type: 3}
+  m_PrefabInstance: {fileID: 3136140622813290153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01de3b949fa871746b01e17a66dafda2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2328511621631068442 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 852666578624649139, guid: 5a1d76bd2f010ec4793b09149005bd25,

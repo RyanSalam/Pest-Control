@@ -36,8 +36,6 @@ public class HUDUI : MonoBehaviour
     {
         core = LevelManager.Instance.Core;
         core.OnHealthChanged += UpdateCoreHealth;
-        WaveInfoPanel.SetActive(false);
-        phaseTimer.SetActive(false);
     }
 
     private void Update()
@@ -76,7 +74,7 @@ public class HUDUI : MonoBehaviour
         // Display build phase
         currentPhase = "Build Phase";
         buildPhase.text = currentPhase;
-        waveNumber.text = "Wave " + WaveManager.Instance.waveIndex.ToString();
+        waveNumber.text = "Wave " + (WaveManager.Instance.waveIndex + 1).ToString();
         // Display the phase timer until the end of the buildphase
         phaseTimer.SetActive(true);
         // Hide the enemyInfo Panel
@@ -96,10 +94,10 @@ public class HUDUI : MonoBehaviour
         phaseTimer.SetActive(false);
         // Display wave info panel
         // Display defense phase
-        currentPhase = "Defence Phase";
+        currentPhase = "Enemies Incoming!";
         buildPhase.text = currentPhase;
         WaveInfoPanel.SetActive(true);
-        waveNumber.text = "Wave " + WaveManager.Instance.waveIndex.ToString();
+        waveNumber.text = "Wave " + (WaveManager.Instance.waveIndex + 1).ToString();
         //Start displaying the enemyInfo Panel
         enemyInfoPanel.SetActive(true);
         // Start displaying coreInfo Panel

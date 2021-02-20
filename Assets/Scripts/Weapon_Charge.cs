@@ -8,6 +8,7 @@ public class Weapon_Charge : Weapon
     [SerializeField] protected float maxChargeDuration;
     [SerializeField] protected float chargeModifier = 1.5f;
     [SerializeField] protected float projForce;
+    protected float forceModifier = 1.0f;
     protected float currentCharge = 0f;
     protected float chargeTimer = 0.0f;
     [SerializeField] protected float chargeThreshold;
@@ -122,6 +123,7 @@ public class Weapon_Charge : Weapon
         while (currentCharge < maxChargeDuration)
         {
             currentCharge += Time.fixedDeltaTime;
+            forceModifier -= Time.fixedDeltaTime / 2.5f;
             float scaleFactor = bulletScaleCurve.Evaluate(currentCharge / maxChargeDuration);
             tempProjectile.transform.localScale += Vector3.one * scaleFactor;            
 
@@ -199,12 +201,13 @@ public class Weapon_Charge : Weapon
         tempProjectile.RB.isKinematic = false;
         tempProjectile.Initialize(data);
         tempProjectile.GetComponent<Collider>().enabled = true;
-        tempProjectile.RB.AddForce(data.direction * projForce, ForceMode.Impulse);
-        //LevelManager.Instance.Player.PlayerCam.DOShakePosition(currentCharge / 2, new Vector3(1, 0, .5f), (int)currentCharge);
+        tempProjectile.RB.AddForce(data.direction * projForce * forceModifier, ForceMode.Impulse);
+        LevelManager.Instance.Player.PlayerCam.DOShakePosition((3 *currentCharge)/5, new Vector3(0.5f * currentCharge, 0, -0.8f * currentCharge), (int)currentCharge);
 
         // Reset variables
         lastFired = Time.time;
         currentCharge = 0;
         chargeTimer = 0.0f;
+        forceModifier = 1.0f;
     }
 }
