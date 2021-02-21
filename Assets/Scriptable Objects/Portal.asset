@@ -27,6 +27,6 @@ MonoBehaviour:
     m_Bits: 1024
   obstacleMasks:
     serializedVersion: 2
-    m_Bits: 6656
+    m_Bits: 23040
   obstacleDetectionRange: 3
   verticalSearch: 1
