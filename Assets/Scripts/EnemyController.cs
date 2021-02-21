@@ -1,0 +1,148 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public abstract class EnemyController : Actor
+{
+    #region Variables
+    // Navigation variables
+    [SerializeField] protected Transform currentTarget;
+    [SerializeField] protected Vector3 currentDestination;
+
+    // Agent reference for navigation
+    protected NavMeshAgent m_agent;
+
+    // Player and core reference for easy target switching
+    private Actor_Player m_player;
+    private Actor_Core m_core;
+
+    // Damage data reference to track last damage instance
+    protected DamageData _lastCachedDamage;
+
+    // Nav mesh path to track current path for vector manipulation
+    protected NavMeshPath _currentPath;
+
+    // Behviour variables
+    [SerializeField] protected float attackRange = 2.5f;
+    [SerializeField] protected float damage = 1.0f;
+    [SerializeField] protected bool bIsSearching = false;
+
+    // Interger defining how much energy enemy will drop upon death
+    [SerializeField] protected int energyDrop = 10;
+
+
+
+    #region Getters
+    // Agent getter for out of class access
+    public NavMeshAgent Agent
+    {
+        get { return m_agent; }
+    }
+
+    // Current target getter for out of class access
+    public Transform CurrentTarget
+    {
+        get { return currentTarget; }
+    }
+
+    // Current destination getter for out of class access
+    public Vector3 CurrentDestination
+    {
+        get { return currentDestination; }
+    }
+
+    // Player getter for out of class access
+    public Actor_Player Player
+    {
+        get { return m_player; }
+    }
+
+    // Core getter for out of class access
+    public Actor_Core Core
+    {
+        get { return m_core; }
+    }
+
+    // Last cached damage getter for out of class access
+    public DamageData LastCachedDamage
+    {
+        get { return _lastCachedDamage; }
+    }
+
+    // Current path getter for out of class access
+    public NavMeshPath CurrentPath
+    {
+        get { return _currentPath; }
+    }
+    #endregion
+    #endregion
+
+    // Start to initialise variables
+    protected override void Start()
+    {
+        base.Start();
+
+        m_player = LevelManager.Instance.Player;
+        m_core = LevelManager.Instance.Core;
+
+        m_agent = GetComponent<NavMeshAgent>();
+        m_agent.updateRotation = true;
+
+
+
+        OnDeath += () => LevelManager.Instance.CurrentEnergy += energyDrop;
+    }
+
+    protected virtual void LateUpdate()
+    {
+        // Setting the animator booleans according to their corresponding conditions
+        Anim.SetBool("hasArrived", Agent.pathStatus == NavMeshPathStatus.PathComplete);
+        Anim.SetBool("hasTarget", currentTarget != Core.transform);
+    }
+
+    public virtual void OnBtwnIntervals() { }
+
+    // Function to define a behaviour that will run upon path completion
+    public abstract void OnPathCompleted();
+
+    // Function to change target to the passed new target & update the pathfinding
+    public void SwitchTarget(Transform newTarget)
+    {
+        if (currentTarget == newTarget) return;
+
+        currentTarget = newTarget;
+        currentDestination = newTarget.position;
+    }
+
+    // Function to randomise a position around the target to better vary pathfinding between enemies
+    public bool GetRandomPointAroundTarget(Vector3 target, float range, out Vector3 result)
+    {
+        for(int i = 0; i < 30; i++)
+        {
+            Vector3 randPoint = target + Random.insideUnitSphere * range;
+            NavMeshHit hit;
+
+            if (NavMesh.SamplePosition(randPoint, out hit, 1.0f, NavMesh.AllAreas))
+            {
+                result = hit.position;
+                return true;
+            }
+        }
+
+        result = Vector3.zero;
+        return false;
+    }
+
+    // Function to set the destination according to the random point function
+    public void SetDestinationAroundTarget(Vector3 targetPos, float range)
+    {
+        Vector3 result;
+
+        if (GetRandomPointAroundTarget(targetPos, range, out result)) 
+        {
+            m_agent.SetDestination(result);
+            return;
+        }
+    }
+}

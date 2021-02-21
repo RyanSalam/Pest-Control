@@ -4,30 +4,32 @@ using UnityEngine;
 
 public class SMB_EnemyAttacking : StateMachineBehaviour
 {
-    #region Variables
-    // Reference to the enemy script on this enemy.
-    Actor_Enemy thisEnemy;
-    #endregion
+
+    Enemy_Grunt self;
+
+    [Range(0, 1)]
+    public float lookAtSmoothness = 0.55f;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // Assign the enemy reference accordingly.
-        thisEnemy = animator.GetComponentInParent<Actor_Enemy>();
-
-        // Prevent the enemy agent from moving.
-        thisEnemy.agent.isStopped = true;
+        self = animator.GetComponentInParent<Enemy_Grunt>();
+        self.Agent.isStopped = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        // During the attack we want to adjust our rotation to look at the target.
+        // Will need to make sure this doesn't happen throughout the animation but only at the first few frames.
+        
+        Vector3 dist = self.transform.position - self.CurrentTarget.position;
+        dist.y = 0;
+    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        self.Agent.isStopped = false;
+    }
 }

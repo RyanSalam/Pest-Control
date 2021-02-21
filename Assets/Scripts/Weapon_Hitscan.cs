@@ -1,6 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
+using System.Collections;
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class Weapon_Hitscan : Weapon
 {
@@ -37,7 +39,11 @@ public class Weapon_Hitscan : Weapon
 
     Vector2 weaponRecoil;
 
-    [SerializeField] protected AnimationCurve animCurve;
+    float timeTillMaxSpread = 4;
+    float maxSpreadAngle = 2;
+
+
+    [SerializeField] protected AnimationCurve spreadCurve;
     [SerializeField] protected float timeFiring = 0f;
 
 
@@ -53,35 +59,41 @@ public class Weapon_Hitscan : Weapon
         base.Awake();
     }
 
+    Coroutine releaseCurrent;
     public override void PrimaryFire()
     {
+        //if these are not true we do not do anything, so nothing below will get run
+        if (!(Time.time > fireRate + lastFired && canFire == true))
+            return;
+
         //our base shoot function is what oversees our weapon heating and cooldown (reload) functionality
-        //it increments shots -> overheats -> cooldowns
-        base.PrimaryFire();
+        //it increments shots -> overheats -> cooldowns        
+
+        if (releaseCurrent != null)
+            StopCoroutine(releaseCurrent);
 
         //muzzle flash creation
         if (muzzleFlashParticle != null)
             muzzleFlashParticle.Play();
 
         ACue.PlayAudioCue();
-        //Ray mouseRay = playerCam.ScreenPointToRay(Input.mousePosition);
-        //Vector2 mousePosition = new Vector2(Random.Range(-bloomX, bloomX)
+
+        timeFiring += Time.deltaTime;
+
+        //float percent = timeFiring / timeTillMaxSpread;
+        float spread = spreadCurve.Evaluate(timeFiring);
+        float currentSpreadAngle = spread * maxSpreadAngle;
+
+        Vector3 mousePosition = playerCam.ScreenToWorldPoint(player.playerInputs.actions["Mouse Pos"].ReadValue<Vector2>());
         
-        //Random spread along axis
-        float spreadX = Random.Range(-bloomX, bloomX);
-        float spreadY = Random.Range(-bloomY, bloomY);
+        float randAnglePitch = Random.Range(-currentSpreadAngle, currentSpreadAngle);
+        float randAngleYaw = Random.Range(-currentSpreadAngle, currentSpreadAngle);
 
-        //converting vector2 to vector3 so it can be used with mouseposition
-        Vector3 spreadVector = new Vector2(spreadX, spreadY);
+        Quaternion spreadAxis = Quaternion.AngleAxis(randAnglePitch, Vector3.right) * Quaternion.AngleAxis(randAngleYaw, Vector3.up);
 
-        //adding bloom to the mouse position
-        Vector3 mousePosition = playerCam.ScreenToWorldPoint(Input.mousePosition + spreadVector);
-
-        Ray ray = new Ray(mousePosition, playerCam.transform.forward + recoil);
+        Ray ray = new Ray(mousePosition, spreadAxis * playerCam.transform.forward);
         RaycastHit hit;
-        Debug.DrawRay(mousePosition, playerCam.transform.forward * range, Color.red);
-
-        
+        Debug.DrawRay(FirePoint.position, spreadAxis * playerCam.transform.forward, Color.green);
 
         if (Physics.Raycast(ray, out hit, range))
         {
@@ -107,19 +119,36 @@ public class Weapon_Hitscan : Weapon
 
             //instantiating our impact particles for now - hope for an object pool down the line
             if (ImpactParticle != null)
-                Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
-
-            
-
+            {
+                var temp = Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(temp.gameObject, 1f); // replaced with object pool
+            }
+                
         }
 
+        if (!auto) // Ryan Was Here
+        {
+            Release();
+            playerCam.transform.DOPunchRotation(Vector3.right * -2.5f, 0.25f);
+        }
+            
+
+        base.PrimaryFire();
     }
 
+    
     public override void Release()
     {
         base.Release();
+        
+        releaseCurrent = StartCoroutine(ReleaseDelay());
+    }
 
-        //reseting our recoil
+    IEnumerator ReleaseDelay()
+    {
+        yield return new WaitForSeconds(fireRate + 0.3f);
+        timeFiring = 0f;
+        isFiring = false;
         muzzleFlashParticle.Stop();
     }
 
@@ -149,12 +178,16 @@ public class Weapon_Hitscan : Weapon
             rotationalRecoil += new Vector3(-RecoilRotation.x, Random.Range(-RecoilRotation.y, RecoilRotation.y), Random.Range(-RecoilRotation.z, RecoilRotation.z));
             positionalRecoil += new Vector3(Random.Range(-RecoilKickBack.x, RecoilKickBack.x), Random.Range(-RecoilKickBack.y, RecoilKickBack.y), RecoilKickBack.z);
 
+            timeFiring += Time.deltaTime;
+            
+
         }
         else //if we are not firing we need to go back to normal
         {
             //weapon recoil script
             rotationalRecoil = Vector3.Lerp(rotationalRecoil, Vector3.zero, rotationalReturnSpeed * Time.deltaTime);
             positionalRecoil = Vector3.Lerp(positionalRecoil, Vector3.zero, positionalReturnSpeed * Time.deltaTime);
+            
         }
 
         transform.localPosition = positionalRecoil;

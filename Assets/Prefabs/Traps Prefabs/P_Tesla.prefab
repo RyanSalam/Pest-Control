@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6662004006499764242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6286992044012704424}
+  - component: {fileID: -6953393950034930389}
+  - component: {fileID: 3016918925551148971}
+  m_Layer: 11
+  m_Name: P_Tesla
+  m_TagString: Trap
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6286992044012704424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662004006499764242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.5, y: 0, z: 16.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5635333082045464780}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &-6953393950034930389
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662004006499764242}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1775379, y: 1.6326563, z: 1.1855164}
+  m_Center: {x: -0.015593529, y: 0.31632817, z: 0.03680992}
+--- !u!114 &3016918925551148971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662004006499764242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ff234010e401f4ea5849e87efb95f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trapDamage: 1
+  maxUses: 10
+  buildDuration: 0
+  currentUses: 0
+  enemyChainAmmount: 4
+  chainRadius: 2
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!1001 &5635333082045602380
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6286992044012704424}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_Name
+      value: Electri_Trap_LowPoly
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855696
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+--- !u!4 &5635333082045464780 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5635333082045602380}
+  m_PrefabAsset: {fileID: 0}

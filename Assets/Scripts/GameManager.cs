@@ -5,23 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    public static Actor_Player selectedPlayer;
-    public static string SelectedLevel;
+    public static Character selectedPlayer;
+    public static string selectedLevel;
 
-    public void Restart()
+    public void SetMissionParam()
     {
-        string scene = SceneManager.GetActiveScene().name;
-        LoadScene(scene);
+        selectedPlayer = FindObjectOfType<MenuHandler>().GetCharacter();
+        selectedLevel = FindObjectOfType<MenuHandler>().GetLevel();
+        LoadScene();
     }
 
-    public void LoadScene(string SceneName)
+    public void LoadScene()
     {
-        SceneManager.LoadScene(SceneName);
+        SceneManager.LoadScene(selectedLevel);
     }
 
-    public void SetLevel(string name)
+    
+
+    public void ReturnToMenu()
     {
-        SelectedLevel = name;
+        SceneManager.LoadScene("Main Menu");
+    }    
+
+    public Character GetCharacter()
+    {
+        return selectedPlayer;
     }
 
     public void OnQuitButton()

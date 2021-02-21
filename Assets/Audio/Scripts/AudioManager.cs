@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
 	[SerializeField] private AudioCueEventChannelSO _SFXEventChannel = default;
 	[Tooltip("The SoundManager listens to this event, fired by objects in any scene, to play Music")]
 	[SerializeField] private AudioCueEventChannelSO _musicEventChannel = default;
-
+ 
 	[Header("Audio control")]
 	[SerializeField]  private AudioMixer audioMixer = default;
 	[SerializeField] [Range(0f, 1f)] private float _masterVolume;
@@ -46,17 +46,7 @@ public class AudioManager : MonoBehaviour
 
 		_pool.Prewarm(_initialSize);
 		_pool.SetParent(this.transform);
-		
-		//if (PlayerPrefs.HasKey("MasterVolumePreference"))
-		//	_masterVolume = PlayerPrefs.GetFloat("MasterVolumePreference");
-		
 
-		//if (PlayerPrefs.HasKey("MusicVolumePreference"))
-		//	_musicVolume = PlayerPrefs.GetFloat("MusicVolumePreference");
-		
-
-		//if (PlayerPrefs.HasKey("SFXVolumePreference"))
-		//	_sfxVolume = PlayerPrefs.GetFloat("SFXVolumePreference");
 		}
 		
 		else
@@ -79,9 +69,7 @@ public class AudioManager : MonoBehaviour
 	{
 		if (Application.isPlaying)
 		{
-			//SetGroupVolume("Master", _masterVolume);
-			//SetGroupVolume("Music", _musicVolume);
-			//SetGroupVolume("SFX", _sfxVolume);
+
 		}
 		Debug.Log("master: " + _masterVolume + "  music:  " + _musicVolume + "  sfx:  " + _sfxVolume);
 	}

@@ -8,13 +8,22 @@ public class GrenadierScript : MonoBehaviour
     public Rigidbody Projectile { get { return projectile; } }
 
     //counter to track our bounces
-    int bounceCount;
+    [SerializeField] int bounceCount;
 
     //max counts for our grenade
-    int maxBounceCount;
+    [SerializeField] int maxBounceCount;
 
     //scalar value for our addForce();
-    int projectileForce = 10;
+    [SerializeField] int projectileForce = 10;
+
+    //explosion radius 
+    [SerializeField] int radius = 15;
+
+    [SerializeField] int damage = 10;
+
+    public GameObject explosionVFX;
+
+    LayerMask enemyLayerMask;
 
     // Start is called before the first frame update
     void Start()
@@ -24,15 +33,12 @@ public class GrenadierScript : MonoBehaviour
 
         maxBounceCount = 2;
 
+        enemyLayerMask = LayerMask.GetMask("Enemy");
+
         projectile.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+   
     private void OnCollisionEnter(Collision collision)
     {
         //Vector3 newDirection = Vector3.Reflect(transform.position, collision.GetContact(0).normal);
@@ -44,8 +50,37 @@ public class GrenadierScript : MonoBehaviour
 
         if (bounceCount >= maxBounceCount)
         {
-            Debug.Log("Kaboom?");
-            Destroy(gameObject);
+            if (explosionVFX != null)
+            {
+                GameObject tempVFX = Instantiate(explosionVFX, transform.position, transform.rotation);
+                tempVFX.transform.localScale *= 5f;
+                Destroy(tempVFX, 0.15f);
+            }
+            damageEnemies();
+            
         }
+    }
+
+    void damageEnemies()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius, enemyLayerMask);
+
+        if (colliders.Length > 0)
+        {
+            foreach (Collider c in colliders)
+            {
+                //temporary actor enemy so we can null check
+                Actor_Enemy temp = c.gameObject.GetComponent<Actor_Enemy>();
+                
+                //if the enemyActor component exists damage it
+                if (temp != null)
+                {
+                    Debug.Log("damaging enemies");
+                    temp.TakeDamage(damage);
+                }
+            }
+        }
+
+        Destroy(gameObject, 0.25f);
     }
 }

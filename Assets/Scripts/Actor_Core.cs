@@ -20,6 +20,7 @@ public class Actor_Core : Actor
         [Tooltip("The time it will take to interpolate to it's resting rotation")]
         [SerializeField] float interpolateDuration = 0.3f;
 
+        public event System.Action CoreRingDestroyed;
         private bool bIsRotating = true;
 
         public void HandleRingRotation()
@@ -39,7 +40,9 @@ public class Actor_Core : Actor
             {
                 bIsRotating = false;
                 ring.transform.DORotate(restRotation, interpolateDuration).OnComplete(() => 
-                    ring.isKinematic = false);                
+                    ring.isKinematic = false);
+                CoreRingDestroyed?.Invoke();
+                
             }
         }
     }
@@ -54,6 +57,7 @@ public class Actor_Core : Actor
         foreach (CoreRing ring in rings)
         {
             OnHealthChanged += ring.CheckThreshold;
+            
         }
     }
 
@@ -64,4 +68,6 @@ public class Actor_Core : Actor
             ring.HandleRingRotation();
         }
     }
+
+    
 }

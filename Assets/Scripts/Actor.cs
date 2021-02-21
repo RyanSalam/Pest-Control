@@ -37,7 +37,7 @@ public abstract class Actor : MonoBehaviour
     [Header("Hit Box Properties")]
     [Tooltip("Determines The area where this Actor can take damage from")]
     [Range(0.0f, 360.0f)]
-    [SerializeField] protected float hitAngle = 360.0f;
+    [SerializeField] public float hitAngle = 360.0f;
 
     [Tooltip("Determines where your hit angle starts from.")]
     [Range(0.0f, 360.0f)]
@@ -70,7 +70,8 @@ public abstract class Actor : MonoBehaviour
         if (isDead) return; // We don't want to take anymore damage if we're already dead.
 
         CurrentHealth -= damageAmount;
-        Anim.SetTrigger("Hit");
+        if (Anim != null)
+            Anim.SetTrigger("Hit");
     }
 
     /// <summary>
@@ -98,14 +99,16 @@ public abstract class Actor : MonoBehaviour
 
         CurrentHealth -= data.damageAmount;
         OnDamageTaken?.Invoke(data);
-        Anim.SetTrigger("Hit");
+
+        if (Anim != null)
+            Anim.SetTrigger("Hit");
     }
 
     protected virtual void Death()
     {
         isDead = true;
-        Anim.SetTrigger("Death");
         OnDeath?.Invoke();
+        Anim.SetTrigger("Death");
     }
 
     // OnEnabled will basically be our respawn solution.

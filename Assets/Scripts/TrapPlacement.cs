@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TrapPlacement : MonoBehaviour, IEquippable
 {
@@ -8,10 +7,16 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     public Transform trapModel;
     [SerializeField] protected float offset;
     [SerializeField] protected float verticalSearch; //max distance for raycast
-    [SerializeField] protected LayerMask whatIsBuildable; // detecting groundlayer for raycast 
+    [SerializeField] protected LayerMask whatIsBuildable;// detecting groundlayer for raycast 
+    [SerializeField] protected LayerMask obstacleMasks;
     [SerializeField] protected int trapPrice;
     public bool isDebugging;
+    public Material Hologram;
+    public bool CanPlace;
 
+    [SerializeField] private float obstacleDetectionRange = 3;
+
+    Actor_Player player;
 
     //Audio Settings
     AudioCue ACue;
@@ -21,52 +26,101 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         gameObject.SetActive(false);
     }
 
-    public void Equip()
+    protected void Start()
     {
-        transform.SetParent(LevelManager.Instance.Player.TrapHolder);
-        transform.localPosition = Vector3.zero + transform.forward * offset; //resetting gameObject's position
-        gameObject.SetActive(true); //setting trap to activate when equiping 
+        ACue = GetComponent<AudioCue>();
     }
 
     private void Update()
     {
-        //transform.position = new Vector3(offset, LevelManager.Instance.Player.transform.position.y, 0); //setting the offset of trap in front of player
+        transform.position = LevelManager.Instance.Player.TrapHolder.position + (LevelManager.Instance.Player.transform.forward * offset);
 
         RaycastHit outHit;
         Ray floorCast = new Ray(transform.position, Vector3.down); //cast from trap to spawn 
         Debug.DrawRay(transform.position, Vector3.down, Color.green);
+
+        Collider[] obstacles = Physics.OverlapBox(trapModel.position, Vector3.one * obstacleDetectionRange, Quaternion.identity, obstacleMasks);
+
         if (Physics.Raycast(floorCast, out outHit, verticalSearch, whatIsBuildable))
         {
-           trapModel.position = outHit.transform.position; // assigning the trap to raycast hit position
+            trapModel.position = outHit.transform.position;
+            
         }
-       
+
+        CanPlace = obstacles.Length <= 0;
+
+        if (CanPlace)
+        {
+            trapModel.position = outHit.transform.position;
+            Hologram.SetColor("Color_F3B47044", Color.blue); //assigning placeable trap colour to blue 
+        }
+        else
+        { 
+            
+            Hologram.SetColor("Color_F3B47044", Color.red);// Changing the colour of the trap to red if it can't be placed
+            CanPlace = false;
+        }
+        
     }
 
-    public void PrimaryFire()
+    public virtual void HandleInput(InputAction.CallbackContext context)
     {
-        //setting the trap GameObject to spawn on raycast's position 
-        GameObject tempTrap = Instantiate(trapToSpawn, trapModel.position, transform.rotation); //instantiating trap 
-        ACue.PlayAudioCue();
-    }
+        switch (context.action.name)
+        {
+            case "Fire":
 
-    public bool PrimaryFireCheck()
+                if (context.phase == InputActionPhase.Performed)
+                    PlaceTrap();
+
+                break;
+
+            case "Alt Fire":
+
+                if (context.phase == InputActionPhase.Performed)
+                    RotateTrap();
+
+                break;
+        }
+    }
+    protected void PlaceTrap()
     {
-        return Input.GetButtonDown("Fire1");
+        Debug.Log("IS THIS BEING CALLED");
+        if (LevelManager.Instance.CurrentEnergy < trapPrice)
+            return;
+
+        //setting the trap GameObject to spawn on raycast's position IF its on whatIsbuildable
+        if (CanPlace)
+        {
+            GameObject tempTrap = Instantiate(trapToSpawn, trapModel.position, transform.rotation); //instantiating trap 
+            ACue.PlayAudioCue();
+            LevelManager.Instance.CurrentEnergy -= trapPrice;
+        }
     }
 
-    public void SecondaryFire()
+    public void RotateTrap()
     {
         transform.Rotate(transform.rotation.eulerAngles + Quaternion.Euler(0, 90, 0).eulerAngles); //rotating trap by 90 degrees clockwise 
     }
 
-    public bool SecondaryFireCheck()
+    public void Equip()
     {
-        return Input.GetButtonDown("Fire2");
+        //resetting gameObject's position then push it a bit forward
+        transform.SetParent(LevelManager.Instance.Player.TrapHolder);
+        transform.localPosition = Vector3.zero;
+        transform.localPosition += transform.forward * offset;
+        transform.SetParent(null);
+        gameObject.SetActive(true); //setting trap to activate when equiping 
+
+        // Registering inputs when we equip this.
+        LevelManager.Instance.Player.playerInputs.onActionTriggered += HandleInput;
     }
 
     public void Unequip()
     {
         gameObject.SetActive(false); //setting trap to deActivate when unEquipping 
+
+        // Deregistering inputs when we unequip this.
+        LevelManager.Instance.Player.playerInputs.onActionTriggered -= HandleInput;
     }
 
     protected void OnDrawGizmos()
@@ -75,10 +129,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         {
             Debug.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - verticalSearch, transform.position.z), Color.green);
         }
-    }
 
-    protected void Start()
-    {
-        ACue = GetComponent<AudioCue>();
+        Gizmos.DrawWireCube(trapModel.position, Vector3.one * obstacleDetectionRange);
     }
 }

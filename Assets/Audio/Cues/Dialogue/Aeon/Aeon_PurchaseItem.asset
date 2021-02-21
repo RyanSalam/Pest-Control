@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c04269c8150901a429efa8db7281493a, type: 3}
+  m_Name: Aeon_PurchaseItem
+  m_EditorClassIdentifier: 
+  looping: 0
+  _audioClipGroups:
+  - sequenceMode: 1
+    audioClips:
+    - {fileID: 8300000, guid: c8e6a05d6e4ae5343af4afd2a78bc1f4, type: 3}
+    - {fileID: 8300000, guid: cb22aa0a10045fc4daed77d566ac37c3, type: 3}
+    - {fileID: 8300000, guid: 52140de4b945ed64598b9cfc68dacce9, type: 3}
+    - {fileID: 8300000, guid: 4e6a739c0f6ca9046ac6d7595e1a1273, type: 3}

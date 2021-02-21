@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - ASMDammo
+  - Trap
   layers:
   - Default
   - TransparentFX
@@ -17,9 +19,9 @@ TagManager:
   - Player
   - Enemy
   - Ground
-  - 
-  - 
-  - 
+  - Trap
+  - Props
+  - Weapons
   - 
   - 
   - 

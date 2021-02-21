@@ -7,16 +7,20 @@ public class Trap : MonoBehaviour
     [SerializeField] protected int trapDamage = 1;
     [SerializeField] protected int maxUses = 10;
     [SerializeField] protected float buildDuration;
-    protected int currentUses;
-    bool isTrapBuilt;
+    public int currentUses;
+    protected bool isTrapBuilt;
     Timer buildTimer;
     protected Animator anim;
 
 
-    protected virtual void Start()
+
+    protected virtual void Awake()
     {
         buildTimer = new Timer(buildDuration, false);
         buildTimer.OnTimerEnd += () => isTrapBuilt = true; //lamda expression: delegates without parameters and dont have an excessive function 
+    }
+    protected virtual void Start()
+    {
         anim = GetComponent<Animator>();
     }
 
@@ -28,15 +32,16 @@ public class Trap : MonoBehaviour
             buildTimer.Tick(Time.deltaTime); //increasing build timer before the trap is built
             return;
         }
+        
     }
 
     public virtual void Activate()
     {
-       /* if (!isBuilt) // should be implemented on the top like this for other trap scripts if overiding
-        {
-            return;
-        }
-       */
+        /* if (!isTrapBuilt) // should be implemented on the top like this for other trap scripts if overiding
+         {
+             return;
+         }
+        */
         // when trap is activated
         currentUses++; //add current uses 
         if (currentUses >= maxUses) //checks if the current trap uses is greater or equal to max
@@ -48,7 +53,7 @@ public class Trap : MonoBehaviour
     protected virtual void OnEnable()
     {
         //function that gets called when a trap is placed
-        if(WaveManager.Instance.IsBuildPhase == false) // checking if it is not on the build phase 
+        if(WaveManager.Instance.isBuildPhase == false) // checking if it is not on the build phase 
         {
             buildTimer.PlayFromStart(); //starting buildTimer
         }
@@ -56,8 +61,8 @@ public class Trap : MonoBehaviour
         {
             isTrapBuilt = true; //if its on build phase instantly built the trap 
         }
-        currentUses = 0; //this should always occur when you spawn a trap so that it resets its current uses and dosent destroy instantly 
-
+        currentUses = 0; //this should always occur when you spawn a trap so that it resets its current uses and dosent destroy instantly
+        LevelManager.Instance.AssessTraps(this); 
     }
 
     protected virtual void OnDrawGizmos()

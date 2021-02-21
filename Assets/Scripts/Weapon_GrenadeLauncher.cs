@@ -26,9 +26,9 @@ public class Weapon_GrenadeLauncher : Weapon
     //4. finally go boom
     
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
     }
 
     // Update is called once per frame
@@ -68,9 +68,7 @@ public class Weapon_GrenadeLauncher : Weapon
 
     public override void PrimaryFire()
     {
-        base.PrimaryFire();
-
-        if (Time.time  > lastFired)
+        if (Time.time  > lastFired + fireRate && canFire)
         {
             shootPhase1();
 
@@ -83,8 +81,12 @@ public class Weapon_GrenadeLauncher : Weapon
             //    damageSource = firePoint.transform.position
             //};
 
-            lastFired = Time.time + fireRate;
+            lastFired = Time.time;
+
+            base.PrimaryFire();
         }
+
+       
     }
 
 

@@ -166,7 +166,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4170628562088871640}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -251,6 +251,7 @@ MonoBehaviour:
   externalMouseForce: {x: 0, y: 0}
   jumpStrength: 4
   _minJumpDuration: 0.75
+  _maxJumpDuration: 2
   mass: 1
   airtime: 0
   _playerCam: {fileID: 3828171031570228784}
@@ -259,3 +260,5 @@ MonoBehaviour:
   _abilitySpawnPoint: {fileID: 0}
   _weaponHolder: {fileID: 0}
   _trapHolder: {fileID: 0}
+  _audioCue: {fileID: 0}
+  _cInfo: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5373822929418806600}
   - component: {fileID: 3144585370819950363}
   - component: {fileID: 6582898349648027028}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: InnerLaser06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 6748729385843857582}
   - component: {fileID: 8412660878361053404}
   - component: {fileID: 3617279690820521587}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Nobs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 6328420386864723782}
   - component: {fileID: 1543953064664135430}
   - component: {fileID: 641551493510496202}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model(Base)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 1195097551103073559}
   - component: {fileID: 8990638324395547392}
   - component: {fileID: 4095554454035861489}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: InnerLaser02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 6708147692109128654}
   - component: {fileID: 6393841989973370832}
   - component: {fileID: 6395779620296544161}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: InnerLaser04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 4992827299783722470}
   - component: {fileID: 5588915746817991095}
   - component: {fileID: 8609209676008632644}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: OutLaserBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,7 +499,7 @@ GameObject:
   - component: {fileID: 6624368776730949529}
   - component: {fileID: 3634616000923525893}
   - component: {fileID: 4978521666724708992}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: OutLaser01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,7 +579,7 @@ GameObject:
   - component: {fileID: 7931018700053671635}
   - component: {fileID: 5307198118304666188}
   - component: {fileID: 4476353489783076999}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: OutLaser02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -659,7 +659,7 @@ GameObject:
   - component: {fileID: 2128084323927793624}
   - component: {fileID: 9052469537276119923}
   - component: {fileID: 8481848326712949048}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: OutLaser03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -737,9 +737,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6286992044012704424}
-  m_Layer: 0
+  - component: {fileID: -6953393950034930389}
+  - component: {fileID: -7431271187095337397}
+  m_Layer: 11
   m_Name: P_LaserTrap
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -752,13 +754,41 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6662004006499764242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.511582, y: -6.4049993, z: 8.881357}
+  m_LocalPosition: {x: 10.5, y: 0, z: 16.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6328420386864723782}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &-6953393950034930389
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662004006499764242}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1775379, y: 1.6326563, z: 1.1855164}
+  m_Center: {x: -0.015593529, y: 0.31632817, z: 0.03680992}
+--- !u!114 &-7431271187095337397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662004006499764242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc5611e4ddaa9314bba0471c8fc8480e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trapDamage: 50
+  maxUses: 10
+  buildDuration: 1
 --- !u!1 &7102626379882069075
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,7 +800,7 @@ GameObject:
   - component: {fileID: 5708702530542059940}
   - component: {fileID: 5164145141950980492}
   - component: {fileID: 3487941517084614284}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: InnerLaser05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -849,7 +879,7 @@ GameObject:
   - component: {fileID: 837077977377282208}
   - component: {fileID: 3783624088482559941}
   - component: {fileID: 1248411354384880171}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: OutLaser04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,7 +959,7 @@ GameObject:
   - component: {fileID: 5358167880965493426}
   - component: {fileID: 2985766319115069117}
   - component: {fileID: 3023902596691656692}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: InnerLaser01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1008,7 +1038,7 @@ GameObject:
   - component: {fileID: 6373819154141886015}
   - component: {fileID: 7362803387439533226}
   - component: {fileID: 1962515470271652620}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1087,7 +1117,7 @@ GameObject:
   - component: {fileID: 6257413375922266961}
   - component: {fileID: 1147520036353700911}
   - component: {fileID: 924769160110656803}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: InnerLaser03
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -8,7 +8,7 @@ public abstract class AltFireAttachment : ScriptableObject
 
     [Space(10)]
     [Header("Alt Fire Stats")]
-    [SerializeField] protected int energyCostPerFire = 50;
+    [SerializeField] public int energyCostPerFire = 50;
     [SerializeField] protected int secondaryDamage = 8;
 
     public abstract void AltShoot();

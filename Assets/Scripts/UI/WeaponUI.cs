@@ -10,6 +10,15 @@ public class WeaponUI : MonoBehaviour
     [SerializeField] Image hitmarkerImage;
     [SerializeField] float hitmarkerTime;
 
+    [SerializeField] Image equippedWeaponIcon;
+
+    [SerializeField] InventorySlot[] inventorySlots;
+
+    private void Start()
+    {
+        UpdateInventoryUI();
+    }
+
     // Update heat bar - called when heat level changes
     /// <summary>
     /// Update the heat bar. Call when heat level changes. Takes in current heat level and max heat level
@@ -45,6 +54,36 @@ public class WeaponUI : MonoBehaviour
     {
         yield return new WaitForSeconds(hitmarkerTime);
         hitmarkerImage.enabled = false;
+    }
+
+    public void UpdateEquippedWeapon(Item itemToUse)
+    {
+        foreach (InventorySlot slot in inventorySlots)
+        {
+            // Find currently equipped weapon
+            if (itemToUse.itemIcon == slot.itemIcon.sprite)
+                slot.SetSelectedItem(true);
+            else
+                slot.SetSelectedItem(false);
+        }
+    }
+
+    public void UpdateInventoryUI()
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            if (i < LevelManager.Instance.InventoryList.Count)
+            {
+                //Debug.Log(LevelManager.Instance.InventoryList[i].ToString());
+                //slots[i].AddItem(LevelManager.Instance.InventoryList[i]);
+                inventorySlots[i].AddItem(LevelManager.Instance.InventoryList[i]);
+            }
+            else
+            {
+                //slots[i].ClearSlot();
+                inventorySlots[i].ClearInventorySlot();
+            }
+        }
     }
 
 }

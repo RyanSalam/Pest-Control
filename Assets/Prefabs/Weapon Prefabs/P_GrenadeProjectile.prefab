@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 170988254655678532}
   - component: {fileID: 7876477369084010117}
   - component: {fileID: 7513803429035349772}
-  - component: {fileID: 5825625685068881652}
+  - component: {fileID: 8907783118398424146}
   m_Layer: 0
   m_Name: P_GrenadeProjectile
   m_TagString: Untagged
@@ -111,7 +111,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5825625685068881652
+--- !u!114 &8907783118398424146
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,7 +120,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 860624453597402381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8d8bf6dd7f22464ea9092f85425fb8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 80925470f883eeb4fa48e1a952b2e0e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 7513803429035349772}
+  bounceCount: 0
+  maxBounceCount: 2
+  projectileForce: 10
+  radius: 10
+  damage: 100
+  explosionVFX: {fileID: 1845764070681338, guid: ac2312a3e32471549882f1a6da5568e6,
+    type: 3}
