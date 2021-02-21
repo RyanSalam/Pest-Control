@@ -16,9 +16,27 @@ MonoBehaviour:
   c_name: Ryder
   c_desc: TechnoWiz
   c_profile: {fileID: 21300000, guid: 1d966881e60f3a842ad57d6c8cf5bb35, type: 3}
-  A1_image: {fileID: 21300000, guid: a8ae8eb9130450c448421a2f70fddf29, type: 3}
+  A1_image: {fileID: 21300000, guid: afb5843854c6b3441b139f09e984739d, type: 3}
+  A1_name: Drone
   A1_text: Drone Bot
-  A2_image: {fileID: 21300000, guid: 4aea93a9d0931534ca490b2f6a454008, type: 3}
+  A2_image: {fileID: 21300000, guid: f52c52a940118414ca1e086402c90bfd, type: 3}
+  A2_name: Swarm
   A2_text: Nano Swarm
   ab1: {fileID: 0}
   ab2: {fileID: 0}
+  UseAbility1: {fileID: 0}
+  UseAbility2: {fileID: 0}
+  BuildPhaseStart: {fileID: 0}
+  BuildTrap: {fileID: 0}
+  CharacterChosen: {fileID: 0}
+  CoreDamaged: {fileID: 0}
+  EnemyKill: {fileID: 0}
+  MissionLoss: {fileID: 0}
+  MissionWin: {fileID: 0}
+  MissionStart: {fileID: 0}
+  PlayerHit: {fileID: 0}
+  PlayerRespawn: {fileID: 0}
+  PurchaseItem: {fileID: 0}
+  TrapDestroyed: {fileID: 0}
+  WaveStart: {fileID: 0}
+  Responses: {fileID: 0}

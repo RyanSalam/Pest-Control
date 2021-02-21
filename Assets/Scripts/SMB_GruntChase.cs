@@ -38,7 +38,7 @@ public class SMB_GruntChase : StateMachineBehaviour
     {
         if (Vector3.Distance(self.transform.position, self.CurrentTarget.position) >= loseAggroDistance)
         {
-            self.SwitchTarget(self.Core.transform);
+            //self.SwitchTarget(self.Core.transform);
         }
 
         else

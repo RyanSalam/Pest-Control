@@ -16,9 +16,27 @@ MonoBehaviour:
   c_name: Alice
   c_desc: Frost
   c_profile: {fileID: 21300000, guid: b2828565d03a36640bec54c64650bfc6, type: 3}
-  A1_image: {fileID: 21300000, guid: 227be678fbd7e3940a5496b5815edf57, type: 3}
+  A1_image: {fileID: 21300000, guid: f0a2a5df3eac55345bddd2536c8e3cd3, type: 3}
+  A1_name: Cryo
   A1_text: Cryo
-  A2_image: {fileID: 21300000, guid: 4249c063e30d5cf4799897b7e3d2c273, type: 3}
+  A2_image: {fileID: 21300000, guid: 6ce14ad8d4245c342934204d618cffc0, type: 3}
+  A2_name: Blizzard
   A2_text: Blizzard
   ab1: {fileID: 0}
   ab2: {fileID: 0}
+  UseAbility1: {fileID: 0}
+  UseAbility2: {fileID: 0}
+  BuildPhaseStart: {fileID: 0}
+  BuildTrap: {fileID: 0}
+  CharacterChosen: {fileID: 0}
+  CoreDamaged: {fileID: 0}
+  EnemyKill: {fileID: 0}
+  MissionLoss: {fileID: 0}
+  MissionWin: {fileID: 0}
+  MissionStart: {fileID: 0}
+  PlayerHit: {fileID: 0}
+  PlayerRespawn: {fileID: 0}
+  PurchaseItem: {fileID: 0}
+  TrapDestroyed: {fileID: 0}
+  WaveStart: {fileID: 0}
+  Responses: {fileID: 0}

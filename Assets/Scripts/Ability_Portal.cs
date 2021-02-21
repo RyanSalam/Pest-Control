@@ -10,7 +10,11 @@ public class Ability_Portal : Ability
 
     List<PortalSender> portalList;
     private int portalCount = 0;
-
+    public bool canMake;
+    [SerializeField] protected LayerMask whatIsBuildable;// detecting groundlayer for raycast 
+    [SerializeField] protected LayerMask obstacleMasks;
+    [SerializeField] private float obstacleDetectionRange = 3;
+    [SerializeField] protected float verticalSearch; //max distance for raycast
     public override void Initialize(GameObject abilitySource)
     {
         base.Initialize(abilitySource);
@@ -43,14 +47,29 @@ public class Ability_Portal : Ability
     public override void Execute()
     {
 
-        portalList[portalCount].transform.position = pA.AbilitySpawnPoint.position + pA.AbilitySpawnPoint.transform.forward * 3;
-        portalList[portalCount].transform.rotation = pA.AbilitySpawnPoint.rotation;
+        RaycastHit outHit;
+        Ray floorCast = new Ray(pA.AbilitySpawnPoint.position, Vector3.down); //cast from player to spawn 
+        Debug.DrawRay(pA.AbilitySpawnPoint.position, Vector3.down, Color.blue);
 
-        portalList[portalCount].gameObject.SetActive(true);
-        portalCount++;
+        Collider[] obstacles = Physics.OverlapBox(pA.AbilitySpawnPoint.position, Vector3.one * obstacleDetectionRange, Quaternion.identity, obstacleMasks);
 
-        Debug.Log("Portal Count : " + portalCount);
+        /*
+        if (Physics.Raycast(floorCast, out outHit, verticalSearch, whatIsBuildable))
+        {
+            pA.AbilitySpawnPoint.position = outHit.transform.position;
 
+        }
+        */
+        canMake = obstacles.Length <= 0;
+
+        if (canMake)
+        {
+            portalList[portalCount].transform.position = pA.AbilitySpawnPoint.position + pA.AbilitySpawnPoint.transform.forward * 3;
+            portalList[portalCount].transform.rotation = pA.AbilitySpawnPoint.rotation;
+            portalList[portalCount].gameObject.SetActive(true);
+            portalCount++;
+        }
+        
         if (portalCount == portalList.Count)
             // Call this when you want to start the cooldown
             base.Execute();

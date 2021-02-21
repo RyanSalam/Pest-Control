@@ -21,12 +21,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ball
-  m_Shader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: -6465566751694194690, guid: 87265a722b9632346bbdcc6541c2cb52,
+    type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -56,11 +57,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2627C88C_Texture_1:
+        m_Texture: {fileID: 2800000, guid: a755dffd3a65f334aa5162022ada839e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_24FCA2E0: 0.8
+    - Vector1_8A2FCB5E: 1
+    - Vector1_D54F60A3: 0.19
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -83,6 +91,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_195383CE: {r: 0.07329842, g: 0.0104712, b: 0.08376963, a: 1}
     - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
     - _Color: {r: 0.21698111, g: 0.029681385, b: 0.19825107, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

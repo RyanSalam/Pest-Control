@@ -20,6 +20,10 @@ public class LevelManager : MonoSingleton<LevelManager>
         get { return _player; }
     }
 
+    private Character Char_SO;
+    private AudioCue Cues;
+
+
     private int _currentEnergy = 200;
     public int CurrentEnergy
     {
@@ -72,6 +76,8 @@ public class LevelManager : MonoSingleton<LevelManager>
     [SerializeField] GameObject PauseStartingButton;
     [SerializeField] GameObject GameOverStartingButton;
 
+    protected bool gameOver = false;
+
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
         base.Awake();
@@ -81,6 +87,12 @@ public class LevelManager : MonoSingleton<LevelManager>
             _player = FindObjectOfType<Actor_Player>();
         }
 
+        //Copy reference to Char Info and AudioManager
+        Char_SO = GameManager.Instance.GetCharacter();
+        Cues = FindObjectOfType<AudioCue>();
+        
+        
+
         m_equipables = new Dictionary<Item, IEquippable>();
 
         if (StartingItem != null)
@@ -89,52 +101,25 @@ public class LevelManager : MonoSingleton<LevelManager>
             StartingItem.Use();
         }
 
+        Player.OnDeath += Respawn; // adding the respawn function to character after death 
+        Player.OnDeath += characterUI.ResetHealthOnRespawn; //Reset health UI on respawn
 
-
-        #region PlayerSetupInitialization
-
-        //if (_player == null)
-        //    _player = FindObjectOfType<Actor_Player>();
-
-        //if (playerSpawnPoint == null)
-        //{
-        //    //Respawn Player if there is no Spawn Point Found
-        //    playerSpawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
-
-        //    if (playerSpawnPoint == null)
-        //        Debug.LogError("No Spawn Point Found you cunt!");
-        //}
-
-        //if (GameManager.selectedPlayer != null)
-        //{
-        //    // Spawn Player from gameManager.
-        //    _player = Instantiate(GameManager.selectedPlayer, playerSpawnPoint.transform.position, Quaternion.identity);            
-        //}
-
-        //else
-        //{
-        //    Debug.Log("No GameManager found, Searching for player here");
-
-
-        //    if (_player == null)
-        //        Debug.LogError("THere's no player in your scene you cunt! Are you even trying?");
-        //}
-
-        //_player.OnDeath += Respawn;
-
-        #endregion
         Player.controlsEnabled = true;
         shopUI.pauseMenu.SetActive(false);
+        gameOver = false;
 
     }
 
     private void Start()
     {
         Core.OnDeath += () => GameOver(false);
-        Player.OnDamageTaken += (DamageData) => Player._audioCue.PlayAudioCue(Player._cInfo.PlayerHit, 15);
+        
         Time.timeScale = 1;
 
         Player.playerInputs.onActionTriggered += HandleInput;
+
+        SubscribeToAudioEvents();
+
     }
 
     private void SetSelectedButton(GameObject newSelectedObj)
@@ -151,12 +136,12 @@ public class LevelManager : MonoSingleton<LevelManager>
         {
             case "Pause":
                 // Couldn't find a simple hold for now. Handling automatic firing in update.
-                if (context.phase == InputActionPhase.Performed && !shopUI.gameObject.activeSelf && Core.CurrentHealth > 0)
+                if (context.phase == InputActionPhase.Performed && !shopUI.gameObject.activeSelf && Core.CurrentHealth > 0 && !gameOver)
                     TogglePause();
                 break;
 
             case "Shop":
-                if (context.phase == InputActionPhase.Performed && !shopUI.pauseMenu.activeSelf)
+                if (context.phase == InputActionPhase.Performed && !shopUI.pauseMenu.activeSelf && !gameOver)
                     ToggleShop();
                 break;
         }
@@ -164,7 +149,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void Update()
     {
-        if (shopUI.gameObject.activeSelf && !WaveManager.Instance.IsBuildPhase)
+        if (shopUI.gameObject.activeSelf && !WaveManager.Instance.isBuildPhase)
             shopUI.CloseShop();
     }
 
@@ -193,7 +178,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void ToggleShop()
     {
-        if (WaveManager.Instance.IsBuildPhase)
+        if (WaveManager.Instance.isBuildPhase)
         {
             shopUI.ToggleMenu();
             shopUI.UpdateItemUI();
@@ -243,8 +228,8 @@ public class LevelManager : MonoSingleton<LevelManager>
         _player.transform.rotation = playerSpawnPoint.rotation;
 
         spectatorCamera.gameObject.SetActive(false);
+        Player.controlsEnabled = true; 
         Player.gameObject.SetActive(true);
-        Player._audioCue.PlayAudioCue(Player._cInfo.PlayerRespawn);
         isRespawning = false;
     }
 
@@ -254,15 +239,14 @@ public class LevelManager : MonoSingleton<LevelManager>
         Cursor.visible = true;
 
         Player.controlsEnabled = false;
+        gameOver = true;
 
         EndGameMenu.SetActive(true);
         EndGameMenu.transform.DOScale(Vector3.one, 0.2f).From(Vector3.zero).OnComplete(() => Time.timeScale = 0.0f);
         EndGameText.text = playerWon ? "Victory!" : "Defeat!";
-        if(playerWon)
-            Player._audioCue.PlayAudioCue(Player._cInfo.MissionWin);
-        if(!playerWon)
-            Player._audioCue.PlayAudioCue(Player._cInfo.MissionLoss);
 
+
+        Player.playerInputs.SwitchCurrentActionMap("UI");
         SetSelectedButton(GameOverStartingButton);
     }
 
@@ -270,6 +254,8 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
+        Player.playerInputs.SwitchCurrentActionMap("Player");
+        gameOver = false;
     }
 
     public void OnQuitButton()
@@ -324,8 +310,23 @@ public class LevelManager : MonoSingleton<LevelManager>
             Player.EquipWeapon(newEquip);
         }
         _currentlyEquipped = itemToUse;
-        weaponUI.UpdateEquippedWeapon();
+        weaponUI.UpdateEquippedWeapon(itemToUse);
     }
 
     #endregion
+
+    private void SubscribeToAudioEvents()
+    {
+        //Player.OnAbilityOneTriggered
+        //Player.OnAbilityTwoTriggered
+        //Player.OnDamageTaken += (DamageData) => Cues.PlayAudioCue(Char_SO.PlayerHit, 10);
+        WaveManager.Instance.OnWaveEnded +=()=> Cues.PlayAudioCue(Char_SO.BuildPhaseStart, 30);
+        //WaveManager.Instance.OnWaveStarted +=()=> Cues.PlayAudioCue(Char_SO.WaveStart, 30);
+        //CoreDamaged
+        foreach (Actor_Enemy enemy in FindObjectsOfType<Actor_Enemy>())
+        {
+            enemy.OnDeath += () => Cues.PlayAudioCue(Char_SO.EnemyKill, 5);
+        }
+
+    }
 }

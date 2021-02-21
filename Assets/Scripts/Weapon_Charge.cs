@@ -8,6 +8,7 @@ public class Weapon_Charge : Weapon
     [SerializeField] protected float maxChargeDuration;
     [SerializeField] protected float chargeModifier = 1.5f;
     [SerializeField] protected float projForce;
+    protected float forceModifier = 1.0f;
     protected float currentCharge = 0f;
     protected float chargeTimer = 0.0f;
     [SerializeField] protected float chargeThreshold;
@@ -21,13 +22,16 @@ public class Weapon_Charge : Weapon
     [SerializeField] private ParticleSystem charging;
     [SerializeField] private ParticleSystem release;
     [SerializeField] AnimationCurve bulletScaleCurve;
+    [SerializeField] bool cooldownActive = false;
+
+    DamageData data;
 
     // Update is called once per frame
     protected override void Update()
     {
         if (isCharging)
         {
-            if (Input.GetButtonUp("Fire1"))
+            if (Input.GetButtonUp("Fire1") || isCanceled)
             {
                 // Release the bullet if it has passed the threshold
                 if (PassedThreshold())
@@ -48,6 +52,26 @@ public class Weapon_Charge : Weapon
         {
             ChargeUntilThreshold();
         }
+
+        // Only tick if you're not firing/charging
+        if (!isFiring)
+            cooldownDelayTimer.Tick(Time.deltaTime);
+
+        // Call PrimaryFire() here since we're not calling base.Update()
+        if (auto && isFiring & canFire && !cooldownActive)
+            PrimaryFire();
+
+        // Protects the heat bar from changing if we try to shoot during cooldown
+        if (cooldownActive)
+        {
+            if (currentShots == 0)
+                cooldownActive = false;
+            else
+            {
+                canFire = false;
+                isFiring = false;
+            }
+        }
     }
 
     // Checks if the charging bullet has reached the threshold
@@ -56,6 +80,7 @@ public class Weapon_Charge : Weapon
         return currentCharge >= chargeThreshold;
     }
 
+    // Makes sure the charge reaches the threshold before release
     public void ChargeUntilThreshold()
     {
         if (!PassedThreshold())
@@ -73,7 +98,7 @@ public class Weapon_Charge : Weapon
     {
         if (canFire == false) return;
 
-        if (isCharging == false)
+        if (isCharging == false && !cooldownActive)
         {
             tempProjectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation, firePoint);
             tempProjectile.GetComponent<Collider>().enabled = false;
@@ -88,7 +113,6 @@ public class Weapon_Charge : Weapon
         }
     }
 
-
     private Coroutine currentChargeCoroutine;
 
     private IEnumerator Charge()
@@ -99,6 +123,7 @@ public class Weapon_Charge : Weapon
         while (currentCharge < maxChargeDuration)
         {
             currentCharge += Time.fixedDeltaTime;
+            forceModifier -= Time.fixedDeltaTime / 2.5f;
             float scaleFactor = bulletScaleCurve.Evaluate(currentCharge / maxChargeDuration);
             tempProjectile.transform.localScale += Vector3.one * scaleFactor;            
 
@@ -112,6 +137,8 @@ public class Weapon_Charge : Weapon
 
         if (tempProjectile == null) return;
 
+        isCanceled = false;
+
         // Stop charging animations
         chargeHold.Stop();
         charging.Stop();
@@ -119,24 +146,25 @@ public class Weapon_Charge : Weapon
         if (isCharging)
             release.Play();
 
-        isCharging = false;
+        if (currentChargeCoroutine != null)
+            StopCoroutine(currentChargeCoroutine);
 
-        StopCoroutine(currentChargeCoroutine);
         currentChargeCoroutine = null;
-
         tempProjectile.transform.SetParent(null);
 
-        if (currentCooldown != null)
+        if (currentCooldown != null && !cooldownActive)
             StopCoroutine(currentCooldown);
 
-        //Debug.Log("currentShots += " + currentCharge * 4);
+        isCharging = false;
+        currentRatio = GetHeatRatio();
+        isFiring = false;
+
         lastFired = Time.time; //reset our last fired
         LevelManager.Instance.WeaponUI.UpdateHeatBar((float)currentShots, (float)maxShots);
-        if (Mathf.RoundToInt(currentCharge * 4) < 20)
-            currentShots++; //increment our current shots by 1 (minimum)
+        if (Mathf.RoundToInt(currentCharge * 5) < 2)
+            currentShots += 3; //increment our current shots by 3 (minimum)
         else
-            currentShots += Mathf.RoundToInt(currentCharge * 4); //increment our current shots
-        currentRatio = GetHeatRatio();
+            currentShots += Mathf.RoundToInt(currentCharge * 5); //increment our current shots as usual
 
         if (currentShots >= maxShots)
         {
@@ -144,25 +172,42 @@ public class Weapon_Charge : Weapon
             canFire = false; //we cannot fire now
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
             currentCooldown = StartCoroutine(WeaponCooldown(GetHeatRatio()));
+            cooldownActive = true;
         }
 
-        DamageData data = new DamageData
+        // If we did a max charge, apply bonus damage
+        if (currentCharge >= maxChargeDuration)
         {
-            damager = player,
-            damageAmount = Mathf.RoundToInt(Damage + (chargeModifier * currentCharge)),
-            direction = (firePoint.forward).normalized,
-            damageSource = firePoint.transform.position
-        };
+            data = new DamageData
+            {
+                damager = player,
+                damageAmount = Mathf.RoundToInt(Damage + (chargeModifier * currentCharge) * 4),
+                direction = (firePoint.forward).normalized,
+                damageSource = firePoint.transform.position
+            };
+        }
+        // Apply normal charge damage
+        else
+        {
+            data = new DamageData
+            {
+                damager = player,
+                damageAmount = Mathf.RoundToInt(Damage + (chargeModifier * currentCharge)),
+                direction = (firePoint.forward).normalized,
+                damageSource = firePoint.transform.position
+            };
+        }
 
         tempProjectile.RB.isKinematic = false;
         tempProjectile.Initialize(data);
         tempProjectile.GetComponent<Collider>().enabled = true;
-        tempProjectile.RB.AddForce(data.direction * projForce, ForceMode.Impulse);
+        tempProjectile.RB.AddForce(data.direction * projForce * forceModifier, ForceMode.Impulse);
+        LevelManager.Instance.Player.PlayerCam.DOShakePosition((3 *currentCharge)/5, new Vector3(0.5f * currentCharge, 0, -0.8f * currentCharge), (int)currentCharge);
 
-        //LevelManager.Instance.Player.PlayerCam.DOShakePosition(currentCharge / 2, new Vector3(1, 0, .5f), (int)currentCharge);
-
+        // Reset variables
         lastFired = Time.time;
         currentCharge = 0;
         chargeTimer = 0.0f;
+        forceModifier = 1.0f;
     }
 }

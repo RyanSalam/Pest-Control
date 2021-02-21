@@ -15,6 +15,7 @@ public class ShopUI : MonoBehaviour
     [SerializeField] public GameObject combatHUD;
     [SerializeField] public GameObject pauseMenu;
     public GameObject[] hudElements;
+    [SerializeField] InventorySlot[] inventorySlots;
 
     private void Awake()
     {
@@ -78,11 +79,12 @@ public class ShopUI : MonoBehaviour
             {
                 //Debug.Log(LevelManager.Instance.InventoryList[i].ToString());
                 slots[i].AddItem(LevelManager.Instance.InventoryList[i]);
-                LevelManager.Instance.Player._audioCue.PlayAudioCue(LevelManager.Instance.Player._cInfo.PurchaseItem, 35);
+                inventorySlots[i].AddItem(LevelManager.Instance.InventoryList[i]);
             }
             else
             {
                 slots[i].ClearSlot();
+                inventorySlots[i].ClearInventorySlot();
             }
         }
     }

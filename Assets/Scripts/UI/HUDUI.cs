@@ -36,8 +36,6 @@ public class HUDUI : MonoBehaviour
     {
         core = LevelManager.Instance.Core;
         core.OnHealthChanged += UpdateCoreHealth;
-        WaveInfoPanel.SetActive(false);
-        phaseTimer.SetActive(false);
     }
 
     private void Update()
@@ -46,8 +44,8 @@ public class HUDUI : MonoBehaviour
 
         if (phaseTimer.activeSelf)
         {
-            phaseTimerProgress = WaveManager.Instance.BuildPhaseTimer.GetProgress();
-            phaseTimerCount.text = Mathf.RoundToInt(WaveManager.Instance.BuildPhaseTimer.GetRemaining()).ToString();
+            phaseTimerProgress = WaveManager.Instance.buildPhaseTimer.GetProgress();
+            phaseTimerCount.text = Mathf.RoundToInt(WaveManager.Instance.buildPhaseTimer.GetRemaining()).ToString();
             phaseTimerClock.fillAmount = 1 - phaseTimerProgress;
         }
     }
@@ -76,7 +74,7 @@ public class HUDUI : MonoBehaviour
         // Display build phase
         currentPhase = "Build Phase";
         buildPhase.text = currentPhase;
-        waveNumber.text = "Wave " + WaveManager.Instance.WaveNumber.ToString();
+        waveNumber.text = "Wave " + (WaveManager.Instance.waveIndex + 1).ToString();
         // Display the phase timer until the end of the buildphase
         phaseTimer.SetActive(true);
         // Hide the enemyInfo Panel
@@ -96,10 +94,10 @@ public class HUDUI : MonoBehaviour
         phaseTimer.SetActive(false);
         // Display wave info panel
         // Display defense phase
-        currentPhase = "Defence Phase";
+        currentPhase = "Enemies Incoming!";
         buildPhase.text = currentPhase;
         WaveInfoPanel.SetActive(true);
-        waveNumber.text = "Wave " + WaveManager.Instance.WaveNumber.ToString();
+        waveNumber.text = "Wave " + (WaveManager.Instance.waveIndex + 1).ToString();
         //Start displaying the enemyInfo Panel
         enemyInfoPanel.SetActive(true);
         // Start displaying coreInfo Panel
@@ -113,12 +111,12 @@ public class HUDUI : MonoBehaviour
 
     private void UpdateEnemyCount()
     {
-        enemyCount.text = WaveManager.Instance.EnemiesRemaining.ToString();
+        enemyCount.text = WaveManager.Instance.enemiesRemaining.ToString();
     }
 
     //public void UpdateWaveNumber()
     //{
-    //    waveNumber.text = WaveManager.Instance.WaveNumber.ToString();
+    //    waveNumber.text = WaveManagerDepreciated.Instance.WaveNumber.ToString();
     //}
     #endregion
 

@@ -16,8 +16,10 @@ public class Character : ScriptableObject
     public Sprite c_profile;
 
     public Sprite A1_image;
+    public string A1_name;
     public string A1_text;
     public Sprite A2_image;
+    public string A2_name;
     public string A2_text;
 
     public Ability ab1;

@@ -61,17 +61,8 @@ public class Actor_Player : Actor
     public IEquippable CurrentEquipped { get { return _currentEquiped; } }
 
     //Audio Params
-    public AudioCue _audioCue;
-    public Character _cInfo;
+    
 
-    public AudioCue AudioCue
-    {
-        get { return _audioCue; }
-    }
-    public Character CharacterInfo
-    {
-        get { return _cInfo; }
-    }
 
     protected override void Awake()
     {
@@ -86,7 +77,7 @@ public class Actor_Player : Actor
 
         playerInputs.actions["Weapon Switch"].performed += HandleWeaponSwap;
 
-        _audioCue = GetComponent<AudioCue>();
+
 
         if (AbilityOne != null)
         {
@@ -125,13 +116,13 @@ public class Actor_Player : Actor
 
         // We're storing our mouse and movement inputs in vectors
         // Helps us know 
-        moveVector = playerInputs.actions["Move"].ReadValue<Vector2>();
+       // moveVector = playerInputs.actions["Move"].ReadValue<Vector2>();
 
-        mouseVector = playerInputs.actions["Look"].ReadValue<Vector2>();
-        mouseVector *= mouseSensitivity * Time.deltaTime;
+      //  mouseVector = playerInputs.actions["Look"].ReadValue<Vector2>();
+       // mouseVector *= mouseSensitivity * Time.deltaTime;
 
-        _camRot -= mouseVector.y;
-        _camRot = Mathf.Clamp(_camRot, -45f, 45f);
+        //_camRot -= mouseVector.y;
+      //  _camRot = Mathf.Clamp(_camRot, -45f, 45f);
 
         // This allows us to control our jump
         // Meaning the longer we hold it, the higher we can jump
@@ -193,6 +184,7 @@ public class Actor_Player : Actor
 
     private void HandleMovement()
     {
+        moveVector = playerInputs.actions["Move"].ReadValue<Vector2>();
         Vector3 movement = transform.right * moveVector.x + transform.forward * moveVector.y;
         movement *= moveSpeed * Time.fixedDeltaTime;
 
@@ -218,6 +210,12 @@ public class Actor_Player : Actor
 
     private void HandleRotation()
     {
+
+        mouseVector = playerInputs.actions["Look"].ReadValue<Vector2>();
+        mouseVector *= mouseSensitivity * Time.deltaTime;
+
+        _camRot -= mouseVector.y;
+        _camRot = Mathf.Clamp(_camRot, -45f, 45f);
         // We rotate the player Camera vertically using the cached camRot
         // We rotate the player horizontally using 
         PlayerCam.transform.localRotation = Quaternion.Euler(_camRot, 0.0f, 0.0f);
