@@ -99,14 +99,14 @@ public class Trap_Turret : Trap
         base.Activate();
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        if(enemyScanner != null)
-        {
-           enemyScanner.EditorGizmo(transform);
-        }
+    //private void OnDrawGizmosSelected()
+    //{
+    //    if(enemyScanner != null)
+    //    {
+    //       enemyScanner.EditorGizmo(transform);
+    //    }
         
-    }
+    //}
 
     //private void EditorGizmo(Transform transform)
     //{

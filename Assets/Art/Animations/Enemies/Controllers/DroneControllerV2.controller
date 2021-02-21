@@ -92,7 +92,7 @@ AnimatorStateMachine:
     m_Position: {x: 280, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7927677008734704082}
-    m_Position: {x: 600, y: 120, z: 0}
+    m_Position: {x: 570, y: 120, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc2ef321b601ae46b7b82698695a53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationForce: 215
 --- !u!114 &5870255312040234405
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,3 +196,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1dbb535b9855274385f9127feec0a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationForce: 275

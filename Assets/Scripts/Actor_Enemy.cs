@@ -50,6 +50,11 @@ public abstract class Actor_Enemy : Actor
         get { return currentTarget; }
     }
 
+    public bool isPlayerTarget
+    {
+        get { return (currentTarget == LevelManager.Instance.Player); }
+    }
+
     // Current destination getter for out of class access
     public Vector3 CurrentDestination
     {
@@ -113,6 +118,11 @@ public abstract class Actor_Enemy : Actor
         _intervalTimer.OnTimerEnd += OnBtwnIntervals;
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+    }
+
     // Start to initialise variables
     protected override void Start()
     {
@@ -120,8 +130,6 @@ public abstract class Actor_Enemy : Actor
 
         m_player = LevelManager.Instance.Player;
         m_core = LevelManager.Instance.Core;
-
-        OnDeath += () => LevelManager.Instance.Player._audioCue.PlayAudioCue(Player._cInfo.EnemyKill, 10);
     }
 
     protected virtual void Update()

@@ -8,6 +8,14 @@ public class Enemy_Grunt : Actor_Enemy
 
     [Range(0, 360)] public float detectionAngle;
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        SetDestinationAroundTarget(CurrentDestination, AttackRange);
+        if(WaveManager.Instance.isBuildPhase == false)
+            EnemyHiveMind.Instance.RegisterGrunt(this);
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -18,7 +26,6 @@ public class Enemy_Grunt : Actor_Enemy
         playerScanner.detectionRadius = AttackRange * 2;
         playerScanner.detectionAngle = detectionAngle;
 
-        currentTarget = LevelManager.Instance.Core.transform;
         if (GetRandomPointAroundTarget(currentTarget.position, _attackRange, out currentDestination))
         {
             Agent.SetDestination(currentDestination);
@@ -53,7 +60,7 @@ public class Enemy_Grunt : Actor_Enemy
     protected override void Death()
     {
         base.Death();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public override void OnPathCompleted()
@@ -66,8 +73,8 @@ public class Enemy_Grunt : Actor_Enemy
         //}
     }
 
-    private void OnDrawGizmos()
-    {
-        playerScanner.EditorGizmo(transform);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    playerScanner.EditorGizmo(transform);
+    //}
 }
