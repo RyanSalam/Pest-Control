@@ -323,7 +323,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         WaveManager.Instance.OnWaveEnded +=()=> Cues.PlayAudioCue(Char_SO.BuildPhaseStart, 30);
         //WaveManager.Instance.OnWaveStarted +=()=> Cues.PlayAudioCue(Char_SO.WaveStart, 30);
         //CoreDamaged
-        foreach(Actor_Enemy enemy in FindObjectsOfType<Actor_Enemy>())
+        foreach (Actor_Enemy enemy in FindObjectsOfType<Actor_Enemy>())
         {
             enemy.OnDeath += () => Cues.PlayAudioCue(Char_SO.EnemyKill, 5);
         }

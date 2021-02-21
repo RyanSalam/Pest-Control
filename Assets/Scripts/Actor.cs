@@ -70,7 +70,8 @@ public abstract class Actor : MonoBehaviour
         if (isDead) return; // We don't want to take anymore damage if we're already dead.
 
         CurrentHealth -= damageAmount;
-        Anim.SetTrigger("Hit");
+        if (Anim != null)
+            Anim.SetTrigger("Hit");
     }
 
     /// <summary>
@@ -98,6 +99,7 @@ public abstract class Actor : MonoBehaviour
 
         CurrentHealth -= data.damageAmount;
         OnDamageTaken?.Invoke(data);
+
         if (Anim != null)
             Anim.SetTrigger("Hit");
     }

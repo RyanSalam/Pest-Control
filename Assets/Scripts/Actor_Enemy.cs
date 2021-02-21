@@ -130,8 +130,6 @@ public abstract class Actor_Enemy : Actor
 
         m_player = LevelManager.Instance.Player;
         m_core = LevelManager.Instance.Core;
-
-        
     }
 
     protected virtual void Update()
