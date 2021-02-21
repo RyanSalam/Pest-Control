@@ -227,6 +227,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         _player.transform.rotation = playerSpawnPoint.rotation;
 
         spectatorCamera.gameObject.SetActive(false);
+        Player.controlsEnabled = true; 
         Player.gameObject.SetActive(true);
         isRespawning = false;
     }
@@ -319,7 +320,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         //Player.OnAbilityTwoTriggered
         Player.OnDamageTaken += (DamageData) => Cues.PlayAudioCue(Char_SO.PlayerHit, 10);
         WaveManager.Instance.OnWaveEnded +=()=> Cues.PlayAudioCue(Char_SO.BuildPhaseStart, 30);
-        WaveManager.Instance.OnWaveStarted +=()=> Cues.PlayAudioCue(Char_SO.WaveStart, 30);
+        //WaveManager.Instance.OnWaveStarted +=()=> Cues.PlayAudioCue(Char_SO.WaveStart, 30);
         //CoreDamaged
         foreach(Actor_Enemy enemy in FindObjectsOfType<Actor_Enemy>())
         {
