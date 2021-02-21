@@ -12,6 +12,8 @@ public class Enemy_Grunt : Actor_Enemy
     {
         base.OnEnable();
         SetDestinationAroundTarget(CurrentDestination, AttackRange);
+        if(WaveManager.Instance.isBuildPhase == false)
+            EnemyHiveMind.Instance.RegisterGrunt(this);
     }
 
     protected override void Start()
@@ -50,8 +52,6 @@ public class Enemy_Grunt : Actor_Enemy
         {
             _bIsSearching = false;
             SwitchTarget(p.transform);
-            //EnemyManager.Instance.ReassessGrunts(this);
-            //EnemyManager.Instance.RegisterGrunt(this);
         }
 
         IntervalTimer.PlayFromStart();
@@ -60,7 +60,6 @@ public class Enemy_Grunt : Actor_Enemy
     protected override void Death()
     {
         base.Death();
-        //EnemyManager.Instance.ReassessGrunts(this);
         gameObject.SetActive(false);
     }
 

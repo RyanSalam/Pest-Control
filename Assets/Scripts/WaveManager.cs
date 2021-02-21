@@ -36,11 +36,8 @@ public class WaveManager : MonoSingleton<WaveManager>
         [Tooltip("List of enemies that will be spawned in this wave")]
         public List<WaveManager.EnemyInfo> enemiesToSpawn;
 
-        [Tooltip("Minimum percentage of enemies that will prioritise the core")]
-        [Range(0, 1)] public float minCoreThresh;
-
         [Tooltip("Minimum number of enemies that will prioritise the player, after the core's threshold has been met")]
-        [Range(0, 1)] public float minPlayerThresh;
+        public int minPlayerThresh;
 
         [Tooltip("Amount of time before enemies begin spawning in a wave for reinforcing and preparations")]
         [Range(0, 60)] public int buildDuration = 5;
@@ -104,7 +101,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     [HideInInspector] public Wave currentWave { get { return levelWaves[waveIndex]; } }
 
     // Boolean to track whether or not we are in build phase
-    bool _isBuildPhase;
+    bool _isBuildPhase = true;
     public bool isBuildPhase { get { return _isBuildPhase; } }
 
     // Timer to track how long build phase lasts
@@ -198,6 +195,8 @@ public class WaveManager : MonoSingleton<WaveManager>
     // Spawner coroutine to activate enemies accordingly
     IEnumerator SpawnerCoroutine()
     {
+        _isBuildPhase = false;
+
         OnWaveStarted?.Invoke();
         // Display the defence phase on UI
         StartCoroutine(hudUI.DefensePhase());
@@ -218,7 +217,6 @@ public class WaveManager : MonoSingleton<WaveManager>
                         {
                             grunt.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
                             grunt.SetActive(true);
-                            grunt.GetComponent<Enemy_Grunt>().SwitchTarget(LevelManager.Instance.Core.transform);
                             _gruntsRemaining--;
                             break;
                         }
@@ -246,7 +244,6 @@ public class WaveManager : MonoSingleton<WaveManager>
                     {
                         grunt.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
                         grunt.SetActive(true);
-                        grunt.GetComponent<Enemy_Grunt>().SwitchTarget(LevelManager.Instance.Core.transform);
                         break;
                     }
                 }
@@ -283,7 +280,6 @@ public class WaveManager : MonoSingleton<WaveManager>
         for (int i = 0; i < _gruntsToSpawn; i++)
         {
             GameObject grunt = Instantiate(gruntPrefab, enemyPoolParent.transform);
-            grunt.GetComponent<Enemy_Grunt>().SwitchTarget(LevelManager.Instance.Player.transform);
             _gruntPool.Add(grunt);
             grunt.name = ("Grunt: " + i);
             grunt.GetComponent<Actor_Enemy>().OnDeath += UpdateRemEnemies;
