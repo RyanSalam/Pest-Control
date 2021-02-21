@@ -5,70 +5,81 @@ using UnityEngine;
 public class Trap_Tesla : Trap
 {
     private bool isChaining = false;
-    private int currentChainAmmount = 0; // deafult chain value 
-    [SerializeField] private int enemyChainAmmount = 4; // setting how much enemy can be infliceted by lighting chain
-    public float chainRadius = 2.0f; //raidus of the chain
+    private int currentChainAmount = 0; // deafult chain value 
+    [SerializeField] private int enemyChainAmount = 4; // setting how much enemy can be infliceted by lighting chain
+    public float chainRadius = 5.0f; //raidus of the chain
     [SerializeField] private LayerMask whatIsEnemy; //check enemy layer 
     private Actor_Enemy enemyTarget;
+    public bool canAttack = true;
+    private float timeAttack = 0.0f;
+    private float attackDelay = 2.0f;
 
-
+    
     protected override void Update()
     {
-        base.Update();
-        if (enemyTarget == null) // finding enemy
+        if (Physics.SphereCast(transform.position, chainRadius, transform.forward, out RaycastHit hit, whatIsEnemy) && canAttack)
         {
-            ChainLighting(transform.position); // ressetting chain lighting position
-        }
-        // if the enemy is not empty
-        if (enemyTarget != null)
-        {
+            enemyTarget = hit.collider.gameObject.GetComponent<Actor_Enemy>();
             Activate();
+            timeAttack = Time.time;
+            canAttack = false;
         }
-        else
+        if (Time.time > timeAttack + attackDelay)
         {
-            // resetting chain back to normal
-            isChaining = false;
-            currentChainAmmount = 0;
+            canAttack = true;
+           
         }
+        base.Update();
     }
-
-    void ChainLighting(Vector3 chainPosition)
-    {
-        //setting array of objects with collider to have a sphere checking chain's position, raidus, and know what enemy
-        Collider[] objects = Physics.OverlapSphere(chainPosition, chainRadius, whatIsEnemy);
-
-        if (objects[0] != null) //checks if objects is not empty 
-        {
-            //checking the current chain ammount is greater or equal to the enemy's chain
-            if (currentChainAmmount >= enemyChainAmmount)
-            {
-                //reseting chain and current chain ammount
-                isChaining = false;
-                currentChainAmmount = 0;
-                return;
-            }
-            enemyTarget = objects[0].GetComponent<Actor_Enemy>(); //setting enemy as objects
-        }
-    }
-
+    
+        
+    
     public override void Activate()
     {
-        if (!isTrapBuilt) //checks if the trap is not built 
-        {
-            return;
-        }
-
-        //set the chain to true and get the lighting to that enemy
-        isChaining = true;
-        ChainLighting(enemyTarget.transform.position); //set the lighting of the trap to the enemys position                                                      
-        enemyTarget.TakeDamage(trapDamage); //make enemy take damage from the trap
-        currentChainAmmount++;  //add the current chain ammount when it is an enemy
+        EnemySphereCast(enemyTarget);
         base.Activate();
+
+    }
+    private void OnTriggerEnter(Collider trigger)
+    {
+        if (trigger.gameObject.tag == "Enemy") //if the enemy actor collides with trap
+        {
+            
+            enemyTarget = trigger.gameObject.GetComponent<Actor_Enemy>();
+            if (enemyTarget != null)
+            {
+                Activate(); //when triggered activate
+                //Physics.SphereCast()
+                enemyTarget.TakeDamage(trapDamage);
+            }
+        }
     }
 
-    protected override void OnDrawGizmos()
+    void EnemySphereCast(Actor_Enemy currentEnemy)
     {
-        base.OnDrawGizmos();
-        Gizmos.DrawSphere(transform.position, chainRadius); //shows the traps ChainRadius on scene 
+        
+        currentChainAmount++;
+        currentEnemy.TakeDamage(trapDamage);
+        
+        if (Physics.SphereCast(currentEnemy.transform.position, chainRadius, currentEnemy.transform.forward, out RaycastHit hit))
+        {
+            if (hit.collider.gameObject.tag == "Enemy")
+            {
+                enemyTarget = hit.collider.gameObject.GetComponent<Actor_Enemy>();
+                Debug.Log("Chaining Sphere");
+                
+                if (currentChainAmount <= enemyChainAmount)
+                {
+                    EnemySphereCast(enemyTarget);
+                   
+                }
+            }
+        }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(enemyTarget.transform.position, chainRadius);
+
     }
 }
