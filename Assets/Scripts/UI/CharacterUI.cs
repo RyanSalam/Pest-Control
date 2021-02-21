@@ -6,6 +6,7 @@ using TMPro;
 
 public class CharacterUI : MonoBehaviour
 {
+    [SerializeField] HealthUI healthUI;
     Actor_Player player;
     [SerializeField] Image ability1_Icon;
     [SerializeField] Image ability2_Icon;
@@ -79,6 +80,11 @@ public class CharacterUI : MonoBehaviour
         abilityActive = false;
         isUsed = false;
         effectTimer = 0.0f;
+    }
+
+    public void ResetHealthOnRespawn()
+    {
+        healthUI.ResetHealth();
     }
 
 
