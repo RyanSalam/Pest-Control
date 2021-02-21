@@ -101,38 +101,8 @@ public class LevelManager : MonoSingleton<LevelManager>
             StartingItem.Use();
         }
 
-        #region PlayerSetupInitialization
+        Player.OnDeath += Respawn; // adding the respawn function to character after death 
 
-        //if (_player == null)
-        //    _player = FindObjectOfType<Actor_Player>();
-
-        //if (playerSpawnPoint == null)
-        //{
-        //    //Respawn Player if there is no Spawn Point Found
-        //    playerSpawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
-
-        //    if (playerSpawnPoint == null)
-        //        Debug.LogError("No Spawn Point Found you cunt!");
-        //}
-
-        //if (GameManager.selectedPlayer != null)
-        //{
-        //    // Spawn Player from gameManager.
-        //    _player = Instantiate(GameManager.selectedPlayer, playerSpawnPoint.transform.position, Quaternion.identity);            
-        //}
-
-        //else
-        //{
-        //    Debug.Log("No GameManager found, Searching for player here");
-
-
-        //    if (_player == null)
-        //        Debug.LogError("THere's no player in your scene you cunt! Are you even trying?");
-        //}
-
-        //_player.OnDeath += Respawn;
-
-        #endregion
         Player.controlsEnabled = true;
         shopUI.pauseMenu.SetActive(false);
         gameOver = false;
@@ -257,6 +227,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         _player.transform.rotation = playerSpawnPoint.rotation;
 
         spectatorCamera.gameObject.SetActive(false);
+        Player.controlsEnabled = true; 
         Player.gameObject.SetActive(true);
         isRespawning = false;
     }
@@ -349,7 +320,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         //Player.OnAbilityTwoTriggered
         Player.OnDamageTaken += (DamageData) => Cues.PlayAudioCue(Char_SO.PlayerHit, 10);
         WaveManager.Instance.OnWaveEnded +=()=> Cues.PlayAudioCue(Char_SO.BuildPhaseStart, 30);
-        WaveManager.Instance.OnWaveStarted +=()=> Cues.PlayAudioCue(Char_SO.WaveStart, 30);
+        //WaveManager.Instance.OnWaveStarted +=()=> Cues.PlayAudioCue(Char_SO.WaveStart, 30);
         //CoreDamaged
         foreach(Actor_Enemy enemy in FindObjectsOfType<Actor_Enemy>())
         {
