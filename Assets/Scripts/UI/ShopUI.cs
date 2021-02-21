@@ -16,6 +16,7 @@ public class ShopUI : MonoBehaviour
     [SerializeField] public GameObject pauseMenu;
     public GameObject[] hudElements;
     [SerializeField] InventorySlot[] inventorySlots;
+    [SerializeField] WeaponUI weaponUI;
 
     private void Awake()
     {
@@ -51,6 +52,7 @@ public class ShopUI : MonoBehaviour
 
         LevelManager.Instance.Player.controlsEnabled = true;
         LevelManager.Instance.Player.playerInputs.SwitchCurrentActionMap("Player");
+        weaponUI.UpdateEquippedWeapon(LevelManager.Instance.CurrentlyEquipped);
     }
 
     // Toggles shop menu
