@@ -52,18 +52,18 @@ public class EnemyManager : MonoSingleton<EnemyManager>
 
         if (enemiesOnCore.Count > 1)
         {
-            // Rearragnes enemy priorities to meet the minimum thresholds
-            if (enemiesOnCore.Count / WaveManager.Instance.currentWave.TotalEnemies() < WaveManager.Instance.currentWave.minCoreThresh * 100)
-            {
-                enemiesOnPlayer[0].SwitchTarget(LevelManager.Instance.Core.transform);
-                RegisterGrunt(enemiesOnPlayer[0]);
-                return;
-            }
-            else if (enemiesOnPlayer.Count / WaveManager.Instance.currentWave.TotalEnemies() < WaveManager.Instance.currentWave.minPlayerThresh * 100 && enemiesOnCore.Count / WaveManager.Instance.currentWave.TotalEnemies() < WaveManager.Instance.currentWave.minCoreThresh * 100)
-            {
-                enemiesOnCore[0].SwitchTarget(LevelManager.Instance.Player.transform);
-                RegisterGrunt(enemiesOnCore[0]);
-            }
+            //// Rearragnes enemy priorities to meet the minimum thresholds
+            //if (enemiesOnCore.Count / WaveManager.Instance.currentWave.TotalEnemies() < WaveManager.Instance.currentWave.minCoreThresh * 100)
+            //{
+            //    enemiesOnPlayer[0].SwitchTarget(LevelManager.Instance.Core.transform);
+            //    RegisterGrunt(enemiesOnPlayer[0]);
+            //    return;
+            //}
+            //else if (enemiesOnPlayer.Count / WaveManager.Instance.currentWave.TotalEnemies() < WaveManager.Instance.currentWave.minPlayerThresh * 100 && enemiesOnCore.Count / WaveManager.Instance.currentWave.TotalEnemies() < WaveManager.Instance.currentWave.minCoreThresh * 100)
+            //{
+            //    enemiesOnCore[0].SwitchTarget(LevelManager.Instance.Player.transform);
+            //    RegisterGrunt(enemiesOnCore[0]);
+            //}
         }
 
         _intervalTimer.PlayFromStart();

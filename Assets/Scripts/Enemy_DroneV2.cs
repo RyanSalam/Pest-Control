@@ -142,7 +142,7 @@ public class Enemy_DroneV2 : Actor_Enemy
         //    return LevelManager.Instance.Player.transform;
         //}
 
-        return EnemyManager.Instance.GetDroneTarget().transform;
+        return EnemyHiveMind.Instance.UpdateDrone(this);
     }
 
     public override void OnPathCompleted()

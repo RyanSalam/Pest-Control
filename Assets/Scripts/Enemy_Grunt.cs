@@ -12,6 +12,7 @@ public class Enemy_Grunt : Actor_Enemy
     {
         base.OnEnable();
         SetDestinationAroundTarget(CurrentDestination, AttackRange);
+        EnemyHiveMind.Instance.ActivateGrunt(this);
     }
 
     protected override void Start()

@@ -36,11 +36,8 @@ public class WaveManager : MonoSingleton<WaveManager>
         [Tooltip("List of enemies that will be spawned in this wave")]
         public List<WaveManager.EnemyInfo> enemiesToSpawn;
 
-        [Tooltip("Minimum percentage of enemies that will prioritise the core")]
-        [Range(0, 1)] public float minCoreThresh;
-
         [Tooltip("Minimum number of enemies that will prioritise the player, after the core's threshold has been met")]
-        [Range(0, 1)] public float minPlayerThresh;
+        [Range(0, 1)] public float minPlayerThresh = 0.3f;
 
         [Tooltip("Amount of time before enemies begin spawning in a wave for reinforcing and preparations")]
         [Range(0, 60)] public int buildDuration = 5;
