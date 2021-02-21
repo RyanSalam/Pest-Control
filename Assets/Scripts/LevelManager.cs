@@ -184,6 +184,7 @@ public class LevelManager : MonoSingleton<LevelManager>
             shopUI.UpdateItemUI();
             shopUI.RefreshEnergyText();
             Player.EquipWeapon(Equipables[InventoryList[0]]);
+            weaponUI.UpdateEquippedWeapon(CurrentlyEquipped);
         }
 
         if (shopUI.gameObject.activeSelf)
@@ -191,8 +192,6 @@ public class LevelManager : MonoSingleton<LevelManager>
             Player.playerInputs.SwitchCurrentActionMap("UI");
             SetSelectedButton(ShopStartingButton);
         }
-
-
         else
             Player.playerInputs.SwitchCurrentActionMap("Player");
     }
