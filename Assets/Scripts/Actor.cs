@@ -98,7 +98,7 @@ public abstract class Actor : MonoBehaviour
 
         CurrentHealth -= data.damageAmount;
         OnDamageTaken?.Invoke(data);
-        Anim.SetTrigger("Hit");
+        //Anim.SetTrigger("Hit");
     }
 
     protected virtual void Death()
