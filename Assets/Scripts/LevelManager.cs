@@ -102,6 +102,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         }
 
         Player.OnDeath += Respawn; // adding the respawn function to character after death 
+        Player.OnDeath += characterUI.ResetHealthOnRespawn; //Reset health UI on respawn
 
         Player.controlsEnabled = true;
         shopUI.pauseMenu.SetActive(false);
@@ -309,7 +310,7 @@ public class LevelManager : MonoSingleton<LevelManager>
             Player.EquipWeapon(newEquip);
         }
         _currentlyEquipped = itemToUse;
-        weaponUI.UpdateEquippedWeapon();
+        weaponUI.UpdateEquippedWeapon(itemToUse);
     }
 
     #endregion
@@ -318,7 +319,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         //Player.OnAbilityOneTriggered
         //Player.OnAbilityTwoTriggered
-        Player.OnDamageTaken += (DamageData) => Cues.PlayAudioCue(Char_SO.PlayerHit, 10);
+        //Player.OnDamageTaken += (DamageData) => Cues.PlayAudioCue(Char_SO.PlayerHit, 10);
         WaveManager.Instance.OnWaveEnded +=()=> Cues.PlayAudioCue(Char_SO.BuildPhaseStart, 30);
         //WaveManager.Instance.OnWaveStarted +=()=> Cues.PlayAudioCue(Char_SO.WaveStart, 30);
         //CoreDamaged
