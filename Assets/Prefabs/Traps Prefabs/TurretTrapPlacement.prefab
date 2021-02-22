@@ -1018,7 +1018,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5721319057133748160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.111398, y: 0.00000012719705, z: -13.567006}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5987241333358661054}
@@ -1041,7 +1041,7 @@ MonoBehaviour:
     type: 3}
   trapModel: {fileID: 5987241333358661054}
   offset: 5
-  verticalSearch: 1
+  verticalSearch: 4
   whatIsBuildable:
     serializedVersion: 2
     m_Bits: 1024
