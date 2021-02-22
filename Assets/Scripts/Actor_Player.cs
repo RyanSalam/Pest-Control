@@ -61,8 +61,8 @@ public class Actor_Player : Actor
     public IEquippable CurrentEquipped { get { return _currentEquiped; } }
 
     //Audio Params
-    
 
+    Timer invulnerableTimer;
 
     protected override void Awake()
     {
@@ -77,7 +77,8 @@ public class Actor_Player : Actor
 
         playerInputs.actions["Weapon Switch"].performed += HandleWeaponSwap;
 
-
+        invulnerableTimer = new Timer(0.8f, false);
+        invulnerableTimer.OnTimerEnd += () => isInvulnerable = false;
 
         if (AbilityOne != null)
         {
@@ -103,6 +104,8 @@ public class Actor_Player : Actor
     {
         HandleInputs();
         HandleRotation();
+
+        invulnerableTimer.Tick(Time.deltaTime);
     }
 
     protected virtual void FixedUpdate()
@@ -220,6 +223,14 @@ public class Actor_Player : Actor
         // We rotate the player horizontally using 
         PlayerCam.transform.localRotation = Quaternion.Euler(_camRot, 0.0f, 0.0f);
         transform.Rotate(Vector3.up * mouseVector.x);
+    }
+
+    public override void TakeDamage(DamageData data)
+    {
+        base.TakeDamage(data);
+        isInvulnerable = true;
+        invulnerableTimer.PlayFromStart();
+
     }
 
     protected virtual void Ondisable()

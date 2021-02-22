@@ -16,6 +16,7 @@ public class ShopUI : MonoBehaviour
     [SerializeField] public GameObject pauseMenu;
     public GameObject[] hudElements;
     [SerializeField] InventorySlot[] inventorySlots;
+    [SerializeField] WeaponUI weaponUI;
 
     private void Awake()
     {
@@ -51,6 +52,7 @@ public class ShopUI : MonoBehaviour
 
         LevelManager.Instance.Player.controlsEnabled = true;
         LevelManager.Instance.Player.playerInputs.SwitchCurrentActionMap("Player");
+        weaponUI.UpdateEquippedWeapon(LevelManager.Instance.CurrentlyEquipped);
     }
 
     // Toggles shop menu
@@ -63,7 +65,7 @@ public class ShopUI : MonoBehaviour
         }
 
         //Time.timeScale = gameObject.activeSelf ? 0.0f : 1.0f;
-        Cursor.lockState = gameObject.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.lockState = gameObject.activeSelf ? CursorLockMode.Confined : CursorLockMode.Locked;
         Cursor.visible = gameObject.activeSelf;
 
         LevelManager.Instance.Player.controlsEnabled = !gameObject.activeSelf;

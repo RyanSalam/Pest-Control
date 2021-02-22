@@ -21,3 +21,12 @@ MonoBehaviour:
   isAbilityOnCoolDown: 0
   prefabToSpawn: {fileID: 6715927603155748980, guid: 57047f4ebc5abb144aeacc2ba41d1ff0,
     type: 3}
+  canMake: 1
+  whatIsBuildable:
+    serializedVersion: 2
+    m_Bits: 1024
+  obstacleMasks:
+    serializedVersion: 2
+    m_Bits: 23040
+  obstacleDetectionRange: 3
+  verticalSearch: 1

@@ -43,6 +43,8 @@ public abstract class Actor : MonoBehaviour
     [Range(0.0f, 360.0f)]
     [SerializeField] protected float hitForwardRot = 360.0f;
 
+    protected bool isInvulnerable;
+
     private Animator m_Anim;
     public Animator Anim { get { return m_Anim; } }
 
@@ -68,6 +70,7 @@ public abstract class Actor : MonoBehaviour
     public virtual void TakeDamage(float damageAmount)
     {
         if (isDead) return; // We don't want to take anymore damage if we're already dead.
+        if (isInvulnerable) return;
 
         CurrentHealth -= damageAmount;
         if (Anim != null)
@@ -81,6 +84,7 @@ public abstract class Actor : MonoBehaviour
     public virtual void TakeDamage(DamageData data)
     {
         if (isDead) return;
+        if (isInvulnerable) return;
 
         // This is mainly checking hit registration and if the attack is inside of the actor's hit angle.
         Vector3 forward = transform.forward;

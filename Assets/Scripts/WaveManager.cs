@@ -28,6 +28,7 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     //[Tooltip("Event system for any custom events occuring at the end of a wave")]
     public event System.Action OnWaveEnded;
+    
     // Wave info data struct to store relevant data
     [System.Serializable]
     public class Wave

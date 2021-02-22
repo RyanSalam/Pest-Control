@@ -7,12 +7,30 @@ public class Trap : MonoBehaviour
     [SerializeField] protected int trapDamage = 1;
     [SerializeField] protected int maxUses = 10;
     [SerializeField] protected float buildDuration;
-    public int currentUses;
+    public event System.Action TrapDestroyed;
+
+
+    private int _currentUses = 0;
+    public int CurrentUses
+    {
+        get { return _currentUses; }
+        set 
+        { 
+            _currentUses = value;
+            if (_currentUses > maxUses)
+            {
+                gameObject.SetActive(false);
+                LevelManager.Instance.GetComponent<AudioCue>().PlayAudioCue(LevelManager.Instance.Char_SO.TrapDestroyed, 5);
+            }
+                
+        }
+    }
     protected bool isTrapBuilt;
     Timer buildTimer;
     protected Animator anim;
 
-
+    
+    public event System.Action OnDestroyed;
 
     protected virtual void Awake()
     {
@@ -43,8 +61,8 @@ public class Trap : MonoBehaviour
          }
         */
         // when trap is activated
-        currentUses++; //add current uses 
-        if (currentUses >= maxUses) //checks if the current trap uses is greater or equal to max
+        CurrentUses++; //add current uses 
+        if (CurrentUses >= maxUses) //checks if the current trap uses is greater or equal to max
         {
             gameObject.SetActive(false);  //setting the game object to false 
         }
@@ -61,7 +79,7 @@ public class Trap : MonoBehaviour
         {
             isTrapBuilt = true; //if its on build phase instantly built the trap 
         }
-        currentUses = 0; //this should always occur when you spawn a trap so that it resets its current uses and dosent destroy instantly
+        CurrentUses = 0; //this should always occur when you spawn a trap so that it resets its current uses and dosent destroy instantly
         LevelManager.Instance.AssessTraps(this); 
     }
 
