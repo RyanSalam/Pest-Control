@@ -22,8 +22,6 @@ public class Trap_Turret : Trap
     [SerializeField] float rateOfFire = 0.1f;
     [SerializeField] float bulletSpeed = 10.0f;
     [SerializeField] int bulletCount = 10;
-
-
    
     // Start is called before the first frame update
     protected override void Start()
@@ -80,11 +78,11 @@ public class Trap_Turret : Trap
         {
             Rigidbody proj = Instantiate(projectile, bulletSpawn.position, bulletSpawn.rotation);
             proj.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.Impulse);
+
             yield return new WaitForSeconds(rateOfFire);
         }
         enemyTarget = null;
     }
-
     Actor_Enemy TurretDetection()
     {
         Collider[] cols = Physics.OverlapSphere(transform.position, maxRange, enemyLayer);
@@ -104,7 +102,6 @@ public class Trap_Turret : Trap
 
                 if (temp != null)
                 {
-
                     return temp;
                 }
             }
