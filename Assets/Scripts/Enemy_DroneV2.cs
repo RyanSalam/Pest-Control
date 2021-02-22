@@ -109,7 +109,7 @@ public class Enemy_DroneV2 : Actor_Enemy
         //here, if our agent is above a certain velocity we will rotate the model on the x axis so it appears its tilted/propelling towards its target - its max mag-Velocity is agents speed parameter
         if (agent.velocity.magnitude > 3.0f)
         {
-            transform.Rotate(Vector3.right * 20); //rotating x axis by 15 degrees - should slowly increment this up too but quaternions are wild
+            //transform.Rotate(Vector3.right * 500 * Time.deltaTime); //rotating x axis by 15 degrees - should slowly increment this up too but quaternions are wild
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.right * 50f), 0.5f);
             //droneBody.localEulerAngles = new Vector3(agent.velocity.y * 20, agent.velocity.x * 10f, transform.localEulerAngles.z);
         }
