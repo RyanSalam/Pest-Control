@@ -160,7 +160,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         
 
         Time.timeScale = shopUI.pauseMenu.gameObject.activeSelf ? 0.0f : 1.0f;
-        Cursor.lockState = shopUI.pauseMenu.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.lockState = shopUI.pauseMenu.activeSelf ? CursorLockMode.Confined : CursorLockMode.Locked;
         Cursor.visible = gameObject.activeSelf;
 
         Player.controlsEnabled = !shopUI.pauseMenu.activeSelf;
