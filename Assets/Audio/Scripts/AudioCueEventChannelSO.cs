@@ -23,4 +23,5 @@ public class AudioCueEventChannelSO : ScriptableObject
 				"and make sure it's listening on this AudioCue Event channel.");
 		}
 	}
+
 }

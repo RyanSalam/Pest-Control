@@ -7,22 +7,30 @@ public class Trap : MonoBehaviour
     [SerializeField] protected int trapDamage = 1;
     [SerializeField] protected int maxUses = 10;
     [SerializeField] protected float buildDuration;
+    public event System.Action TrapDestroyed;
+
 
     private int _currentUses = 0;
     public int CurrentUses
     {
         get { return _currentUses; }
-        set { 
+        set 
+        { 
             _currentUses = value;
             if (_currentUses > maxUses)
+            {
                 gameObject.SetActive(false);
+                LevelManager.Instance.GetComponent<AudioCue>().PlayAudioCue(LevelManager.Instance.Char_SO.TrapDestroyed, 5);
+            }
+                
         }
     }
     protected bool isTrapBuilt;
     Timer buildTimer;
     protected Animator anim;
 
-
+    
+    public event System.Action OnDestroyed;
 
     protected virtual void Awake()
     {

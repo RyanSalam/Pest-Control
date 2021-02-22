@@ -20,7 +20,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         get { return _player; }
     }
 
-    private Character Char_SO;
+    public Character Char_SO;
     private AudioCue Cues;
 
 
@@ -119,7 +119,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         Player.playerInputs.onActionTriggered += HandleInput;
 
         SubscribeToAudioEvents();
-
+        Cues.PlayAudioCue(Char_SO.MissionStart);
     }
 
     private void SetSelectedButton(GameObject newSelectedObj)
@@ -243,7 +243,14 @@ public class LevelManager : MonoSingleton<LevelManager>
         EndGameMenu.SetActive(true);
         EndGameMenu.transform.DOScale(Vector3.one, 0.2f).From(Vector3.zero).OnComplete(() => Time.timeScale = 0.0f);
         EndGameText.text = playerWon ? "Victory!" : "Defeat!";
-
+        if(playerWon)
+        {
+            Cues.PlayAudioCue(Char_SO.MissionWin);
+        }
+        else if(!playerWon)
+        {
+            Cues.PlayAudioCue(Char_SO.MissionLoss);
+        }
 
         Player.playerInputs.SwitchCurrentActionMap("UI");
         SetSelectedButton(GameOverStartingButton);
@@ -285,6 +292,7 @@ public class LevelManager : MonoSingleton<LevelManager>
                 if (test != null)
                     Equipables.Add(item, test);
             }
+            Cues.PlayAudioCue(Char_SO.PurchaseItem, 15);
         }
     }
 
@@ -316,16 +324,30 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     private void SubscribeToAudioEvents()
     {
+                //char chosen - Handled in MenuHandler.cs
+        
+        WaveManager.Instance.OnWaveEnded += () => Cues.PlayAudioCue(Char_SO.BuildPhaseStart, 30);
+        WaveManager.Instance.OnWaveStarted += () => Cues.PlayAudioCue(Char_SO.WaveStart, 30);
+
+        _core.OnDamageTaken += (DamageData) => Cues.PlayAudioCue(Char_SO.CoreDamaged, 3);
         //Player.OnAbilityOneTriggered
         //Player.OnAbilityTwoTriggered
-        //Player.OnDamageTaken += (DamageData) => Cues.PlayAudioCue(Char_SO.PlayerHit, 10);
-        WaveManager.Instance.OnWaveEnded +=()=> Cues.PlayAudioCue(Char_SO.BuildPhaseStart, 30);
-        //WaveManager.Instance.OnWaveStarted +=()=> Cues.PlayAudioCue(Char_SO.WaveStart, 30);
-        //CoreDamaged
+
         foreach (Actor_Enemy enemy in FindObjectsOfType<Actor_Enemy>())
         {
             enemy.OnDeath += () => Cues.PlayAudioCue(Char_SO.EnemyKill, 5);
         }
+
+        Player.OnDamageTaken += (DamageData) => Cues.PlayAudioCue(Char_SO.PlayerHit, 10);
+        Player.OnDeath += () => Cues.PlayAudioCue(Char_SO.PlayerRespawn);
+        
+        //OpenShop?
+                //purchaseItem - handled in InventoryAdd()
+                //Trap Build - Handled in TrapPlacement.cs
+                //Trap Destroyed - Handled in Trap.cs
+            
+                //MissionStart - Handled in Level Manager Start()
+                //MissionWin/MissionLoss - Handled in GameOver Method of LevelManager
 
     }
 }
