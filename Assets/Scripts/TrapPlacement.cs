@@ -93,7 +93,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         if (CanPlace)
         {
             GameObject tempTrap = Instantiate(trapToSpawn, trapModel.position, transform.rotation); //instantiating trap 
-            ACue.PlayAudioCue();
+            //ACue.PlayAudioCue();
             LevelManager.Instance.CurrentEnergy -= trapPrice;
             LevelManager.Instance.GetComponent<AudioCue>().PlayAudioCue(LevelManager.Instance.Char_SO.BuildTrap, 20);
         }

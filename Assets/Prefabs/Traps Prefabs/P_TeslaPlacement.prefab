@@ -60,7 +60,7 @@ MonoBehaviour:
   isDebugging: 1
   Hologram: {fileID: 2100000, guid: 3c852c0492ffc54488c16540cdd99acb, type: 2}
   CanPlace: 0
-  obstacleDetectionRange: 2
+  obstacleDetectionRange: 1
 --- !u!114 &551121752816470550
 MonoBehaviour:
   m_ObjectHideFlags: 0

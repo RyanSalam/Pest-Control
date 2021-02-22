@@ -109,12 +109,13 @@ public class Trap_Turret : Trap
         return null; 
     }
 
-    private void OnDrawGizmos()
-    {
-        if(enemyScanner != null)
-        {
-           enemyScanner.EditorGizmo(transform);
-        }   
-    }
-
+#if UNITY_EDITOR
+    //private void OnDrawGizmos()
+    //{
+    //    if(enemyScanner != null)
+    //    {
+    //       enemyScanner.EditorGizmo(transform);
+    //    }   
+    //}
+#endif
 }

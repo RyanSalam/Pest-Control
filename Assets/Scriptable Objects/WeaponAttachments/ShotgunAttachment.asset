@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShotgunAttachment
   m_EditorClassIdentifier: 
   energyCostPerFire: 50
-  secondaryDamage: 2
+  secondaryDamage: 10
   shotgunPellets: 8
   range: 10
   spreadAngle: 10
