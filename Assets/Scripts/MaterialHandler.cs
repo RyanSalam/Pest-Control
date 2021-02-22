@@ -70,4 +70,20 @@ public static class MaterialHandler
         }
 
     }
+    /// <summary>
+    /// This function can change a objects sprite. The object must have a spriteRenderer to utilize this
+    /// </summary>
+    /// <param name="gameObject"></param>
+    /// <param name="newSprite"></param>
+    public static void spriteChanger(GameObject gameObject, Sprite newSprite)
+    {
+        //grab the sprite renderer component 
+        SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = newSprite;
+        }
+
+    }
 }
