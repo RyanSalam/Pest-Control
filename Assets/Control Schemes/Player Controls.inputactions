@@ -483,7 +483,7 @@
                 {
                     "name": "",
                     "id": "0d9f1a0a-5b44-43f3-9898-60de131eff71",
-                    "path": "<Keyboard>/i",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -1027,7 +1027,7 @@
                 {
                     "name": "",
                     "id": "1714f671-2c77-4e04-ae18-556e61a6aceb",
-                    "path": "<Keyboard>/i",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
