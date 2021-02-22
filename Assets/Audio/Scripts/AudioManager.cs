@@ -128,6 +128,8 @@ public class AudioManager : MonoBehaviour
 
 		//TODO: Save the SoundEmitters that were activated, to be able to stop them if needed
 	}
+	
+	
 
 	private void OnSoundEmitterFinishedPlaying(SoundEmitter soundEmitter)
 	{

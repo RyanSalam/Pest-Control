@@ -31,6 +31,7 @@ public class AudioCue : MonoBehaviour
 			_audioCueEventChannel.RaiseEvent(cue, _audioConfiguration, transform.position);
 		}
 	}
+	
 
 	public void PlayAudioCue(AudioCueSO cue, int chance)
     {

@@ -27,23 +27,25 @@ public class Character : ScriptableObject
 
 
     [Header("Dialogue")]
-    
+
+    public AudioCueSO CharacterChosen;
+
+    public AudioCueSO BuildPhaseStart;
+    public AudioCueSO WaveStart;
+
+    public AudioCueSO CoreDamaged;
     public AudioCueSO UseAbility1;
     public AudioCueSO UseAbility2;
-    public AudioCueSO BuildPhaseStart;
-    public AudioCueSO BuildTrap;
-    public AudioCueSO CharacterChosen;
-    public AudioCueSO CoreDamaged;
     public AudioCueSO EnemyKill;
-    public AudioCueSO MissionLoss;
-    public AudioCueSO MissionWin;
-    public AudioCueSO MissionStart;
     public AudioCueSO PlayerHit;
     public AudioCueSO PlayerRespawn;
     public AudioCueSO PurchaseItem;
+    public AudioCueSO BuildTrap;
     public AudioCueSO TrapDestroyed;
-    public AudioCueSO WaveStart;
-
+    
+    public AudioCueSO MissionStart;
+    public AudioCueSO MissionLoss;
+    public AudioCueSO MissionWin;
 
     public AudioCueSO Responses;
 }
