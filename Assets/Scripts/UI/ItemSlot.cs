@@ -9,6 +9,11 @@ using TMPro;
 public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler
 {
     private ShopUI shop;
+    [SerializeField] public bool hasTooltip = false;
+    [SerializeField] public TMP_Text tooltipNameText;
+    [SerializeField] public TMP_Text tooltipDescriptionText;
+
+    [SerializeField] GameObject tooltipPanel;
 
     [SerializeField] private Image BorderImage = null;
     [SerializeField] private Image ItemIcon = null;
@@ -33,6 +38,13 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         ItemIcon.sprite = item.itemIcon;
 
         itemCost.text = item.itemCost.ToString();
+
+        if (hasTooltip)
+        {
+            tooltipPanel.SetActive(false);
+            tooltipNameText.text = item.itemName.ToString();
+            tooltipDescriptionText.text = item.itemDescription.ToString();
+        }
     }
 
     // Buying a shop item
@@ -63,12 +75,22 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         transform.localScale = Vector3.one * 1.25f;
         BorderImage.sprite = selectedSprite;
+
+        if (hasTooltip)
+        {
+            tooltipPanel.SetActive(true);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         transform.localScale = Vector3.one;
         BorderImage.sprite = unselectedSprite;
+
+        if (hasTooltip)
+        {
+            tooltipPanel.SetActive(false);
+        }
     }
 
     public void OnMove(AxisEventData eventData)
