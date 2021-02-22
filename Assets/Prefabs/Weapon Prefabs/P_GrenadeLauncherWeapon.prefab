@@ -82,7 +82,7 @@ MonoBehaviour:
   auto: 0
   currentShots: 0
   maxShots: 5
-  shotIncrease: 1
+  shotIncrease: 5
   timeTillWeaponCooldown: 2
   fireSound: {fileID: 0}
   ImpactParticle: {fileID: 0}
