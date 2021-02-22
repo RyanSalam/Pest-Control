@@ -42,6 +42,7 @@ public class Weapon_Hitscan : Weapon
     float timeTillMaxSpread = 4;
     float maxSpreadAngle = 2;
 
+    public ParticleSystem bulletTrail;
 
     [SerializeField] protected AnimationCurve spreadCurve;
     [SerializeField] protected float timeFiring = 0f;
@@ -75,6 +76,10 @@ public class Weapon_Hitscan : Weapon
         //muzzle flash creation
         if (muzzleFlashParticle != null)
             muzzleFlashParticle.Play();
+
+        //bullet trail
+        if (bulletTrail != null)
+            bulletTrail.Play();
 
         ACue.PlayAudioCue();
 
