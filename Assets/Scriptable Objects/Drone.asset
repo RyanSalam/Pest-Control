@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606af5a33136ba543b813cd4ae1bcccd, type: 3}
+  m_Name: Drone
+  m_EditorClassIdentifier: 
+  abilityName: Drone
+  abilityDesc: Description
+  abilitySprite: {fileID: 0}
+  lifetimeDuration: 0
+  cooldownDuration: 0
+  AbilityButton: Ability One
+  isAbilityOnCoolDown: 0
+  shots: 25
+  roundPerMinute: 180
+  damage: 20
+  kamikazeSelfDestructTime: 10
+  kamikazeSearchRange: 50
+  targetDistance: 20
+  attackRange: 7
+  playerStoppingDistance: 5
+  enemyStoppingDistance: 3
+  movementSpeed: 10
+  kamikazeMovementSpeed: 25
+  explosionDamage: 200
+  explosionRadiusMin: 5
+  explosionRadiusMax: 15
+  Drone: {fileID: 5648181703306760068, guid: 0f4fb45df7d7f61458007b768d0baeb7, type: 3}

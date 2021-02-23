@@ -2,93 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ability_Swarm : MonoBehaviour
+[CreateAssetMenu(fileName = "SwarmAbility", menuName = "Abilities/Swarm Ability")]
+public class Ability_Swarm : Ability
 {
-    private float swarmCurrentCharge = 0f;
-    [SerializeField] private float swarmMaxcharge = 2f;
-    [SerializeField] int maxNanoDrones = 10;
+    [SerializeField] public float swarmMaxcharge = 2f;
+    [SerializeField] public int maxNanoDrones = 10;
     [SerializeField] public float nanoDroneDamage = 10f;
     [SerializeField] public float nanoDroneAttackRadius = 10f;
-    [SerializeField] private float nanoDroneLaunchDelay = 0.1f;
+    [SerializeField] public float nanoDroneLaunchDelay = 0.1f;
+    [SerializeField] public float nanoDroneMovementSpeed = 1f;
+    [SerializeField] public float nanoDroneRotationSpeed = 1f;
 
-    // Used for controller the spawning of the swarm
-    [SerializeField] GameObject[] nanoDrones;
+    private Actor_Player pA;
 
-    // The individual drone prefab to spawn.
-    [SerializeField] GameObject nanoDronePrefab;
+    public GameObject swarmMaster;
 
-    // Where the drones will spawn
-    [SerializeField] GameObject nanoDroneSpawn;
-
-    [SerializeField] LayerMask enemies;
-
-    public void Start()
+    public override void Initialize(GameObject abilitySource)
     {
-        
+        base.Initialize(abilitySource);
+        pA = abilitySource.GetComponent<Actor_Player>();
+
     }
 
-    public void Update()
+    public override void Execute()
     {
-        /*
-        // Charge on hold
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            SwarmCharge();
-        }
-        // Fire on release
-        if (Input.GetKeyUp(KeyCode.E) && swarmCurrentCharge > 0f)
-        {
-            StartCoroutine("SwarmFire");
-        }
-        */
+        base.Execute();
+
+        Instantiate(swarmMaster, pA.AbilitySpawnPoint.position, pA.AbilitySpawnPoint.rotation);
     }
 
-    public void Fire()
+    public override void OnCooldownEnd()
     {
-        StartCoroutine("SwarmAltCharge");
-    }
 
-    IEnumerator SwarmAltCharge()
+    }
+    public override void OnLifetimeEnd()
     {
-        yield return new WaitForSeconds(swarmMaxcharge);
-        StartCoroutine("SwarmFire");
+        //throw new System.NotImplementedException();
     }
-
-    void SwarmCharge()
-    {
-        if(swarmCurrentCharge < swarmMaxcharge) swarmCurrentCharge += Time.deltaTime;
-        if (swarmCurrentCharge > swarmMaxcharge) swarmCurrentCharge = swarmMaxcharge;
-    }
-
-    IEnumerator SwarmFire()
-    {
-        var enemiesInExplosionRange = Physics.OverlapSphere(transform.position, nanoDroneAttackRadius, enemies);
-        int enemyIndex = 0;
-
-        // Used for the old charging method
-        //float chargePercentage = (swarmCurrentCharge / swarmMaxcharge);
-        //float dronesToSpawn = maxNanoDrones * chargePercentage;
-        //int dronesToSpawnInt = (int)dronesToSpawn;
-
-        int dronesToSpawnInt = maxNanoDrones;
-
-        swarmCurrentCharge = 0f;
-        if (enemiesInExplosionRange.Length > 0)
-        {
-            for (int i = 0; i < dronesToSpawnInt; i++)
-            {
-                // Create nano drone
-                nanoDrones[i] = Instantiate(nanoDronePrefab, nanoDroneSpawn.transform.position, transform.rotation);
-                // Set drone target to enemy index
-                nanoDrones[i].GetComponent<NanoDroneScript>().SetTarget(enemiesInExplosionRange[enemyIndex]);
-                enemyIndex++;
-
-                // If more drones are fired than there are enemies, loop back around and hit the first enemy again
-                if (maxNanoDrones > enemiesInExplosionRange.Length && enemyIndex == enemiesInExplosionRange.Length) enemyIndex = 0;
-
-                yield return new WaitForSeconds(nanoDroneLaunchDelay);
-            }
-        }
-        yield return null;
-    }
+    
 }

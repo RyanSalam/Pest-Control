@@ -7,15 +7,13 @@ public class NanoDroneScript : MonoBehaviour
     private NavMeshAgent agent;
     public Collider target;
 
-    float speed = 50f;
+    [SerializeField] float speed = 1f;
+    [SerializeField] float rotationSpeed = 1f;
     public float damage = 10f;
     float distanceToExplodeAt = 1f;
 
     bool hasTarget = false;
     bool attackFinished = false;
-
-    // Prevents drone from being destroyed until explosion effect is finished playing
-    bool keepAlive = true;
 
     public ParticleSystem explosionEffect;
 
@@ -23,7 +21,7 @@ public class NanoDroneScript : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        //damage = GameObject.Find("Ryder").GetComponent<RyderController>().nanoDroneDamage;
+        
         //agent.speed = speed;
         //Destroy(gameObject, 5f);
     }
@@ -31,15 +29,15 @@ public class NanoDroneScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!explosionEffect.isPlaying && !keepAlive) Destroy(gameObject);
-
         if (target != null)
         {
             // Move to target
             if (!DroneInRange())
             {
-                //agent.SetDestination(target.transform.position);
-                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.fixedDeltaTime);
+                Vector3 targetDir = target.transform.position - transform.position;
+                Quaternion lookRotation = Quaternion.LookRotation(targetDir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
+                transform.position += transform.forward * (speed * Time.deltaTime);
             }
             // Explode
             else if (DroneInRange() && !attackFinished)
@@ -49,11 +47,12 @@ public class NanoDroneScript : MonoBehaviour
             }
         }
         // This activates if the target is killed before the drone can reach it
-        else if (target == null && hasTarget == true)
+        else if (target == null && hasTarget == true && !attackFinished)
         {
             Explode();
+            attackFinished = true;
         }
-        else
+        else if (!attackFinished)
         {
             Debug.Log(gameObject + " has no target. If you're seeing this, something went wrong.");
         }
@@ -62,16 +61,19 @@ public class NanoDroneScript : MonoBehaviour
 
     void Explode()
     {
-        //if(target!= null) target.GetComponent<Actor_Enemy>().TakeDamage(damage);
+        if(target!= null) target.GetComponent<Actor_Enemy>().TakeDamage(damage);
         GetComponent<MeshRenderer>().enabled = false;
         explosionEffect.Play();
-        keepAlive = false;
+        Destroy(gameObject, 2f);
     }
 
-    public void SetTarget(Collider t)
+    public void SetTarget(Collider t, float move, float rot, float dam)
     {
         target = t;
         hasTarget = true;
+        speed = move;
+        rotationSpeed = rot;
+        damage = dam;
     }
 
     bool DroneInRange()
