@@ -59,7 +59,7 @@
                     "id": "738b379b-8232-4571-90f7-d8fec704e3b8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap"
+                    "interactions": ""
                 },
                 {
                     "name": "Jump",
@@ -428,7 +428,7 @@
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Alt Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -527,7 +527,7 @@
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "SkipBuildPhase",
                     "isComposite": false,
                     "isPartOfComposite": false
