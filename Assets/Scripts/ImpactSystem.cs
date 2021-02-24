@@ -45,7 +45,28 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
 
     public void HandleImpact(GameObject targetHit, Vector3 hitPoint, Quaternion hitRotation)
     {
+        //MeshRenderer myParentMeshRenderer = targetHit.GetComponent<MeshRenderer>();
+
         Material myMaterial = targetHit.GetComponent<MeshRenderer>().material;
+       
+        if (!myMaterial)
+        {
+            float childCount = targetHit.transform.childCount;
+
+            for (int i = 0; i < childCount; i++)
+            {
+                GameObject temp = targetHit.transform.GetChild(i).gameObject;
+
+                MeshRenderer meshRenderer = temp.GetComponent<MeshRenderer>();
+
+                if (meshRenderer != null) //found a mesh renderer
+                {
+                    myMaterial = meshRenderer.material;
+                    break;
+                }
+            }
+        }
+
         ImpactSettings impactSettings;
 
 
