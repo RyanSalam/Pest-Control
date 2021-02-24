@@ -48,7 +48,9 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
         //MeshRenderer myParentMeshRenderer = targetHit.GetComponent<MeshRenderer>();
 
         MeshRenderer myMeshRenderer = targetHit.GetComponent<MeshRenderer>();
+        MeshRenderer[] myMeshRenderer1 = targetHit.GetComponentsInChildren<MeshRenderer>();
 
+        Debug.Log(myMeshRenderer1.Length);
         //Material myMaterial = targetHit.GetComponent<MeshRenderer>().material;
         Material myMaterial = null;
 

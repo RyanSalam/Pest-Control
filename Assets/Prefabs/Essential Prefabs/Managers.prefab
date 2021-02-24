@@ -428,6 +428,12 @@ MonoBehaviour:
     particleToSpawn: {fileID: 1416136211686774, guid: 6b7b9c36fcf9e4b49b9dc23074d303a5,
       type: 3}
     audioToPlay: {fileID: 0}
+  - hitMaterial: {fileID: 2100000, guid: da590161fea7b27409592f526ef20550, type: 2}
+    decalToSpawn: {fileID: 6531785189501894211, guid: 0253165f077a69944a70f45b95d94ab8,
+      type: 3}
+    particleToSpawn: {fileID: 1845764070681338, guid: ac2312a3e32471549882f1a6da5568e6,
+      type: 3}
+    audioToPlay: {fileID: 0}
   defaultSettings:
     hitMaterial: {fileID: 0}
     decalToSpawn: {fileID: 4982921017592928787, guid: fac90a147758d184e9bc8b1b375f45b1,

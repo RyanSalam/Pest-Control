@@ -12,6 +12,9 @@ public class MultiRayCastAttachment : AltFireAttachment
     [SerializeField] GameObject muzzleFlash;
     [SerializeField] GameObject impactEffect;
 
+    
+
+    
     public override void AltShoot()
     {
 
@@ -65,6 +68,8 @@ public class MultiRayCastAttachment : AltFireAttachment
                         //apply damage to our enemy
                         enemyHit.TakeDamage(damageData);
                     }
+
+                    //ImpactSystem.Instance.HandleImpact
                 }
 
                 if (impactEffect != null)
@@ -74,6 +79,9 @@ public class MultiRayCastAttachment : AltFireAttachment
                     impactVFX = Instantiate(impactVFX, hit.point, Quaternion.LookRotation(hit.point));
                     Destroy(impactVFX, 0.15f);
                 }
+
+                ImpactSystem.Instance.HandleImpact(hit.transform.gameObject, hit.point, Quaternion.LookRotation(hit.normal));
+
             }
         }
     }
