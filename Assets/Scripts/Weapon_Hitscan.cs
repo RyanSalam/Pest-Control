@@ -43,7 +43,7 @@ public class Weapon_Hitscan : Weapon
     float maxSpreadAngle = 2;
 
     public ParticleSystem bulletTrail;
-    public GameObject bulletDecal;
+    //public GameObject bulletDecal;
 
     [SerializeField] protected AnimationCurve spreadCurve;
     [SerializeField] protected float timeFiring = 0f;
@@ -63,7 +63,7 @@ public class Weapon_Hitscan : Weapon
     protected override void Start()
     {
         ObjectPooler.Instance.InitializePool(ImpactParticle.gameObject , 20);
-        ObjectPooler.Instance.InitializePool(bulletDecal, 20);
+        //ObjectPooler.Instance.InitializePool(bulletDecal, 20);
         
         base.Start();
         ACue = GetComponent<AudioCue>();
