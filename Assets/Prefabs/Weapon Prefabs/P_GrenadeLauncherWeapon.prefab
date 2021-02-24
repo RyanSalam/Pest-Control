@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2955010615129653358}
   - component: {fileID: 7027731481850693599}
+  - component: {fileID: 7452918317169352853}
   m_Layer: 13
   m_Name: P_GrenadeLauncherWeapon
   m_TagString: Untagged
@@ -96,6 +97,22 @@ MonoBehaviour:
     type: 3}
   projectileForce: 15
   breakDistance: 5
+--- !u!114 &7452918317169352853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5257384463069363096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c577419b930a6f342931d31663c5ccc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swayAmount: 0.02
+  swayAmountMax: 0.08
+  smoothing: 0.25
+  offsetMove: {x: 0, y: 0, z: 0}
 --- !u!1 &7151869070914382769
 GameObject:
   m_ObjectHideFlags: 0

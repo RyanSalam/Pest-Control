@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 922396192194762793}
   - component: {fileID: 8419441482282743823}
   - component: {fileID: 541031496880407571}
+  - component: {fileID: 4688576020405022781}
   m_Layer: 13
   m_Name: P_Pistol
   m_TagString: Untagged
@@ -142,8 +143,6 @@ MonoBehaviour:
   bloomX: 1
   bloomY: 1
   bulletTrail: {fileID: 6956728020116618863}
-  bulletDecal: {fileID: 4982921017592928787, guid: fac90a147758d184e9bc8b1b375f45b1,
-    type: 3}
   spreadCurve:
     serializedVersion: 2
     m_Curve: []
@@ -170,6 +169,22 @@ MonoBehaviour:
     type: 2}
   _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
     type: 2}
+--- !u!114 &4688576020405022781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943468318281720411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c577419b930a6f342931d31663c5ccc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swayAmount: 0.02
+  swayAmountMax: 0.08
+  smoothing: 0.25
+  offsetMove: {x: 0, y: 0, z: 0}
 --- !u!1 &7630208820619711404
 GameObject:
   m_ObjectHideFlags: 0
