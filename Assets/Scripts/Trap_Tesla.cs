@@ -19,6 +19,9 @@ public class Trap_Tesla : Trap
     private List<Actor_Enemy> enemies = new List<Actor_Enemy>();
     private LineRenderer lineRenderer;
 
+    [SerializeField] private Transform chainOrigin;
+    [SerializeField] private GameObject particleVFX;
+
     protected override void Start()
     {
         base.Start();
@@ -29,7 +32,7 @@ public class Trap_Tesla : Trap
 
     protected override void Update()
     {
-        if (Physics.SphereCast(transform.position, chainRadius, transform.forward, out RaycastHit hit, 1f, whatIsEnemy) && canAttack && currentChainAmount == 0) //searching every frame using sphere cast for an enemy
+        if (Physics.SphereCast(chainOrigin.position, chainRadius, chainOrigin.forward, out RaycastHit hit, 1f, whatIsEnemy) && canAttack) //searching every frame using sphere cast for an enemy
         {
             enemyTarget = hit.collider.gameObject.GetComponent<Actor_Enemy>(); //enemy goes collides with sphere cast 
 
@@ -50,17 +53,19 @@ public class Trap_Tesla : Trap
     
     public override void Activate() 
     {
-
         EnemySphereCast(enemyTarget); //activate chain sphere cast on attacked enemy
         
         lineRenderer.enabled = true;
-        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(0, chainOrigin.position);
         lineRenderer.positionCount = currentChainAmount + 1;
         
         for (int i = 1; i < currentChainAmount + 1; i++)
         {
-            lineRenderer.SetPosition(i, enemies[i - 1].transform.position);
+            Vector3 position = enemies[i - 1].transform.position;
+            position = GetHeightOffset(position);
+            lineRenderer.SetPosition(i, position);
         }
+
         foreach(Actor_Enemy enemy in enemies)
         {
             if(enemy != null)
@@ -69,20 +74,16 @@ public class Trap_Tesla : Trap
                 enemies.Remove(enemy);
             }
         }
-        currentChainAmount = 0;
-        //enemies = new List<Actor_Enemy>();
-        enemyTarget = null;
-        StartCoroutine(Cooldown());
-        base.Activate();
-        /*lineRenderer.enabled = true;
-        lineRenderer.SetPosition(0, transform.position);
 
-        for(int i = 1; i < currentChainAmount + 1; i++)
-        {
-            lineRenderer.SetPosition(i, enemies[i - 1].transform.position);
-        }*/
-        //currentChainAmount = 0;
-        //enemies.Clear();
+        StartCoroutine(Cooldown());
+    }
+
+    public Vector3 GetHeightOffset(Vector3 position)
+    {
+        float mod = Mathf.PingPong(0, 1);
+        position.y += mod;
+
+        return position;
     }
 
     private IEnumerator Cooldown()
@@ -93,22 +94,12 @@ public class Trap_Tesla : Trap
         //enemies = new List<Actor_Enemy>();
         lineRenderer.positionCount = 1;
         canAttack = true;
+
+        currentChainAmount = 0;
+        enemyTarget = null;
+
+        base.Activate();
     }
-    /*private void OnTriggerEnter(Collider trigger)
-    {
-        if (trigger.gameObject.CompareTag("Enemy")) //if the enemy actor collides with trap
-        {
-            
-            enemyTarget = trigger.gameObject.GetComponent<Actor_Enemy>();
-            if (enemyTarget != null)
-            {
-                Activate(); //when triggered activate
-                //Physics.SphereCast()
-                
-                enemyTarget.TakeDamage(trapDamage);
-            }
-        }
-    }*/
 
     void EnemySphereCast(Actor_Enemy currentEnemy)
     {
