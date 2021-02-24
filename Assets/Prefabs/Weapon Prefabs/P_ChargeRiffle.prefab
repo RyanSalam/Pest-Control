@@ -9682,6 +9682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1125051515378951084}
   - component: {fileID: 5762118544214456464}
+  - component: {fileID: -1656993514379352690}
   m_Layer: 0
   m_Name: P_ChargeRiffle
   m_TagString: Untagged
@@ -9742,7 +9743,6 @@ MonoBehaviour:
   maxChargeDuration: 1.5
   chargeModifier: 15
   projForce: 30
-  forceModifier: 1
   chargeThreshold: 0.5
   projectilePrefab: {fileID: 3679318245965258635, guid: e9bb6861f0e3e5d48b6e0696298b13e5,
     type: 3}
@@ -9774,6 +9774,22 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   cooldownActive: 0
+--- !u!114 &-1656993514379352690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5354056572423735346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c577419b930a6f342931d31663c5ccc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swayAmount: 0.02
+  swayAmountMax: 0.08
+  smoothing: 0.25
+  offsetMove: {x: 0, y: 0, z: 0}
 --- !u!1 &7310577104350773672
 GameObject:
   m_ObjectHideFlags: 0
