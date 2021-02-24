@@ -421,7 +421,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739a0a05a14f0f64381e407df5b61410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WorldImpactSetting: []
+  WorldImpactSetting:
+  - hitMaterial: {fileID: 2100000, guid: f2c950dab3ab21a4580eace543d1a42d, type: 2}
+    decalToSpawn: {fileID: 4982921017592928787, guid: fac90a147758d184e9bc8b1b375f45b1,
+      type: 3}
+    particleToSpawn: {fileID: 1416136211686774, guid: 6b7b9c36fcf9e4b49b9dc23074d303a5,
+      type: 3}
+    audioToPlay: {fileID: 0}
   defaultSettings:
     hitMaterial: {fileID: 0}
     decalToSpawn: {fileID: 4982921017592928787, guid: fac90a147758d184e9bc8b1b375f45b1,
