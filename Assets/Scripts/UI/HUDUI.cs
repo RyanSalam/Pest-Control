@@ -28,8 +28,8 @@ public class HUDUI : MonoBehaviour
     [SerializeField] GameObject phaseTimer;
     [SerializeField] Image phaseTimerClock;
     [SerializeField] TMP_Text phaseTimerCount;
+    [SerializeField] GameObject skipBuildPhaseInfo;
     public float phaseTimerProgress;
-
 
 
     private void Start()
@@ -82,10 +82,15 @@ public class HUDUI : MonoBehaviour
         // Hide coreInfo Panel until the Defence Phase
         coreInfoPanel.SetActive(false);
 
+        // Show text for skipping build phase
+        skipBuildPhaseInfo.SetActive(true);
+
         yield return new WaitForSeconds(5f);
 
         // Hide wave info panel;
         WaveInfoPanel.SetActive(false);
+        // Hide skip build phase text
+        skipBuildPhaseInfo.SetActive(false);
     }
 
     public IEnumerator DefensePhase()
@@ -102,6 +107,9 @@ public class HUDUI : MonoBehaviour
         enemyInfoPanel.SetActive(true);
         // Start displaying coreInfo Panel
         coreInfoPanel.SetActive(true);
+
+        // Make sure to disable the skip build phase info
+        skipBuildPhaseInfo.SetActive(false);
 
         yield return new WaitForSeconds(5f);
 
