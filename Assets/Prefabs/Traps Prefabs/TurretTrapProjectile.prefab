@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2831718977678281227}
   - component: {fileID: 2258202018191096362}
   - component: {fileID: 2313646109566992826}
-  - component: {fileID: 5349902520713924728}
   - component: {fileID: -6831115600125466467}
   - component: {fileID: -5352884086919835261}
+  - component: {fileID: 337388300186423604}
   m_Layer: 0
   m_Name: TurretTrapProjectile
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4117378253472324327}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 23.775843, y: 2.2122972, z: -32.285915}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -82,19 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &5349902520713924728
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4117378253472324327}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-6831115600125466467
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -123,3 +110,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15405d48f415ac143bf4c534396d0547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitEffect: {fileID: 7050105079803764325, guid: 95b65c856f420494990e4b32dcd5dd0b,
+    type: 3}
+--- !u!136 &337388300186423604
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4117378253472324327}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5251324
+  m_Height: 1.0155869
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.0077092648, z: -0.004851023}
