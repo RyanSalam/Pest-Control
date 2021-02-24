@@ -101,7 +101,9 @@ public class TrapPlacement : MonoBehaviour, IEquippable
 
     public void RotateTrap()
     {
-        transform.Rotate(transform.rotation.eulerAngles + Quaternion.Euler(0, 90, 0).eulerAngles); //rotating trap by 90 degrees clockwise 
+        //Debug.Log("Rotating trap");
+        //transform.Rotate(transform.rotation.eulerAngles + Quaternion.Euler(0, 90, 0).eulerAngles); //rotating trap by 90 degrees clockwise 
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 90, transform.eulerAngles.z);
     }
 
     public void Equip()
