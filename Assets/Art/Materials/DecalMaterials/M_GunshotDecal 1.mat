@@ -45,6 +45,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _EmissionIntensity: 1
+    - _EmissionIntensity: 1.0155
     m_Colors:
     - _EmissionColor: {r: 2, g: 0.9716982, b: 1.858861, a: 0}

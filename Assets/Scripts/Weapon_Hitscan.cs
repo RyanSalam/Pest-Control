@@ -43,6 +43,7 @@ public class Weapon_Hitscan : Weapon
     float maxSpreadAngle = 2;
 
     public ParticleSystem bulletTrail;
+    public GameObject bulletDecal;
 
     [SerializeField] protected AnimationCurve spreadCurve;
     [SerializeField] protected float timeFiring = 0f;
@@ -62,6 +63,7 @@ public class Weapon_Hitscan : Weapon
     protected override void Start()
     {
         ObjectPooler.Instance.InitializePool(ImpactParticle.gameObject , 20);
+        ObjectPooler.Instance.InitializePool(bulletDecal, 20);
         
         base.Start();
         ACue = GetComponent<AudioCue>();
@@ -129,11 +131,22 @@ public class Weapon_Hitscan : Weapon
                 enemyHit.TakeDamage(damageData);
 
             }
+            else
+            {
+                //going to remove this from here when impact system is setup
+                //if (bulletDecal != null)
+                //{
+                //    ObjectPooler.Instance.GetFromPool(bulletDecal, hit.point, Quaternion.LookRotation(hit.normal));
+                //}
+            }
+
+            ImpactSystem.Instance.HandleImpact(hit.transform.gameObject, hit.point, Quaternion.LookRotation(hit.normal));
 
             //instantiating our impact particles for now - hope for an object pool down the line
             if (ImpactParticle != null)
             {
                 //var temp = Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
+                //Vector3 newRotation = new Vector3( , hit.normal.z, 0);
                 ObjectPooler.Instance.GetFromPool(ImpactParticle.gameObject, hit.point, Quaternion.LookRotation(hit.normal));
                 //Destroy(temp.gameObject, 1f); // replaced with object pool
             }

@@ -142,6 +142,8 @@ MonoBehaviour:
   bloomX: 1
   bloomY: 1
   bulletTrail: {fileID: 6956728020116618863}
+  bulletDecal: {fileID: 4982921017592928787, guid: fac90a147758d184e9bc8b1b375f45b1,
+    type: 3}
   spreadCurve:
     serializedVersion: 2
     m_Curve: []
