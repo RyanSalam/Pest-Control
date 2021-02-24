@@ -30,6 +30,8 @@ public class Enemy_Grunt : Actor_Enemy
         {
             Agent.SetDestination(currentDestination);
         }
+
+        Agent.autoTraverseOffMeshLink = false;
     }
 
     protected override void Update()
