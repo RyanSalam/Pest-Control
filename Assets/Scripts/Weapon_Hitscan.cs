@@ -59,6 +59,14 @@ public class Weapon_Hitscan : Weapon
     {
         base.Awake();
     }
+    protected override void Start()
+    {
+        ObjectPooler.Instance.InitializePool(ImpactParticle.gameObject , 20);
+        
+        base.Start();
+        ACue = GetComponent<AudioCue>();
+    }
+
 
     Coroutine releaseCurrent;
     public override void PrimaryFire()
@@ -102,7 +110,7 @@ public class Weapon_Hitscan : Weapon
 
         if (Physics.Raycast(ray, out hit, range))
         {
-            Debug.Log("We are shooting at: " + hit.transform.name);
+            //Debug.Log("We are shooting at: " + hit.transform.name);
             //check if we hit enemy
             if (hit.transform.CompareTag("Enemy"))
             {
@@ -125,8 +133,9 @@ public class Weapon_Hitscan : Weapon
             //instantiating our impact particles for now - hope for an object pool down the line
             if (ImpactParticle != null)
             {
-                var temp = Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
-                Destroy(temp.gameObject, 1f); // replaced with object pool
+                //var temp = Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
+                ObjectPooler.Instance.GetFromPool(ImpactParticle.gameObject, hit.point, Quaternion.LookRotation(hit.normal));
+                //Destroy(temp.gameObject, 1f); // replaced with object pool
             }
                 
         }
@@ -157,12 +166,7 @@ public class Weapon_Hitscan : Weapon
         muzzleFlashParticle.Stop();
     }
 
-    protected override void Start()
-    {
-        base.Start();
-        ACue = GetComponent<AudioCue>();
-    }
-
+    
     // Update is called once per frame
     protected override void Update()
     {
