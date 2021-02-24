@@ -47,9 +47,15 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
     {
         //MeshRenderer myParentMeshRenderer = targetHit.GetComponent<MeshRenderer>();
 
-        Material myMaterial = targetHit.GetComponent<MeshRenderer>().material;
-       
-        if (!myMaterial)
+        MeshRenderer myMeshRenderer = targetHit.GetComponent<MeshRenderer>();
+
+        //Material myMaterial = targetHit.GetComponent<MeshRenderer>().material;
+        Material myMaterial = null;
+
+        if (myMeshRenderer != null)
+            myMaterial = myMeshRenderer.material;
+
+        if (!myMeshRenderer)
         {
             float childCount = targetHit.transform.childCount;
 
@@ -66,6 +72,10 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
                 }
             }
         }
+
+        if (myMaterial == null)
+            return;
+
 
         ImpactSettings impactSettings;
 
