@@ -16,7 +16,6 @@ public class SMB_EnemyMoving : StateMachineBehaviour
         thisEnemy = animator.GetComponentInParent<Actor_Enemy>();
         // Allow the enemy agent to move.
         thisEnemy.Agent.isStopped = false;
-        thisEnemy.SetDestinationAroundTarget(thisEnemy.CurrentTarget.position, thisEnemy.AttackRange);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

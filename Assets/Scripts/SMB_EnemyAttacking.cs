@@ -31,5 +31,6 @@ public class SMB_EnemyAttacking : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         self.Agent.isStopped = false;
+        self.SetDestinationAroundTarget(self.CurrentTarget.position, self.AttackRange);
     }
 }

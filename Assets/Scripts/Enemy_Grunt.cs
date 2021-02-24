@@ -38,11 +38,20 @@ public class Enemy_Grunt : Actor_Enemy
     {
         base.Update();
 
-        Vector3 dir = currentTarget.position - transform.position;
-        dir.y = 0;
+        if (Vector3.Distance(transform.position, currentTarget.position) <= _attackRange * 1.5f)
+        {
+            Vector3 dir = currentTarget.position - transform.position;
+            dir.y = 0;
 
-        Quaternion rot = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rot, 0.6f);
+            Quaternion rot = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot, 0.6f);
+        }
+
+        else
+        {
+            Quaternion rot = Quaternion.LookRotation(Agent.velocity);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot, 0.6f);
+        }
     }
 
     public override void OnBtwnIntervals()
