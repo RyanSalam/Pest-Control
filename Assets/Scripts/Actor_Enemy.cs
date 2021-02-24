@@ -171,7 +171,7 @@ public abstract class Actor_Enemy : Actor
     {
         for (int i = 0; i < 30; i++)
         {
-            Vector3 randPoint = target + Random.insideUnitSphere * range;
+            Vector3 randPoint = target + Random.onUnitSphere * range;
             NavMeshHit hit;
 
             if (NavMesh.SamplePosition(randPoint, out hit, 1.0f, NavMesh.AllAreas))
