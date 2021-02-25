@@ -57,7 +57,7 @@ public class SMB_droneFindTarg : StateMachineBehaviour
         }
 
         //applying rotation on the y axis
-        droneBody.Rotate(Vector3.up * rotationForce * Time.deltaTime);
+        //droneBody.Rotate(Vector3.up * rotationForce * Time.deltaTime);
     }
 
 
