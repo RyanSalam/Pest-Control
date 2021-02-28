@@ -39,7 +39,6 @@ public class RyderDroneScript : Actor
         agent = GetComponent<NavMeshAgent>();
         shotsRemaining = master.shots;
         attackCooldown = (float)60 / master.roundPerMinute;
-        Debug.Log(attackCooldown);
         damage = master.damage;
         kamiSelfDestruct = master.kamikazeSelfDestructTime;
         kamikazeSearchRange = master.kamikazeSearchRange;
