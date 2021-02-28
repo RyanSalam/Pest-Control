@@ -37,7 +37,6 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     [SerializeField] protected AudioClip fireSound;
     [SerializeField] protected ParticleSystem ImpactParticle;
     [SerializeField] protected ParticleSystem muzzleFlashParticle;
-
     //stats for our weapons damage
     public delegate void Weapondamage(DamageData data);
    // public event DamageData
@@ -103,6 +102,9 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         cooldownDelayTimer = new Timer(timeTillWeaponCooldown / 2, false);
         cooldownDelayTimer.OnTimerEnd += () => currentCooldown = StartCoroutine(WeaponCooldown(currentRatio));
+
+        if(auto)
+            animator.SetBool("isAuto", true);
     }
 
     protected virtual void Update()
@@ -162,6 +164,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     {
         isFiring = false;
         cooldownDelayTimer.PlayFromStart();
+        animator.SetTrigger("Release");
     }
     protected float GetHeatRatio()
     {
@@ -209,12 +212,16 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         currentShots += shotIncrease; //increment our current shots
         LevelManager.Instance.WeaponUI.UpdateHeatBar((float)currentShots, (float)maxShots);
         currentRatio = GetHeatRatio();
+        
+        //setting animator parameters
+        animator.SetTrigger("fire");
 
         //should trigger our weapon overheating-breaking animation
         if (currentShots >= maxShots)
         {
             isFiring = false;
             canFire = false; //we cannot fire now
+            animator.SetBool("isOverheating", true);
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
             currentCooldown = StartCoroutine(WeaponCooldown(GetHeatRatio()));
         }
@@ -253,6 +260,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
             canFire = true;
             currentShots = 0;
             currentCooldown = null;
+            animator.SetBool("isOverheating", false);
         }
     }
 }

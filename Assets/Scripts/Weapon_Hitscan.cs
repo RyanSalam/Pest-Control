@@ -47,7 +47,7 @@ public class Weapon_Hitscan : Weapon
 
     [SerializeField] protected AnimationCurve spreadCurve;
     [SerializeField] protected float timeFiring = 0f;
-
+    
 
     //Audio Settings
     AudioCue ACue;
