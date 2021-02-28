@@ -33,13 +33,13 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
             ImpactDictionary[Setting.hitMaterial] = Setting;
             
             if(Setting.decalToSpawn != null)
-               ObjectPooler.Instance.InitializePool(Setting.decalToSpawn, 10);
+               ObjectPooler.Instance.InitializePool(Setting.decalToSpawn, 20);
 
             if (Setting.particleToSpawn != null)
                 ObjectPooler.Instance.InitializePool(Setting.particleToSpawn, 10);
         }
 
-        ObjectPooler.Instance.InitializePool(defaultSettings.decalToSpawn, 10);
+        ObjectPooler.Instance.InitializePool(defaultSettings.decalToSpawn, 20);
         ObjectPooler.Instance.InitializePool(defaultSettings.particleToSpawn, 10);
     }
 

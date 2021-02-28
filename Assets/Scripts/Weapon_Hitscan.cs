@@ -62,7 +62,7 @@ public class Weapon_Hitscan : Weapon
     }
     protected override void Start()
     {
-        ObjectPooler.Instance.InitializePool(ImpactParticle.gameObject , 20);
+        ObjectPooler.Instance.InitializePool(ImpactParticle.gameObject , 30);
         //ObjectPooler.Instance.InitializePool(bulletDecal, 20);
         
         base.Start();
@@ -112,6 +112,8 @@ public class Weapon_Hitscan : Weapon
 
         if (Physics.Raycast(ray, out hit, range))
         {
+            CalculateDamageFalloff(firePoint.position, hit.point);
+
             //Debug.Log("We are shooting at: " + hit.transform.name);
             //check if we hit enemy
             if (hit.transform.CompareTag("Enemy"))
@@ -177,6 +179,19 @@ public class Weapon_Hitscan : Weapon
         timeFiring = 0f;
         isFiring = false;
         muzzleFlashParticle.Stop();
+    }
+
+    void CalculateDamageFalloff(Vector3 firePosition, Vector3 hitPosition)
+    {
+        //going to change our damage value based on how far away our target it
+        Vector3 shotDistance = firePosition - hitPosition;
+        Debug.Log("shotDistance = " + shotDistance.magnitude);
+        //Debug.Log("Percentage of damage to remove = " + shotDistance.magnitude / 100);
+        float damageFalloff = shotDistance.magnitude / 100; //get a percentage
+        damageFalloff *= Damage; //apply the percentage to our damage
+       
+        //now if we subtract the distance penalty from damage we have our new damage value
+        //Debug.Log("newDamage = " +  (Damage - damageFalloff));
     }
 
     
