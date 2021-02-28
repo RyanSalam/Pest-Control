@@ -37,7 +37,7 @@ public class Trap_Tesla : Trap
         {
             enemyTarget = hit.collider.gameObject.GetComponent<Actor_Enemy>(); //enemy goes collides with sphere cast 
 
-            if (enemyTarget != null)
+            if (enemyTarget != null) // if there is an enemy, add it to the list, attack!
             {
                 enemies.Add(enemyTarget);
                 Debug.Log("enemy target not null");
@@ -48,7 +48,7 @@ public class Trap_Tesla : Trap
             }
         }
 
-        base.Update();
+        base.Update(); //base trap update
     }
 
 
@@ -56,11 +56,11 @@ public class Trap_Tesla : Trap
     {
         EnemySphereCast(enemyTarget); //activate chain sphere cast on attacked enemy
 
-        lineRenderer.enabled = true;
+        lineRenderer.enabled = true; //adjusting linerenders position based off the chain origin
         lineRenderer.SetPosition(0, chainOrigin.position);
         lineRenderer.positionCount = currentChainAmount + 1;
 
-        for (int i = 1; i < currentChainAmount + 1; i++)
+        for (int i = 1; i < currentChainAmount + 1; i++) // adding enemies to the list and adding current chain amount 
         {
             Vector3 position = enemies[i - 1].transform.position;
             //position = GetHeightOffset(position);
@@ -72,7 +72,7 @@ public class Trap_Tesla : Trap
             if (enemy != null)
             {
                 enemy.TakeDamage(trapDamage);
-                Instantiate(particleVFX, enemy.transform.position, enemy.transform.rotation);
+                Instantiate(particleVFX, enemy.transform.position, enemy.transform.rotation); // when an enemy is hit (above line) spawn particle. need to spawn particle above feet...
 
                 //enemies.Remove(enemy);
             }
@@ -81,7 +81,7 @@ public class Trap_Tesla : Trap
         StartCoroutine(Cooldown());
     }
 
-    private IEnumerator Cooldown()
+    private IEnumerator Cooldown() //cooldown for attacks
     {
         yield return new WaitForSeconds(attackDelay);
 
@@ -96,7 +96,7 @@ public class Trap_Tesla : Trap
         base.Activate();
     }
 
-    void EnemySphereCast(Actor_Enemy currentEnemy)
+    void EnemySphereCast(Actor_Enemy currentEnemy) //the base of the chain, creating sphere cast on another enemy so it can chain another enemy
     {
         if (currentEnemy == null) { return; }
 
@@ -106,11 +106,11 @@ public class Trap_Tesla : Trap
 
         RaycastHit[] hits;
 
-        hits = Physics.SphereCastAll(currentEnemy.transform.position, chainRadius, currentEnemy.transform.forward, 1, whatIsEnemy);
+        hits = Physics.SphereCastAll(currentEnemy.transform.position, chainRadius, currentEnemy.transform.forward, 1, whatIsEnemy); //when hits, spherecast on the current enemy to search for new enemies to chain
 
         Actor_Enemy newEnemy = currentEnemy;
 
-        foreach (RaycastHit enemyHit in hits)
+        foreach (RaycastHit enemyHit in hits) //hit new enemies you have not previously hit
         {
             // newEnemy = enemyHit.transform.GetComponent<Actor_Enemy>();
             if (!enemies.Contains(newEnemy))
@@ -124,45 +124,13 @@ public class Trap_Tesla : Trap
         {
             EnemySphereCast(newEnemy);
         }
-        if (currentChainAmount == enemyChainAmount)
+        if (currentChainAmount == enemyChainAmount) //reset chain amount
         {
             currentChainAmount = 0;
         }
-        }
-
-        /*if (Physics.SphereCast(currentEnemy.transform.position, chainRadius, currentEnemy.transform.forward, out RaycastHit hit)) //&& currentEnemy != enemyTarget)
-        {
-            //currentEnemy.TakeDamage(trapDamage);
-
-            if (hit.collider.gameObject.CompareTag("Enemy"))
-            {
-                
-                enemyTarget = hit.collider.gameObject.GetComponent<Actor_Enemy>();
-                Debug.Log("Chaining Sphere");
-                Debug.DrawLine(currentEnemy.transform.position, hit.point);
-                if(!enemies.Contains(enemyTarget))
-                {
-                    enemies.Add(enemyTarget);
-                }
-                //enemyTarget.TakeDamage(trapDamage);*/
-
-        /*if (currentChainAmount < enemyChainAmount)
-        {
-            EnemySphereCast(enemyTarget);
-
-            if (currentChainAmount == enemyChainAmount)
-            {
-                currentChainAmount = 0;
-            }
-        }*/
-    
+    }
 }
-    
-    /*private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(enemyTarget.transform.position, chainRadius);
 
-    }*/
+        
     
 
