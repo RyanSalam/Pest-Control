@@ -43,7 +43,6 @@ public class Ability_Drone : Ability
     public override void Execute()
     {
         base.Execute();
-        Debug.Log("aggg");
         // If no drone exists, spawn a new one
         if(thisDrone == null) thisDrone = Instantiate(Drone, pA.AbilitySpawnPoint.position, pA.AbilitySpawnPoint.rotation);
         // If drone exist, begin kamikaze
