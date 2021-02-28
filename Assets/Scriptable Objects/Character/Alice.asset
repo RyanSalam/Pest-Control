@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845e597e8d7b4df4eb690cea2accbed4, type: 3}
   m_Name: Alice
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 3828171030826589136, guid: 31f6d2184e46d414a8bd729e1fbf60d0, type: 3}
   c_name: Alice
   c_desc: Frost
   c_profile: {fileID: 21300000, guid: b2828565d03a36640bec54c64650bfc6, type: 3}
@@ -22,21 +22,25 @@ MonoBehaviour:
   A2_image: {fileID: 21300000, guid: 6ce14ad8d4245c342934204d618cffc0, type: 3}
   A2_name: Blizzard
   A2_text: Blizzard
-  ab1: {fileID: 0}
-  ab2: {fileID: 0}
+  ab1: {fileID: 11400000, guid: 93e50680bc69be547b4894696f5b0cd0, type: 2}
+  ab2: {fileID: 11400000, guid: 7877b10957704c44ea572191107ee7c3, type: 2}
+  emissionIntensity: 0
+  glovesColour: {r: 0, g: 0, b: 0, a: 0}
+  emissionColour: {r: 0, g: 0, b: 0, a: 0}
+  skinTone: 0
+  CharacterChosen: {fileID: 0}
+  BuildPhaseStart: {fileID: 0}
+  WaveStart: {fileID: 0}
+  CoreDamaged: {fileID: 0}
   UseAbility1: {fileID: 0}
   UseAbility2: {fileID: 0}
-  BuildPhaseStart: {fileID: 0}
-  BuildTrap: {fileID: 0}
-  CharacterChosen: {fileID: 0}
-  CoreDamaged: {fileID: 0}
   EnemyKill: {fileID: 0}
-  MissionLoss: {fileID: 0}
-  MissionWin: {fileID: 0}
-  MissionStart: {fileID: 0}
   PlayerHit: {fileID: 0}
   PlayerRespawn: {fileID: 0}
   PurchaseItem: {fileID: 0}
+  BuildTrap: {fileID: 0}
   TrapDestroyed: {fileID: 0}
-  WaveStart: {fileID: 0}
+  MissionStart: {fileID: 0}
+  MissionLoss: {fileID: 0}
+  MissionWin: {fileID: 0}
   Responses: {fileID: 0}

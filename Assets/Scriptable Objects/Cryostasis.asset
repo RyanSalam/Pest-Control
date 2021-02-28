@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Cryostasis
   abilityDesc: Description
-  abilitySprite: {fileID: 0}
+  abilitySprite: {fileID: 21300000, guid: ad46680fc24b7784fa6744032a5757e2, type: 3}
   lifetimeDuration: 5
   cooldownDuration: 30
-  AbilityButton: Ability Two
-  isAbilityOnCoolDown: 0
+  AbilityButton: Ability One
+  isAbilityOnCoolDown: 1
   triggerName: Cryostasis

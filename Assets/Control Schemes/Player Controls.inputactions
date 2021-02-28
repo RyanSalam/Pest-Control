@@ -51,7 +51,7 @@
                     "id": "2cb71e85-0a28-4a29-aac1-24e6456760bb",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap"
+                    "interactions": ""
                 },
                 {
                     "name": "Alt Fire",

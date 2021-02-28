@@ -6,7 +6,7 @@ using UnityEngine;
 public class Ability_Projectile : Ability
 {
     public GameObject prefabToSpawn;
-    public GameObject spawnedProjectile;
+    private GameObject spawnedProjectile;
     private Actor_Player pA;
 
     //[SerializeField] protected float lifeTime = 5f;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845e597e8d7b4df4eb690cea2accbed4, type: 3}
   m_Name: Ryder
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 787800783448728176, guid: 069a52e6198962e4f9a3a06d4ae4440b, type: 3}
   c_name: Ryder
   c_desc: TechnoWiz
   c_profile: {fileID: 21300000, guid: 1d966881e60f3a842ad57d6c8cf5bb35, type: 3}
@@ -22,21 +22,25 @@ MonoBehaviour:
   A2_image: {fileID: 21300000, guid: f52c52a940118414ca1e086402c90bfd, type: 3}
   A2_name: Swarm
   A2_text: Nano Swarm
-  ab1: {fileID: 0}
-  ab2: {fileID: 0}
+  ab1: {fileID: 11400000, guid: 09473e8eccb486740b7d4977aede66e1, type: 2}
+  ab2: {fileID: 11400000, guid: e71998366f51bf64c9117315079fe836, type: 2}
+  emissionIntensity: 0
+  glovesColour: {r: 0, g: 0, b: 0, a: 0}
+  emissionColour: {r: 0, g: 0, b: 0, a: 0}
+  skinTone: 0
+  CharacterChosen: {fileID: 0}
+  BuildPhaseStart: {fileID: 0}
+  WaveStart: {fileID: 0}
+  CoreDamaged: {fileID: 0}
   UseAbility1: {fileID: 0}
   UseAbility2: {fileID: 0}
-  BuildPhaseStart: {fileID: 0}
-  BuildTrap: {fileID: 0}
-  CharacterChosen: {fileID: 0}
-  CoreDamaged: {fileID: 0}
   EnemyKill: {fileID: 0}
-  MissionLoss: {fileID: 0}
-  MissionWin: {fileID: 0}
-  MissionStart: {fileID: 0}
   PlayerHit: {fileID: 0}
   PlayerRespawn: {fileID: 0}
   PurchaseItem: {fileID: 0}
+  BuildTrap: {fileID: 0}
   TrapDestroyed: {fileID: 0}
-  WaveStart: {fileID: 0}
+  MissionStart: {fileID: 0}
+  MissionLoss: {fileID: 0}
+  MissionWin: {fileID: 0}
   Responses: {fileID: 0}
