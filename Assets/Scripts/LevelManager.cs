@@ -124,7 +124,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         Cues.PlayAudioCue(Char_SO.MissionStart);
     }
 
-    private void SetSelectedButton(GameObject newSelectedObj)
+    public void SetSelectedButton(GameObject newSelectedObj)
     {
         if (Gamepad.current != null)
         {
@@ -184,6 +184,18 @@ public class LevelManager : MonoSingleton<LevelManager>
         else
             Player.playerInputs.SwitchCurrentActionMap("Player");
     }
+
+    public void TurnObjectOn(GameObject obj)
+    {
+        obj.SetActive(true);
+        Debug.Log("clicked");
+    }
+
+    public void TurnObjectOff(GameObject obj)
+    {
+        obj.SetActive(false);
+    }
+
 
     public void ToggleShop()
     {
