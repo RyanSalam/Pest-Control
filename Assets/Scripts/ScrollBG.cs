@@ -8,7 +8,7 @@ public class ScrollBG : MonoBehaviour
     public float scrollSpeed = -5f;
     Vector2 startPos;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         startPos = transform.position;
     }
