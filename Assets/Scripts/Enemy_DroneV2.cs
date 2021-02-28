@@ -57,10 +57,12 @@ public class Enemy_DroneV2 : Actor_Enemy
             //checking if our hitpoint was above or below our y position. so we know if we should move below or above the obstacle in our way
             if (hit.point.y > gameObject.transform.position.y)//go down
             {
+               // Debug.Log("go down - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y );
                 agent.baseOffset -= 0.4f;
             }
             else if (hit.point.y < gameObject.transform.position.y) //go up
             {
+                //Debug.Log("go up - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y);
                 agent.baseOffset += 0.4f;
             }
 
@@ -125,11 +127,11 @@ public class Enemy_DroneV2 : Actor_Enemy
         base.Update();
     }
 
-    //private void OnDrawGizmosSelected()
-    //{
-    //    Gizmos.color = Color.yellow;
-    //    Gizmos.DrawWireSphere(collisionChecker.position, 1.0f);
-    //}
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(collisionChecker.position, 1.0f);
+    }
 
     public Transform searchForTarget()
     {
