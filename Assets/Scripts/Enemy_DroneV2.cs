@@ -127,11 +127,11 @@ public class Enemy_DroneV2 : Actor_Enemy
         base.Update();
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(collisionChecker.position, 1.0f);
-    }
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireSphere(collisionChecker.position, 1.0f);
+    //}
 
     public Transform searchForTarget()
     {
