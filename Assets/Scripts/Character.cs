@@ -25,6 +25,11 @@ public class Character : ScriptableObject
     public Ability ab1;
     public Ability ab2;
 
+    [Header("Shader Properties")]
+    public float emissionIntensity;
+    public Color glovesColour;
+    public Color emissionColour;
+    public float skinTone;
 
     [Header("Dialogue")]
 

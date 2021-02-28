@@ -16,7 +16,7 @@ public class SMB_Cryostasis : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        pA = animator.GetComponentInParent<Actor_Player>();
+        pA = animator.GetComponent<Actor_Player>();
         pA.OnDamageFailed += Charge;
         // Set player's hit angle to 0
         pA.hitAngle = 0.0f;
