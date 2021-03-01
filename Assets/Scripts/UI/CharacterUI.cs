@@ -76,7 +76,7 @@ public class CharacterUI : MonoBehaviour
 
     public void ResetAlphaValue()
     {
-        abilityEffect.CrossFadeAlpha(0.01f, 0.5f, true);
+        abilityEffect.CrossFadeAlpha(0.01f, 0.25f, true);
         abilityActive = false;
         isUsed = false;
         effectTimer = 0.0f;

@@ -13,6 +13,8 @@ public class SMB_Cryostasis : StateMachineBehaviour
     [SerializeField] float chargeAmount;
     [SerializeField] LayerMask whatIsEnemy;
 
+    [SerializeField] GameObject explosionVFX;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -20,7 +22,8 @@ public class SMB_Cryostasis : StateMachineBehaviour
         pA.OnDamageFailed += Charge;
         // Set player's hit angle to 0
         pA.hitAngle = 0.0f;
-        pA.controlsEnabled = false;
+        //pA.controlsEnabled = false;
+        pA.playerInputs.currentActionMap.Disable();
         healingTimer = 0.0f;
         enemiesHit = null;
     }
@@ -44,9 +47,11 @@ public class SMB_Cryostasis : StateMachineBehaviour
         CryostasisExplosion();
         // Set player's hit angle to 360
         pA.hitAngle = 360.0f;
-        pA.controlsEnabled = true;
+        //pA.controlsEnabled = true;
+        pA.playerInputs.currentActionMap.Enable();
 
         LevelManager.Instance.CharacterUI.ResetAlphaValue();
+        Instantiate(explosionVFX, pA.gameObject.transform.position, pA.gameObject.transform.rotation);
     }
 
     public void Charge(DamageData data)
