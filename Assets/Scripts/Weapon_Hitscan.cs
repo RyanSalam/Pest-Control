@@ -112,7 +112,7 @@ public class Weapon_Hitscan : Weapon
 
         if (Physics.Raycast(ray, out hit, range))
         {
-            CalculateDamageFalloff(firePoint.position, hit.point);
+            int newDamage = CalculateDamageFalloff(firePoint.position, hit.point);
 
             //Debug.Log("We are shooting at: " + hit.transform.name);
             //check if we hit enemy
@@ -124,7 +124,7 @@ public class Weapon_Hitscan : Weapon
                 DamageData damageData = new DamageData
                 {
                     damager = player,
-                    damageAmount = Damage,
+                    damageAmount = newDamage,
                     direction = transform.forward,
                     damageSource = transform.position,
                     damagedActor = enemyHit,
@@ -181,17 +181,21 @@ public class Weapon_Hitscan : Weapon
         muzzleFlashParticle.Stop();
     }
 
-    void CalculateDamageFalloff(Vector3 firePosition, Vector3 hitPosition)
+    int CalculateDamageFalloff(Vector3 firePosition, Vector3 hitPosition)
     {
         //going to change our damage value based on how far away our target it
         Vector3 shotDistance = firePosition - hitPosition;
+
         //Debug.Log("shotDistance = " + shotDistance.magnitude);
         //Debug.Log("Percentage of damage to remove = " + shotDistance.magnitude / 100);
+       
         float damageFalloff = shotDistance.magnitude / 100; //get a percentage
         damageFalloff *= Damage; //apply the percentage to our damage
        
         //now if we subtract the distance penalty from damage we have our new damage value
-        //Debug.Log("newDamage = " +  (Damage - damageFalloff));
+        Debug.Log("newDamage = " +  (Damage - damageFalloff));
+
+        return (int)(Damage - damageFalloff);
     }
 
     
