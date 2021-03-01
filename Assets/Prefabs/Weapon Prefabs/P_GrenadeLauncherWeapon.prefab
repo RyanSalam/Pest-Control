@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 2955010615129653358}
   - component: {fileID: 7027731481850693599}
   - component: {fileID: 7452918317169352853}
+  - component: {fileID: 5716831647811846636}
   m_Layer: 13
   m_Name: P_GrenadeLauncherWeapon
   m_TagString: Untagged
@@ -113,6 +114,24 @@ MonoBehaviour:
   swayAmountMax: 0.08
   smoothing: 0.25
   offsetMove: {x: 0, y: 0, z: 0}
+--- !u!114 &5716831647811846636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5257384463069363096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f4dcd5da0291c4b914bd20a115beb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioCue: {fileID: 11400000, guid: 1c1d16e5168c4674cb6f0eeb5f6baa39, type: 2}
+  _playOnStart: 0
+  _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
+    type: 2}
+  _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
+    type: 2}
 --- !u!1 &7151869070914382769
 GameObject:
   m_ObjectHideFlags: 0

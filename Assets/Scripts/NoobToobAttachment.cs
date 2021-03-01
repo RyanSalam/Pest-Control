@@ -22,6 +22,7 @@ public class NoobToobAttachment : MonoBehaviour
     [SerializeField] int damage = 10;
 
     public GameObject explosionVFX;
+    AudioCue ac;
 
     LayerMask enemyLayerMask;
 
@@ -34,7 +35,7 @@ public class NoobToobAttachment : MonoBehaviour
         maxBounceCount = 2;
 
         enemyLayerMask = LayerMask.GetMask("Enemy");
-
+        ac = GetComponent<AudioCue>();
         projectile.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
     }
 
@@ -59,6 +60,8 @@ public class NoobToobAttachment : MonoBehaviour
             damageEnemies();
 
         }
+
+        ac.PlayAudioCue();
     }
 
     void damageEnemies()
