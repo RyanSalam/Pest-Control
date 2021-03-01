@@ -46,7 +46,7 @@ public abstract class Actor : MonoBehaviour
     protected bool isInvulnerable;
 
     private Animator m_Anim;
-    public Animator Anim { get { return m_Anim; } }
+    public virtual Animator Anim { get { return m_Anim; } }
 
     protected virtual void Awake() // All components should be cached in Awake.
     {
