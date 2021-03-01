@@ -220,7 +220,8 @@ public class LevelManager : MonoSingleton<LevelManager>
     private void UpdateVolume(float max, float current)
     {
         float ratio = current / max;
-        playerHealthVolume.SetVolumeWeight(ratio);
+        ratio -= 1;
+        playerHealthVolume.SetVolumeWeight(Mathf.Abs(ratio));
     }
 
     public void ToggleShop()
