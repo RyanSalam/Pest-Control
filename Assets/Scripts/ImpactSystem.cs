@@ -54,9 +54,11 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
         //Material myMaterial = targetHit.GetComponent<MeshRenderer>().material;
         Material myMaterial = null;
 
-        if (myMeshRenderer1 != null)
-            myMaterial = myMeshRenderer1[0].sharedMaterial;
-
+        if (myMeshRenderer != null)
+        {
+            myMaterial = myMeshRenderer.sharedMaterial;
+            //myMaterial = myMeshRenderer1[0].sharedMaterial;
+        }
         //if (!myMeshRenderer)
         //{
         //    float childCount = targetHit.transform.childCount;
