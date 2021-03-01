@@ -74109,11 +74109,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3414804625668340200, guid: bf07f2fb012e7cd419acf52822c039ca,
-        type: 3}
-      propertyPath: collisionLayer.m_Bits
-      value: 16385
-      objectReference: {fileID: 0}
     - target: {fileID: 3414804625668340203, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}
       propertyPath: m_Name
@@ -74132,7 +74127,7 @@ PrefabInstance:
     - target: {fileID: 3414804625668340206, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.81
+      value: -2.33
       objectReference: {fileID: 0}
     - target: {fileID: 3414804625668340206, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}
