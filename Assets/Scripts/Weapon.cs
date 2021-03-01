@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using DG.Tweening;
 public abstract class Weapon : MonoBehaviour, IEquippable
 {
 
@@ -121,6 +121,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         transform.localPosition = Vector3.zero;
         transform.localRotation = player.WeaponHolder.localRotation;
         gameObject.SetActive(true);
+        transform.DOLocalRotate(Vector3.zero, 0.3f).From(Vector3.right * -90);
 
         lastFired = 0.0f;
 
