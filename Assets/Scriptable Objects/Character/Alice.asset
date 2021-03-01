@@ -28,19 +28,19 @@ MonoBehaviour:
   glovesColour: {r: 0, g: 0, b: 0, a: 0}
   emissionColour: {r: 0, g: 0, b: 0, a: 0}
   skinTone: 0
-  CharacterChosen: {fileID: 0}
-  BuildPhaseStart: {fileID: 0}
-  WaveStart: {fileID: 0}
+  CharacterChosen: {fileID: 11400000, guid: 37247c7b796c1bd4d8608e0000e5227f, type: 2}
+  BuildPhaseStart: {fileID: 11400000, guid: ed16ae699b1592e4a83f82d99afa1543, type: 2}
+  WaveStart: {fileID: 11400000, guid: 57254e2c6def4544cb6f7949e7feae36, type: 2}
   CoreDamaged: {fileID: 0}
   UseAbility1: {fileID: 0}
   UseAbility2: {fileID: 0}
   EnemyKill: {fileID: 0}
-  PlayerHit: {fileID: 0}
+  PlayerHit: {fileID: 11400000, guid: 3b873889a72f7644382e59669d0f2ad6, type: 2}
   PlayerRespawn: {fileID: 0}
-  PurchaseItem: {fileID: 0}
-  BuildTrap: {fileID: 0}
-  TrapDestroyed: {fileID: 0}
-  MissionStart: {fileID: 0}
-  MissionLoss: {fileID: 0}
-  MissionWin: {fileID: 0}
+  PurchaseItem: {fileID: 11400000, guid: dcf4c086c7bfa604e975882ebeaadffb, type: 2}
+  BuildTrap: {fileID: 11400000, guid: cc734e3b300dd8a418b7cf3bd76d4f14, type: 2}
+  TrapDestroyed: {fileID: 11400000, guid: 13abda484db34cf469da1780c20057a6, type: 2}
+  MissionStart: {fileID: 11400000, guid: 148aa54fbb06c0146aa25460d3d64c32, type: 2}
+  MissionLoss: {fileID: 11400000, guid: c935e41472c08c043bba08c18ac155ff, type: 2}
+  MissionWin: {fileID: 11400000, guid: 156dca081bfe6d4418b793c7cae31c73, type: 2}
   Responses: {fileID: 0}

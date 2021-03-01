@@ -29,18 +29,18 @@ MonoBehaviour:
   emissionColour: {r: 0, g: 0, b: 0, a: 0}
   skinTone: 0
   CharacterChosen: {fileID: 0}
-  BuildPhaseStart: {fileID: 0}
-  WaveStart: {fileID: 0}
+  BuildPhaseStart: {fileID: 11400000, guid: c1cd8c800c19a4545b47761230db2459, type: 2}
+  WaveStart: {fileID: 11400000, guid: f6eba4c22a9a7044382b58230255646e, type: 2}
   CoreDamaged: {fileID: 0}
   UseAbility1: {fileID: 0}
   UseAbility2: {fileID: 0}
   EnemyKill: {fileID: 0}
-  PlayerHit: {fileID: 0}
+  PlayerHit: {fileID: 11400000, guid: 30a1875866070154082b9b27f94d3c6f, type: 2}
   PlayerRespawn: {fileID: 0}
-  PurchaseItem: {fileID: 0}
-  BuildTrap: {fileID: 0}
-  TrapDestroyed: {fileID: 0}
-  MissionStart: {fileID: 0}
+  PurchaseItem: {fileID: 11400000, guid: 5ce5819dfb9b98b47b8d7c2ed8f9b199, type: 2}
+  BuildTrap: {fileID: 11400000, guid: 7d76326c666408d4392dfe70f0744f45, type: 2}
+  TrapDestroyed: {fileID: 11400000, guid: a84b532cfbc7aa94eacbb37fa68e0d4f, type: 2}
+  MissionStart: {fileID: 11400000, guid: 0ceaf459a4b8e2944a2a5958db5d649d, type: 2}
   MissionLoss: {fileID: 0}
   MissionWin: {fileID: 0}
   Responses: {fileID: 0}
