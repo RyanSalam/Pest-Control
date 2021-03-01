@@ -25,9 +25,9 @@ MonoBehaviour:
   ab1: {fileID: 11400000, guid: 93e50680bc69be547b4894696f5b0cd0, type: 2}
   ab2: {fileID: 11400000, guid: 7877b10957704c44ea572191107ee7c3, type: 2}
   emissionIntensity: 0
-  glovesColour: {r: 0, g: 0, b: 0, a: 0}
-  emissionColour: {r: 0, g: 0, b: 0, a: 0}
-  skinTone: 0
+  glovesColour: {r: 0, g: 1, b: 1, a: 0}
+  emissionColour: {r: 1, g: 0, b: 0.583333, a: 0}
+  skinTone: 1.8
   CharacterChosen: {fileID: 11400000, guid: 37247c7b796c1bd4d8608e0000e5227f, type: 2}
   BuildPhaseStart: {fileID: 11400000, guid: ed16ae699b1592e4a83f82d99afa1543, type: 2}
   WaveStart: {fileID: 11400000, guid: 57254e2c6def4544cb6f7949e7feae36, type: 2}
