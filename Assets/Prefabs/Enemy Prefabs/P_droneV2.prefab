@@ -628,7 +628,7 @@ MonoBehaviour:
   collisionChecker: {fileID: 5079266832271153096}
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 16385
+    m_Bits: 16384
   droneLegs: {fileID: 2803846637370935330}
 --- !u!195 &3414804625668340201
 NavMeshAgent:

@@ -57,12 +57,12 @@ public class Enemy_DroneV2 : Actor_Enemy
             //checking if our hitpoint was above or below our y position. so we know if we should move below or above the obstacle in our way
             if (hit.point.y > gameObject.transform.position.y)//go down
             {
-                Debug.Log("go down - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y );
+                //Debug.Log("go down - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y );
                 agent.baseOffset -= 0.4f;
             }
             else if (hit.point.y < gameObject.transform.position.y ) //go up
             {
-                Debug.Log("go up - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y);
+                //Debug.Log("go up - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y);
                 agent.baseOffset += 0.4f;
             }
 
@@ -103,6 +103,13 @@ public class Enemy_DroneV2 : Actor_Enemy
             {
                 agent.baseOffset += 0.1f;
             }
+        }
+
+        //adding a failsafe - if we havnt collided for a few seconds automatically snap back to a offset value of 5
+        if (Time.time > timeAtCollision + 5f)
+        {
+            Debug.Log("FailSafe activated");
+            agent.baseOffset = 5;
         }
 
 
