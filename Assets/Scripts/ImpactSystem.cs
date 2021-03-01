@@ -49,44 +49,44 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
 
         MeshRenderer myMeshRenderer = targetHit.GetComponent<MeshRenderer>();
         MeshRenderer[] myMeshRenderer1 = targetHit.GetComponentsInChildren<MeshRenderer>();
-
-        Debug.Log(myMeshRenderer1.Length);
+        
+        //Debug.Log("renderer1 length: " + myMeshRenderer1.Length);
         //Material myMaterial = targetHit.GetComponent<MeshRenderer>().material;
         Material myMaterial = null;
 
-        if (myMeshRenderer != null)
-            myMaterial = myMeshRenderer.material;
+        if (myMeshRenderer1 != null)
+            myMaterial = myMeshRenderer1[0].sharedMaterial;
 
-        if (!myMeshRenderer)
-        {
-            float childCount = targetHit.transform.childCount;
+        //if (!myMeshRenderer)
+        //{
+        //    float childCount = targetHit.transform.childCount;
 
-            for (int i = 0; i < childCount; i++)
-            {
-                GameObject temp = targetHit.transform.GetChild(i).gameObject;
+        //    for (int i = 0; i < childCount; i++)
+        //    {
+        //        GameObject temp = targetHit.transform.GetChild(i).gameObject;
 
-                MeshRenderer meshRenderer = temp.GetComponent<MeshRenderer>();
+        //        MeshRenderer meshRenderer = temp.GetComponent<MeshRenderer>();
 
-                if (meshRenderer != null) //found a mesh renderer
-                {
-                    myMaterial = meshRenderer.material;
-                    break;
-                }
-            }
-        }
+        //        if (meshRenderer != null) //found a mesh renderer
+        //        {
+        //            myMaterial = meshRenderer.material;
+        //            break;
+        //        }
+        //    }
+        //}
 
         if (myMaterial == null)
             return;
 
-
+        //Debug.Log("material name: " +  myMaterial.name);
         ImpactSettings impactSettings;
 
 
         //if it doesnt exist gtfo
-        if (!ImpactDictionary.ContainsKey(myMaterial))
-            impactSettings = defaultSettings;
-        else
+        if (ImpactDictionary.ContainsKey(myMaterial))
             impactSettings = ImpactDictionary[myMaterial];
+        else
+            impactSettings = defaultSettings;
 
 
         ObjectPooler.Instance.GetFromPool(impactSettings.decalToSpawn, hitPoint, hitRotation);
