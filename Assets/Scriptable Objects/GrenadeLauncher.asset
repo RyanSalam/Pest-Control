@@ -15,7 +15,12 @@ MonoBehaviour:
   itemName: Grenade Launcher
   itemCost: 30
   itemIcon: {fileID: 21300000, guid: 9bd6e3681635ea442a5cbaa118a18790, type: 3}
-  itemDescription: 
+  itemDescription: 'Brads favourite weapon. Cluster grenade launcher that deals area
+    of affect damage. More grenades will spawn based on how far your shots travel!
+    Longer flight time equals more grenades! But one shot and it will overheat! Alt
+    Fire: Deploy a poison cloud grenade that sticks to anything. It releases a toxin
+    slowly damaging enemies overtime. Has a long lifetime and a big radius. costs
+    50 energy per shot. '
   equipSound: {fileID: 0}
   EquipableToSpawn: {fileID: 5257384463069363096, guid: c98dc00c8544d2444ae621085be14d2f,
     type: 3}
