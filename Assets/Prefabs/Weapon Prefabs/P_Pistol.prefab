@@ -134,6 +134,7 @@ MonoBehaviour:
   isFiring: 0
   weaponAttachment: {fileID: 11400000, guid: d621e690a72398d40abd19a5545b9f12, type: 2}
   firePoint: {fileID: 7431430868000239111}
+  armMaterial: {fileID: 2100000, guid: 3143c83435297054187c50afd797d7fe, type: 2}
   recoilPosition: {fileID: 2618095177929340359}
   rotationPoint: {fileID: 2026636711729483326}
   positionalRecoilSpeed: 9

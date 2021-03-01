@@ -30,6 +30,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     [SerializeField] protected int shotIncrease = 1; //everytime you shoot the currentShots is increased by shotIncrease, allowing for some guns to overheat faster
     //[SerializeField] protected float coolDownDelay = 3; //
     [SerializeField] protected float timeTillWeaponCooldown = 3; //how long it takes for our gun to reload (cool off)
+    protected float lastUnequiped = 0.0f;
 
     [Space(10)]
     [Header("Weapon Efx")]
@@ -197,7 +198,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     {
         // Deregistering inputs when we unequip this.
         player.playerInputs.onActionTriggered -= HandleInput;
-
+        lastUnequiped = Time.time;
         transform.SetParent(null);
         gameObject.SetActive(false);        
 
@@ -243,7 +244,17 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         if (currentCooldown != null)
         {
-            StartCoroutine(WeaponCooldown(currentRatio));
+            Debug.Log("Time.Time: " + Time.time + " lastUnequiped + timeTill: " + lastUnequiped + timeTillWeaponCooldown);
+            if (Time.time > lastUnequiped + timeTillWeaponCooldown)
+            {
+                
+                ResetWeaponStats(true);
+            }
+
+            else
+            {
+                StartCoroutine(WeaponCooldown(currentRatio));
+            }
         }
     }
 
@@ -262,6 +273,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
             currentShots = 0;
             currentCooldown = null;
             animator.SetBool("isOverheating", false);
+            LevelManager.Instance.WeaponUI.UpdateHeatBar(0, 1);
         }
     }
 }

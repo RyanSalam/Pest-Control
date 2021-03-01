@@ -78,6 +78,8 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     protected bool gameOver = false;
 
+    [SerializeField] Material armMaterial;
+
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
         base.Awake();
@@ -96,6 +98,12 @@ public class LevelManager : MonoSingleton<LevelManager>
             _player = temp;
             _player.AbilityOne = Char_SO.ab1;
             _player.AbilityTwo = Char_SO.ab2;
+
+            armMaterial.SetFloat("_EmissionIntensity", Char_SO.emissionIntensity);
+            armMaterial.SetColor("_GlovesColour", Char_SO.glovesColour);
+            armMaterial.SetColor("_EmissionColour", Char_SO.emissionColour);
+            armMaterial.SetFloat("_SkinTone", Char_SO.skinTone);
+
         }
         Cues = FindObjectOfType<AudioCue>();
         
