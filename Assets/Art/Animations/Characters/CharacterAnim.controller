@@ -308,6 +308,8 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 512
+  explosionVFX: {fileID: 5608372016476806062, guid: c6f23a11debdff140976d93acaecbf5d,
+    type: 3}
 --- !u!1102 &5610806290738779664
 AnimatorState:
   serializedVersion: 5
