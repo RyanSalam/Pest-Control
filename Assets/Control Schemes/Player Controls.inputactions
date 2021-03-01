@@ -426,7 +426,7 @@
                     "name": "",
                     "id": "19b63c21-0c9a-4c46-b573-6f20022ec316",
                     "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Alt Fire",
