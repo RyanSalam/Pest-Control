@@ -338,6 +338,7 @@ MonoBehaviour:
   ShopStartingButton: {fileID: 3136140621590705029}
   PauseStartingButton: {fileID: 4445807850305677669}
   GameOverStartingButton: {fileID: 5421731853599999248}
+  armMaterial: {fileID: 2100000, guid: 3143c83435297054187c50afd797d7fe, type: 2}
 --- !u!114 &7195516875643859446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1158,6 +1159,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 160
       objectReference: {fileID: 0}
+    - target: {fileID: 5832001912720707695, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8402986662682793176}
+    - target: {fileID: 5832001912720707695, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 8402986662682793176}
+    - target: {fileID: 5832001912720707695, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 8402986662682793176}
     - target: {fileID: 6852412231888011058, guid: 5a1d76bd2f010ec4793b09149005bd25,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1358,6 +1374,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8204111529444759570, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8402986662682793176}
+    - target: {fileID: 8204111529444759570, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 8402986662682793176}
+    - target: {fileID: 8204111529444759570, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 8402986662682793176}
     - target: {fileID: 8437477833326053267, guid: 5a1d76bd2f010ec4793b09149005bd25,
         type: 3}
       propertyPath: m_Color.b

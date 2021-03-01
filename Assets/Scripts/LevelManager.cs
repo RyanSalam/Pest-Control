@@ -79,6 +79,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     protected bool gameOver = false;
 
     [SerializeField] Material armMaterial;
+    [SerializeField] PostProcessHandler playerHealthVolume;
 
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
@@ -99,10 +100,13 @@ public class LevelManager : MonoSingleton<LevelManager>
             _player.AbilityOne = Char_SO.ab1;
             _player.AbilityTwo = Char_SO.ab2;
 
-            armMaterial.SetFloat("_EmissionIntensity", Char_SO.emissionIntensity);
-            armMaterial.SetColor("_GlovesColour", Char_SO.glovesColour);
-            armMaterial.SetColor("_EmissionColour", Char_SO.emissionColour);
-            armMaterial.SetFloat("_SkinTone", Char_SO.skinTone);
+            if (armMaterial != null)
+            {
+                armMaterial.SetFloat("_EmissionIntensity", Char_SO.emissionIntensity);
+                armMaterial.SetColor("_GlovesColour", Char_SO.glovesColour);
+                armMaterial.SetColor("_EmissionColour", Char_SO.emissionColour);
+                armMaterial.SetFloat("_SkinTone", Char_SO.skinTone);
+            }
 
         }
         Cues = FindObjectOfType<AudioCue>();
@@ -119,6 +123,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         Player.OnDeath += Respawn; // adding the respawn function to character after death 
         Player.OnDeath += characterUI.ResetHealthOnRespawn; //Reset health UI on respawn
+        Player.OnHealthChanged += UpdateVolume;
 
         Player.controlsEnabled = true;
         shopUI.pauseMenu.SetActive(false);
@@ -212,6 +217,11 @@ public class LevelManager : MonoSingleton<LevelManager>
         obj.SetActive(false);
     }
 
+    private void UpdateVolume(float max, float current)
+    {
+        float ratio = current / max;
+        playerHealthVolume.SetVolumeWeight(ratio);
+    }
 
     public void ToggleShop()
     {
