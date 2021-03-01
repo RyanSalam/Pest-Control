@@ -38,6 +38,8 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     [SerializeField] protected AudioClip fireSound;
     [SerializeField] protected ParticleSystem ImpactParticle;
     [SerializeField] protected ParticleSystem muzzleFlashParticle;
+    [SerializeField] protected Color weaponColour;
+    [SerializeField] protected GameObject[] objectsToChange;
     //stats for our weapons damage
     public delegate void Weapondamage(DamageData data);
    // public event DamageData
@@ -106,6 +108,14 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         if(auto)
             animator.SetBool("isAuto", true);
+
+        if (weaponColour != null)
+        {
+           for (int i = 0; i < objectsToChange.Length; i++)
+            {
+                MaterialHandler.materialColorChanger(objectsToChange[i], weaponColour, "_WeaponEmission");
+            }
+        }
     }
 
     protected virtual void Update()
