@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5390ff2259642db4585a6f56a282ebe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 50
   moveSpeed: 10
   hitAngle: 360
   hitForwardRot: 360

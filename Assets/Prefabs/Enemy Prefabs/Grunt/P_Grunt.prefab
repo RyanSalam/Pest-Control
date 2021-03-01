@@ -103,7 +103,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   currentDestination: {x: 0, y: 0, z: 0}
   m_player: {fileID: 0}
-  _attackRange: 5
+  _attackRange: 3
   _damage: 12
   _bIsSearching: 0
   _playerLayer:

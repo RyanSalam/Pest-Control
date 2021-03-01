@@ -121,7 +121,7 @@ public abstract class Actor : MonoBehaviour
     protected virtual void OnEnable()
     {
         isDead = false;
-        m_currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
     }
 
     protected void OnDestroy()

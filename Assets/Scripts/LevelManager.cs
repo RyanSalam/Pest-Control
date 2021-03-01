@@ -130,7 +130,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         gameOver = false;
 
         // FOR TESTING PURPOSES ONLY - COMMENT OUT THIS LINE LATER
-        CurrentEnergy = 2000;
+        CurrentEnergy = 500;
     }
 
     private void Start()

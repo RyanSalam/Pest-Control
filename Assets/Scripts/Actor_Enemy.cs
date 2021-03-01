@@ -140,7 +140,7 @@ public abstract class Actor_Enemy : Actor
     protected virtual void LateUpdate()
     {
         // Setting the animator booleans according to their corresponding conditions
-        Anim.SetBool("hasArrived", Vector3.Distance(transform.position, currentTarget.position) <= _attackRange);
+        Anim.SetBool("hasArrived", Vector3.Distance(transform.position, currentTarget.position) <= _attackRange * 1.5f);
         Anim.SetBool("hasTarget", currentTarget != Core.transform);
     }
 
