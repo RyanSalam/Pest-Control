@@ -129,12 +129,16 @@ MonoBehaviour:
     type: 3}
   muzzleFlashParticle: {fileID: 477785412443062808, guid: cde4185c39bc8964eb20d569b7f289dd,
     type: 3}
+  weaponColour: {r: 1, g: 0, b: 0.78841305, a: 0}
+  objectsToChange:
+  - {fileID: 4035559840911256215}
+  - {fileID: 5329413161465935888}
+  - {fileID: 6767485497078455964}
   lastFired: 0
   canFire: 1
   isFiring: 0
   weaponAttachment: {fileID: 11400000, guid: d621e690a72398d40abd19a5545b9f12, type: 2}
   firePoint: {fileID: 7431430868000239111}
-  armMaterial: {fileID: 2100000, guid: 3143c83435297054187c50afd797d7fe, type: 2}
   recoilPosition: {fileID: 2618095177929340359}
   rotationPoint: {fileID: 2026636711729483326}
   positionalRecoilSpeed: 9
@@ -472,12 +476,12 @@ PrefabInstance:
     - target: {fileID: 2213742754241274192, guid: 3ad1679f9bf260548a27a0d7222f18e2,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.3864812
+      value: 0.38648126
       objectReference: {fileID: 0}
     - target: {fileID: 2213742754241274192, guid: 3ad1679f9bf260548a27a0d7222f18e2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.59292674
+      value: 0.5929267
       objectReference: {fileID: 0}
     - target: {fileID: 2213742754241274192, guid: 3ad1679f9bf260548a27a0d7222f18e2,
         type: 3}
@@ -487,7 +491,7 @@ PrefabInstance:
     - target: {fileID: 2213742754241274192, guid: 3ad1679f9bf260548a27a0d7222f18e2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.60110134
+      value: -0.6011014
       objectReference: {fileID: 0}
     - target: {fileID: 2519280058086975203, guid: 3ad1679f9bf260548a27a0d7222f18e2,
         type: 3}
@@ -569,6 +573,24 @@ PrefabInstance:
 --- !u!4 &895380317296446506 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2519280058086975203, guid: 3ad1679f9bf260548a27a0d7222f18e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3358348843634338505}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4035559840911256215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1628737573754224734, guid: 3ad1679f9bf260548a27a0d7222f18e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3358348843634338505}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5329413161465935888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7453071945666187993, guid: 3ad1679f9bf260548a27a0d7222f18e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3358348843634338505}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6767485497078455964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8318623839329399893, guid: 3ad1679f9bf260548a27a0d7222f18e2,
     type: 3}
   m_PrefabInstance: {fileID: 3358348843634338505}
   m_PrefabAsset: {fileID: 0}
