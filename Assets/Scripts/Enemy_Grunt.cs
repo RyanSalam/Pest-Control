@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy_Grunt : Actor_Enemy
 {
     Scanner<Actor_Player> playerScanner;
+    public bool HiveDictated;
 
     [Range(0, 360)] public float detectionAngle;
 
@@ -63,6 +64,7 @@ public class Enemy_Grunt : Actor_Enemy
         {
             _bIsSearching = false;
             SwitchTarget(p.transform);
+            HiveDictated = false;
         }
 
         IntervalTimer.PlayFromStart();

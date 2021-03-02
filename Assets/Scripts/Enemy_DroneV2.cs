@@ -43,6 +43,14 @@ public class Enemy_DroneV2 : Actor_Enemy
         base.Start();
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        SetDestinationAroundTarget(CurrentDestination, AttackRange);
+        if (WaveManager.Instance.isBuildPhase == false)
+            searchForTarget();
+    }
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -51,7 +59,7 @@ public class Enemy_DroneV2 : Actor_Enemy
         //we need to check for obstacle detection - 
         //ex. if we run into a doorframe/roof we need to adjust our agent-offset so the droneModel can go through it
         //without going through the wall
-        if (Physics.SphereCast(collisionChecker.position, 1.0f, transform.forward , out RaycastHit hit, 1.5f, collisionLayer))
+        if (Physics.SphereCast(collisionChecker.position, 1.0f, transform.forward, out RaycastHit hit, 1.5f, collisionLayer))
         {
 
             //checking if our hitpoint was above or below our y position. so we know if we should move below or above the obstacle in our way
@@ -60,7 +68,7 @@ public class Enemy_DroneV2 : Actor_Enemy
                 //Debug.Log("go down - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y );
                 agent.baseOffset -= 0.4f;
             }
-            else if (hit.point.y < gameObject.transform.position.y ) //go up
+            else if (hit.point.y < gameObject.transform.position.y) //go up
             {
                 //Debug.Log("go up - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y);
                 agent.baseOffset += 0.4f;
@@ -87,7 +95,7 @@ public class Enemy_DroneV2 : Actor_Enemy
             {
                 isColliding = false;
             }
-           
+
         }
 
         //here is where we finally change our agents offset(y position) based of our semi-speghetti collision detection system
@@ -129,7 +137,7 @@ public class Enemy_DroneV2 : Actor_Enemy
             //transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.Euler(0,transform.rotation.y,transform.rotation.z), 1f); //trying to slowly bring the x rotation back to 0
         }
 
-        
+
 
         base.Update();
     }
@@ -161,8 +169,14 @@ public class Enemy_DroneV2 : Actor_Enemy
         //{
         //    return LevelManager.Instance.Player.transform;
         //}
+        Transform targ = null;
 
-        return EnemyHiveMind.Instance.UpdateDrone(this);
+        while (targ == null)
+        {
+            targ = EnemyHiveMind.Instance.UpdateDrone(this);
+        }
+
+        return targ;
     }
 
     public override void OnPathCompleted()

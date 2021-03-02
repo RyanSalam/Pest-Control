@@ -53,7 +53,7 @@ public class SMB_droneFindTarg : StateMachineBehaviour
         }
         else //default to player
         {
-           drone.SwitchTarget(LevelManager.Instance.Player.transform);
+           //drone.SwitchTarget(LevelManager.Instance.Player.transform);
         }
 
         //applying rotation on the y axis
