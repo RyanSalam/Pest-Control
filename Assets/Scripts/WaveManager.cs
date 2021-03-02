@@ -121,6 +121,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     // Hud reference for hud management
     [SerializeField] private HUDUI hudUI;
     public HUDUI HudUI { get { return hudUI; } }
+    Coroutine waveInfoCoroutine;
     #endregion
 
     // Start is called before the first frame update
@@ -172,7 +173,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         _gruntsRemaining = currentWave.TotalGrunts();
         _dronesRemaining = currentWave.TotalDrones();
         // Display the build phase on UI
-        StartCoroutine(hudUI.BuildPhase());
+        waveInfoCoroutine = StartCoroutine(hudUI.BuildPhase());
     }
 
     // Cleanup for each wave and beginning of next wave
@@ -200,7 +201,14 @@ public class WaveManager : MonoSingleton<WaveManager>
 
         OnWaveStarted?.Invoke();
         // Display the defence phase on UI
-        StartCoroutine(hudUI.DefensePhase());
+        // Making sure each message would last the usual duration instead of cutting out from the previous one
+        if (waveInfoCoroutine == null)
+            StartCoroutine(hudUI.DefensePhase());
+        else
+        {
+            StopCoroutine(waveInfoCoroutine);
+            waveInfoCoroutine = StartCoroutine(hudUI.DefensePhase());
+        }
 
         // Calculate how many enemies we spawn this wave and start a loop that will only activate that amount
         int _enemiesToSpawn = _enemiesRemaining;
