@@ -21,11 +21,15 @@ public class Trap_Turret : Trap
     Scanner<Actor_Enemy> enemyScanner;
     [SerializeField] private LayerMask enemyLayer;
 
+    [SerializeField] float damage = 10f;
     [SerializeField] float rateOfFire = 0.1f;
     [SerializeField] float bulletSpeed = 10.0f;
     [SerializeField] int bulletCount = 10;
 
     [SerializeField] ParticleSystem muzzleFlash;
+    [SerializeField] GameObject hitEffect;
+
+    Quaternion startingRot;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -35,6 +39,8 @@ public class Trap_Turret : Trap
         enemyScanner.targetMask = enemyLayer;
         enemyScanner.detectionRadius = maxRange;
         enemyScanner.detectionAngle = detectionAngle;
+        startingRot = turretRotHinge.rotation;
+        ObjectPooler.Instance.InitializePool(hitEffect, 3);
     }
 
     // Update is called once per frame
@@ -45,10 +51,12 @@ public class Trap_Turret : Trap
         {
             Debug.Log("Finding Enemy");
             // Reset turret rotation to default if it isn't already
-            if(turretRotHinge.rotation != Quaternion.Euler(0f, 0f, 0f)) ResetRotation();
+            if(turretRotHinge.rotation != startingRot) ResetRotation();
             FindClosestEnemy();
         }
         else AimAtTarget();
+
+        Debug.DrawRay(bulletSpawn.position, Vector3.forward * 10, Color.green);
     }
     public override void Activate()
     {
@@ -72,8 +80,7 @@ public class Trap_Turret : Trap
     }
     void ResetRotation()
     {
-        Quaternion rot = Quaternion.Euler(0f, 0f, 0f);
-        turretRotHinge.rotation = Quaternion.Slerp(turretRotHinge.rotation, rot, Time.deltaTime * 5);
+        turretRotHinge.rotation = Quaternion.Slerp(turretRotHinge.rotation, startingRot, Time.deltaTime * 5);
     }
     void AimAtTarget()
     {
@@ -94,8 +101,16 @@ public class Trap_Turret : Trap
         for (int i = 0; i < bulletCount; i++)
         {
             if (enemyTarget == null) break;
-            Rigidbody proj = Instantiate(projectile, bulletSpawn.position, bulletSpawn.rotation);
-            proj.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.Impulse);
+
+            //Rigidbody proj = Instantiate(projectile, bulletSpawn.position, bulletSpawn.rotation);
+            //proj.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.Impulse);
+            //Instantiate(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
+            if (hitEffect) ObjectPooler.Instance.GetFromPool(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
+            enemyTarget.GetComponent<Actor_Enemy>().TakeDamage(damage); 
+
+            
+
+
             muzzleFlash.Play();
             yield return new WaitForSeconds(rateOfFire);
         }
