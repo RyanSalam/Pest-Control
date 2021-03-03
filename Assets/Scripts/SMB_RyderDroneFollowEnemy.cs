@@ -16,7 +16,7 @@ public class SMB_RyderDroneFollowEnemy : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // If target is alive
-        if (drone.currentTarget != null)
+        if (drone.currentTarget.isActiveAndEnabled)
         {
             drone.agent.SetDestination(drone.currentTarget.transform.position);
             // Check if in attack range
