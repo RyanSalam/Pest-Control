@@ -12,13 +12,12 @@ GameObject:
   - component: {fileID: 17749549997739243}
   - component: {fileID: 5468895387297183195}
   - component: {fileID: 5611629373176990788}
-  - component: {fileID: 1336724538}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Glass002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7321590786779666735
 Transform:
@@ -95,20 +94,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3423241806674605285, guid: 7687336ec70ab0e4e81dd2678efeaac3, type: 3}
---- !u!64 &1336724538
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30710376747462983}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3423241806674605285, guid: 7687336ec70ab0e4e81dd2678efeaac3, type: 3}
 --- !u!1 &699803851465853306
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,12 +105,12 @@ GameObject:
   - component: {fileID: 3426561665530364421}
   - component: {fileID: 5327161327697143682}
   - component: {fileID: 1218214061459870525}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Railing001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &3426561665530364421
 Transform:
@@ -200,13 +185,12 @@ GameObject:
   - component: {fileID: 6292114769250160528}
   - component: {fileID: 3682996591563249816}
   - component: {fileID: 7477182403074496303}
-  - component: {fileID: 1336724539}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Glass001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8062903696359600660
 Transform:
@@ -283,20 +267,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3381272373562487013, guid: 7687336ec70ab0e4e81dd2678efeaac3, type: 3}
---- !u!64 &1336724539
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3047195345195969066}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3381272373562487013, guid: 7687336ec70ab0e4e81dd2678efeaac3, type: 3}
 --- !u!1 &4705399678667352272
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,12 +276,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5334268289688547946}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Escalator v4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5334268289688547946
 Transform:
@@ -347,12 +317,12 @@ GameObject:
   - component: {fileID: 3987804908525456655}
   - component: {fileID: 2994392404017783672}
   - component: {fileID: 5836657423782090965}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rail_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &3987804908525456655
 Transform:
@@ -427,12 +397,12 @@ GameObject:
   - component: {fileID: 5588291771902478077}
   - component: {fileID: 5588291771902478076}
   - component: {fileID: 5588291771902478067}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5588291771902478066
 Transform:
@@ -520,12 +490,12 @@ GameObject:
   - component: {fileID: 3981919445245016712}
   - component: {fileID: 4409159818111528944}
   - component: {fileID: 1877164357440279024}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Step096
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &3981919445245016712
 Transform:
@@ -599,12 +569,12 @@ GameObject:
   - component: {fileID: 5285556819968869642}
   - component: {fileID: 3862572171515722861}
   - component: {fileID: 8467107516817472299}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Higher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5285556819968869642
 Transform:
@@ -678,12 +648,12 @@ GameObject:
   - component: {fileID: 6618805636324029063}
   - component: {fileID: 5955567295122372941}
   - component: {fileID: 3292388318475738617}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Railing002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6618805636324029063
 Transform:
@@ -757,12 +727,12 @@ GameObject:
   - component: {fileID: 3248115537861329454}
   - component: {fileID: 4210578422150575674}
   - component: {fileID: 1576827138119330733}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &3248115537861329454
 Transform:
