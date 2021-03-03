@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,16 @@ public class BulletImpactDecalScript : MonoBehaviour
     Material myMaterial;
 
     float myEmmisionValue;
+
+    public float lifeTime = 15f;
+   Timer lifeTimeTimer;
+
+    private void Awake()
+    {
+        lifeTimeTimer = new Timer(lifeTime, true);
+        lifeTimeTimer.OnTimerEnd += DespawnDecal; 
+    }
+
     private void OnEnable()
     {
         activated = true;
@@ -21,6 +32,7 @@ public class BulletImpactDecalScript : MonoBehaviour
         MaterialHandler.materialFloatChanger(gameObject, 1.5f, "_EmissionIntensity");
         
         myEmmisionValue = myMaterial.GetFloat("_EmissionIntensity");
+        lifeTimeTimer.PlayFromStart();
     }
 
     private void OnDisable()
@@ -32,7 +44,21 @@ public class BulletImpactDecalScript : MonoBehaviour
     {
         if (activated)
         {
-            MaterialHandler.materialFloatChanger(gameObject, myEmmisionValue -= Time.deltaTime , "_EmissionIntensity");
+            MaterialHandler.materialFloatChanger(gameObject , myEmmisionValue -= Time.deltaTime, "_EmissionIntensity" );
+
+            //if (Time.time > timeAtSpawn + lifeTime)
+            //{
+            //    gameObject.SetActive(false);
+            //}
+
+            lifeTimeTimer.Tick(Time.deltaTime);
         }
     }
+
+    private void DespawnDecal()
+    {
+        Debug.Log("DespawnDecal NOW");
+        gameObject.transform.root.gameObject.SetActive(false);
+    }
+
 }
