@@ -15,7 +15,7 @@ MonoBehaviour:
   player: {fileID: 3828171030826589136, guid: 31f6d2184e46d414a8bd729e1fbf60d0, type: 3}
   c_name: Aeon
   c_desc: Mercenary
-  c_profile: {fileID: 21300000, guid: afa21f0468e0955459821d29885bb901, type: 3}
+  c_profile: {fileID: 21300000, guid: 7b0855ba4c0a6cd44a171e26e0ca555c, type: 3}
   A1_image: {fileID: 21300000, guid: 55b1a259fb54df04d8604e49d1c67f1e, type: 3}
   A1_name: Blackhole
   A1_text: Blackhole
