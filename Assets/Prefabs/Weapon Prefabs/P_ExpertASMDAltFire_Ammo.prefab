@@ -145,3 +145,4 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 512
+  color: {r: 0.033018887, g: 0.951189, b: 1, a: 0}

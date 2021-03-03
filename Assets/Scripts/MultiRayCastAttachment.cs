@@ -12,7 +12,7 @@ public class MultiRayCastAttachment : AltFireAttachment
     [SerializeField] GameObject muzzleFlash;
     [SerializeField] GameObject impactEffect;
 
-    
+   
 
     
     public override void AltShoot()
@@ -59,14 +59,16 @@ public class MultiRayCastAttachment : AltFireAttachment
                         //damager = player,
                         damageAmount = secondaryDamage,
                         direction = weapon.FirePoint.position,
-                        damageSource = weapon.FirePoint.position,
+                        damageSource = hit.point,
                         damagedActor = enemyHit,
+                        hitNormal = hit.normal,
                     };
 
                     if (enemyHit != null)
                     {
                         //apply damage to our enemy
                         enemyHit.TakeDamage(damageData);
+                        ImpactSystem.Instance.DamageIndication(damageData.damageAmount, Color.blue , damageData.damageSource, Quaternion.LookRotation(-hit.normal));
                     }
 
                     //ImpactSystem.Instance.HandleImpact

@@ -15,7 +15,7 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
     }
 
     [SerializeField] ImpactSettings[] WorldImpactSetting;
-
+    [SerializeField] GameObject damageIndicatorObj;
 
     public Dictionary<Material, ImpactSettings> ImpactDictionary;
     [SerializeField] ImpactSettings defaultSettings;
@@ -59,23 +59,7 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
             myMaterial = myMeshRenderer.sharedMaterial;
             //myMaterial = myMeshRenderer1[0].sharedMaterial;
         }
-        //if (!myMeshRenderer)
-        //{
-        //    float childCount = targetHit.transform.childCount;
-
-        //    for (int i = 0; i < childCount; i++)
-        //    {
-        //        GameObject temp = targetHit.transform.GetChild(i).gameObject;
-
-        //        MeshRenderer meshRenderer = temp.GetComponent<MeshRenderer>();
-
-        //        if (meshRenderer != null) //found a mesh renderer
-        //        {
-        //            myMaterial = meshRenderer.material;
-        //            break;
-        //        }
-        //    }
-        //}
+       
 
         if (myMaterial == null)
             return;
@@ -95,6 +79,15 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
         ObjectPooler.Instance.GetFromPool(impactSettings.particleToSpawn, hitPoint, hitRotation);
     }
 
-
+    public virtual void DamageIndication(float damage, Color color, Vector3 position, Quaternion rotation)
+    {
+        if (damageIndicatorObj != null)
+        {
+            //GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, hit.point, Quaternion.LookRotation(hit.normal)).gameObject;
+            GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, position, rotation).gameObject;
+            temp.GetComponent<DamageIndicator>().setDamageIndicator((int)damage, color);
+            //DamageIndicator.setDamageIndicator(temp, newDamage, weaponColour);
+        }
+    }
 
 }

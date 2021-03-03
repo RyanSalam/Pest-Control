@@ -55,6 +55,9 @@ public class Weapon_Hitscan : Weapon
     //range variable for our raycast
     [SerializeField] protected float range = 80.0f;
 
+    //our damage indicator prefabs
+    //[SerializeField] GameObject damageIndicatorObj;
+
     //this is our hitscan script. The pistol and SMG will use this script
     protected override void Awake()
     {
@@ -63,12 +66,13 @@ public class Weapon_Hitscan : Weapon
     protected override void Start()
     {
         ObjectPooler.Instance.InitializePool(ImpactParticle.gameObject , 30);
+        //ObjectPooler.Instance.InitializePool(damageIndicatorObj, 5);
         //ObjectPooler.Instance.InitializePool(bulletDecal, 20);
         
         base.Start();
         ACue = GetComponent<AudioCue>();
     }
-
+    
 
     Coroutine releaseCurrent;
     public override void PrimaryFire()
@@ -126,11 +130,24 @@ public class Weapon_Hitscan : Weapon
                     damager = player,
                     damageAmount = newDamage,
                     direction = transform.forward,
-                    damageSource = transform.position,
+                    damageSource = hit.point,
                     damagedActor = enemyHit,
+                    hitNormal = hit.normal,
                 };
                 //apply damage to our enemy
                 enemyHit.TakeDamage(damageData);
+
+                ImpactSystem.Instance.DamageIndication(damageData.damageAmount, weaponColour, damageData.damageSource, Quaternion.LookRotation(-hit.normal));
+
+                //DamageDealt(damageData);
+
+                //if (damageIndicatorObj != null)
+                //{
+                //   //GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, hit.point, Quaternion.LookRotation(hit.normal)).gameObject;
+                //    GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, hit.point, Quaternion.LookRotation(-hit.normal)).gameObject;
+                //    temp.GetComponent<DamageIndicator>().setDamageIndicator(newDamage, weaponColour);
+                //    //DamageIndicator.setDamageIndicator(temp, newDamage, weaponColour);
+                //}
 
             }
             else
@@ -193,7 +210,7 @@ public class Weapon_Hitscan : Weapon
         damageFalloff *= Damage; //apply the percentage to our damage
        
         //now if we subtract the distance penalty from damage we have our new damage value
-        Debug.Log("newDamage = " +  (Damage - damageFalloff));
+        //Debug.Log("newDamage = " +  (Damage - damageFalloff));
 
         return (int)(Damage - damageFalloff);
     }

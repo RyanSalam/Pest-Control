@@ -55,6 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d33646e34bc3ae44aeacc137adeb2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: {r: 0, g: 1, b: 0.05781889, a: 0}
   gameObjectVFX: {fileID: 1759596753954018, guid: e5adb3b1760919e42bcb3d8cfd847cd8,
     type: 3}
 --- !u!23 &6391247818688516989
