@@ -91,7 +91,7 @@ public class ObjectPooler : MonoSingleton<ObjectPooler>
         SetActive(temp, true);
 
         //add our new and improved item back to the queue
-        Pools[objPrefab].Enqueue(temp);
+        //Pools[objPrefab].Enqueue(temp);
 
         return temp;
     }

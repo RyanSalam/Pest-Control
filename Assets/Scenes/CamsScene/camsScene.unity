@@ -4391,7 +4391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &108980290
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4459,13 +4459,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108980289}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.17, y: 5.2, z: -5.093978}
-  m_LocalScale: {x: 13.676, y: 2.0601249, z: 9.609493}
+  m_LocalRotation: {x: -0, y: -0, z: -0.01215709, w: 0.9999261}
+  m_LocalPosition: {x: 37.71, y: 3.38, z: -5.093978}
+  m_LocalScale: {x: 30.719032, y: 8.786845, z: 9.609493}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 30
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.393}
 --- !u!1001 &109417035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74109,6 +74109,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3414804625668340200, guid: bf07f2fb012e7cd419acf52822c039ca,
+        type: 3}
+      propertyPath: collisionLayer.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
     - target: {fileID: 3414804625668340203, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}
       propertyPath: m_Name
@@ -74127,7 +74132,7 @@ PrefabInstance:
     - target: {fileID: 3414804625668340206, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.33
+      value: 1.59
       objectReference: {fileID: 0}
     - target: {fileID: 3414804625668340206, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}

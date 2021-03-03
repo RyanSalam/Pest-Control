@@ -15,8 +15,8 @@ MonoBehaviour:
   abilityName: Drone
   abilityDesc: Description
   abilitySprite: {fileID: 21300000, guid: f635121d8a45fad4e8a499c5481272df, type: 3}
-  lifetimeDuration: 0
-  cooldownDuration: 0
+  lifetimeDuration: 30
+  cooldownDuration: 60
   AbilityButton: Ability One
   isAbilityOnCoolDown: 0
   shots: 25
