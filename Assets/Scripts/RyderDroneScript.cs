@@ -114,7 +114,7 @@ public class RyderDroneScript : Actor
         RaycastHit findGround;
         Physics.Raycast(transform.position, Vector3.down, out findGround, 10f);
         Instantiate(GroundFire, findGround.transform.position, transform.rotation);
-        Destroy(gameObject);
+        master.DroneFinished();
     }
 
     public Actor_Enemy CheckForTargets()

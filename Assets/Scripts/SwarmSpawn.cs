@@ -39,7 +39,7 @@ public class SwarmSpawn : MonoBehaviour
         swarmCurrentCharge = 0f;
         //enemies = LayerMask.NameToLayer("Enemy");
         swarmMaxcharge = master.swarmMaxcharge;
-        maxNanoDrones = master.maxNanoDrones;
+        maxNanoDrones = master.currentDrones;
         nanoDroneDamage = master.nanoDroneDamage;
         nanoDroneAttackRadius = master.nanoDroneAttackRadius;
         nanoDroneLaunchDelay = master.nanoDroneLaunchDelay;
@@ -64,8 +64,17 @@ public class SwarmSpawn : MonoBehaviour
     IEnumerator SwarmFire()
     {
         enemiesInExplosionRange = Physics.OverlapSphere(transform.position, nanoDroneAttackRadius, enemies);
+        float[] virtualEnemyHealth = new float[enemiesInExplosionRange.Length];
         int enemyIndex = 0;
-        //int dronesToSpawnInt = maxNanoDrones;
+
+        int enemiesSkipped = 0;
+
+        // Encourage saving drones
+        for(int i = 0; i < virtualEnemyHealth.Length; i++)
+        {
+            virtualEnemyHealth[i] = 100f;
+        }
+
         if (enemiesInExplosionRange.Length > 0)
         {
             for (int i = 0; i < maxNanoDrones; i++)
@@ -73,24 +82,41 @@ public class SwarmSpawn : MonoBehaviour
                 // Only fire when there are enemies left
                 if (enemiesInExplosionRange.Length > 0)
                 {
-
-                    Quaternion up = Quaternion.LookRotation(Vector3.up);
-                    up.y = aP.transform.rotation.y;
-                    // Create nano drone
-                    nanoDrones[i] = Instantiate(nanoDronePrefab, nanoDroneSpawn.transform.position, up);
-                    // Set drone target to enemy index
-                    nanoDrones[i].GetComponent<NanoDroneScript>().SetTarget(enemiesInExplosionRange[enemyIndex], droneMoveSpeed, droneRotSpeed, nanoDroneDamage);
-                    enemyIndex++;
-                    // If more drones are fired than there are enemies, loop back around and hit the first enemy again
-                    if (maxNanoDrones > enemiesInExplosionRange.Length && enemyIndex == enemiesInExplosionRange.Length)
+                    if (enemiesSkipped == enemiesInExplosionRange.Length)
                     {
-                        enemyIndex = 0;
+                        Debug.Log("All enemies skipped. Ending");
+                        break;
                     }
+                    if (virtualEnemyHealth[enemyIndex] <= 0)
+                    {
+                        Debug.Log("Not firing at enemy that should be dead");
+                        i--;
+                        enemyIndex++;
+                        enemiesSkipped++;
+                    }
+                    else
+                    {
+                        enemiesSkipped = 0;
+                        Quaternion up = Quaternion.LookRotation(Vector3.up);
+                        up.y = aP.transform.rotation.y;
+                        // Create nano drone
+                        nanoDrones[i] = Instantiate(nanoDronePrefab, nanoDroneSpawn.transform.position, up);
 
-                    // If all enemies in range are killed, end attack
+                        virtualEnemyHealth[enemyIndex] -= nanoDroneDamage;
 
-                    yield return new WaitForSeconds(nanoDroneLaunchDelay);
+                        master.UpdateCurrentDrones();
+                        // Set drone target to enemy index
+                        nanoDrones[i].GetComponent<NanoDroneScript>().SetTarget(enemiesInExplosionRange[enemyIndex], droneMoveSpeed, droneRotSpeed, nanoDroneDamage);
+                        enemyIndex++;
+                        // If more drones are fired than there are enemies, loop back around and hit the first enemy again
+                        if (maxNanoDrones > enemiesInExplosionRange.Length && enemyIndex == enemiesInExplosionRange.Length)
+                        {
+                            enemyIndex = 0;
+                        }
+                        yield return new WaitForSeconds(nanoDroneLaunchDelay);
+                    }
                 }
+                else break;
             }
         }
         FinishAttack();
@@ -99,6 +125,7 @@ public class SwarmSpawn : MonoBehaviour
 
     void FinishAttack()
     {
-        Destroy(gameObject);
+        master.OnSwarmEnd();
+        //Destroy(gameObject);
     }
 }
