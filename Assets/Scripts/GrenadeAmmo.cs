@@ -10,6 +10,7 @@ public class GrenadeAmmo : MonoBehaviour
     public float damage;
 
     AudioCue ac;
+    Weapon weapon;
 
     [SerializeField] GameObject explosionVFX;
 
@@ -50,6 +51,7 @@ public class GrenadeAmmo : MonoBehaviour
             if (temp != null)
             {
                 temp.TakeDamage(damage);
+                ImpactSystem.Instance.DamageIndication(damage, Color.red, hitPoint, Quaternion.LookRotation(-hitPoint.normalized));
             }
         }
 

@@ -54,10 +54,16 @@ public class Ability_Drone : Ability
 
     public override void OnCooldownEnd()
     {
-
+        isAbilityOnCoolDown = false;
+    }
+    public void DroneFinished()
+    {
+        Destroy(thisDrone);
+        isAbilityOnCoolDown = true;
+        cooldownTimer.PlayFromStart();
     }
     public override void OnLifetimeEnd()
     {
-        //throw new System.NotImplementedException();
+        thisDrone.GetComponent<RyderDroneScript>().Explode();
     }
 }

@@ -26,6 +26,8 @@ public class NoobToobAttachment : MonoBehaviour
 
     LayerMask enemyLayerMask;
 
+    public Color color;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -80,6 +82,7 @@ public class NoobToobAttachment : MonoBehaviour
                 {
                     //Debug.Log("damaging enemies");
                     temp.TakeDamage(damage);
+                    ImpactSystem.Instance.DamageIndication(damage, color, c.gameObject.transform.position, Quaternion.LookRotation(transform.position - LevelManager.Instance.Player.transform.position));
                 }
             }
         }

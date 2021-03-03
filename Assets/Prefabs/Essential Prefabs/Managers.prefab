@@ -624,6 +624,8 @@ MonoBehaviour:
     particleToSpawn: {fileID: 1845764070681338, guid: ac2312a3e32471549882f1a6da5568e6,
       type: 3}
     audioToPlay: {fileID: 0}
+  damageIndicatorObj: {fileID: 4527500523508540015, guid: c271527d08d2e6c4597aec6a2592ee56,
+    type: 3}
   defaultSettings:
     hitMaterial: {fileID: 0}
     decalToSpawn: {fileID: 4982921017592928787, guid: fac90a147758d184e9bc8b1b375f45b1,

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NO IOR glass_with_normals
+  m_Shader: {fileID: -6465566751694194690, guid: 8b776406ab744ed4ea3269db48d587b6,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_49E7712B:
+        m_Texture: {fileID: 2800000, guid: a9d2210725e85f54686423be8b59a37e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_2C4A75BC: 0.03
+    m_Colors:
+    - Color_1C5C4CBC: {r: 0.40899786, g: 0.47676116, b: 0.9528302, a: 1}
+    - Vector2_5C7E4741: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_AC1656C8: {r: 1, g: 1, b: 0, a: 0}

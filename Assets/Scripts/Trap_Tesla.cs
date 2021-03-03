@@ -22,6 +22,7 @@ public class Trap_Tesla : Trap
 
     [SerializeField] private Transform chainOrigin;
     [SerializeField] private GameObject particleVFX;
+    
 
     protected override void Start()
     {
@@ -62,8 +63,10 @@ public class Trap_Tesla : Trap
 
         for (int i = 1; i < currentChainAmount + 1; i++) // adding enemies to the list and adding current chain amount 
         {
+            
             Vector3 position = enemies[i - 1].transform.position;
-            //position = GetHeightOffset(position);
+            position.y += 1.4f;
+            Instantiate(particleVFX, position, enemies[i - 1].transform.rotation);
             lineRenderer.SetPosition(i, position);
         }
 
@@ -71,8 +74,11 @@ public class Trap_Tesla : Trap
         {
             if (enemy != null)
             {
+               
+
                 enemy.TakeDamage(trapDamage);
-                Instantiate(particleVFX, enemy.transform.position, enemy.transform.rotation); // when an enemy is hit (above line) spawn particle. need to spawn particle above feet...
+                
+                 // when an enemy is hit (above line) spawn particle. need to spawn particle above feet...
 
                 //enemies.Remove(enemy);
             }

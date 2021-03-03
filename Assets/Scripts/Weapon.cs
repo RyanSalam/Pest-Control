@@ -53,6 +53,17 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     [SerializeField] protected AltFireAttachment weaponAttachment;
     [SerializeField] protected Transform firePoint;
 
+    //our damage indicator prefabs
+    [SerializeField] protected GameObject damageIndicatorObj;
+
+    public delegate void DamageHandler(DamageData data);
+    public event DamageHandler onDamageDealt;
+
+    public void DamageDealt(DamageData data)
+    {
+        //calling all functions in the DamageHandler list
+        onDamageDealt?.Invoke(data);
+    }
     public Transform FirePoint
     {
         get { return firePoint; }
@@ -116,6 +127,10 @@ public abstract class Weapon : MonoBehaviour, IEquippable
                 MaterialHandler.materialColorChanger(objectsToChange[i], weaponColour, "_WeaponEmission");
             }
         }
+
+        ObjectPooler.Instance.InitializePool(damageIndicatorObj, 5);
+
+        //onDamageDealt += DamageIndication;
     }
 
     protected virtual void Update()
@@ -227,7 +242,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         
         //setting animator parameters
         animator.SetTrigger("fire");
-
+        animator.SetBool("isFiring" , isFiring);
         //should trigger our weapon overheating-breaking animation
         if (currentShots >= maxShots)
         {
@@ -238,6 +253,17 @@ public abstract class Weapon : MonoBehaviour, IEquippable
             currentCooldown = StartCoroutine(WeaponCooldown(GetHeatRatio()));
         }
     }
+
+    //protected virtual void DamageIndication(DamageData data)
+    //{
+    //    if (damageIndicatorObj != null)
+    //    {
+    //        //GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, hit.point, Quaternion.LookRotation(hit.normal)).gameObject;
+    //        GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, data.damageSource , Quaternion.LookRotation(-data.hitNormal)).gameObject;
+    //        temp.GetComponent<DamageIndicator>().setDamageIndicator(data.damageAmount, weaponColour);
+    //        //DamageIndicator.setDamageIndicator(temp, newDamage, weaponColour);
+    //    }
+    //}
 
     public virtual void SecondaryFire()
     {
@@ -274,6 +300,10 @@ public abstract class Weapon : MonoBehaviour, IEquippable
             StopCoroutine(currentCooldown);
     }
 
+    private void OnDestroy()
+    {
+        onDamageDealt = null;
+    }
     private void ResetWeaponStats(bool shouldReset)
     {
         if (shouldReset)

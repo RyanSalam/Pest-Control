@@ -28,6 +28,8 @@ public class PoisonCloudScript : MonoBehaviour
 
     Rigidbody projectile;
 
+    public Color color;
+
     [SerializeField] GameObject gameObjectVFX;
 
     // Start is called before the first frame update
@@ -68,6 +70,7 @@ public class PoisonCloudScript : MonoBehaviour
                     {
                         Debug.Log("Enemy taking damage");
                         enemy.TakeDamage(damageAmount);
+                        ImpactSystem.Instance.DamageIndication(damageAmount, color, enemy.transform.position, Quaternion.LookRotation(transform.position - LevelManager.Instance.Player.transform.position));
                     }
                 }
             }

@@ -93,14 +93,14 @@ MonoBehaviour:
   trapDamage: 20
   maxUses: 10
   buildDuration: 0
-  enemyChainAmount: 10
-  chainRadius: 10
+  enemyChainAmount: 4
+  chainRadius: 8
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 512
   canAttack: 1
   chainOrigin: {fileID: 4084208043290531406}
-  particleVFX: {fileID: 1616087419151336, guid: 91fb7ab2ef38317499700fcf6b971451,
+  particleVFX: {fileID: 1469211736650368, guid: b08f505eff218204fb92fac4cda2cfca,
     type: 3}
 --- !u!120 &8470837194361203702
 LineRenderer:

@@ -6,7 +6,8 @@ public class NanoDroneScript : MonoBehaviour
 {
     private NavMeshAgent agent;
     public Collider target;
-
+    Vector3 offset = new Vector3(0f, 1f, 0f);
+    Vector3 finalTar = new Vector3();
     [SerializeField] float speed = 1f;
     [SerializeField] float rotationSpeed = 1f;
     public float damage = 10f;
@@ -29,13 +30,15 @@ public class NanoDroneScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target != null)
+        if (target.GetComponent<Actor_Enemy>().isActiveAndEnabled)
         {
             // Move to target
             if (!DroneInRange())
             {
+                rotationSpeed += 0.1f;
                 Vector3 targetDir = target.transform.position - transform.position;
-                Quaternion lookRotation = Quaternion.LookRotation(targetDir);
+                finalTar = offset + targetDir;
+                Quaternion lookRotation = Quaternion.LookRotation(finalTar);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
                 transform.position += transform.forward * (speed * Time.deltaTime);
             }
@@ -47,7 +50,7 @@ public class NanoDroneScript : MonoBehaviour
             }
         }
         // This activates if the target is killed before the drone can reach it
-        else if (target == null && hasTarget == true && !attackFinished)
+        else if (!target.GetComponent<Actor_Enemy>().isActiveAndEnabled && hasTarget == true && !attackFinished)
         {
             Explode();
             attackFinished = true;
