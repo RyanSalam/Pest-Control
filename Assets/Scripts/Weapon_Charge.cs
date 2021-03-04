@@ -58,7 +58,7 @@ public class Weapon_Charge : Weapon
             cooldownDelayTimer.Tick(Time.deltaTime);
 
         // Call PrimaryFire() here since we're not calling base.Update()
-        if (auto && isFiring & canFire && !cooldownActive)
+        if (auto && isFiring && canFire && !cooldownActive)
             PrimaryFire();
 
         // Protects the heat bar from changing if we try to shoot during cooldown
@@ -72,6 +72,7 @@ public class Weapon_Charge : Weapon
                 isFiring = false;
             }
         }
+
     }
 
     // Checks if the charging bullet has reached the threshold
@@ -120,6 +121,13 @@ public class Weapon_Charge : Weapon
         isCharging = true;
         currentCharge = 0.0f;
 
+        if (currentCooldown != null)
+        {
+            StopCoroutine(currentCooldown);
+            currentCooldown = null;
+        }
+            
+
         while (currentCharge < maxChargeDuration)
         {
             currentCharge += Time.fixedDeltaTime;
@@ -156,22 +164,25 @@ public class Weapon_Charge : Weapon
             StopCoroutine(currentCooldown);
 
         isCharging = false;
-        currentRatio = GetHeatRatio();
+        //currentRatio = GetHeatRatio();
         isFiring = false;
 
-        lastFired = Time.time; //reset our last fired
+        //Debug.Log("Current shots += " + currentCharge * 5);
+
         LevelManager.Instance.WeaponUI.UpdateHeatBar((float)currentShots, (float)maxShots);
-        if (Mathf.RoundToInt(currentCharge * 5) < 2)
+        if (Mathf.RoundToInt(currentCharge * 5) < 1)
             currentShots += 3; //increment our current shots by 3 (minimum)
         else
             currentShots += Mathf.RoundToInt(currentCharge * 5); //increment our current shots as usual
+        LevelManager.Instance.WeaponUI.UpdateHeatBar((float)currentShots, (float)maxShots);
 
+        currentRatio = GetHeatRatio();
         if (currentShots >= maxShots)
         {
             isFiring = false;
             canFire = false; //we cannot fire now
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
-            currentCooldown = StartCoroutine(WeaponCooldown(GetHeatRatio()));
+            currentCooldown = StartCoroutine(WeaponCooldown(currentRatio));
             cooldownActive = true;
         }
 
@@ -203,7 +214,7 @@ public class Weapon_Charge : Weapon
         tempProjectile.GetComponent<Collider>().enabled = true;
         tempProjectile.RB.AddForce(data.direction * projForce * forceModifier, ForceMode.Impulse);
         LevelManager.Instance.Player.PlayerCam.DOShakePosition((3 *currentCharge)/5, new Vector3(0.5f * currentCharge, 0, -0.8f * currentCharge), (int)currentCharge);
-
+        
         // Reset variables
         lastFired = Time.time;
         currentCharge = 0;

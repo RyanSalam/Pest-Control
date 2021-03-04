@@ -78,6 +78,9 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     protected bool gameOver = false;
 
+    [SerializeField] Material armMaterial;
+    [SerializeField] PostProcessHandler playerHealthVolume;
+
     protected override void Awake() //On Awake set check LevelManager's Instance and playerSpawnPoint
     {
         base.Awake();
@@ -89,6 +92,23 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         //Copy reference to Char Info and AudioManager
         Char_SO = GameManager.Instance.GetCharacter();
+        if (Char_SO != null)
+        {
+            var temp = Instantiate(Char_SO.player, playerSpawnPoint.position, playerSpawnPoint.rotation);
+            _player.gameObject.SetActive(false);
+            _player = temp;
+            _player.AbilityOne = Char_SO.ab1;
+            _player.AbilityTwo = Char_SO.ab2;
+
+            if (armMaterial != null)
+            {
+                armMaterial.SetFloat("_EmissionIntensity", Char_SO.emissionIntensity);
+                armMaterial.SetColor("_GlovesColour", Char_SO.glovesColour);
+                armMaterial.SetColor("_EmissionColour", Char_SO.emissionColour);
+                armMaterial.SetFloat("_SkinTone", Char_SO.skinTone);
+            }
+
+        }
         Cues = FindObjectOfType<AudioCue>();
         
         
@@ -103,11 +123,14 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         Player.OnDeath += Respawn; // adding the respawn function to character after death 
         Player.OnDeath += characterUI.ResetHealthOnRespawn; //Reset health UI on respawn
+        Player.OnHealthChanged += UpdateVolume;
 
         Player.controlsEnabled = true;
         shopUI.pauseMenu.SetActive(false);
         gameOver = false;
 
+        // FOR TESTING PURPOSES ONLY - COMMENT OUT THIS LINE LATER
+        CurrentEnergy = 500;
     }
 
     private void Start()
@@ -122,7 +145,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         Cues.PlayAudioCue(Char_SO.MissionStart);
     }
 
-    private void SetSelectedButton(GameObject newSelectedObj)
+    public void SetSelectedButton(GameObject newSelectedObj)
     {
         if (Gamepad.current != null)
         {
@@ -144,6 +167,13 @@ public class LevelManager : MonoSingleton<LevelManager>
                 if (context.phase == InputActionPhase.Performed && !shopUI.pauseMenu.activeSelf && !gameOver)
                     ToggleShop();
                 break;
+
+            case "SkipBuildPhase":
+                if (context.phase == InputActionPhase.Performed && WaveManager.Instance.isBuildPhase)
+                    // Skip the build phase timer
+                    WaveManager.Instance.buildPhaseTimer.Tick(1000f);
+                    break;
+
         }
     }
 
@@ -174,6 +204,24 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         else
             Player.playerInputs.SwitchCurrentActionMap("Player");
+    }
+
+    public void TurnObjectOn(GameObject obj)
+    {
+        obj.SetActive(true);
+        Debug.Log("clicked");
+    }
+
+    public void TurnObjectOff(GameObject obj)
+    {
+        obj.SetActive(false);
+    }
+
+    private void UpdateVolume(float max, float current)
+    {
+        float ratio = current / max;
+        ratio -= 1;
+        playerHealthVolume.SetVolumeWeight(Mathf.Abs(ratio));
     }
 
     public void ToggleShop()

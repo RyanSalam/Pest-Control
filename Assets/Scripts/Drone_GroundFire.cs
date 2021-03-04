@@ -5,7 +5,7 @@ using UnityEngine;
 public class Drone_GroundFire : MonoBehaviour
 {
     [SerializeField] float damagePerTick = 5f;
-
+    [SerializeField] float delay = 1f;
     [SerializeField] ParticleSystem ps_Fire;
 
     bool shouldDealDamage;
@@ -13,8 +13,14 @@ public class Drone_GroundFire : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Invoke("Begin", delay);
+    }
+
+    void Begin()
+    {
         ps_Fire.Play();
         shouldDealDamage = true;
+        Destroy(gameObject, 12f);
     }
 
     // Update is called once per frame
@@ -24,14 +30,11 @@ public class Drone_GroundFire : MonoBehaviour
         {
             // Stop dealing damage when fire effect finishes playing
             shouldDealDamage = false;
-
-            // Delete game object when all particles are gone
-            if (ps_Fire.particleCount == 0) Destroy(gameObject);
         }
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(shouldDealDamage && other.gameObject.tag == "Enemy")
         {

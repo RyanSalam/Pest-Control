@@ -27,15 +27,18 @@ public class HUDUI : MonoBehaviour
     [SerializeField] GameObject enemyInfoPanel;
     [SerializeField] GameObject phaseTimer;
     [SerializeField] Image phaseTimerClock;
-    [SerializeField] TMP_Text phaseTimerCount;
+    //[SerializeField] TMP_Text phaseTimerCount;
+    [SerializeField] GameObject waveNumberIndicator;
+    [SerializeField] TMP_Text waveNumberText;
+    [SerializeField] GameObject skipBuildPhaseInfo;
     public float phaseTimerProgress;
-
 
 
     private void Start()
     {
         core = LevelManager.Instance.Core;
         core.OnHealthChanged += UpdateCoreHealth;
+        waveNumberIndicator.SetActive(false);
     }
 
     private void Update()
@@ -45,16 +48,10 @@ public class HUDUI : MonoBehaviour
         if (phaseTimer.activeSelf)
         {
             phaseTimerProgress = WaveManager.Instance.buildPhaseTimer.GetProgress();
-            phaseTimerCount.text = Mathf.RoundToInt(WaveManager.Instance.buildPhaseTimer.GetRemaining()).ToString();
+            //phaseTimerCount.text = Mathf.RoundToInt(WaveManager.Instance.buildPhaseTimer.GetRemaining()).ToString();
             phaseTimerClock.fillAmount = 1 - phaseTimerProgress;
         }
     }
-
-    //public static float Round(float value, int digits)
-    //{
-    //    float mult = Mathf.Pow(10.0f, (float)digits);
-    //    return Mathf.Round(value * mult) / mult;
-    //}
 
     #region Updating HUD UI
     // subscribe this function to core.OnHealthChanged on start to update the core health info
@@ -69,6 +66,9 @@ public class HUDUI : MonoBehaviour
 
     public IEnumerator BuildPhase()
     {
+        // Make sure to disable waveNumberIndicator during build phase
+        waveNumberIndicator.SetActive(false);
+
         // Display wave info panel
         WaveInfoPanel.SetActive(true);
         // Display build phase
@@ -82,10 +82,15 @@ public class HUDUI : MonoBehaviour
         // Hide coreInfo Panel until the Defence Phase
         coreInfoPanel.SetActive(false);
 
+        // Show text for skipping build phase
+        //skipBuildPhaseInfo.SetActive(true);
+
         yield return new WaitForSeconds(5f);
 
         // Hide wave info panel;
         WaveInfoPanel.SetActive(false);
+        // Hide skip build phase text
+        skipBuildPhaseInfo.SetActive(false);
     }
 
     public IEnumerator DefensePhase()
@@ -102,6 +107,14 @@ public class HUDUI : MonoBehaviour
         enemyInfoPanel.SetActive(true);
         // Start displaying coreInfo Panel
         coreInfoPanel.SetActive(true);
+
+        // Make sure to disable the skip build phase info
+        //skipBuildPhaseInfo.SetActive(false);
+
+        // Display waveNumberIndicator during the wave
+        waveNumberIndicator.SetActive(true);
+        // Update wave number text
+        waveNumberText.text = (WaveManager.Instance.waveIndex + 1).ToString();
 
         yield return new WaitForSeconds(5f);
 

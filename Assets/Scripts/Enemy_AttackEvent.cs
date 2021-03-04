@@ -23,12 +23,11 @@ public class Enemy_AttackEvent : MonoBehaviour
 
     }
 
-    private void Update()
+    public void DoAttack()
     {
-        //// Make an artifical trigger box that will damage any players within it.
         Collider[] targets = Physics.OverlapBox(transform.position, Vector3.one * thisEnemy.AttackRange, thisEnemy.transform.rotation);
 
-        foreach ( Collider col in targets)
+        foreach (Collider col in targets)
         {
             if (!col.CompareTag("Enemy"))
             {
@@ -51,6 +50,11 @@ public class Enemy_AttackEvent : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void Update()
+    {
+        //// Make an artifical trigger box that will damage any players within it.
     }
 
     public void EndAttack()

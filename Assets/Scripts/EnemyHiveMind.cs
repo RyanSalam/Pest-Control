@@ -51,7 +51,7 @@ public class EnemyHiveMind : MonoSingleton<EnemyHiveMind>
         if (totalGrunts > MinPlayer)
         {
             if (gruntsOnPlayer.Count > MinPlayer)
-            { 
+            {
                 while (gruntsOnPlayer.Count > MinPlayer)
                 {
                     int ranIndex = Random.Range(0, gruntsOnPlayer.Count);
@@ -60,6 +60,11 @@ public class EnemyHiveMind : MonoSingleton<EnemyHiveMind>
                     gruntsOnCore.Add(gruntsOnPlayer[ranIndex]);
                     gruntsOnPlayer.RemoveAt(ranIndex);
                 }
+            }
+
+            else
+            {
+
             }
         }
         else

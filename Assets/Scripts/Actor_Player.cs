@@ -47,8 +47,8 @@ public class Actor_Player : Actor
 
     [SerializeField] protected Transform _abilitySpawnPoint;
     public Transform AbilitySpawnPoint { get { return _abilitySpawnPoint; } }
-    public Ability AbilityOne { get { return _abilityOne; } }
-    public Ability AbilityTwo { get { return _abilityTwo; } }
+    public Ability AbilityOne { get { return _abilityOne; } set { _abilityOne = value; } }
+    public Ability AbilityTwo { get { return _abilityTwo; } set { _abilityTwo = value; } }
 
     [Header("Weapon")]
     [SerializeField] private Transform _weaponHolder;
@@ -80,14 +80,7 @@ public class Actor_Player : Actor
         invulnerableTimer = new Timer(0.8f, false);
         invulnerableTimer.OnTimerEnd += () => isInvulnerable = false;
 
-        if (AbilityOne != null)
-        {
-            AbilityOne.Initialize(gameObject);
-        }
-            
-
-        if (AbilityTwo != null)
-            AbilityTwo.Initialize(gameObject);
+        
     }
 
 
@@ -95,6 +88,15 @@ public class Actor_Player : Actor
     protected override void Start()
     {
         base.Start();
+
+        if (AbilityOne != null)
+        {
+            AbilityOne.Initialize(gameObject);
+        }
+
+
+        if (AbilityTwo != null)
+            AbilityTwo.Initialize(gameObject);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

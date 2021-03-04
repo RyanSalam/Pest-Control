@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using DG.Tweening;
 public abstract class Weapon : MonoBehaviour, IEquippable
 {
 
@@ -30,6 +30,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     [SerializeField] protected int shotIncrease = 1; //everytime you shoot the currentShots is increased by shotIncrease, allowing for some guns to overheat faster
     //[SerializeField] protected float coolDownDelay = 3; //
     [SerializeField] protected float timeTillWeaponCooldown = 3; //how long it takes for our gun to reload (cool off)
+    protected float lastUnequiped = 0.0f;
 
     [Space(10)]
     [Header("Weapon Efx")]
@@ -37,7 +38,8 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     [SerializeField] protected AudioClip fireSound;
     [SerializeField] protected ParticleSystem ImpactParticle;
     [SerializeField] protected ParticleSystem muzzleFlashParticle;
-
+    [SerializeField] protected Color weaponColour;
+    [SerializeField] protected GameObject[] objectsToChange;
     //stats for our weapons damage
     public delegate void Weapondamage(DamageData data);
    // public event DamageData
@@ -51,6 +53,17 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     [SerializeField] protected AltFireAttachment weaponAttachment;
     [SerializeField] protected Transform firePoint;
 
+    //our damage indicator prefabs
+    [SerializeField] protected GameObject damageIndicatorObj;
+
+    public delegate void DamageHandler(DamageData data);
+    public event DamageHandler onDamageDealt;
+
+    public void DamageDealt(DamageData data)
+    {
+        //calling all functions in the DamageHandler list
+        onDamageDealt?.Invoke(data);
+    }
     public Transform FirePoint
     {
         get { return firePoint; }
@@ -103,6 +116,21 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         cooldownDelayTimer = new Timer(timeTillWeaponCooldown / 2, false);
         cooldownDelayTimer.OnTimerEnd += () => currentCooldown = StartCoroutine(WeaponCooldown(currentRatio));
+
+        if(auto)
+            animator.SetBool("isAuto", true);
+
+        if (weaponColour != null)
+        {
+           for (int i = 0; i < objectsToChange.Length; i++)
+            {
+                MaterialHandler.materialColorChanger(objectsToChange[i], weaponColour, "_WeaponEmission");
+            }
+        }
+
+        ObjectPooler.Instance.InitializePool(damageIndicatorObj, 5);
+
+        //onDamageDealt += DamageIndication;
     }
 
     protected virtual void Update()
@@ -119,6 +147,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         transform.localPosition = Vector3.zero;
         transform.localRotation = player.WeaponHolder.localRotation;
         gameObject.SetActive(true);
+        transform.DOLocalRotate(Vector3.zero, 0.3f).From(Vector3.right * -90);
 
         lastFired = 0.0f;
 
@@ -162,6 +191,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     {
         isFiring = false;
         cooldownDelayTimer.PlayFromStart();
+        animator.SetTrigger("Release");
     }
     protected float GetHeatRatio()
     {
@@ -193,7 +223,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     {
         // Deregistering inputs when we unequip this.
         player.playerInputs.onActionTriggered -= HandleInput;
-
+        lastUnequiped = Time.time;
         transform.SetParent(null);
         gameObject.SetActive(false);        
 
@@ -209,16 +239,31 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         currentShots += shotIncrease; //increment our current shots
         LevelManager.Instance.WeaponUI.UpdateHeatBar((float)currentShots, (float)maxShots);
         currentRatio = GetHeatRatio();
-
+        
+        //setting animator parameters
+        animator.SetTrigger("fire");
+        animator.SetBool("isFiring" , isFiring);
         //should trigger our weapon overheating-breaking animation
         if (currentShots >= maxShots)
         {
             isFiring = false;
             canFire = false; //we cannot fire now
+            animator.SetBool("isOverheating", true);
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
             currentCooldown = StartCoroutine(WeaponCooldown(GetHeatRatio()));
         }
     }
+
+    //protected virtual void DamageIndication(DamageData data)
+    //{
+    //    if (damageIndicatorObj != null)
+    //    {
+    //        //GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, hit.point, Quaternion.LookRotation(hit.normal)).gameObject;
+    //        GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, data.damageSource , Quaternion.LookRotation(-data.hitNormal)).gameObject;
+    //        temp.GetComponent<DamageIndicator>().setDamageIndicator(data.damageAmount, weaponColour);
+    //        //DamageIndicator.setDamageIndicator(temp, newDamage, weaponColour);
+    //    }
+    //}
 
     public virtual void SecondaryFire()
     {
@@ -235,7 +280,17 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         if (currentCooldown != null)
         {
-            StartCoroutine(WeaponCooldown(currentRatio));
+            Debug.Log("Time.Time: " + Time.time + " lastUnequiped + timeTill: " + lastUnequiped + timeTillWeaponCooldown);
+            if (Time.time > lastUnequiped + timeTillWeaponCooldown)
+            {
+                
+                ResetWeaponStats(true);
+            }
+
+            else
+            {
+                StartCoroutine(WeaponCooldown(currentRatio));
+            }
         }
     }
 
@@ -245,6 +300,10 @@ public abstract class Weapon : MonoBehaviour, IEquippable
             StopCoroutine(currentCooldown);
     }
 
+    private void OnDestroy()
+    {
+        onDamageDealt = null;
+    }
     private void ResetWeaponStats(bool shouldReset)
     {
         if (shouldReset)
@@ -253,6 +312,8 @@ public abstract class Weapon : MonoBehaviour, IEquippable
             canFire = true;
             currentShots = 0;
             currentCooldown = null;
+            animator.SetBool("isOverheating", false);
+            LevelManager.Instance.WeaponUI.UpdateHeatBar(0, 1);
         }
     }
 }

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845e597e8d7b4df4eb690cea2accbed4, type: 3}
   m_Name: Aeon
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 3828171030826589136, guid: 31f6d2184e46d414a8bd729e1fbf60d0, type: 3}
   c_name: Aeon
   c_desc: Mercenary
-  c_profile: {fileID: 21300000, guid: afa21f0468e0955459821d29885bb901, type: 3}
+  c_profile: {fileID: 21300000, guid: 7b0855ba4c0a6cd44a171e26e0ca555c, type: 3}
   A1_image: {fileID: 21300000, guid: 55b1a259fb54df04d8604e49d1c67f1e, type: 3}
   A1_name: Blackhole
   A1_text: Blackhole
@@ -24,19 +24,23 @@ MonoBehaviour:
   A2_text: Portal
   ab1: {fileID: 11400000, guid: 56dd13d55c659f94aacbe6f99aa06512, type: 2}
   ab2: {fileID: 11400000, guid: f1a96881bf115c04ab530474e4edffc6, type: 2}
+  emissionIntensity: 0
+  glovesColour: {r: 1, g: 0.31666666, b: 0, a: 0}
+  emissionColour: {r: 0, g: 0.083333254, b: 1, a: 0}
+  skinTone: 1.14
+  CharacterChosen: {fileID: 11400000, guid: 957cb18ade27bf345bd353fd47dcfe94, type: 2}
+  BuildPhaseStart: {fileID: 11400000, guid: 297e96d426689ac4b96f10bda9716f80, type: 2}
+  WaveStart: {fileID: 11400000, guid: 5833175701b8f6248a20f1e77eea1e9d, type: 2}
+  CoreDamaged: {fileID: 11400000, guid: 9d549df961888404cbc2138c29ddf046, type: 2}
   UseAbility1: {fileID: 11400000, guid: d5bb9b6039fec5549a1d68b1f4be2188, type: 2}
   UseAbility2: {fileID: 11400000, guid: 32015c7a931474245b7f4d01acf86f26, type: 2}
-  BuildPhaseStart: {fileID: 11400000, guid: 297e96d426689ac4b96f10bda9716f80, type: 2}
-  BuildTrap: {fileID: 11400000, guid: 03fce8f3d515af544804c090cd3f0a4d, type: 2}
-  CharacterChosen: {fileID: 11400000, guid: 957cb18ade27bf345bd353fd47dcfe94, type: 2}
-  CoreDamaged: {fileID: 11400000, guid: 9d549df961888404cbc2138c29ddf046, type: 2}
   EnemyKill: {fileID: 11400000, guid: cb393108763e17046bf4ee53f5295024, type: 2}
-  MissionLoss: {fileID: 11400000, guid: 6f94c23fd958d0747af34e98c92e94f6, type: 2}
-  MissionWin: {fileID: 11400000, guid: ad0b1f0aefdf4934f9798d740d442ad0, type: 2}
-  MissionStart: {fileID: 11400000, guid: 3313dc643cf270f45919e87587e52757, type: 2}
   PlayerHit: {fileID: 11400000, guid: 30c06d1acd89cdd46b7ca5f39054fb29, type: 2}
   PlayerRespawn: {fileID: 11400000, guid: cc9cb5b3a71207e4fa47af9b39257615, type: 2}
   PurchaseItem: {fileID: 11400000, guid: ef4211dc063fab545b227836c07390d7, type: 2}
+  BuildTrap: {fileID: 11400000, guid: 03fce8f3d515af544804c090cd3f0a4d, type: 2}
   TrapDestroyed: {fileID: 11400000, guid: b47b93eab60c4aa4eb665e006b7b3be6, type: 2}
-  WaveStart: {fileID: 11400000, guid: 5833175701b8f6248a20f1e77eea1e9d, type: 2}
+  MissionStart: {fileID: 11400000, guid: 3313dc643cf270f45919e87587e52757, type: 2}
+  MissionLoss: {fileID: 11400000, guid: 6f94c23fd958d0747af34e98c92e94f6, type: 2}
+  MissionWin: {fileID: 11400000, guid: ad0b1f0aefdf4934f9798d740d442ad0, type: 2}
   Responses: {fileID: 0}

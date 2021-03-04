@@ -67,6 +67,7 @@ MonoBehaviour:
   damage: 0
   launchForce: 0
   lifeTime: 5
+  color: {r: 1, g: 0, b: 0.9914956, a: 0}
 --- !u!135 &8441448102959324593
 SphereCollider:
   m_ObjectHideFlags: 0

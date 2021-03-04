@@ -18,7 +18,7 @@ public class SMB_TornadoKick : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        pA = animator.GetComponentInParent<Actor_Player>();
+        pA = animator.GetComponent<Actor_Player>();
         pA.controlsEnabled = false;
         tornadoStrikeDamagePerSecond = 2f;
         tornadoStrikeForwardMomentum = 5f;

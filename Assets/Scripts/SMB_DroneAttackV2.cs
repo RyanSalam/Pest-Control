@@ -35,7 +35,7 @@ public class SMB_DroneAttackV2 : StateMachineBehaviour
         }
 
         //still spinning our drone, just slower than the movement phase, as we are hovering in this phase
-        droneBody.Rotate(Vector3.up * rotationForce * Time.deltaTime);
+        //droneBody.Rotate(Vector3.up * rotationForce * Time.deltaTime);
     }
    
 }

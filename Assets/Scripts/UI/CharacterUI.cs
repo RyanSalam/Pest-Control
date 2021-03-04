@@ -26,12 +26,12 @@ public class CharacterUI : MonoBehaviour
         ability1_Icon.sprite = player.AbilityOne.abilitySprite;
         ability2_Icon.sprite = player.AbilityTwo.abilitySprite;
 
-        player.AbilityOne.cooldownTimer.OnTimerEnd += () => ability1_Clock.fillAmount = 0;
-        player.AbilityTwo.cooldownTimer.OnTimerEnd += () => ability2_Clock.fillAmount = 0;
-
         abilityEffect.color = new Color(abilityEffect.color.r, abilityEffect.color.g, abilityEffect.color.b, 0.01f);
         effectTimer = 0.0f;
         isUsed = false;
+
+        player.AbilityOne.cooldownTimer.OnTimerEnd += () => ability1_Clock.fillAmount = 0;
+        player.AbilityTwo.cooldownTimer.OnTimerEnd += () => ability2_Clock.fillAmount = 0;
     }
 
     // Update is called once per frame
@@ -76,7 +76,7 @@ public class CharacterUI : MonoBehaviour
 
     public void ResetAlphaValue()
     {
-        abilityEffect.CrossFadeAlpha(0.01f, 0.5f, true);
+        abilityEffect.CrossFadeAlpha(0.01f, 0.25f, true);
         abilityActive = false;
         isUsed = false;
         effectTimer = 0.0f;

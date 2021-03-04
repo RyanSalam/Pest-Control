@@ -40,13 +40,17 @@ public static class MaterialHandler
     public static void materialTextureChanger(GameObject gameObject, Texture texture, string shaderPropertyName)
     {
         //getting the objects renderer -> material
-        Material existingMaterial = gameObject.GetComponent<Renderer>().material;
+        MeshRenderer existingMaterial = gameObject.GetComponent<MeshRenderer>();
+        MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
 
         if (existingMaterial != null) //we will only change the material if it exists in the first place
         {
             //set our materials texture to the new desired one
             if (texture != null)
-            existingMaterial.SetTexture(shaderPropertyName, texture);
+            {
+                propertyBlock.SetTexture(shaderPropertyName, texture);
+                existingMaterial.SetPropertyBlock(propertyBlock);
+            }
         }
 
     }
@@ -60,13 +64,39 @@ public static class MaterialHandler
     /// <param name="shaderPropertyName"></param>
     public static void materialFloatChanger(GameObject gameObject, float shaderValue, string shaderPropertyName)
     {
-        //getting the objects renderer -> material
-        Material existingMaterial = gameObject.GetComponent<Renderer>().material;
+        ////getting the objects renderer -> material
+        //Material existingMaterial = gameObject.GetComponent<Renderer>().material;
+
+        //if (existingMaterial != null) //we will only change the material if it exists in the first place
+        //{
+        //    //setting the float will change the values of the shaders variables.  
+        //    existingMaterial.SetFloat(shaderPropertyName, shaderValue);
+        //}
+
+        MeshRenderer existingMaterial = gameObject.GetComponent<MeshRenderer>();
+        MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
 
         if (existingMaterial != null) //we will only change the material if it exists in the first place
         {
-            //setting the float will change the values of the shaders variables.  
-            existingMaterial.SetFloat(shaderPropertyName, shaderValue);
+                propertyBlock.SetFloat(shaderPropertyName, shaderValue);
+                existingMaterial.SetPropertyBlock(propertyBlock);
+        }
+
+
+    }
+    /// <summary>
+    /// This function can change a objects sprite. The object must have a spriteRenderer to utilize this
+    /// </summary>
+    /// <param name="gameObject"></param>
+    /// <param name="newSprite"></param>
+    public static void spriteChanger(GameObject gameObject, Sprite newSprite)
+    {
+        //grab the sprite renderer component 
+        SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = newSprite;
         }
 
     }

@@ -16,7 +16,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
 
     [SerializeField] private float obstacleDetectionRange = 3;
 
-    Actor_Player player;
+    Actor_Player player => LevelManager.Instance.Player;
 
     //Audio Settings
     AudioCue ACue;
@@ -48,7 +48,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
             
         }
 
-        CanPlace = obstacles.Length <= 0;
+        CanPlace = obstacles.Length <= 0 && player.Controller.isGrounded && outHit.collider != null;
 
         if (CanPlace)
         {
@@ -56,12 +56,12 @@ public class TrapPlacement : MonoBehaviour, IEquippable
             Hologram.SetColor("Color_F3B47044", Color.blue); //assigning placeable trap colour to blue 
         }
         else
-        { 
-            
+        {
+
             Hologram.SetColor("Color_F3B47044", Color.red);// Changing the colour of the trap to red if it can't be placed
             CanPlace = false;
         }
-        
+
     }
 
     public virtual void HandleInput(InputAction.CallbackContext context)
@@ -85,7 +85,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     }
     protected void PlaceTrap()
     {
-        Debug.Log("IS THIS BEING CALLED");
+        //Debug.Log("IS THIS BEING CALLED");
         if (LevelManager.Instance.CurrentEnergy < trapPrice)
             return;
 
@@ -101,7 +101,9 @@ public class TrapPlacement : MonoBehaviour, IEquippable
 
     public void RotateTrap()
     {
-        transform.Rotate(transform.rotation.eulerAngles + Quaternion.Euler(0, 90, 0).eulerAngles); //rotating trap by 90 degrees clockwise 
+        //Debug.Log("Rotating trap");
+        //transform.Rotate(transform.rotation.eulerAngles + Quaternion.Euler(0, 90, 0).eulerAngles); //rotating trap by 90 degrees clockwise 
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 90, transform.eulerAngles.z);
     }
 
     public void Equip()

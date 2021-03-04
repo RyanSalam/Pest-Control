@@ -43,10 +43,11 @@ public class Weapon_Hitscan : Weapon
     float maxSpreadAngle = 2;
 
     public ParticleSystem bulletTrail;
+    //public GameObject bulletDecal;
 
     [SerializeField] protected AnimationCurve spreadCurve;
     [SerializeField] protected float timeFiring = 0f;
-
+    
 
     //Audio Settings
     AudioCue ACue;
@@ -54,11 +55,24 @@ public class Weapon_Hitscan : Weapon
     //range variable for our raycast
     [SerializeField] protected float range = 80.0f;
 
+    //our damage indicator prefabs
+    //[SerializeField] GameObject damageIndicatorObj;
+
     //this is our hitscan script. The pistol and SMG will use this script
     protected override void Awake()
     {
         base.Awake();
     }
+    protected override void Start()
+    {
+        ObjectPooler.Instance.InitializePool(ImpactParticle.gameObject , 30);
+        //ObjectPooler.Instance.InitializePool(damageIndicatorObj, 5);
+        //ObjectPooler.Instance.InitializePool(bulletDecal, 20);
+        
+        base.Start();
+        ACue = GetComponent<AudioCue>();
+    }
+    
 
     Coroutine releaseCurrent;
     public override void PrimaryFire()
@@ -102,7 +116,9 @@ public class Weapon_Hitscan : Weapon
 
         if (Physics.Raycast(ray, out hit, range))
         {
-            Debug.Log("We are shooting at: " + hit.transform.name);
+            int newDamage = CalculateDamageFalloff(firePoint.position, hit.point);
+
+            //Debug.Log("We are shooting at: " + hit.transform.name);
             //check if we hit enemy
             if (hit.transform.CompareTag("Enemy"))
             {
@@ -112,21 +128,46 @@ public class Weapon_Hitscan : Weapon
                 DamageData damageData = new DamageData
                 {
                     damager = player,
-                    damageAmount = Damage,
+                    damageAmount = newDamage,
                     direction = transform.forward,
-                    damageSource = transform.position,
+                    damageSource = hit.point,
                     damagedActor = enemyHit,
+                    hitNormal = hit.normal,
                 };
                 //apply damage to our enemy
                 enemyHit.TakeDamage(damageData);
 
+                ImpactSystem.Instance.DamageIndication(damageData.damageAmount, weaponColour, damageData.damageSource, Quaternion.LookRotation(-hit.normal));
+
+                //DamageDealt(damageData);
+
+                //if (damageIndicatorObj != null)
+                //{
+                //   //GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, hit.point, Quaternion.LookRotation(hit.normal)).gameObject;
+                //    GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, hit.point, Quaternion.LookRotation(-hit.normal)).gameObject;
+                //    temp.GetComponent<DamageIndicator>().setDamageIndicator(newDamage, weaponColour);
+                //    //DamageIndicator.setDamageIndicator(temp, newDamage, weaponColour);
+                //}
+
             }
+            else
+            {
+                //going to remove this from here when impact system is setup
+                //if (bulletDecal != null)
+                //{
+                //    ObjectPooler.Instance.GetFromPool(bulletDecal, hit.point, Quaternion.LookRotation(hit.normal));
+                //}
+            }
+
+            ImpactSystem.Instance.HandleImpact(hit.transform.gameObject, hit.point, Quaternion.LookRotation(hit.normal));
 
             //instantiating our impact particles for now - hope for an object pool down the line
             if (ImpactParticle != null)
             {
-                var temp = Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
-                Destroy(temp.gameObject, 1f); // replaced with object pool
+                //var temp = Instantiate(ImpactParticle, hit.point, Quaternion.LookRotation(hit.normal));
+                //Vector3 newRotation = new Vector3( , hit.normal.z, 0);
+                ObjectPooler.Instance.GetFromPool(ImpactParticle.gameObject, hit.point, Quaternion.LookRotation(hit.normal));
+                //Destroy(temp.gameObject, 1f); // replaced with object pool
             }
                 
         }
@@ -157,12 +198,24 @@ public class Weapon_Hitscan : Weapon
         muzzleFlashParticle.Stop();
     }
 
-    protected override void Start()
+    int CalculateDamageFalloff(Vector3 firePosition, Vector3 hitPosition)
     {
-        base.Start();
-        ACue = GetComponent<AudioCue>();
+        //going to change our damage value based on how far away our target it
+        Vector3 shotDistance = firePosition - hitPosition;
+
+        //Debug.Log("shotDistance = " + shotDistance.magnitude);
+        //Debug.Log("Percentage of damage to remove = " + shotDistance.magnitude / 100);
+       
+        float damageFalloff = shotDistance.magnitude / 100; //get a percentage
+        damageFalloff *= Damage; //apply the percentage to our damage
+       
+        //now if we subtract the distance penalty from damage we have our new damage value
+        //Debug.Log("newDamage = " +  (Damage - damageFalloff));
+
+        return (int)(Damage - damageFalloff);
     }
 
+    
     // Update is called once per frame
     protected override void Update()
     {

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: third pass glass_002
+  m_Shader: {fileID: -6465566751694194690, guid: a5c66c523ee1b204d96220db6ac48ec6,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_DCB4F659:
+        m_Texture: {fileID: 2800000, guid: a9d2210725e85f54686423be8b59a37e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_1982E863: 0
+    - Vector1_557DB9D3: 0.5
+    - Vector1_6D0C6114: 1
+    - Vector1_EAE94C5C: -0.04
+    m_Colors:
+    - Color_5CF80C82: {r: 0.37833747, g: 0.735849, b: 0.7269112, a: 0.5882353}

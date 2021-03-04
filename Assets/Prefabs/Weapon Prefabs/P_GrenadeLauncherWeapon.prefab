@@ -40,6 +40,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2955010615129653358}
   - component: {fileID: 7027731481850693599}
+  - component: {fileID: 7452918317169352853}
+  - component: {fileID: 5716831647811846636}
   m_Layer: 13
   m_Name: P_GrenadeLauncherWeapon
   m_TagString: Untagged
@@ -87,15 +89,53 @@ MonoBehaviour:
   fireSound: {fileID: 0}
   ImpactParticle: {fileID: 0}
   muzzleFlashParticle: {fileID: 0}
+  weaponColour: {r: 1, g: 0, b: 0, a: 1}
+  objectsToChange: []
   lastFired: 0
   canFire: 1
   isFiring: 0
   weaponAttachment: {fileID: 11400000, guid: dbcb79a4f59b1a541b57d4e3ab887e21, type: 2}
   firePoint: {fileID: 1276595699964514502}
+  damageIndicatorObj: {fileID: 4527500523508540015, guid: c271527d08d2e6c4597aec6a2592ee56,
+    type: 3}
   projectilePrefab: {fileID: 2221685402508476846, guid: 77811e88227db92489017efc683573df,
     type: 3}
   projectileForce: 15
   breakDistance: 5
+--- !u!114 &7452918317169352853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5257384463069363096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c577419b930a6f342931d31663c5ccc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swayAmount: 0.02
+  swayAmountMax: 0.08
+  smoothing: 0.25
+  offsetMove: {x: 0, y: 0, z: 0}
+--- !u!114 &5716831647811846636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5257384463069363096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f4dcd5da0291c4b914bd20a115beb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioCue: {fileID: 11400000, guid: 1c1d16e5168c4674cb6f0eeb5f6baa39, type: 2}
+  _playOnStart: 0
+  _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
+    type: 2}
+  _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
+    type: 2}
 --- !u!1 &7151869070914382769
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +148,7 @@ GameObject:
   - component: {fileID: 3119743452478886175}
   - component: {fileID: 304753583105211225}
   - component: {fileID: 2219978795519642140}
+  - component: {fileID: 8177788450389606441}
   m_Layer: 13
   m_Name: GrenadeLauncherBody
   m_TagString: Untagged
@@ -190,3 +231,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &8177788450389606441
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7151869070914382769}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b6fa7bee0be8000449f13e928f451508, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

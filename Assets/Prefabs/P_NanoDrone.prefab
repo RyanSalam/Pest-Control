@@ -4810,6 +4810,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  speed: 1
+  rotationSpeed: 1
   damage: 10
   explosionEffect: {fileID: 1956217911}
 --- !u!23 &3837788441486409699

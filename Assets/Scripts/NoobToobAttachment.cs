@@ -22,8 +22,11 @@ public class NoobToobAttachment : MonoBehaviour
     [SerializeField] int damage = 10;
 
     public GameObject explosionVFX;
+    AudioCue ac;
 
     LayerMask enemyLayerMask;
+
+    public Color color;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +37,7 @@ public class NoobToobAttachment : MonoBehaviour
         maxBounceCount = 2;
 
         enemyLayerMask = LayerMask.GetMask("Enemy");
-
+        ac = GetComponent<AudioCue>();
         projectile.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
     }
 
@@ -59,6 +62,8 @@ public class NoobToobAttachment : MonoBehaviour
             damageEnemies();
 
         }
+
+        ac.PlayAudioCue();
     }
 
     void damageEnemies()
@@ -77,6 +82,7 @@ public class NoobToobAttachment : MonoBehaviour
                 {
                     //Debug.Log("damaging enemies");
                     temp.TakeDamage(damage);
+                    ImpactSystem.Instance.DamageIndication(damage, color, c.gameObject.transform.position, Quaternion.LookRotation(transform.position - LevelManager.Instance.Player.transform.position));
                 }
             }
         }

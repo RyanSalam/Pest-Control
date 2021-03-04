@@ -5,6 +5,7 @@ using UnityEngine;
 public class TurretTrapProjectile : MonoBehaviour
 {
     Actor_Enemy enemyTarget; 
+    [SerializeField] GameObject hitEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,11 @@ public class TurretTrapProjectile : MonoBehaviour
         {
             other.GetComponent<Actor_Enemy>().TakeDamage(30f); 
         }
-        Destroy(gameObject); 
+        if (other.gameObject.tag != "Trap")
+        {
+            Instantiate(hitEffect, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
         
     }
 }

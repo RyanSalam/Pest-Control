@@ -51,7 +51,7 @@
                     "id": "2cb71e85-0a28-4a29-aac1-24e6456760bb",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap"
+                    "interactions": ""
                 },
                 {
                     "name": "Alt Fire",
@@ -59,7 +59,7 @@
                     "id": "738b379b-8232-4571-90f7-d8fec704e3b8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap"
+                    "interactions": ""
                 },
                 {
                     "name": "Jump",
@@ -89,6 +89,14 @@
                     "name": "Shop",
                     "type": "Button",
                     "id": "1c2ec292-f38d-4fc6-a087-1b4375d44ff1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SkipBuildPhase",
+                    "type": "Button",
+                    "id": "44c1a481-b53d-40ab-a42e-1c165221611f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -418,9 +426,9 @@
                     "name": "",
                     "id": "19b63c21-0c9a-4c46-b573-6f20022ec316",
                     "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Alt Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -464,7 +472,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -475,7 +483,7 @@
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -486,7 +494,7 @@
                     "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Shop",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -497,8 +505,30 @@
                     "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Shop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e9284e14-04b6-46e3-bb24-c9e823c1fc78",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SkipBuildPhase",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0d21edd6-371e-42a1-a136-754876692ba1",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SkipBuildPhase",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

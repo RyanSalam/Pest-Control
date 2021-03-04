@@ -626,7 +626,6 @@ MonoBehaviour:
   trapDamage: 3
   maxUses: 10
   buildDuration: 3
-  currentUses: 0
   maxRange: 7
   detectionAngle: 180
   bulletSpawn: {fileID: 1800523372919622226}
@@ -640,6 +639,7 @@ MonoBehaviour:
   rateOfFire: 0.5
   bulletSpeed: 5
   bulletCount: 10
+  muzzleFlash: {fileID: 0}
 --- !u!65 &7536266950377536950
 BoxCollider:
   m_ObjectHideFlags: 0

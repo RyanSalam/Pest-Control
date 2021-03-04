@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04269c8150901a429efa8db7281493a, type: 3}
   m_Name: Core_Hum
   m_EditorClassIdentifier: 
-  looping: 0
+  looping: 1
   _audioClipGroups:
   - sequenceMode: 0
     audioClips:
-    - {fileID: 8300000, guid: 89551ec3dbe07fe40aedf462ae9b8808, type: 3}
+    - {fileID: 8300000, guid: 1700957306d991a428c375504ddcfd7e, type: 3}
