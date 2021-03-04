@@ -15,7 +15,7 @@ MonoBehaviour:
   player: {fileID: 787800783448728176, guid: 069a52e6198962e4f9a3a06d4ae4440b, type: 3}
   c_name: Ryder
   c_desc: TechnoWiz
-  c_profile: {fileID: 21300000, guid: 1d966881e60f3a842ad57d6c8cf5bb35, type: 3}
+  c_profile: {fileID: 21300000, guid: 926c8f6211123584fbf1e3b0425a9b72, type: 3}
   A1_image: {fileID: 21300000, guid: afb5843854c6b3441b139f09e984739d, type: 3}
   A1_name: Drone
   A1_text: Drone Bot

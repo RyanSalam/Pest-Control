@@ -15,7 +15,7 @@ MonoBehaviour:
   player: {fileID: 3828171030826589136, guid: 31f6d2184e46d414a8bd729e1fbf60d0, type: 3}
   c_name: Eve
   c_desc: Fighter
-  c_profile: {fileID: 21300000, guid: 8bdfbe20c12da8040922c5640c2cc656, type: 3}
+  c_profile: {fileID: 21300000, guid: 531059f5bfdad7e4982318b1a000aae6, type: 3}
   A1_image: {fileID: 21300000, guid: 79214501366e0734facbac846dbcf375, type: 3}
   A1_name: Dash
   A1_text: Dash
