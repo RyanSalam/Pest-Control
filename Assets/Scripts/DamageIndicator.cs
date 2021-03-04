@@ -47,7 +47,9 @@ public class DamageIndicator : MonoBehaviour
             //myColor.a -= 0.075f;
             myColor.a -= Time.deltaTime * 0.5f;
             myDamageIndicator.color = myColor;
+            gameObject.transform.Translate(Vector3.up * Time.deltaTime, Space.World);
             //myDamageIndicator.rectTransform.position += yPosScrollValue;
+            
         }
     }
 
@@ -58,12 +60,12 @@ public class DamageIndicator : MonoBehaviour
         if (!myDamageIndicator)
             return;
 
-
+        
 
         myDamageIndicator.text = damage.ToString();
         myDamageIndicator.fontSize = fontSize;
         yPos = myDamageIndicator.rectTransform.position.y;
-
+        
         if (color != null)
         {
             color.a = 1; //have to reset the alpha to one so its opaque. Can make this a variable so we can mess about with transparancy
