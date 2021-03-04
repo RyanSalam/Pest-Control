@@ -158,6 +158,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   timeFiring: 0
   range: 400
+  damageIndicatorObj: {fileID: 4527500523508540015, guid: c271527d08d2e6c4597aec6a2592ee56,
+    type: 3}
 --- !u!114 &541031496880407571
 MonoBehaviour:
   m_ObjectHideFlags: 0

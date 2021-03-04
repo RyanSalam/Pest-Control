@@ -59,11 +59,14 @@ MonoBehaviour:
   fireSound: {fileID: 0}
   ImpactParticle: {fileID: 0}
   muzzleFlashParticle: {fileID: 0}
+  weaponColour: {r: 0, g: 0.8415315, b: 1, a: 0}
+  objectsToChange: []
   lastFired: 0
   canFire: 1
   isFiring: 0
   weaponAttachment: {fileID: 11400000, guid: e84381d79513e7047924a3b38efde32b, type: 2}
   firePoint: {fileID: 8568025554495181573}
+  damageIndicatorObj: {fileID: 0}
   projectilePrefab: {fileID: 5491038871089590036, guid: 53445aa1f69d8d842af4ad1e55704092,
     type: 3}
   projectileSpawnPoint: {fileID: 8568025554495181573}

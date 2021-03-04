@@ -9,4 +9,5 @@ public struct DamageData
     public Actor damagedActor;
     public Vector3 direction;
     public Vector3 damageSource;
+    public Vector3 hitNormal;
 }

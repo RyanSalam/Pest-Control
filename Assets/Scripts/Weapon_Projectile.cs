@@ -11,6 +11,8 @@ public class Weapon_Projectile : MonoBehaviour
     protected Vector3 direction;
     private float timeElapsed;
     protected Rigidbody rb;
+
+    public Color color;
     public Rigidbody RB
     {
         get { return rb; }
@@ -57,6 +59,8 @@ public class Weapon_Projectile : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(Data);
+
+                ImpactSystem.Instance.DamageIndication(Data.damageAmount, color, Data.damageSource, Quaternion.LookRotation(transform.position - Data.damager.transform.position));
                 //if (Data.weaponUsed != null)
                 //    Data.weaponUsed.DamageDealt(Data);
             }

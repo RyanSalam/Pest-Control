@@ -12,6 +12,8 @@ public class ExpertASMD_Orb : MonoBehaviour
     [SerializeField] float explosionDamage;
     [SerializeField] LayerMask enemyMask;
 
+    public Color color;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,8 @@ public class ExpertASMD_Orb : MonoBehaviour
 
             if (tempEnemy)
                 tempEnemy.TakeDamage(explosionDamage);
+
+            ImpactSystem.Instance.DamageIndication(explosionDamage, color, c.gameObject.transform.position, Quaternion.LookRotation(transform.position - LevelManager.Instance.Player.transform.position));
         }
 
         Destroy(gameObject);

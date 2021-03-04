@@ -7,6 +7,8 @@ public class Weapon_ASMD_Ammo : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] int damage = 1;
     [SerializeField] float projForce = 10.0f;
+
+    public Color color;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +34,8 @@ public class Weapon_ASMD_Ammo : MonoBehaviour
                     direction = transform.position,
                     damagedActor = enemy
                 };
-                    enemy.TakeDamage(damageData);
+                enemy.TakeDamage(damageData);
+                ImpactSystem.Instance.DamageIndication(damage, color, transform.position, Quaternion.LookRotation(transform.position - damageData.damager.transform.position));
             }
         }
         Destroy(gameObject);

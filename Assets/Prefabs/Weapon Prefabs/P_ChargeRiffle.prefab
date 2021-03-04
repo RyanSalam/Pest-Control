@@ -9754,11 +9754,14 @@ MonoBehaviour:
   fireSound: {fileID: 0}
   ImpactParticle: {fileID: 0}
   muzzleFlashParticle: {fileID: 0}
+  weaponColour: {r: 1, g: 0, b: 0.844852, a: 1}
+  objectsToChange: []
   lastFired: 0
   canFire: 1
   isFiring: 0
   weaponAttachment: {fileID: 0}
   firePoint: {fileID: 6965653023597013632}
+  damageIndicatorObj: {fileID: 0}
   maxChargeDuration: 1.5
   chargeModifier: 15
   projForce: 30

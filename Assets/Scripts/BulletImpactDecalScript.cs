@@ -15,7 +15,7 @@ public class BulletImpactDecalScript : MonoBehaviour
 
     float myEmmisionValue;
 
-    public float lifeTime = 15f;
+    public float lifeTime = 60f;
    Timer lifeTimeTimer;
 
     private void Awake()
@@ -57,7 +57,6 @@ public class BulletImpactDecalScript : MonoBehaviour
 
     private void DespawnDecal()
     {
-        Debug.Log("DespawnDecal NOW");
         gameObject.transform.root.gameObject.SetActive(false);
     }
 
