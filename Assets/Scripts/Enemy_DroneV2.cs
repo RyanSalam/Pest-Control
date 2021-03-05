@@ -215,6 +215,7 @@ public class Enemy_DroneV2 : Actor_Enemy
     protected override void Death()
     {
         StartCoroutine(startDroneDeath());
+        base.Death();
     }
 
     IEnumerator startDroneDeath()
@@ -224,8 +225,6 @@ public class Enemy_DroneV2 : Actor_Enemy
         rb.AddForce(Vector3.back * 3.5f, ForceMode.Impulse);
         isDying = true;
         yield return new WaitForSeconds(1.5f);
-        //base.Death();
-        //gameObject.SetActive(false);
     }
     private void OnCollisionEnter(Collision c)
     {
