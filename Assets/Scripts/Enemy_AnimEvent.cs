@@ -2,25 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_AttackEvent : MonoBehaviour
+public class Enemy_AnimEvent : MonoBehaviour
 {
     Actor_Enemy thisEnemy;
     int damage;
+
+
+    public float dissolveTime;
+    public SkinnedMeshRenderer body;
+    public SkinnedMeshRenderer wings;
+
+    public void OnEnable()
+    {
+        body.material.SetFloat("_TextureTransition", 0f);
+        wings.material.SetFloat("_TextureTransition", 0f);
+    }
+
     private void Start()
     {
         // Assign the enemy reference accordingly.
         thisEnemy = GetComponentInParent<Actor_Enemy>();
         damage = (int)thisEnemy.Damage;
         enabled = false;
-    }
-
-    public void StartAttack()
-    {
-        // Enable the attack box;
-        enabled = true;
-
-        // Initialise damage data according to the enemy's properties.
-
     }
 
     public void DoAttack()
@@ -45,21 +48,35 @@ public class Enemy_AttackEvent : MonoBehaviour
                     };
 
                     actor.TakeDamage(data);
-                    EndAttack(); // May Remove Later
                     break;
                 }
             }
         }
     }
 
-    private void Update()
+    public void Ragdoll()
     {
-        //// Make an artifical trigger box that will damage any players within it.
+
     }
 
-    public void EndAttack()
+    public void Despawn()
     {
-        // Disable the attack box.
-        enabled = false;
+        StartCoroutine(Dissolve());
+    }
+
+    IEnumerator Dissolve()
+    {
+        float elapsed = 0;
+        while(elapsed < dissolveTime)
+        {
+            Debug.Log("Despawn");
+            elapsed += Time.deltaTime;
+            float ratio = elapsed / dissolveTime;
+            ratio *= 0.7f;
+            body.material.SetFloat("_TextureTransition", ratio);
+            wings.material.SetFloat("_TextureTransition", ratio);
+            yield return null;
+        }
+        thisEnemy.gameObject.SetActive(false);
     }
 }
