@@ -53,17 +53,20 @@ public class Enemy_DroneV2 : Actor_Enemy
         //without going through the wall
         if (Physics.SphereCast(collisionChecker.position, 1.0f, transform.forward , out RaycastHit hit, 1.5f, collisionLayer))
         {
-
+            //Debug.Log(hit.point + ": hitpoint");
             //checking if our hitpoint was above or below our y position. so we know if we should move below or above the obstacle in our way
             if (hit.point.y > gameObject.transform.position.y)//go down
             {
                 //Debug.Log("go down - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y );
-                agent.baseOffset -= 0.4f;
+                //agent.baseOffset -= 0.4f;
+                agent.baseOffset += 0.4f;
+
             }
-            else if (hit.point.y < gameObject.transform.position.y ) //go up
+            else if (hit.point.y < gameObject.transform.position.y) //go up
             {
                 //Debug.Log("go up - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y);
-                agent.baseOffset += 0.4f;
+                //agent.baseOffset += 0.4f;
+                agent.baseOffset -= 0.4f;
             }
 
             //using a bool and timer so we re-adjust our position when we are done colliding for x seconds - helps with smoothing and makes it less glitchy 
