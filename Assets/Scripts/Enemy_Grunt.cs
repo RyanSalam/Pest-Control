@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy_Grunt : Actor_Enemy
 {
     Scanner<Actor_Player> playerScanner;
-    public bool HiveDictated;
+    public bool hiveDictated;
 
     [Range(0, 360)] public float detectionAngle;
 
@@ -43,15 +43,19 @@ public class Enemy_Grunt : Actor_Enemy
         {
             Vector3 dir = currentTarget.position - transform.position;
             dir.y = 0;
+            dir = dir.normalized;
 
-            Quaternion rot = Quaternion.LookRotation(dir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot, 0.6f);
+            //Quaternion rot = Quaternion.LookRotation(dir);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, rot, -0.6f);
+            transform.LookAt(currentTarget.position);
         }
 
         else
         {
-            Quaternion rot = Quaternion.LookRotation(Agent.velocity);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot, 0.6f);
+            //Quaternion rot = Quaternion.LookRotation(Agent.velocity);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, rot, 0.6f);
+            Quaternion rot = Quaternion.LookRotation(Agent.velocity.normalized);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, -0.6f);
         }
     }
 
@@ -64,7 +68,6 @@ public class Enemy_Grunt : Actor_Enemy
         {
             _bIsSearching = false;
             SwitchTarget(p.transform);
-            HiveDictated = false;
         }
 
         IntervalTimer.PlayFromStart();

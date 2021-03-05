@@ -243,7 +243,9 @@ public class WaveManager : MonoSingleton<WaveManager>
                         {
                             if (!drone.activeSelf)
                             {
-                                drone.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
+                                int droneI = Random.Range(0, currentWave.availableSpawnPoints.Length);
+                                drone.transform.position = currentWave.availableSpawnPoints[droneI].position;
+                                drone.transform.rotation = currentWave.availableSpawnPoints[droneI].rotation;
                                 drone.SetActive(true);
                                 _dronesRemaining--;
                                 break;

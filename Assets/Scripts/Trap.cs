@@ -66,7 +66,8 @@ public class Trap : MonoBehaviour
         CurrentUses++; //add current uses 
         if (CurrentUses >= maxUses) //checks if the current trap uses is greater or equal to max
         {
-            gameObject.SetActive(false);  //setting the game object to false 
+            gameObject.SetActive(false);  //setting the game object to false
+            LevelManager.Instance.AssessTraps(this);
             Anim.SetTrigger("Destroy"); 
         }
     }
