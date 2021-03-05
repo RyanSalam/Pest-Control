@@ -79,15 +79,15 @@ public class EnemyHiveMind : MonoSingleton<EnemyHiveMind>
         }
         else
         {
-            foreach (Enemy_Grunt grunt in gruntsOnPlayer)
-            {
-                grunt.SwitchTarget(LevelManager.Instance.Core.transform);
-                if (gruntsOnPlayer.Contains(grunt))
-                    gruntsOnPlayer.Remove(grunt);
+            //foreach (Enemy_Grunt grunt in gruntsOnPlayer)
+            //{
+            //    grunt.SwitchTarget(LevelManager.Instance.Core.transform);
+            //    if (gruntsOnPlayer.Contains(grunt))
+            //        gruntsOnPlayer.Remove(grunt);
 
-                gruntsOnCore.Add(grunt);
-                grunt.hiveDictated = true;
-            }
+            //    gruntsOnCore.Add(grunt);
+            //    grunt.hiveDictated = true;
+            //}
         }
     }
 
