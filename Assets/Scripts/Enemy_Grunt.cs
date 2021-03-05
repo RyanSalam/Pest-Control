@@ -13,6 +13,9 @@ public class Enemy_Grunt : Actor_Enemy
     {
         base.OnEnable();
         SetDestinationAroundTarget(CurrentDestination, AttackRange);
+        Agent.speed = movementSpeed;
+        GetComponentInChildren<Enemy_AnimEvent>().OnEnable();
+
         if (WaveManager.Instance.isBuildPhase == false)
             EnemyHiveMind.Instance.RegisterGrunt(this);
     }
@@ -73,7 +76,7 @@ public class Enemy_Grunt : Actor_Enemy
     protected override void Death()
     {
         base.Death();
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     public override void OnPathCompleted()
