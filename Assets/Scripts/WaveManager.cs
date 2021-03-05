@@ -83,9 +83,6 @@ public class WaveManager : MonoSingleton<WaveManager>
     }
 
     #region Variables
-    [Tooltip("Boolean to disable spawning systems")]
-    public bool disableSpawning;
-
     // Private pool lists to track all enemies spawned
     List<GameObject> _gruntPool = new List<GameObject>();
     List<GameObject> _dronePool = new List<GameObject>();
@@ -214,46 +211,15 @@ public class WaveManager : MonoSingleton<WaveManager>
             waveInfoCoroutine = StartCoroutine(hudUI.DefensePhase());
         }
 
-        if(!disableSpawning)
+        // Calculate how many enemies we spawn this wave and start a loop that will only activate that amount
+        int _enemiesToSpawn = _enemiesRemaining;
+        for (int i = 0; i < _enemiesToSpawn; i++)
         {
-            // Calculate how many enemies we spawn this wave and start a loop that will only activate that amount
-            int _enemiesToSpawn = _enemiesRemaining;
-            for (int i = 0; i < _enemiesToSpawn; i++)
+            // If we have both grunts and drones in the wave then randomly spawn from them
+            if (_gruntsRemaining > 0 && _dronesRemaining > 0)
             {
-                // If we have both grunts and drones in the wave then randomly spawn from them
-                if (_gruntsRemaining > 0 && _dronesRemaining > 0)
-                {
-                    int index = Random.Range(0, 1);
-                    if (index == 0 && _gruntsRemaining > 0)
-                    {
-                        foreach (GameObject grunt in _gruntPool)
-                        {
-                            if (!grunt.activeSelf)
-                            {
-                                grunt.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
-                                grunt.SetActive(true);
-                                _gruntsRemaining--;
-                                break;
-                            }
-                        }
-                    }
-                    else if (index == 1 && _dronesRemaining > 0)
-                    {
-                        foreach (GameObject drone in _dronePool)
-                        {
-                            if (!drone.activeSelf)
-                            {
-                                int droneI = Random.Range(0, currentWave.availableSpawnPoints.Length);
-                                drone.transform.position = currentWave.availableSpawnPoints[droneI].position;
-                                drone.transform.rotation = currentWave.availableSpawnPoints[droneI].rotation;
-                                drone.SetActive(true);
-                                _dronesRemaining--;
-                                break;
-                            }
-                        }
-                    }
-                }
-                else if (_gruntsRemaining > 0)
+                int index = Random.Range(0, 1);
+                if (index == 0 && _gruntsRemaining > 0)
                 {
                     foreach (GameObject grunt in _gruntPool)
                     {
@@ -261,26 +227,54 @@ public class WaveManager : MonoSingleton<WaveManager>
                         {
                             grunt.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
                             grunt.SetActive(true);
+                            _gruntsRemaining--;
                             break;
                         }
                     }
                 }
-                else
+                else if (index == 1 && _dronesRemaining > 0)
                 {
                     foreach (GameObject drone in _dronePool)
                     {
                         if (!drone.activeSelf)
                         {
-                            drone.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
+                            int droneI = Random.Range(0, currentWave.availableSpawnPoints.Length);
+                            drone.transform.position = currentWave.availableSpawnPoints[droneI].position;
+                            drone.transform.rotation = currentWave.availableSpawnPoints[droneI].rotation;
                             drone.SetActive(true);
+                            _dronesRemaining--;
                             break;
                         }
                     }
                 }
             }
-
-            yield return new WaitForSeconds(currentWave.spawnDelay);
+            else if (_gruntsRemaining > 0)
+            {
+                foreach (GameObject grunt in _gruntPool)
+                {
+                    if (!grunt.activeSelf)
+                    {
+                        grunt.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
+                        grunt.SetActive(true);
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                foreach (GameObject drone in _dronePool)
+                {
+                    if (!drone.activeSelf)
+                    {
+                        drone.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
+                        drone.SetActive(true);
+                        break;
+                    }
+                }
+            }
         }
+
+        yield return new WaitForSeconds(currentWave.spawnDelay);
     }
 
     #region Object Pooling
