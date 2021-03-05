@@ -30,13 +30,24 @@ public class Enemy_DroneV2 : Actor_Enemy
 
     [SerializeField] GameObject deathVFX;
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        agent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
+
+        if (!rb)
+            Debug.Log("RigidBody not found");
+    }
+
     // Start is called before the first frame update
     protected override void Start()
     {
         //reset our queue on start
         trapQueue = new Queue<Transform>();
 
-        agent = gameObject.GetComponent<NavMeshAgent>();
+
 
         if (!agent)
             Debug.Log("Agent not found");
@@ -45,11 +56,6 @@ public class Enemy_DroneV2 : Actor_Enemy
 
         if (!droneLegs)
             Debug.Log("Body not found");
-
-        rb = GetComponent<Rigidbody>();
-
-        if (!rb)
-            Debug.Log("RigidBody not found");
 
         ObjectPooler.Instance.InitializePool(deathVFX, 5);
 
