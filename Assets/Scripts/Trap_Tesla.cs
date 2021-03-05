@@ -30,6 +30,7 @@ public class Trap_Tesla : Trap
         lineRenderer = GetComponent<LineRenderer>();
         //lineRenderer.positionCount = enemyChainAmount;
         lineRenderer.enabled = false;
+        //Anim.SetBool("isIdle", true); //uncomment these when tesla trap animations is set on animator and applied  
     }
 
     protected override void Update()
@@ -85,6 +86,7 @@ public class Trap_Tesla : Trap
         }
         base.Activate();
         StartCoroutine(Cooldown());
+        //Anim.SetBool("isAttacking", true); 
     }
 
     private IEnumerator Cooldown() //cooldown for attacks
