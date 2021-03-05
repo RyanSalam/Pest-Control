@@ -272,9 +272,9 @@ public class WaveManager : MonoSingleton<WaveManager>
                     }
                 }
             }
-        }
 
-        yield return new WaitForSeconds(currentWave.spawnDelay);
+            yield return new WaitForSeconds(currentWave.spawnDelay);
+        }
     }
 
     #region Object Pooling
