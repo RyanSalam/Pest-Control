@@ -192,7 +192,7 @@ public class Weapon_Hitscan : Weapon
 
     IEnumerator ReleaseDelay()
     {
-        yield return new WaitForSeconds(fireRate + 0.3f);
+        yield return new WaitForSeconds(fireRate / 2);
         timeFiring = 0f;
         isFiring = false;
         muzzleFlashParticle.Stop();
