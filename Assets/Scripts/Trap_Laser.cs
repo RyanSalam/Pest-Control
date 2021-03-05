@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Trap_Laser : Trap
 {
+    //[SerializeField] protected ParticleSystem laserAttack;
 
     private Actor_Enemy enemyTarget;
 
     protected override void Start()
     {
         base.Start();
+        //laserAttack = GetComponentInChildren<ParticleSystem>();
         Anim.SetBool("isIdle", true); 
     }
 
@@ -20,6 +22,8 @@ public class Trap_Laser : Trap
             return;
         }
         base.Activate();
+        //if (laserAttack != null)
+            //laserAttack.Play();
         enemyTarget.TakeDamage(trapDamage); //damage enemy 
         Anim.SetBool("isIdle", false);
         Anim.SetBool("isAttacking", true);
@@ -39,6 +43,7 @@ public class Trap_Laser : Trap
             {
                 Anim.SetBool("isIdle", true);
                 Anim.SetBool("isAttacking", false);
+                //laserAttack.Stop();
             }
         }
 
