@@ -19,10 +19,16 @@ public class Enemy_DroneV2 : Actor_Enemy
 
     float timeAtCollision;
 
+    Rigidbody rb;
+
+    bool isDying = false;
+
     //reference to our agent / variables well need for our base offset
     NavMeshAgent agent;
 
     public Transform droneLegs;
+
+    [SerializeField] GameObject deathVFX;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -40,9 +46,17 @@ public class Enemy_DroneV2 : Actor_Enemy
         if (!droneLegs)
             Debug.Log("Body not found");
 
+        rb = GetComponent<Rigidbody>();
+
+        if (!rb)
+            Debug.Log("RigidBody not found");
+
+        ObjectPooler.Instance.InitializePool(deathVFX, 5);
+
         base.Start();
     }
 
+    
     // Update is called once per frame
     protected override void Update()
     {
@@ -131,7 +145,12 @@ public class Enemy_DroneV2 : Actor_Enemy
             //transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.Euler(0,transform.rotation.y,transform.rotation.z), 1f); //trying to slowly bring the x rotation back to 0
         }
 
-        
+        //if (isDying)
+        //{
+        //    agent.baseOffset -= 0.25f;
+        //    agent.updateRotation = false;
+        //    transform.Rotate(Vector3.right * 400 * Time.deltaTime);
+        //}
 
         base.Update();
     }
@@ -142,6 +161,14 @@ public class Enemy_DroneV2 : Actor_Enemy
     //    Gizmos.DrawWireSphere(collisionChecker.position, 1.0f);
     //}
 
+
+   
+    protected override void OnEnable()
+    {
+        rb.isKinematic = true;
+        agent.enabled = true;
+        base.OnEnable();
+    }
     public Transform searchForTarget()
     {
         //SEARCH FOR TRAPS
@@ -187,9 +214,26 @@ public class Enemy_DroneV2 : Actor_Enemy
 
     protected override void Death()
     {
-        base.Death();
-        gameObject.SetActive(false);
+        StartCoroutine(startDroneDeath());
     }
 
-
+    IEnumerator startDroneDeath()
+    {
+        rb.isKinematic = false;
+        agent.enabled = false;
+        rb.AddForce(Vector3.back * 3.5f, ForceMode.Impulse);
+        isDying = true;
+        yield return new WaitForSeconds(1.5f);
+        //base.Death();
+        //gameObject.SetActive(false);
+    }
+    private void OnCollisionEnter(Collision c)
+    {
+        if (isDying)
+        {
+            ObjectPooler.Instance.GetFromPool(deathVFX, c.GetContact(0).point, transform.rotation);
+            gameObject.SetActive(false);
+            base.Death();
+        }
+    }
 }
