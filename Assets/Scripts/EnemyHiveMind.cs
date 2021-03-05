@@ -20,13 +20,13 @@ public class EnemyHiveMind : MonoSingleton<EnemyHiveMind>
         {
             grunt.SwitchTarget(LevelManager.Instance.Core.transform);
             gruntsOnCore.Add(grunt);
-            grunt.HiveDictated = true;
+            //grunt.hiveDictated = true;
         }
         else
         {
             grunt.SwitchTarget(LevelManager.Instance.Player.transform);
             gruntsOnPlayer.Add(grunt);
-            grunt.HiveDictated = true;
+            grunt.hiveDictated = true;
         }
 
         grunt.OnDeath += () => DeRegisterGrunt(grunt);
@@ -59,7 +59,7 @@ public class EnemyHiveMind : MonoSingleton<EnemyHiveMind>
 
                     gruntsOnPlayer[ranIndex].SwitchTarget(LevelManager.Instance.Core.transform);
                     gruntsOnCore.Add(gruntsOnPlayer[ranIndex]);
-                    gruntsOnPlayer[ranIndex].HiveDictated = true;
+                    //gruntsOnPlayer[ranIndex].hiveDictated = true;
                     gruntsOnPlayer.RemoveAt(ranIndex);
                 }
             }
@@ -71,7 +71,7 @@ public class EnemyHiveMind : MonoSingleton<EnemyHiveMind>
 
                     gruntsOnCore[randIndex].SwitchTarget(LevelManager.Instance.Player.transform);
                     gruntsOnPlayer.Add(gruntsOnCore[randIndex]);
-                    gruntsOnCore[randIndex].HiveDictated = true;
+                    gruntsOnCore[randIndex].hiveDictated = true;
                     gruntsOnCore.RemoveAt(randIndex);
 
                 }
@@ -82,7 +82,11 @@ public class EnemyHiveMind : MonoSingleton<EnemyHiveMind>
             foreach (Enemy_Grunt grunt in gruntsOnPlayer)
             {
                 grunt.SwitchTarget(LevelManager.Instance.Core.transform);
-                grunt.HiveDictated = true;
+                if (gruntsOnPlayer.Contains(grunt))
+                    gruntsOnPlayer.Remove(grunt);
+
+                gruntsOnCore.Add(grunt);
+                grunt.hiveDictated = true;
             }
         }
     }
