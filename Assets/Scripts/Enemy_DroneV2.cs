@@ -171,8 +171,8 @@ public class Enemy_DroneV2 : Actor_Enemy
    
     protected override void OnEnable()
     {
-        rb.isKinematic = true;
         agent.enabled = true;
+        rb.isKinematic = true;
         base.OnEnable();
     }
     public Transform searchForTarget()
