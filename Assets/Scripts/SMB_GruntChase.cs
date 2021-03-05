@@ -40,7 +40,6 @@ public class SMB_GruntChase : StateMachineBehaviour
         {
             //self.SwitchTarget(self.Core.transform);
         }
-
         else
         {
             Vector3 destination;

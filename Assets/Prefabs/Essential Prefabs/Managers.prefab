@@ -493,6 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f951e288e0e74f449b2b85da800aa5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableSpawning: 0
   gruntPrefab: {fileID: 7864417393676115726, guid: bbbb804aa00c5624b841f067f4350dc2,
     type: 3}
   dronePrefab: {fileID: 3414804625668340203, guid: bf07f2fb012e7cd419acf52822c039ca,
@@ -502,7 +503,7 @@ MonoBehaviour:
   - enemiesToSpawn:
     - enemyPrefab: 0
       numberToSpawn: 5
-    minPlayerThresh: 0
+    minPlayerThresh: 1
     buildDuration: 40
     spawnDelay: 2
     availableSpawnPoints:
@@ -511,18 +512,18 @@ MonoBehaviour:
   - enemiesToSpawn:
     - enemyPrefab: 0
       numberToSpawn: 10
-    minPlayerThresh: 0
+    minPlayerThresh: 2
     buildDuration: 40
     spawnDelay: 2
     availableSpawnPoints:
     - {fileID: 689711442}
     - {fileID: 3531116633094684250}
   - enemiesToSpawn:
-    - enemyPrefab: 1
+    - enemyPrefab: 0
       numberToSpawn: 15
     - enemyPrefab: 1
       numberToSpawn: 5
-    minPlayerThresh: 0
+    minPlayerThresh: 3
     buildDuration: 50
     spawnDelay: 2
     availableSpawnPoints:
@@ -535,7 +536,7 @@ MonoBehaviour:
       numberToSpawn: 20
     - enemyPrefab: 1
       numberToSpawn: 10
-    minPlayerThresh: 0
+    minPlayerThresh: 4
     buildDuration: 50
     spawnDelay: 2
     availableSpawnPoints:
@@ -547,7 +548,7 @@ MonoBehaviour:
       numberToSpawn: 25
     - enemyPrefab: 1
       numberToSpawn: 15
-    minPlayerThresh: 0
+    minPlayerThresh: 5
     buildDuration: 50
     spawnDelay: 2
     availableSpawnPoints:
