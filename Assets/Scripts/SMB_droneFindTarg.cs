@@ -17,9 +17,9 @@ public class SMB_droneFindTarg : StateMachineBehaviour
     {
         drone = animator.gameObject.GetComponentInParent<Enemy_DroneV2>();
         droneBody = drone.transform.GetChild(0); //getting our drone model to rotate
-       
+
         canAttack = true; //this is a second bool so we dont enter the attack state every frame
-        
+
         Transform target = drone.searchForTarget();
 
         if (target != null) //we caught one boys, get the camera
@@ -45,7 +45,7 @@ public class SMB_droneFindTarg : StateMachineBehaviour
             //this is being triggered way too much adding a second bool
             if (inAttackRange && canAttack)
             {
-                
+
                 canAttack = false; //bool gets fliped when we re-enter this state
 
                 animator.SetTrigger("Attack"); //set attack trigger entering the attack state
@@ -53,7 +53,7 @@ public class SMB_droneFindTarg : StateMachineBehaviour
         }
         else //default to player
         {
-           drone.SwitchTarget(LevelManager.Instance.Player.transform);
+            //drone.SwitchTarget(LevelManager.Instance.Player.transform);
         }
 
         //applying rotation on the y axis
