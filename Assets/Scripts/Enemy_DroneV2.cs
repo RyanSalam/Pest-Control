@@ -233,7 +233,6 @@ public class Enemy_DroneV2 : Actor_Enemy
         {
             ObjectPooler.Instance.GetFromPool(deathVFX, c.GetContact(0).point, transform.rotation);
             gameObject.SetActive(false);
-            base.Death();
         }
     }
 }
