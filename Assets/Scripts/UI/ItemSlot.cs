@@ -73,7 +73,7 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.localScale = Vector3.one * 1.25f;
+        transform.localScale = Vector3.one * 1.05f;
         BorderImage.sprite = selectedSprite;
 
         if (hasTooltip)
