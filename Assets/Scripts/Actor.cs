@@ -112,7 +112,8 @@ public abstract class Actor : MonoBehaviour
     {
         isDead = true;
         OnDeath?.Invoke();
-        Anim.SetTrigger("Death");
+        if (Anim != null)
+            Anim.SetTrigger("Death");
     }
 
     // OnEnabled will basically be our respawn solution.
