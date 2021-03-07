@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.samdriver.driven-decals": "https://github.com/Anatta336/driven-decals.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.animation.rigging": "0.2.7-preview",
