@@ -3,7 +3,14 @@ guid: 8fa949a7289d1ff4597c0f8812e45291
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - currentTarget: {instanceID: 0}
+  - m_player: {instanceID: 0}
+  - ac: {instanceID: 0}
+  - portalClip: {instanceID: 0}
+  - enemyHit: {instanceID: 0}
+  - enemyAttack: {instanceID: 0}
+  - enemyDeath: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

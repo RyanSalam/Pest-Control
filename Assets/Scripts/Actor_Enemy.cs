@@ -37,6 +37,13 @@ public abstract class Actor_Enemy : Actor
 
     public float movementSpeed = 3.5f;
 
+    public AudioCue ac;
+    public AudioCueSO portalClip;
+    public AudioCueSO enemyHit;
+    public AudioCueSO enemyAttack;
+    public AudioCueSO enemyDeath;
+
+
     #region Getters
     // Agent getter for out of class access
     public NavMeshAgent Agent
@@ -107,7 +114,7 @@ public abstract class Actor_Enemy : Actor
     protected override void Awake()
     {
         base.Awake();
-
+        ac = GetComponent<AudioCue>();
         m_agent = GetComponent<NavMeshAgent>();
         m_agent.updateRotation = true;
         m_agent.speed = movementSpeed;
@@ -121,6 +128,7 @@ public abstract class Actor_Enemy : Actor
     protected override void OnEnable()
     {
         base.OnEnable();
+        //ac.PlayAudioCue(portalClip);
     }
 
     // Start to initialise variables

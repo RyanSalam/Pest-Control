@@ -227,7 +227,9 @@ public class WaveManager : MonoSingleton<WaveManager>
                         {
                             grunt.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
                             grunt.SetActive(true);
+                            grunt.GetComponent<AudioCue>().PlayAudioCue(grunt.GetComponent<Enemy_Grunt>().portalClip);
                             _gruntsRemaining--;
+                            
                             break;
                         }
                     }
@@ -242,6 +244,7 @@ public class WaveManager : MonoSingleton<WaveManager>
                             drone.transform.position = currentWave.availableSpawnPoints[droneI].position;
                             drone.transform.rotation = currentWave.availableSpawnPoints[droneI].rotation;
                             drone.SetActive(true);
+                            drone.GetComponent<AudioCue>().PlayAudioCue(drone.GetComponent<Enemy_DroneV2>().portalClip);
                             _dronesRemaining--;
                             break;
                         }

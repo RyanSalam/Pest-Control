@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 7287288067907043919}
   - component: {fileID: 462009527958355807}
   - component: {fileID: -1733453893914788994}
+  - component: {fileID: 178693488647071872}
   m_Layer: 9
   m_Name: P_Grunt
   m_TagString: Enemy
@@ -115,6 +116,11 @@ MonoBehaviour:
   _energyDrop: 10
   scanIntervals: 0.5
   movementSpeed: 3.5
+  ac: {fileID: 0}
+  portalClip: {fileID: 11400000, guid: 11f50e8e152759b40ab8252beb85692c, type: 2}
+  enemyHit: {fileID: 11400000, guid: df32668011ad55344a2465bf4efaaffb, type: 2}
+  enemyAttack: {fileID: 11400000, guid: 69b2935a41bcb9c43a9e6a629920d61c, type: 2}
+  enemyDeath: {fileID: 11400000, guid: 303e47fb041383248836acabda8d1705, type: 2}
   hiveDictated: 0
   detectionAngle: 90
 --- !u!54 &-1733453893914788994
@@ -133,6 +139,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &178693488647071872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7864417393676115726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f4dcd5da0291c4b914bd20a115beb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioCue: {fileID: 0}
+  _playOnStart: 0
+  _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
+    type: 2}
+  _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
+    type: 2}
 --- !u!1 &7864417394483169466
 GameObject:
   m_ObjectHideFlags: 0
