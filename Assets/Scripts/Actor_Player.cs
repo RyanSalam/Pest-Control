@@ -164,7 +164,7 @@ public class Actor_Player : Actor
         if (_jumpRequest || _jumpElapsed.IsWithin(Mathf.Epsilon, _minJumpDuration) && _jumpElapsed <= _maxJumpDuration)
         {
             _jumpElapsed += Time.fixedDeltaTime;
-            _verticalVel = (jumpStrength * _jumpElapsed * 3f) + (0.5f * -20f * _jumpElapsed * _jumpElapsed);
+            _verticalVel = (jumpStrength * _jumpElapsed * 3f) + (0.5f * -26f * _jumpElapsed * _jumpElapsed);
         }
 
         else
