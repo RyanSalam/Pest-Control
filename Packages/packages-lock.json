@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "com.samdriver.driven-decals": {
-      "version": "file:C:/Users/Ryan_/Downloads/driven-decals-master/driven-decals-master",
+      "version": "file:driven-decals-master",
       "depth": 0,
-      "source": "local",
+      "source": "embedded",
       "dependencies": {
         "com.unity.render-pipelines.universal": "7.3.1"
       }
