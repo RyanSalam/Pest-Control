@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 257
   damage: 10
   radiusToPlayer: 5
   explosionVFX: {fileID: 1416136211686774, guid: 6b7b9c36fcf9e4b49b9dc23074d303a5,

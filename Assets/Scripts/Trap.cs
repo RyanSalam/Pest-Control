@@ -29,6 +29,8 @@ public class Trap : MonoBehaviour
     Timer buildTimer;
     protected Animator anim;
 
+    public Animator Anim { get{ return anim; } }
+
     
     public event System.Action OnDestroyed;
 
@@ -39,7 +41,7 @@ public class Trap : MonoBehaviour
     }
     protected virtual void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     protected virtual void Update()
@@ -64,7 +66,9 @@ public class Trap : MonoBehaviour
         CurrentUses++; //add current uses 
         if (CurrentUses >= maxUses) //checks if the current trap uses is greater or equal to max
         {
-            gameObject.SetActive(false);  //setting the game object to false 
+            gameObject.SetActive(false);  //setting the game object to false
+            LevelManager.Instance.AssessTraps(this);
+            Anim.SetTrigger("Destroy"); 
         }
     }
 

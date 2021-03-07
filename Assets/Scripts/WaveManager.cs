@@ -28,7 +28,7 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     //[Tooltip("Event system for any custom events occuring at the end of a wave")]
     public event System.Action OnWaveEnded;
-    
+
     // Wave info data struct to store relevant data
     [System.Serializable]
     public class Wave
@@ -110,10 +110,10 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     // Interger to track how many enemies are left in the wave
     int _enemiesRemaining;
-    public int enemiesRemaining {  get { return _enemiesRemaining; } }
+    public int enemiesRemaining { get { return _enemiesRemaining; } }
 
     int _gruntsRemaining;
-    public int gruntsRemaining {  get { return _gruntsRemaining; } }
+    public int gruntsRemaining { get { return _gruntsRemaining; } }
 
     int _dronesRemaining;
     public int dronesRemaining { get { return _dronesRemaining; } }
@@ -136,6 +136,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         // Properly set up the build phase timer and subscribe the activation coroutine to it's end
         buildPhaseTimer = new Timer(0, false);
         buildPhaseTimer.OnTimerEnd += () => StartCoroutine(SpawnerCoroutine());
+
         WaveStart();
     }
 
@@ -212,15 +213,15 @@ public class WaveManager : MonoSingleton<WaveManager>
 
         // Calculate how many enemies we spawn this wave and start a loop that will only activate that amount
         int _enemiesToSpawn = _enemiesRemaining;
-        for(int i = 0; i < _enemiesToSpawn; i++)
+        for (int i = 0; i < _enemiesToSpawn; i++)
         {
             // If we have both grunts and drones in the wave then randomly spawn from them
-            if(_gruntsRemaining > 0 && _dronesRemaining > 0)
+            if (_gruntsRemaining > 0 && _dronesRemaining > 0)
             {
                 int index = Random.Range(0, 1);
                 if (index == 0 && _gruntsRemaining > 0)
                 {
-                    foreach(GameObject grunt in _gruntPool)
+                    foreach (GameObject grunt in _gruntPool)
                     {
                         if (!grunt.activeSelf)
                         {
@@ -237,7 +238,9 @@ public class WaveManager : MonoSingleton<WaveManager>
                     {
                         if (!drone.activeSelf)
                         {
-                            drone.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
+                            int droneI = Random.Range(0, currentWave.availableSpawnPoints.Length);
+                            drone.transform.position = currentWave.availableSpawnPoints[droneI].position;
+                            drone.transform.rotation = currentWave.availableSpawnPoints[droneI].rotation;
                             drone.SetActive(true);
                             _dronesRemaining--;
                             break;

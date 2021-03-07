@@ -51,7 +51,8 @@ public class GrenadeAmmo : MonoBehaviour
             if (temp != null)
             {
                 temp.TakeDamage(damage);
-                ImpactSystem.Instance.DamageIndication(damage, Color.red, hitPoint, Quaternion.LookRotation(-hitPoint.normalized));
+                Vector3 damagePos = new Vector3(hitPoint.x, hitPoint.y + 1.25f, hitPoint.z);
+                ImpactSystem.Instance.DamageIndication(damage, Color.red, damagePos, Quaternion.LookRotation(-hitPoint.normalized));
             }
         }
 

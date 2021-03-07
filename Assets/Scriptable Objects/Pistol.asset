@@ -21,3 +21,5 @@ MonoBehaviour:
   equipSound: {fileID: 0}
   EquipableToSpawn: {fileID: 5943468318281720411, guid: 55e4ff7ea784484419ac3df59ded27be,
     type: 3}
+  isWeapon: 1
+  altFireAttachment: {fileID: 11400000, guid: d621e690a72398d40abd19a5545b9f12, type: 2}

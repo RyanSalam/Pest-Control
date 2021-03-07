@@ -9,14 +9,14 @@ public class Trap_Tesla : Trap
 {
     private bool isChaining = false;
     private int currentChainAmount = 0; // default chain value 
-    [SerializeField] private int enemyChainAmount = 10; // setting how much enemy can be inflicted by lighting chain
+    [SerializeField] private int enemyChainAmount = 5; // setting how much enemy can be inflicted by lighting chain
 
     public float chainRadius = 5.0f; //radius of the chain
     [SerializeField] private LayerMask whatIsEnemy; //check enemy layer 
     private Actor_Enemy enemyTarget;
     public bool canAttack = true;
     private float timeAttack = 0.0f;
-    private float attackDelay = 1f;
+    private float attackDelay = 0.3f;
     private List<Actor_Enemy> enemies = new List<Actor_Enemy>();
     private LineRenderer lineRenderer;
 
@@ -30,6 +30,7 @@ public class Trap_Tesla : Trap
         lineRenderer = GetComponent<LineRenderer>();
         //lineRenderer.positionCount = enemyChainAmount;
         lineRenderer.enabled = false;
+        //Anim.SetBool("isIdle", true); //uncomment these when tesla trap animations is set on animator and applied  
     }
 
     protected override void Update()
@@ -85,6 +86,7 @@ public class Trap_Tesla : Trap
         }
         base.Activate();
         StartCoroutine(Cooldown());
+        //Anim.SetBool("isAttacking", true); 
     }
 
     private IEnumerator Cooldown() //cooldown for attacks
