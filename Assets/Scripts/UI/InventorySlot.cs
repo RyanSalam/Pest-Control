@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private ShopUI shop;
 
+    public bool in_Game = false;
     [SerializeField] private Item item;
     [SerializeField] public Image itemIcon;
 
     [SerializeField] private Image borderImage;
     [SerializeField] private Sprite inventoryOccupied;
     [SerializeField] private Sprite inventoryEmpty;
+    [SerializeField] private Sprite occupiedHighlighted;
+    [SerializeField] private Sprite emptyHighlighted;
 
-    // NEVER ATTACH A SPRITE TO THIS FOR SHOP INVENTORY SLOTS
-    [SerializeField] public Sprite inventorySelected;
+    [SerializeField] public Sprite inventorySelected;  // ALWAYS LEAVE THIS EMPTY FOR SHOP INVENTORY SLOTS
     bool selected = false;
 
     private void Awake()
@@ -23,10 +26,19 @@ public class InventorySlot : MonoBehaviour
         shop = GetComponentInParent<ShopUI>();
     }
 
+    private void Start()
+    {
+        if (inventorySelected == null)
+            in_Game = false;
+        else
+            in_Game = true;
+
+    }
+
     private void Update()
     {
         // For inventory slots in the shop UI
-        if (inventorySelected == null)
+        if (!in_Game)
             UpdateFrame();
         // For inventory slots in in-game UI
         else
@@ -104,5 +116,27 @@ public class InventorySlot : MonoBehaviour
     {
         selected = isSelected;
 
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (!in_Game)
+        {
+            if (item != null)
+                borderImage.sprite = occupiedHighlighted;
+            else
+                borderImage.sprite = emptyHighlighted;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (!in_Game)
+        {
+            if (item != null)
+                borderImage.sprite = inventoryOccupied;
+            else
+                borderImage.sprite = inventoryEmpty;
+        }   
     }
 }
