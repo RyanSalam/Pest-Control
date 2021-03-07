@@ -18,6 +18,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private Sprite occupiedHighlighted;
     [SerializeField] private Sprite emptyHighlighted;
 
+    [SerializeField] private Image altFire;
+
     [SerializeField] public Sprite inventorySelected;  // ALWAYS LEAVE THIS EMPTY FOR SHOP INVENTORY SLOTS
     bool selected = false;
 
@@ -33,6 +35,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         else
             in_Game = true;
 
+        UpdateAltFire();
+
     }
 
     private void Update()
@@ -43,6 +47,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         // For inventory slots in in-game UI
         else
             UpdateFrameInGame();
+
+        UpdateAltFire();
     }
 
     // For shop UI inventory slots
@@ -70,11 +76,24 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             itemIcon.color = new Color(itemIcon.color.r, itemIcon.color.g, itemIcon.color.b, 0.01f);
     }
 
+    public void UpdateAltFire()
+    {
+        if (item != null && item.isWeapon && item.altFireAttachment != null)
+        {
+            altFire.enabled = true;
+            altFire.sprite = item.altFireAttachment.altFireIcon;
+        }
+        else
+            altFire.enabled = false;
+    }
+
     public void AddItem(Item newItem)
     {
         item = newItem;
         itemIcon.sprite = item.itemIcon;
         itemIcon.enabled = true;
+
+        //UpdateAltFire();
     }
 
     // For shop UI inventory
@@ -82,6 +101,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         item = null;
         itemIcon.enabled = false;
+
+        //UpdateAltFire();
     }
 
     // For in game UI inventory
@@ -89,6 +110,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         item = null;
         itemIcon.sprite = null;
+
+        //UpdateAltFire();
     }
 
     // TODO: Implement refunding
@@ -110,6 +133,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             Debug.Log("This slot is empty! Please select a valid inventory slot.");
         }
+
+        //UpdateAltFire();
     }
     
     public void SetSelectedItem(bool isSelected)

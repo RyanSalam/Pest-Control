@@ -15,6 +15,8 @@ public class Item : ScriptableObject
     public GameObject EquipableToSpawn;
     //trap
     private int _refundCost;
+    public bool isWeapon;
+    public AltFireAttachment altFireAttachment;
 
 
     public void Use() //equips the item

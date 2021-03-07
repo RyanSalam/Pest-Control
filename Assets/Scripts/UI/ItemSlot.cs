@@ -28,6 +28,9 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     [SerializeField] private TMP_Text ownedText;
 
+    [SerializeField] private Image altFire;
+    [SerializeField] public bool storingWeapon = true;
+
     private bool purchased = false;
 
     private void Awake()
@@ -39,8 +42,9 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         itemName.text = item.itemName;
         ItemIcon.sprite = item.itemIcon;
-
         itemCost.text = item.itemCost.ToString();
+        
+        UpdateAltFire();
     }
 
     private void FixedUpdate()
@@ -56,6 +60,20 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             BorderImage.sprite = unselectedSprite;
         }
 
+    }
+
+    public void UpdateAltFire()
+    {
+        if (storingWeapon)
+        {
+            if (altFire != null && item.isWeapon && item.altFireAttachment != null)
+            {
+                altFire.enabled = true;
+                altFire.sprite = item.altFireAttachment.altFireIcon;
+            }
+            else
+                altFire.enabled = false;
+        }
     }
 
     // Buying a shop item
