@@ -12229,6 +12229,8 @@ MonoBehaviour:
   waveNumberText: {fileID: 4519739146959661082}
   skipBuildPhaseInfo: {fileID: 5349700453110193875}
   phaseTimerProgress: 0
+  defaultCoreColor: {r: 1, g: 1, b: 1, a: 1}
+  changedCoreColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &6852412233834360952
 GameObject:
   m_ObjectHideFlags: 0
