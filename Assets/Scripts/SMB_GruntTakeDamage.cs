@@ -12,9 +12,10 @@ public class SMB_GruntTakeDamage : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         // Assign the enemy reference accordingly.
         thisEnemy = animator.GetComponentInParent<Actor_Enemy>();
-
+        thisEnemy.ac.PlayAudioCue(thisEnemy.enemyHit);
         // Ensure the Enemy is stopped as they search.
         thisEnemy.Agent.isStopped = true;
 

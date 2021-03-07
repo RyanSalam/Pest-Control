@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04269c8150901a429efa8db7281493a, type: 3}
   m_Name: Grenade_Blast
   m_EditorClassIdentifier: 
+  isSolo: 0
   looping: 0
   _audioClipGroups:
   - sequenceMode: 0
     audioClips:
-    - {fileID: 8300000, guid: 07e106354d2652b4aacb2b8c5d4f7cd9, type: 3}
+    - {fileID: 8300000, guid: b2574f094adf40246b9f73292f0257ef, type: 3}

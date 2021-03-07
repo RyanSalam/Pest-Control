@@ -91,12 +91,14 @@ public class LevelManager : MonoSingleton<LevelManager>
         }
 
         //Copy reference to Char Info and AudioManager
-        Char_SO = GameManager.Instance.GetCharacter();
+        var character = GameManager.Instance.GetCharacter();
+        Char_SO = character != null ? character : Char_SO;
+
         if (Char_SO != null)
         {
-            //var temp = Instantiate(Char_SO.player, playerSpawnPoint.position, playerSpawnPoint.rotation);
-            //_player.gameObject.SetActive(false);
-            //_player = temp;
+            var temp = Instantiate(Char_SO.player, playerSpawnPoint.position, playerSpawnPoint.rotation);
+            _player.gameObject.SetActive(false);
+            _player = temp;
             _player.AbilityOne = Char_SO.ab1;
             _player.AbilityTwo = Char_SO.ab2;
 

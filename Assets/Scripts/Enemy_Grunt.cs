@@ -7,6 +7,10 @@ public class Enemy_Grunt : Actor_Enemy
     Scanner<Actor_Player> playerScanner;
     public bool hiveDictated;
 
+    
+
+    
+
     [Range(0, 360)] public float detectionAngle;
 
     protected override void OnEnable()
@@ -23,7 +27,7 @@ public class Enemy_Grunt : Actor_Enemy
     protected override void Start()
     {
         base.Start();
-
+        
         // Initialising the player scanner properly passing relevant variables
         playerScanner = new Scanner<Actor_Player>(transform);
         playerScanner.targetMask = _playerLayer;
