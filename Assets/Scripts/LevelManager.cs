@@ -142,7 +142,8 @@ public class LevelManager : MonoSingleton<LevelManager>
         Player.playerInputs.onActionTriggered += HandleInput;
 
         SubscribeToAudioEvents();
-        Cues.PlayAudioCue(Char_SO.MissionStart);
+        if (Char_SO != null)
+            Cues.PlayAudioCue(Char_SO.MissionStart);
     }
 
     public void SetSelectedButton(GameObject newSelectedObj)
@@ -340,7 +341,9 @@ public class LevelManager : MonoSingleton<LevelManager>
                 if (test != null)
                     Equipables.Add(item, test);
             }
-            Cues.PlayAudioCue(Char_SO.PurchaseItem, 15);
+
+            if (Char_SO != null)
+                Cues.PlayAudioCue(Char_SO.PurchaseItem, 15);
         }
     }
 
@@ -372,8 +375,10 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     private void SubscribeToAudioEvents()
     {
-                //char chosen - Handled in MenuHandler.cs
-        
+        //char chosen - Handled in MenuHandler.cs
+
+        if (Char_SO == null) return;
+
         WaveManager.Instance.OnWaveEnded += () => Cues.PlayAudioCue(Char_SO.BuildPhaseStart, 30);
         WaveManager.Instance.OnWaveStarted += () => Cues.PlayAudioCue(Char_SO.WaveStart, 30);
 
