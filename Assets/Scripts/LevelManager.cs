@@ -94,9 +94,9 @@ public class LevelManager : MonoSingleton<LevelManager>
         Char_SO = GameManager.Instance.GetCharacter();
         if (Char_SO != null)
         {
-            var temp = Instantiate(Char_SO.player, playerSpawnPoint.position, playerSpawnPoint.rotation);
-            _player.gameObject.SetActive(false);
-            _player = temp;
+            //var temp = Instantiate(Char_SO.player, playerSpawnPoint.position, playerSpawnPoint.rotation);
+            //_player.gameObject.SetActive(false);
+            //_player = temp;
             _player.AbilityOne = Char_SO.ab1;
             _player.AbilityTwo = Char_SO.ab2;
 
