@@ -12229,6 +12229,9 @@ MonoBehaviour:
   waveNumberText: {fileID: 4519739146959661082}
   skipBuildPhaseInfo: {fileID: 5349700453110193875}
   phaseTimerProgress: 0
+  defaultCoreHealthFill: {fileID: 0}
+  damagedCoreHealthFill: {fileID: 21300000, guid: e3628d07b2fd5014c94794892be6d6d1,
+    type: 3}
 --- !u!1 &6852412233834360952
 GameObject:
   m_ObjectHideFlags: 0

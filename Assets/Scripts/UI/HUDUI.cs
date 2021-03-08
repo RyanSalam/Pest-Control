@@ -33,9 +33,13 @@ public class HUDUI : MonoBehaviour
     [SerializeField] GameObject skipBuildPhaseInfo;
     public float phaseTimerProgress;
 
+    [SerializeField] Sprite defaultCoreHealthFill;
+    [SerializeField] Sprite damagedCoreHealthFill;
+    Coroutine changeCoreColor;
 
     private void Start()
     {
+        defaultCoreHealthFill = coreFill.sprite;
         core = LevelManager.Instance.Core;
         core.OnHealthChanged += UpdateCoreHealth;
         waveNumberIndicator.SetActive(false);
@@ -62,6 +66,28 @@ public class HUDUI : MonoBehaviour
 
         // Setting the core's health bar
         coreFill.fillAmount = coreCurrentHealth / coreMaxHealth;
+
+        CoreHealthFlash();
+    }
+
+    public void CoreHealthFlash()
+    {
+        if (changeCoreColor == null)
+            changeCoreColor = StartCoroutine(CoreHealthChange());
+        else
+        {
+            StopCoroutine(changeCoreColor);
+            changeCoreColor = StartCoroutine(CoreHealthChange());
+        }
+    }
+
+    public IEnumerator CoreHealthChange()
+    {
+        coreFill.sprite = damagedCoreHealthFill;
+        //coreFill.CrossFadeAlpha(10f, 0.25f, false);
+        yield return new WaitForSeconds(1.2f);
+        //coreFill.CrossFadeAlpha(255f, 0.25f, false);
+        coreFill.sprite = defaultCoreHealthFill;
     }
 
     public IEnumerator BuildPhase()
