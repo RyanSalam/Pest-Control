@@ -51,8 +51,8 @@ Material:
     m_Floats:
     - Vector1_5B82AD35: 1.3
     - _EmissionIntensity: 0
-    - _SkinTone: 1.8
+    - _SkinTone: 1.14
     m_Colors:
     - SkinTone: {r: 1, g: 1, b: 1, a: 0}
-    - _EmissionColour: {r: 1, g: 0, b: 0.583333, a: 0}
-    - _GlovesColour: {r: 0, g: 1, b: 1, a: 0}
+    - _EmissionColour: {r: 0, g: 0.083333254, b: 1, a: 0}
+    - _GlovesColour: {r: 1, g: 0.31666666, b: 0, a: 0}
