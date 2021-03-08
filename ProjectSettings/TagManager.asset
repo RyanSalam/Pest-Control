@@ -38,7 +38,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - PlayerOnlyCollision
   - OccludeLight
   m_SortingLayers:
   - name: Default
