@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_SG_MainScreenBG
+  m_Name: M_ScrollingMainMenu
   m_Shader: {fileID: -6465566751694194690, guid: 75ba70d1b119f8b4fb4cef5d5741d458,
     type: 3}
   m_ShaderKeywords: 
