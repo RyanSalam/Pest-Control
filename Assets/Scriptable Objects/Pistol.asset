@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Pistol
   itemCost: 0
-  itemIcon: {fileID: 21300000, guid: 253069214fa43cb488e57b70e668c1a3, type: 3}
+  itemIcon: {fileID: 21300000, guid: e3b66fb4ae98d82458cf8fec6af5d7a3, type: 3}
   itemDescription: 'Our classic semi-auto pistol, medium fire rate, medium magazine
     size.Has a short cooldown and is always reliable in early game scenarios. AltFire:
     Buck shot; limited range but high damage, costs 50 energy per shot.  '
