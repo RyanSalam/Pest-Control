@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExpertASMD
   m_EditorClassIdentifier: 
   itemName: Shock Rifle
-  itemCost: 40
+  itemCost: 150
   itemIcon: {fileID: 21300000, guid: dde075511cb5f7340a19bd99de9484ac, type: 3}
   itemDescription: 'Shoots a bolt of energy. Low fire rate, extremely low damage,
     at first glance this weapon sucks, but if you figure out its secret is the best

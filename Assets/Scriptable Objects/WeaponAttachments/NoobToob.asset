@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d9658d2c3c54dd47a6d2e10883834c8, type: 3}
   m_Name: NoobToob
   m_EditorClassIdentifier: 
-  energyCostPerFire: 50
+  energyCostPerFire: 100
   secondaryDamage: 0
   altFireIcon: {fileID: 21300000, guid: 1ecabaa188f85da46bd7af19980361e5, type: 3}
   projectilePrefab: {fileID: 7513803429035349772, guid: 99e04bfbdacf3cc46a968734c73c5a22,
