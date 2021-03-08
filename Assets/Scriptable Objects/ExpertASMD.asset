@@ -15,10 +15,10 @@ MonoBehaviour:
   itemName: Shock Rifle
   itemCost: 150
   itemIcon: {fileID: 21300000, guid: dde075511cb5f7340a19bd99de9484ac, type: 3}
-  itemDescription: 'Shoots a bolt of energy. Low fire rate, extremely low damage,
-    at first glance this weapon sucks, but if you figure out its secret is the best
-    weapon in the game. Alt fire: Shoot an electric orb that explodes if shot by
-    the primary fire dealing massive area of affect damage. Costs 50 energy per shot'
+  itemDescription: 'Shoots a bolt of energy.Low fire rate, extremely low damage,
+    but its secret is the best weapon in the game.Alt fire: Shoot an electric orb
+    that explodes if shot by the primary fire dealing massive area of affect damage.
+    Costs 150 energy per shot.'
   equipSound: {fileID: 0}
   EquipableToSpawn: {fileID: 2273648221676926498, guid: a6dd4906f90fe484b8bffd0d9d634e70,
     type: 3}
