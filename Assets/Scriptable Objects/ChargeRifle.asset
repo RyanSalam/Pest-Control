@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: ChargeRifle
   m_EditorClassIdentifier: 
   itemName: Charge Rifle
-  itemCost: 40
+  itemCost: 75
   itemIcon: {fileID: 21300000, guid: 7a89de50757804741a96624c14b8d0f7, type: 3}
-  itemDescription: 'Energy based charge weapon. Hold down fire to charge up an energy
-    blast. The bigger the charge the more damage, but this causes the weapon to overheat
-    faster.  '
+  itemDescription: Energy based charge weapon. Hold down fire to charge up an energy
+    blast. The bigger the charge the more damage
   equipSound: {fileID: 0}
   EquipableToSpawn: {fileID: 5354056572423735346, guid: 6ec14258a451dcb47abaf0ad82346b9d,
     type: 3}
   isWeapon: 1
+  altFireAttachment: {fileID: 0}

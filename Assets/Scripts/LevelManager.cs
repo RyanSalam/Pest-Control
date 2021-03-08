@@ -92,7 +92,9 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         //Copy reference to Char Info and AudioManager
         var character = GameManager.Instance.GetCharacter();
-        Char_SO = character != null ? character : Char_SO;
+
+        if (character != null)
+            Char_SO = character;
 
         if (Char_SO != null)
         {
