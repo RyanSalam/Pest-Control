@@ -15,7 +15,8 @@ MonoBehaviour:
   itemName: Turret Trap
   itemCost: 150
   itemIcon: {fileID: 21300000, guid: 71d8db3c04e6d6f4394d405fb314c874, type: 3}
-  itemDescription: 
+  itemDescription: A range type trap, enemies coming in the range of this trap will
+    be shot at with no restraints, even if they are flying.
   equipSound: {fileID: 0}
   EquipableToSpawn: {fileID: 5721319057133748160, guid: 083914ab8699ae14ab9c67a33209a136,
     type: 3}

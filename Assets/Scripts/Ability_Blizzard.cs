@@ -17,6 +17,7 @@ public class Ability_Blizzard : MonoBehaviour
 
     [SerializeField] LayerMask enemies;
     [SerializeField] Collider[] enemiesHit;
+    [SerializeField] HashSet<Actor_Enemy> enemiesHash;
 
     //[SerializeField] private float lifeTimeCount;
     //private Timer lifeTime;
@@ -26,6 +27,7 @@ public class Ability_Blizzard : MonoBehaviour
         transform.parent = null;
         //lifeTime = new Timer(lifeTimeCount);
         //lifeTime.OnTimerEnd += () => transform.DOScale(Vector3.zero, 0.2f).OnComplete(() => gameObject.SetActive(false));
+        enemiesHash = new HashSet<Actor_Enemy>();
     }
 
     private void OnEnable()
@@ -48,25 +50,44 @@ public class Ability_Blizzard : MonoBehaviour
 
     void LookForEnemies()
     {
-        var enemiesHit = Physics.OverlapSphere(transform.position, blizzardRange, enemies);
+        enemiesHit = Physics.OverlapSphere(transform.position, blizzardRange, enemies);
 
         if (enemiesHit.Length > 0)
         {
             foreach (Collider enemy in enemiesHit)
             {
+
                 Debug.Log(enemy.name + " is being slowed down");
-                enemy.GetComponent<Actor_Enemy>().Agent.speed *= speedReductionMultiplier;
+                Actor_Enemy enemy1 = enemy.GetComponent<Actor_Enemy>();
+
+                if (enemiesHash.Add(enemy1))
+                {
+                    enemy1.Agent.speed *= speedReductionMultiplier;
+                    StartCoroutine(EnemySlowSequence(enemy1));
+                }
             }
-            Invoke("ResetEnemySpeed", blizzardEffectTime);
         }
     }
 
-    void ResetEnemySpeed()
+    //void ResetEnemySpeed()
+    //{
+    //    Debug.Log("ABILITY BLIZZARD: Resetting speed");
+    //    foreach (Collider enemy in enemiesHit)
+    //    {
+    //        enemy.GetComponent<Actor_Enemy>().Agent.speed /= speedReductionMultiplier;
+    //    }
+    //}
+
+    public IEnumerator EnemySlowSequence(Actor_Enemy enemy)
     {
-        Debug.Log("Resetting speed");
-        foreach (Collider enemy in enemiesHit)
+        
+        yield return new WaitForSeconds(blizzardEffectTime);
+
+        Debug.Log("Speed before: " + enemy.Agent.speed);
+        if (enemy != null)
         {
-            enemy.GetComponent<Actor_Enemy>().Agent.speed /= speedReductionMultiplier;
+            enemy.Agent.speed /= speedReductionMultiplier;
+            Debug.Log("Speed after: " + enemy.Agent.speed);
         }
     }
 }

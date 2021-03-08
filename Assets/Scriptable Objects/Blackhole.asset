@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Blackhole
   m_EditorClassIdentifier: 
   abilityName: Blackhole
-  abilityDesc: Description
+  abilityDesc: Throws a localized blackhole that gravitates enemies towards its center
+    for 10 seconds.
   abilitySprite: {fileID: 21300000, guid: db3f0e485eda61c42a8bedc400535aae, type: 3}
   lifetimeDuration: 10
   cooldownDuration: 10
@@ -21,4 +22,3 @@ MonoBehaviour:
   isAbilityOnCoolDown: 0
   prefabToSpawn: {fileID: 3147279108591053944, guid: 455f961f3b328a343892e31b7952b66b,
     type: 3}
-  spawnedProjectile: {fileID: 0}
