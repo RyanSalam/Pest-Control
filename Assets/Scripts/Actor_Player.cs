@@ -78,11 +78,11 @@ public class Actor_Player : Actor
         invulnerableTimer = new Timer(0.8f, false);
         invulnerableTimer.OnTimerEnd += () => isInvulnerable = false;
 
-        if (AbilityOne != null)
-            AbilityOne.Initialize(gameObject);
+        //if (AbilityOne != null)
+        //    AbilityOne.Initialize(gameObject);
 
-        if (AbilityTwo != null)
-            AbilityTwo.Initialize(gameObject);
+        //if (AbilityTwo != null)
+        //    AbilityTwo.Initialize(gameObject);
 
     }
 
