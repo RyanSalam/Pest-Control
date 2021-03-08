@@ -68,7 +68,11 @@ public class Trap : MonoBehaviour
         {
             gameObject.SetActive(false);  //setting the game object to false
             LevelManager.Instance.AssessTraps(this);
-            Anim.SetTrigger("Destroy"); 
+            Anim.SetTrigger("Destroy");
+            foreach (Animator anim in GetComponentsInChildren<Animator>())
+            {
+                anim.SetTrigger("Destroy"); 
+            }
         }
     }
 
