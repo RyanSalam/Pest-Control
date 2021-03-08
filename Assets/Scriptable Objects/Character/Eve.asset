@@ -16,10 +16,10 @@ MonoBehaviour:
   c_name: Eve
   c_desc: Fighter
   c_profile: {fileID: 21300000, guid: 531059f5bfdad7e4982318b1a000aae6, type: 3}
-  A1_image: {fileID: 21300000, guid: 79214501366e0734facbac846dbcf375, type: 3}
+  A1_image: {fileID: 21300000, guid: 73c1567ef2b42e940a654bb1cbf0452e, type: 3}
   A1_name: Dash
   A1_text: Dash
-  A2_image: {fileID: 21300000, guid: 621d7797f572044498a66f7c20130d58, type: 3}
+  A2_image: {fileID: 21300000, guid: f7fa22a2831aad54c84d28d86116adeb, type: 3}
   A2_name: Kick
   A2_text: SpinKick
   ab1: {fileID: 0}
