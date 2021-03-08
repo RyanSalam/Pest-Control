@@ -319,7 +319,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4170628562088871640}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c454faa5daa63114fbf55b2bd19ba2ec, type: 2}
   m_CullingMode: 0
@@ -377,6 +377,7 @@ MonoBehaviour:
   _abilityOne: {fileID: 11400000, guid: 56dd13d55c659f94aacbe6f99aa06512, type: 2}
   _abilityTwo: {fileID: 11400000, guid: f1a96881bf115c04ab530474e4edffc6, type: 2}
   _abilitySpawnPoint: {fileID: 8422927109470140873}
+  _playerArms: {fileID: 0}
   _weaponHolder: {fileID: 8025575011193713661}
   _trapHolder: {fileID: 8586339961259611175}
 --- !u!114 &1394492705354489218
