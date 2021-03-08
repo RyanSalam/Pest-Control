@@ -47,7 +47,7 @@ public class NoobToobAttachment : MonoBehaviour
         //Vector3 newDirection = Vector3.Reflect(transform.position, collision.GetContact(0).normal);
 
 
-        projectile.AddForce(collision.GetContact(0).normal * projectileForce, ForceMode.Impulse);
+        projectile.AddForce(collision.GetContact(0).normal * (projectileForce * 0.75f), ForceMode.Impulse);
 
         bounceCount += 1;
 
