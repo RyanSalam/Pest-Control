@@ -133,8 +133,8 @@ public class LevelManager : MonoSingleton<LevelManager>
         shopUI.pauseMenu.SetActive(false);
         gameOver = false;
 
-        // FOR TESTING PURPOSES ONLY - COMMENT OUT THIS LINE LATER
-        CurrentEnergy = 500;
+        // Set the starting energy value here
+        CurrentEnergy = 200;
     }
 
     private void Start()

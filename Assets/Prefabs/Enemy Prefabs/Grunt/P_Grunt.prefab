@@ -113,7 +113,7 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  _energyDrop: 10
+  _energyDrop: 20
   scanIntervals: 0.5
   movementSpeed: 3.5
   ac: {fileID: 0}
