@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 17fbd60a0c674194ab34b3296c5535c8
+<<<<<<< HEAD:Assets/Resources/Graphic Presets.meta
+guid: 9c2f4e7d176c49947bc5944293b176d0
+=======
+guid: eb12fc046469c7749adabee7122fb1ec
+>>>>>>> Development:Assets/Editor/Resources/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

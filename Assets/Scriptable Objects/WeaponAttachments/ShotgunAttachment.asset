@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShotgunAttachment
   m_EditorClassIdentifier: 
   energyCostPerFire: 50
-  secondaryDamage: 10
+  secondaryDamage: 20
   altFireIcon: {fileID: 21300000, guid: f3098fb104660384187959ac075d7750, type: 3}
   shotgunPellets: 10
   range: 20

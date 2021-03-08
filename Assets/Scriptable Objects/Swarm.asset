@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Swarm
   m_EditorClassIdentifier: 
   abilityName: Swarm
-  abilityDesc: Description
-  abilitySprite: {fileID: 21300000, guid: 83b57b70a2921994ab27bef38b15185f, type: 3}
+  abilityDesc: 'Each missile from the drone locks to the nearest enemy.
+
+'
+  abilitySprite: {fileID: 21300000, guid: 4f512dd9b10f26f40ae449060d72662d, type: 3}
   lifetimeDuration: 1
   cooldownDuration: 5
   AbilityButton: Ability Two
@@ -26,7 +28,6 @@ MonoBehaviour:
   nanoDroneLaunchDelay: 0.1
   nanoDroneMovementSpeed: 10
   nanoDroneRotationSpeed: 5
-  temp: {fileID: 0}
   currentDrones: 3
   swarmMaster: {fileID: 7038940383447211371, guid: 2e8c2493af2853a4489a638fbf3d65f0,
     type: 3}

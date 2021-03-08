@@ -134,6 +134,13 @@ MonoBehaviour:
   - {fileID: 4035559840911256215}
   - {fileID: 5329413161465935888}
   - {fileID: 6767485497078455964}
+  overheatSteamVFX:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   lastFired: 0
   canFire: 1
   isFiring: 0

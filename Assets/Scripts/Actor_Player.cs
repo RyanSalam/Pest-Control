@@ -46,6 +46,7 @@ public class Actor_Player : Actor
     [SerializeField] private Ability _abilityTwo;
 
     [SerializeField] protected Transform _abilitySpawnPoint;
+    [SerializeField] protected Transform _playerArms;
     public Transform AbilitySpawnPoint { get { return _abilitySpawnPoint; } }
     public Ability AbilityOne { get { return _abilityOne; } set { _abilityOne = value; } }
     public Ability AbilityTwo { get { return _abilityTwo; } set { _abilityTwo = value; } }
@@ -78,11 +79,14 @@ public class Actor_Player : Actor
         invulnerableTimer = new Timer(0.8f, false);
         invulnerableTimer.OnTimerEnd += () => isInvulnerable = false;
 
-        if (AbilityOne != null)
-            AbilityOne.Initialize(gameObject);
+        //m_Anim = _playerArms.GetComponent<Animator>();
+        //_playerArms.gameObject.SetActive(false);
 
-        if (AbilityTwo != null)
-            AbilityTwo.Initialize(gameObject);
+        //if (AbilityOne != null)
+        //    AbilityOne.Initialize(gameObject);
+
+        //if (AbilityTwo != null)
+        //    AbilityTwo.Initialize(gameObject);
 
     }
 

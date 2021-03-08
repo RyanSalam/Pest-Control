@@ -1048,7 +1048,7 @@ MonoBehaviour:
   obstacleMasks:
     serializedVersion: 2
     m_Bits: 19200
-  trapPrice: 50
+  trapPrice: 100
   isDebugging: 0
   Hologram: {fileID: 2100000, guid: 3c852c0492ffc54488c16540cdd99acb, type: 2}
   CanPlace: 0
