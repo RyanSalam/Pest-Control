@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyCostPerFire: 50
   secondaryDamage: 20
-  altFireIcon: {fileID: 21300000, guid: f3098fb104660384187959ac075d7750, type: 3}
+  altFireIcon: {fileID: 21300000, guid: 9454d935bdf7e3d40a97ad4a2e130ac1, type: 3}
   shotgunPellets: 10
   range: 20
   spreadAngle: 10

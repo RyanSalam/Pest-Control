@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyCostPerFire: 100
   secondaryDamage: 0
-  altFireIcon: {fileID: 21300000, guid: 1ecabaa188f85da46bd7af19980361e5, type: 3}
+  altFireIcon: {fileID: 21300000, guid: df12bdfeb0dfe5a44ad9ef79908cbbab, type: 3}
   projectilePrefab: {fileID: 7513803429035349772, guid: 99e04bfbdacf3cc46a968734c73c5a22,
     type: 3}
