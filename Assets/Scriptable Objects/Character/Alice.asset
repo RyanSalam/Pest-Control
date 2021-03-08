@@ -16,10 +16,10 @@ MonoBehaviour:
   c_name: Alice
   c_desc: Frost
   c_profile: {fileID: 21300000, guid: c26f14b2955b0964fb5a80004d671c43, type: 3}
-  A1_image: {fileID: 21300000, guid: f0a2a5df3eac55345bddd2536c8e3cd3, type: 3}
+  A1_image: {fileID: 21300000, guid: ad46680fc24b7784fa6744032a5757e2, type: 3}
   A1_name: Cryo
   A1_text: Cryo
-  A2_image: {fileID: 21300000, guid: 6ce14ad8d4245c342934204d618cffc0, type: 3}
+  A2_image: {fileID: 21300000, guid: 74a845c4dd9a50e47acd51268b136090, type: 3}
   A2_name: Blizzard
   A2_text: Blizzard
   ab1: {fileID: 11400000, guid: 93e50680bc69be547b4894696f5b0cd0, type: 2}

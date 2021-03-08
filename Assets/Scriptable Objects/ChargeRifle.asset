@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChargeRifle
   m_EditorClassIdentifier: 
   itemName: Charge Rifle
-  itemCost: 75
+  itemCost: 100
   itemIcon: {fileID: 21300000, guid: 7a89de50757804741a96624c14b8d0f7, type: 3}
   itemDescription: Energy based charge weapon. Hold down fire to charge up an energy
     blast. The bigger the charge the more damage

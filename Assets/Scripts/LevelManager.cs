@@ -92,7 +92,9 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         //Copy reference to Char Info and AudioManager
         var character = GameManager.Instance.GetCharacter();
-        Char_SO = character != null ? character : Char_SO;
+
+        if (character != null)
+            Char_SO = character;
 
         if (Char_SO != null)
         {
@@ -131,8 +133,8 @@ public class LevelManager : MonoSingleton<LevelManager>
         shopUI.pauseMenu.SetActive(false);
         gameOver = false;
 
-        // FOR TESTING PURPOSES ONLY - COMMENT OUT THIS LINE LATER
-        CurrentEnergy = 500;
+        // Set the starting energy value here
+        CurrentEnergy = 200;
     }
 
     private void Start()
