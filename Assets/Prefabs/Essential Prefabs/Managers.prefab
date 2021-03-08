@@ -493,7 +493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f951e288e0e74f449b2b85da800aa5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableSpawning: 0
   gruntPrefab: {fileID: 7864417393676115726, guid: bbbb804aa00c5624b841f067f4350dc2,
     type: 3}
   dronePrefab: {fileID: 3414804625668340203, guid: bf07f2fb012e7cd419acf52822c039ca,
@@ -574,7 +573,7 @@ MonoBehaviour:
   _playOnStart: 0
   _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
     type: 2}
-  _audioConfiguration: {fileID: 11400000, guid: 23de2d9a3999f064db8ac58ef3c009ab,
+  _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
     type: 2}
 --- !u!114 &8562597381162518369
 MonoBehaviour:
@@ -618,13 +617,13 @@ MonoBehaviour:
       type: 3}
     particleToSpawn: {fileID: 1416136211686774, guid: 6b7b9c36fcf9e4b49b9dc23074d303a5,
       type: 3}
-    audioToPlay: {fileID: 0}
+    audioToPlay: {fileID: 11400000, guid: aed0096f174149e4ea98d0400d6a26fe, type: 2}
   - hitMaterial: {fileID: 2100000, guid: da590161fea7b27409592f526ef20550, type: 2}
     decalToSpawn: {fileID: 6531785189501894211, guid: 0253165f077a69944a70f45b95d94ab8,
       type: 3}
     particleToSpawn: {fileID: 1845764070681338, guid: ac2312a3e32471549882f1a6da5568e6,
       type: 3}
-    audioToPlay: {fileID: 0}
+    audioToPlay: {fileID: 11400000, guid: 4380f678b4b6c834697f7864f7679eaf, type: 2}
   damageIndicatorObj: {fileID: 4527500523508540015, guid: c271527d08d2e6c4597aec6a2592ee56,
     type: 3}
   defaultSettings:
