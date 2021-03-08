@@ -143,6 +143,16 @@ public abstract class Weapon : MonoBehaviour, IEquippable
             PrimaryFire();
     }
 
+    protected virtual void LateUpdate()
+    {
+        if (player == null) return;
+        Vector2 inputDir = player.playerInputs.actions["Move"].ReadValue<Vector2>();
+        animator.SetFloat("directionX", inputDir.x);
+        animator.SetFloat("directionY", inputDir.y);
+
+        animator.SetBool("isMoving", inputDir.magnitude > Mathf.Epsilon);
+    }
+
     public virtual void Equip()
     {
         transform.SetParent(player.WeaponHolder);
