@@ -180,6 +180,9 @@ public class WaveManager : MonoSingleton<WaveManager>
     // Cleanup for each wave and beginning of next wave
     private void WaveEnd()
     {
+        // Wave end reward -> 150 Energy
+        LevelManager.Instance.CurrentEnergy += LevelManager.Instance.waveEnergyReward;
+
         // Increase wave index
         waveIndex++;
 

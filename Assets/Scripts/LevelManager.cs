@@ -34,6 +34,7 @@ public class LevelManager : MonoSingleton<LevelManager>
             // Call UI Update Here 
         }
     }
+    public int waveEnergyReward = 150;
 
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private float respawnTimer = 2.0f;
@@ -132,8 +133,8 @@ public class LevelManager : MonoSingleton<LevelManager>
         shopUI.pauseMenu.SetActive(false);
         gameOver = false;
 
-        // Set the starting energy value here
-        CurrentEnergy = 200;
+        // Set the starting energy value here -> 250
+        CurrentEnergy = 250;
     }
 
     private void Start()
