@@ -49,36 +49,36 @@ public class EnemyHiveMind : MonoSingleton<EnemyHiveMind>
     public void ReassessGrunts()
     {
         // If enough grunts for both player and core targeting
-        if (totalGrunts > MinPlayer)
-        {
-            if (gruntsOnPlayer.Count > MinPlayer)
-            {
-                while (gruntsOnPlayer.Count > MinPlayer)
-                {
-                    int ranIndex = Random.Range(0, gruntsOnPlayer.Count);
+        //if (totalGrunts > MinPlayer)
+        //{
+        //    if (gruntsOnPlayer.Count > MinPlayer)
+        //    {
+        //        while (gruntsOnPlayer.Count > MinPlayer)
+        //        {
+        //            int ranIndex = Random.Range(0, gruntsOnPlayer.Count);
 
-                    gruntsOnPlayer[ranIndex].SwitchTarget(LevelManager.Instance.Core.transform);
-                    gruntsOnCore.Add(gruntsOnPlayer[ranIndex]);
-                    //gruntsOnPlayer[ranIndex].hiveDictated = true;
-                    gruntsOnPlayer.RemoveAt(ranIndex);
-                }
-            }
-            else
-            {
-                while (gruntsOnPlayer.Count < MinPlayer)
-                {
-                    int randIndex = Random.Range(0, gruntsOnCore.Count);
+        //            gruntsOnPlayer[ranIndex].SwitchTarget(LevelManager.Instance.Core.transform);
+        //            gruntsOnCore.Add(gruntsOnPlayer[ranIndex]);
+        //            gruntsOnPlayer[ranIndex].hiveDictated = true;
+        //            gruntsOnPlayer.RemoveAt(ranIndex);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        while (gruntsOnPlayer.Count < MinPlayer)
+        //        {
+        //            int randIndex = Random.Range(0, gruntsOnCore.Count);
 
-                    gruntsOnCore[randIndex].SwitchTarget(LevelManager.Instance.Player.transform);
-                    gruntsOnPlayer.Add(gruntsOnCore[randIndex]);
-                    gruntsOnCore[randIndex].hiveDictated = true;
-                    gruntsOnCore.RemoveAt(randIndex);
+        //            gruntsOnCore[randIndex].SwitchTarget(LevelManager.Instance.Player.transform);
+        //            gruntsOnPlayer.Add(gruntsOnCore[randIndex]);
+        //            gruntsOnCore[randIndex].hiveDictated = true;
+        //            gruntsOnCore.RemoveAt(randIndex);
 
-                }
-            }
-        }
-        else
-        {
+        //        }
+        //    }
+        //}
+        //else
+        //{
             //foreach (Enemy_Grunt grunt in gruntsOnPlayer)
             //{
             //    grunt.SwitchTarget(LevelManager.Instance.Core.transform);
@@ -88,7 +88,7 @@ public class EnemyHiveMind : MonoSingleton<EnemyHiveMind>
             //    gruntsOnCore.Add(grunt);
             //    grunt.hiveDictated = true;
             //}
-        }
+        //}
     }
 
 
