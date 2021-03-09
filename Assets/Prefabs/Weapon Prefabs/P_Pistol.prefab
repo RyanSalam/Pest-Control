@@ -143,14 +143,11 @@ MonoBehaviour:
     type: 3}
   recoilPosition: {fileID: 2618095177929340359}
   rotationPoint: {fileID: 2026636711729483326}
-  positionalRecoilSpeed: 30
-  rotationalRecoilSpeed: 0
-  positionalReturnSpeed: 22
-  rotationalReturnSpeed: 0
-  RecoilRotation: {x: 0, y: 0, z: 0}
-  RecoilKickBack: {x: 0, y: 0, z: -0.09}
-  bloomX: 1
-  bloomY: 1
+  positionalRecoilSpeed: 10
+  rotationalRecoilSpeed: 10
+  positionalReturnSpeed: 10
+  rotationalReturnSpeed: 10
+  RecoilKickBack: {x: 0.015, y: 0, z: -0.09}
   bulletTrail: {fileID: 6956728020116618863}
   spreadCurve:
     serializedVersion: 2

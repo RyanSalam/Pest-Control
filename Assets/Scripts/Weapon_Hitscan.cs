@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class Weapon_Hitscan : Weapon
 {
     //recoil variables
-    [Header("REference Points:")]
+    /*[Header("REference Points:")]
     [SerializeField] protected Transform recoilPosition;
     [SerializeField] protected Transform rotationPoint;
     [Space(10)]
@@ -35,7 +35,7 @@ public class Weapon_Hitscan : Weapon
 
     Vector3 rotationalRecoil;
     Vector3 positionalRecoil;
-    Vector3 Rot;
+    Vector3 Rot;*/
 
     Vector2 weaponRecoil;
 
@@ -192,7 +192,7 @@ public class Weapon_Hitscan : Weapon
 
     IEnumerator ReleaseDelay()
     {
-        yield return new WaitForSeconds(fireRate / 2);
+        yield return new WaitForSeconds(fireRate + 0.3f);
         timeFiring = 0f;
         isFiring = false;
         muzzleFlashParticle.Stop();
@@ -221,7 +221,7 @@ public class Weapon_Hitscan : Weapon
     {
         base.Update();
         //when we are firing simulate recoil
-        if (isFiring)
+        /*if (isFiring)
         {
             //weapon recoil script
             rotationalRecoil = Vector3.Lerp(rotationalRecoil, Vector3.zero, rotationalReturnSpeed * Time.deltaTime);
@@ -249,7 +249,7 @@ public class Weapon_Hitscan : Weapon
         }
 
         transform.localPosition = positionalRecoil;
-        //transform.rotation = Quaternion.Euler(rotationalRecoil);
+        //transform.rotation = Quaternion.Euler(rotationalRecoil);*/
 
     }
 
