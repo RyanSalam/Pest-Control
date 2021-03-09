@@ -5,13 +5,14 @@ using UnityEngine;
 public class ImpactSystem : MonoSingleton<ImpactSystem>
 {
     [System.Serializable]
-
+    
    public class ImpactSettings
     {
         public Material hitMaterial;
         public GameObject decalToSpawn;
         public GameObject particleToSpawn;
         public AudioCueSO audioToPlay;
+        
     }
 
     [SerializeField] ImpactSettings[] WorldImpactSetting;
@@ -19,10 +20,12 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
 
     public Dictionary<Material, ImpactSettings> ImpactDictionary;
     [SerializeField] ImpactSettings defaultSettings;
+    public AudioCue ac;
+
     protected override void Awake()
     {
         base.Awake();
-
+        ac = GetComponent<AudioCue>();
         //create a new dictionary on spawn
         ImpactDictionary = new Dictionary<Material, ImpactSettings>();
 
@@ -42,6 +45,8 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
         ObjectPooler.Instance.InitializePool(defaultSettings.decalToSpawn, 20);
         ObjectPooler.Instance.InitializePool(defaultSettings.particleToSpawn, 10);
     }
+
+   
 
     public void HandleImpact(GameObject targetHit, Vector3 hitPoint, Quaternion hitRotation)
     {
@@ -77,6 +82,9 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
 
         ObjectPooler.Instance.GetFromPool(impactSettings.decalToSpawn, hitPoint, hitRotation);
         ObjectPooler.Instance.GetFromPool(impactSettings.particleToSpawn, hitPoint, hitRotation);
+        Debug.Log(impactSettings.audioToPlay.name);
+        ac.PlayAudioCue(impactSettings.audioToPlay, 100);
+        
     }
 
     public virtual void DamageIndication(float damage, Color color, Vector3 position, Quaternion rotation)

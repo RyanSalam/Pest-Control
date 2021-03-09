@@ -21,3 +21,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 5546e2440a7d2cf4c91d8eb94b2fcc53, type: 3}
     - {fileID: 8300000, guid: bf5f1e52347c4544480590f04364aec4, type: 3}
     - {fileID: 8300000, guid: d42a88c544faec14f9d465103629d79d, type: 3}
+  - sequenceMode: 0
+    audioClips:
+    - {fileID: 8300000, guid: 19ec01d5ee13f3b41b989223885e57c7, type: 3}
+    - {fileID: 8300000, guid: b0308274f3b2cf647b691664dfd080c0, type: 3}
+    - {fileID: 8300000, guid: e2246e65042402647b5b5a3c68167c10, type: 3}
+    - {fileID: 8300000, guid: b80429000cbd15546aabcfda650894d1, type: 3}
