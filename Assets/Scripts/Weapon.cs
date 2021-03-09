@@ -350,7 +350,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     {
         if (isFiring)
         {
-            Debug.Log("recoiling");
+            //Debug.Log("recoiling");
             //weapon recoil script
             rotationalRecoil = Vector3.Lerp(rotationalRecoil, Vector3.zero, rotationalReturnSpeed * Time.deltaTime);
             positionalRecoil = Vector3.Lerp(positionalRecoil, Vector3.zero, positionalReturnSpeed * Time.deltaTime);
