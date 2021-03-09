@@ -183,6 +183,10 @@ public class WaveManager : MonoSingleton<WaveManager>
         // Increase wave index
         waveIndex++;
 
+        // Wave end reward -> 150 Energy
+        LevelManager.Instance.waveEnergyReward += 50;
+        LevelManager.Instance.CurrentEnergy += LevelManager.Instance.waveEnergyReward;
+
         // Game win condition
         if (waveIndex >= levelWaves.Count)
         {
