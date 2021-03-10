@@ -167,7 +167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4198126126068601477}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DangerSign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
