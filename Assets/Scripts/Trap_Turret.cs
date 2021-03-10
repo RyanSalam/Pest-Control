@@ -106,8 +106,13 @@ public class Trap_Turret : Trap
             //proj.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.Impulse);
             //Instantiate(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
             if (hitEffect) ObjectPooler.Instance.GetFromPool(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
-            enemyTarget.GetComponent<Actor_Enemy>().TakeDamage(damage); 
-
+            enemyTarget.GetComponent<Actor_Enemy>();
+            if (enemyTarget != null)
+            {
+                enemyTarget.TakeDamage(damage);
+                ImpactSystem.Instance.DamageIndication(damage, trapColor, enemyTarget.transform.position,
+                   Quaternion.LookRotation(enemyTarget.transform.position - LevelManager.Instance.Player.transform.position));
+            }
             
 
 

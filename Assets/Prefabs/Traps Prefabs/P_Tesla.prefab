@@ -93,6 +93,7 @@ MonoBehaviour:
   trapDamage: 25
   maxUses: 10
   buildDuration: 0
+  trapColor: {r: 0, g: 1, b: 0.9335954, a: 1}
   enemyChainAmount: 5
   chainRadius: 10
   whatIsEnemy:
@@ -102,6 +103,7 @@ MonoBehaviour:
   chainOrigin: {fileID: 4084208043290531406}
   particleVFX: {fileID: 1469211736650368, guid: b08f505eff218204fb92fac4cda2cfca,
     type: 3}
+  damageIndicator: {fileID: 0}
 --- !u!120 &8470837194361203702
 LineRenderer:
   m_ObjectHideFlags: 0

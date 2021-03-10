@@ -89,8 +89,9 @@ public class Trap_Tesla : Trap
 
 
                 enemy.TakeDamage(trapDamage);
-               // ImpactSystem.Instance.DamageIndication(trapDamage, trapColor, enemy.transform.position, Quaternion.LookRotation(LevelManager.Instance.Player.transform.position - enemy.transform.position));
-                // when an enemy is hit (above line) spawn particle. need to spawn particle above feet...
+
+                ImpactSystem.Instance.DamageIndication(trapDamage, trapColor, enemy.transform.position, Quaternion.LookRotation(LevelManager.Instance.Player.transform.position - enemy.transform.position));
+                 // when an enemy is hit (above line) spawn particle. need to spawn particle above feet...
 
                 //enemies.Remove(enemy);
             }
