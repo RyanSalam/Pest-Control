@@ -7,6 +7,7 @@ public class Trap : MonoBehaviour
     [SerializeField] protected int trapDamage = 1;
     [SerializeField] protected int maxUses = 10;
     [SerializeField] protected float buildDuration;
+    [SerializeField] protected Color trapColor;
     public event System.Action TrapDestroyed;
 
 
