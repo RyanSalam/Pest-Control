@@ -39,7 +39,7 @@ ModelImporter:
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 17
+      lastFrame: 19
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -118,12 +118,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: bee612563fd84e34f85547d8926d9d30,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 2
+  avatarSetup: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
