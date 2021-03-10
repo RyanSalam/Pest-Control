@@ -22,7 +22,8 @@ public class Trap_Turret : Trap
     [SerializeField] private LayerMask enemyLayer;
 
     [SerializeField] float damage = 10f;
-    [SerializeField] float rateOfFire = 0.1f;
+    [SerializeField] int RoundsPerMinute = 60;
+    float rateOfFire = 0.1f;
     [SerializeField] float bulletSpeed = 10.0f;
     [SerializeField] int bulletCount = 10;
 
@@ -30,7 +31,9 @@ public class Trap_Turret : Trap
     [SerializeField] GameObject hitEffect;
 
     Quaternion startingRot;
+    Quaternion startingRotVert;
 
+    float fireTimer = 0f;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -40,21 +43,36 @@ public class Trap_Turret : Trap
         enemyScanner.detectionRadius = maxRange;
         enemyScanner.detectionAngle = detectionAngle;
         startingRot = turretRotHinge.rotation;
+        startingRotVert = turretVerHinge.rotation;
+        rateOfFire = (float)60 / RoundsPerMinute;
         ObjectPooler.Instance.InitializePool(hitEffect, 3);
     }
 
     // Update is called once per frame
     protected override void Update()
     {
+        if(fireTimer <= rateOfFire) fireTimer += Time.deltaTime;
         base.Update();
         if (enemyTarget == null)
         {
-            Debug.Log("Finding Enemy");
             // Reset turret rotation to default if it isn't already
-            if(turretRotHinge.rotation != startingRot) ResetRotation();
+            if (turretRotHinge.rotation != startingRot || turretVerHinge.rotation != startingRotVert) ResetRotation();
             FindClosestEnemy();
         }
-        else AimAtTarget();
+        else
+        {
+            if (OutOfRange()) enemyTarget = null;
+            else if (!enemyTarget.isActiveAndEnabled) enemyTarget = null;
+            else
+            {
+                AimAtTarget();
+                if (fireTimer >= rateOfFire)
+                {
+                    Fire();
+                }
+                
+            }
+        }
 
         Debug.DrawRay(bulletSpawn.position, Vector3.forward * 10, Color.green);
     }
@@ -65,7 +83,6 @@ public class Trap_Turret : Trap
             return;
         }
         base.Activate();
-        StartCoroutine(Fire()); //starts the couroutine to fire when trap is activated
     }
     private void FindClosestEnemy()
     {
@@ -74,47 +91,37 @@ public class Trap_Turret : Trap
         enemyTarget = TurretDetection();
         if (enemyTarget != null)
         {
-            //AimAtTarget();
             Activate();
         }
     }
     void ResetRotation()
     {
         turretRotHinge.rotation = Quaternion.Slerp(turretRotHinge.rotation, startingRot, Time.deltaTime * 5);
+        turretVerHinge.rotation = Quaternion.Slerp(turretVerHinge.rotation, startingRotVert, Time.deltaTime * 5);
     }
     void AimAtTarget()
     {
-        //roatating turret hinge 
-        
         Vector3 turretLookPos = enemyTarget.transform.position - transform.position;
+        Vector3 rot = Quaternion.LookRotation(turretLookPos, Vector3.up).eulerAngles;
 
-        Quaternion rot = Quaternion.LookRotation(turretLookPos, Vector3.up);
+        Vector3 lookHor = new Vector3(0f, rot.y, 0f);
+        Vector3 lookVert = new Vector3(rot.x, rot.y, 0f);
 
-        turretRotHinge.rotation = Quaternion.Slerp(turretRotHinge.rotation, rot, Time.deltaTime * 5);
+        Quaternion rotHor = Quaternion.Euler(lookHor);
+        Quaternion rotVert = Quaternion.Euler(lookVert);
 
-        //turretRotHinge.rotation = rot;
-
+        turretRotHinge.rotation = Quaternion.Slerp(turretRotHinge.rotation, rotHor, Time.deltaTime * 5);
+        turretVerHinge.rotation = Quaternion.Slerp(turretVerHinge.rotation, rotVert, Time.deltaTime * 5);
 
     }
-    IEnumerator Fire()
-    { 
-        for (int i = 0; i < bulletCount; i++)
-        {
-            if (enemyTarget == null) break;
+    void Fire()
+    {
+        fireTimer = 0f;
+        Debug.Log("Fire");
+        if (hitEffect) ObjectPooler.Instance.GetFromPool(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
+        enemyTarget.GetComponent<Actor_Enemy>().TakeDamage(damage);
+        muzzleFlash.Play();
 
-            //Rigidbody proj = Instantiate(projectile, bulletSpawn.position, bulletSpawn.rotation);
-            //proj.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.Impulse);
-            //Instantiate(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
-            if (hitEffect) ObjectPooler.Instance.GetFromPool(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
-            enemyTarget.GetComponent<Actor_Enemy>().TakeDamage(damage); 
-
-            
-
-
-            muzzleFlash.Play();
-            yield return new WaitForSeconds(rateOfFire);
-        }
-        enemyTarget = null;
     }
     Actor_Enemy TurretDetection()
     {
@@ -133,13 +140,39 @@ public class Trap_Turret : Trap
                 // Assign the collider to a temp variable
                 Actor_Enemy temp = col.GetComponent<Actor_Enemy>();
 
-                if (temp != null)
+                if (temp != null && temp.isActiveAndEnabled)
                 {
                     return temp;
                 }
             }
         }
         return null; 
+    }
+
+    bool OutOfRange()
+    {
+        Collider[] cols = Physics.OverlapSphere(transform.position, maxRange, enemyLayer);
+
+        foreach (Collider col in cols)
+        {
+            Vector3 forward = transform.forward;
+            forward = Quaternion.AngleAxis(detectionAngle, transform.up) * forward;
+
+            Vector3 pos = col.transform.position - transform.position;
+            pos -= transform.up * Vector3.Dot(transform.up, pos);
+
+            if (Vector3.Angle(forward, pos) > detectionAngle / 2)
+            {
+                // Assign the collider to a temp variable
+                Actor_Enemy temp = col.GetComponent<Actor_Enemy>();
+
+                for(int i = 0; i < cols.Length; i++)
+                {
+                    if (temp == enemyTarget) return false;
+                }
+            }
+        }
+        return true;
     }
 
 #if UNITY_EDITOR
