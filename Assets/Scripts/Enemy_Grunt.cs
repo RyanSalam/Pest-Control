@@ -54,15 +54,20 @@ public class Enemy_Grunt : Actor_Enemy
             //Quaternion rot = Quaternion.LookRotation(dir);
             //transform.rotation = Quaternion.Lerp(transform.rotation, rot, -0.6f);
 
-            // When attacking player
-            if (currentTarget.gameObject.CompareTag("Player"))
+            // When attacking core
+            if (currentTarget == Core.transform)
             {
+                //Debug.Log("Attacking CORE");
+                transform.LookAt(currentTarget);
+            }
+            // When attacking player
+            else if (Vector3.Distance(transform.position, currentTarget.position) <= _attackRange)
+            {
+                //Debug.Log("Attacking player");
                 Vector3 targetAim = new Vector3(currentTarget.position.x, currentTarget.position.y - 1.0f, currentTarget.position.z);
                 transform.LookAt(targetAim);
             }
-            // When attacking core
-            else
-                transform.LookAt(currentTarget);
+                
         }
         else
         {
