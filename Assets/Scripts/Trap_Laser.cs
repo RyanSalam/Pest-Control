@@ -23,6 +23,8 @@ public class Trap_Laser : Trap
         particleEffectObjects.SetActive(true); 
         //laserAttack.Play();
         enemyTarget.TakeDamage(trapDamage); //damage enemy 
+        ImpactSystem.Instance.DamageIndication(trapDamage, trapColor, enemyTarget.transform.position, 
+            Quaternion.LookRotation(LevelManager.Instance.Player.transform.position - enemyTarget.transform.position));
         Anim.SetBool("isIdle", false); 
         Anim.SetBool("isAttacking", true);
         StartCoroutine(trapAnimationSet()); 
