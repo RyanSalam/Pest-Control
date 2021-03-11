@@ -7,6 +7,7 @@ public class Enemy_Grunt : Actor_Enemy
     Scanner<Actor_Player> playerScanner;
     public bool hiveDictated;
 
+    public int hitsRecieved;
     
 
     
@@ -19,6 +20,7 @@ public class Enemy_Grunt : Actor_Enemy
         SetDestinationAroundTarget(CurrentDestination, AttackRange);
         Agent.speed = movementSpeed;
         GetComponentInChildren<Enemy_AnimEvent>().OnEnable();
+        hitsRecieved = 0;
 
         if (WaveManager.Instance.isBuildPhase == false)
             EnemyHiveMind.Instance.RegisterGrunt(this);
@@ -106,6 +108,13 @@ public class Enemy_Grunt : Actor_Enemy
         //{
         //    Core.TakeDamage(Damage); 
         //}
+    }
+
+    public override void TakeDamage(DamageData data)
+    {
+        base.TakeDamage(data);
+        hitsRecieved++;
+        Anim.SetInteger("hitsRecieved", hitsRecieved);
     }
 
     //private void OnDrawGizmos()
