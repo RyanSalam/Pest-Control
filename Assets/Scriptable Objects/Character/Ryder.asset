@@ -16,10 +16,10 @@ MonoBehaviour:
   c_name: Ryder
   c_desc: TechnoWiz
   c_profile: {fileID: 21300000, guid: 926c8f6211123584fbf1e3b0425a9b72, type: 3}
-  A1_image: {fileID: 21300000, guid: afb5843854c6b3441b139f09e984739d, type: 3}
+  A1_image: {fileID: 21300000, guid: f635121d8a45fad4e8a499c5481272df, type: 3}
   A1_name: Drone
   A1_text: Drone Bot
-  A2_image: {fileID: 21300000, guid: f52c52a940118414ca1e086402c90bfd, type: 3}
+  A2_image: {fileID: 21300000, guid: 83b57b70a2921994ab27bef38b15185f, type: 3}
   A2_name: Swarm
   A2_text: Nano Swarm
   ab1: {fileID: 11400000, guid: 09473e8eccb486740b7d4977aede66e1, type: 2}

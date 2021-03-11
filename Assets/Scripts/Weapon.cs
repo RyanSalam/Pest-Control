@@ -42,6 +42,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     [SerializeField] protected GameObject[] objectsToChange;
     //stats for our weapons damage
     public delegate void Weapondamage(DamageData data);
+    [SerializeField] public GameObject[] overheatSteamVFX;
    // public event DamageData
 
     public float lastFired = 0.0f;
@@ -158,6 +159,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         ObjectPooler.Instance.InitializePool(damageIndicatorObj, 5);
 
         //onDamageDealt += DamageIndication;
+        overheatSteamVFX = GameObject.FindGameObjectsWithTag("gasLeakVFX");
     }
 
     protected virtual void Update()
@@ -166,6 +168,16 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         if (auto && isFiring)
             PrimaryFire();
+    }
+
+    protected virtual void LateUpdate()
+    {
+        if (player == null) return;
+        Vector2 inputDir = player.playerInputs.actions["Move"].ReadValue<Vector2>();
+        animator.SetFloat("directionX", inputDir.x);
+        animator.SetFloat("directionY", inputDir.y);
+
+        animator.SetBool("isMoving", inputDir.magnitude > Mathf.Epsilon);
     }
 
     public virtual void Equip()
@@ -276,24 +288,19 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         //should trigger our weapon overheating-breaking animation
         if (currentShots >= maxShots)
         {
+            if (overheatSteamVFX.Length > 0) //play our vfx if they exist
+                StartCoroutine(playVFX());
+                //playOverHeatVFX();
+
             isFiring = false;
             canFire = false; //we cannot fire now
             animator.SetBool("isOverheating", true);
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
             currentCooldown = StartCoroutine(WeaponCooldown(GetHeatRatio()));
+
         }
     }
 
-    //protected virtual void DamageIndication(DamageData data)
-    //{
-    //    if (damageIndicatorObj != null)
-    //    {
-    //        //GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, hit.point, Quaternion.LookRotation(hit.normal)).gameObject;
-    //        GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, data.damageSource , Quaternion.LookRotation(-data.hitNormal)).gameObject;
-    //        temp.GetComponent<DamageIndicator>().setDamageIndicator(data.damageAmount, weaponColour);
-    //        //DamageIndicator.setDamageIndicator(temp, newDamage, weaponColour);
-    //    }
-    //}
 
     public virtual void SecondaryFire()
     {
@@ -378,6 +385,22 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         transform.localPosition = positionalRecoil;
         //transform.rotation = Quaternion.Euler(rotationalRecoil);
+
+    private void playOverHeatVFX()
+    {
+        Debug.Log("Playing overheatVFX");
+        for (int i = 0; i < overheatSteamVFX.Length; i++)
+        {
+            overheatSteamVFX[i].GetComponent<ParticleSystem>().Play();
+            
+        }
+    }
+
+    IEnumerator playVFX()
+    {
+        yield return new WaitForSeconds(0.5f);
+        playOverHeatVFX();
+
     }
 }
 

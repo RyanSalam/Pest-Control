@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04269c8150901a429efa8db7281493a, type: 3}
   m_Name: Alice_TrapDestroyed
   m_EditorClassIdentifier: 
+  isSolo: 1
   looping: 0
   _audioClipGroups:
   - sequenceMode: 0

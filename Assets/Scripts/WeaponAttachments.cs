@@ -10,6 +10,7 @@ public abstract class AltFireAttachment : ScriptableObject
     [Header("Alt Fire Stats")]
     [SerializeField] public int energyCostPerFire = 50;
     [SerializeField] protected int secondaryDamage = 8;
+    [SerializeField] public Sprite altFireIcon;
 
     public abstract void AltShoot();
 

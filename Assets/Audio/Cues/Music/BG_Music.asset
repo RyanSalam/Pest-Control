@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04269c8150901a429efa8db7281493a, type: 3}
   m_Name: BG_Music
   m_EditorClassIdentifier: 
+  isSolo: 0
   looping: 1
   _audioClipGroups:
   - sequenceMode: 1
     audioClips:
-    - {fileID: 8300000, guid: ce4453f131932ef4c87427c88cc004a2, type: 3}
-    - {fileID: 8300000, guid: c091f843e7224eb49a513a16314f4f33, type: 3}
-    - {fileID: 8300000, guid: d5250c0033369994a976f5118737cbd8, type: 3}
-    - {fileID: 8300000, guid: e07cb7c3bd1ea5d41b0867258a541c1f, type: 3}
+    - {fileID: 8300000, guid: 2d041fd064880334797a4cacef6db7ff, type: 3}
+    - {fileID: 8300000, guid: 9d46d8ad3859297458fd21d0754bc60d, type: 3}
+    - {fileID: 8300000, guid: 13b983f96e7c3284aa33434a38a1fe4b, type: 3}
+    - {fileID: 8300000, guid: 77433fc9a42db2b4fb1cd5397a459e21, type: 3}
+    - {fileID: 8300000, guid: ce14df1cb16a04b4fb11aaad26c357d1, type: 3}

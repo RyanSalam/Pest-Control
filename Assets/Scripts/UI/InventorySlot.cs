@@ -2,20 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private ShopUI shop;
 
+    public bool in_Game = false;
     [SerializeField] private Item item;
     [SerializeField] public Image itemIcon;
 
     [SerializeField] private Image borderImage;
     [SerializeField] private Sprite inventoryOccupied;
     [SerializeField] private Sprite inventoryEmpty;
+    [SerializeField] private Sprite occupiedHighlighted;
+    [SerializeField] private Sprite emptyHighlighted;
 
-    // NEVER ATTACH A SPRITE TO THIS FOR SHOP INVENTORY SLOTS
-    [SerializeField] public Sprite inventorySelected;
+    [SerializeField] private Image altFire;
+
+    [SerializeField] public Sprite inventorySelected;  // ALWAYS LEAVE THIS EMPTY FOR SHOP INVENTORY SLOTS
     bool selected = false;
 
     private void Awake()
@@ -23,14 +28,27 @@ public class InventorySlot : MonoBehaviour
         shop = GetComponentInParent<ShopUI>();
     }
 
+    private void Start()
+    {
+        if (inventorySelected == null)
+            in_Game = false;
+        else
+            in_Game = true;
+
+        UpdateAltFire();
+
+    }
+
     private void Update()
     {
         // For inventory slots in the shop UI
-        if (inventorySelected == null)
+        if (!in_Game)
             UpdateFrame();
         // For inventory slots in in-game UI
         else
             UpdateFrameInGame();
+
+        UpdateAltFire();
     }
 
     // For shop UI inventory slots
@@ -58,11 +76,24 @@ public class InventorySlot : MonoBehaviour
             itemIcon.color = new Color(itemIcon.color.r, itemIcon.color.g, itemIcon.color.b, 0.01f);
     }
 
+    public void UpdateAltFire()
+    {
+        if (item != null && item.isWeapon && item.altFireAttachment != null)
+        {
+            altFire.enabled = true;
+            altFire.sprite = item.altFireAttachment.altFireIcon;
+        }
+        else
+            altFire.enabled = false;
+    }
+
     public void AddItem(Item newItem)
     {
         item = newItem;
         itemIcon.sprite = item.itemIcon;
         itemIcon.enabled = true;
+
+        //UpdateAltFire();
     }
 
     // For shop UI inventory
@@ -70,6 +101,8 @@ public class InventorySlot : MonoBehaviour
     {
         item = null;
         itemIcon.enabled = false;
+
+        //UpdateAltFire();
     }
 
     // For in game UI inventory
@@ -77,6 +110,8 @@ public class InventorySlot : MonoBehaviour
     {
         item = null;
         itemIcon.sprite = null;
+
+        //UpdateAltFire();
     }
 
     // TODO: Implement refunding
@@ -98,11 +133,35 @@ public class InventorySlot : MonoBehaviour
         {
             Debug.Log("This slot is empty! Please select a valid inventory slot.");
         }
+
+        //UpdateAltFire();
     }
     
     public void SetSelectedItem(bool isSelected)
     {
         selected = isSelected;
 
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (!in_Game)
+        {
+            if (item != null)
+                borderImage.sprite = occupiedHighlighted;
+            else
+                borderImage.sprite = emptyHighlighted;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (!in_Game)
+        {
+            if (item != null)
+                borderImage.sprite = inventoryOccupied;
+            else
+                borderImage.sprite = inventoryEmpty;
+        }   
     }
 }

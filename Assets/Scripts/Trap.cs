@@ -7,6 +7,7 @@ public class Trap : MonoBehaviour
     [SerializeField] protected int trapDamage = 1;
     [SerializeField] protected int maxUses = 10;
     [SerializeField] protected float buildDuration;
+    [SerializeField] protected Color trapColor;
     public event System.Action TrapDestroyed;
 
 
@@ -68,7 +69,11 @@ public class Trap : MonoBehaviour
         {
             gameObject.SetActive(false);  //setting the game object to false
             LevelManager.Instance.AssessTraps(this);
-            Anim.SetTrigger("Destroy"); 
+            Anim.SetTrigger("Destroy");
+            foreach (Animator anim in GetComponentsInChildren<Animator>())
+            {
+                anim.SetTrigger("Destroy"); 
+            }
         }
     }
 

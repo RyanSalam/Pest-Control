@@ -34,6 +34,7 @@ public class LevelManager : MonoSingleton<LevelManager>
             // Call UI Update Here 
         }
     }
+    public int waveEnergyReward;
 
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private float respawnTimer = 2.0f;
@@ -92,13 +93,16 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         //Copy reference to Char Info and AudioManager
         Char_SO = GameManager.Instance.GetCharacter();
+
         if (Char_SO != null)
         {
             var temp = Instantiate(Char_SO.player, playerSpawnPoint.position, playerSpawnPoint.rotation);
             _player.gameObject.SetActive(false);
+            temp.AbilityOne = Char_SO.ab1;
+            temp.AbilityTwo = Char_SO.ab2;
+            temp.AbilityOne.Initialize(temp.gameObject);
+            temp.AbilityTwo.Initialize(temp.gameObject);
             _player = temp;
-            _player.AbilityOne = Char_SO.ab1;
-            _player.AbilityTwo = Char_SO.ab2;
 
             if (armMaterial != null)
             {
@@ -129,8 +133,10 @@ public class LevelManager : MonoSingleton<LevelManager>
         shopUI.pauseMenu.SetActive(false);
         gameOver = false;
 
-        // FOR TESTING PURPOSES ONLY - COMMENT OUT THIS LINE LATER
-        CurrentEnergy = 500;
+        // Set the starting energy value here -> 250 
+        CurrentEnergy = 250;
+        // Set the initial waveEnergyReward -> 100
+        waveEnergyReward = 100;
     }
 
     private void Start()
@@ -142,7 +148,8 @@ public class LevelManager : MonoSingleton<LevelManager>
         Player.playerInputs.onActionTriggered += HandleInput;
 
         SubscribeToAudioEvents();
-        Cues.PlayAudioCue(Char_SO.MissionStart);
+        if (Char_SO != null)
+            Cues.PlayAudioCue(Char_SO.MissionStart);
     }
 
     public void SetSelectedButton(GameObject newSelectedObj)
@@ -340,7 +347,9 @@ public class LevelManager : MonoSingleton<LevelManager>
                 if (test != null)
                     Equipables.Add(item, test);
             }
-            Cues.PlayAudioCue(Char_SO.PurchaseItem, 15);
+
+            if (Char_SO != null)
+                Cues.PlayAudioCue(Char_SO.PurchaseItem, 15);
         }
     }
 
@@ -372,8 +381,10 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     private void SubscribeToAudioEvents()
     {
-                //char chosen - Handled in MenuHandler.cs
-        
+        //char chosen - Handled in MenuHandler.cs
+
+        if (Char_SO == null) return;
+
         WaveManager.Instance.OnWaveEnded += () => Cues.PlayAudioCue(Char_SO.BuildPhaseStart, 30);
         WaveManager.Instance.OnWaveStarted += () => Cues.PlayAudioCue(Char_SO.WaveStart, 30);
 

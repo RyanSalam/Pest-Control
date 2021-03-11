@@ -46,6 +46,7 @@ public class Actor_Player : Actor
     [SerializeField] private Ability _abilityTwo;
 
     [SerializeField] protected Transform _abilitySpawnPoint;
+    [SerializeField] protected Transform _playerArms;
     public Transform AbilitySpawnPoint { get { return _abilitySpawnPoint; } }
     public Ability AbilityOne { get { return _abilityOne; } set { _abilityOne = value; } }
     public Ability AbilityTwo { get { return _abilityTwo; } set { _abilityTwo = value; } }
@@ -72,15 +73,21 @@ public class Actor_Player : Actor
 
         controller = GetComponent<CharacterController>();
 
-        playerInputs.actions["Jump"].started += (context) => HandleJump(true);
-        playerInputs.actions["Jump"].canceled += (context) => HandleJump(false);
-
+        playerInputs.onActionTriggered += HandleInputs;
         playerInputs.actions["Weapon Switch"].performed += HandleWeaponSwap;
 
         invulnerableTimer = new Timer(0.8f, false);
         invulnerableTimer.OnTimerEnd += () => isInvulnerable = false;
 
-        
+        //m_Anim = _playerArms.GetComponent<Animator>();
+        //_playerArms.gameObject.SetActive(false);
+
+        //if (AbilityOne != null)
+        //    AbilityOne.Initialize(gameObject);
+
+        //if (AbilityTwo != null)
+        //    AbilityTwo.Initialize(gameObject);
+
     }
 
 
@@ -89,24 +96,13 @@ public class Actor_Player : Actor
     {
         base.Start();
 
-        if (AbilityOne != null)
-        {
-            AbilityOne.Initialize(gameObject);
-        }
-
-
-        if (AbilityTwo != null)
-            AbilityTwo.Initialize(gameObject);
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     protected virtual void Update()
     {
-        HandleInputs();
         HandleRotation();
-
         invulnerableTimer.Tick(Time.deltaTime);
     }
 
@@ -115,42 +111,27 @@ public class Actor_Player : Actor
         HandleMovement();
     }
 
-    private void HandleInputs()
+    private void HandleInputs(InputAction.CallbackContext context)
     {
         if (!controlsEnabled) return;
 
-        // We're storing our mouse and movement inputs in vectors
-        // Helps us know 
-       // moveVector = playerInputs.actions["Move"].ReadValue<Vector2>();
+        switch (context.action.name)
+        {
+            case "Jump":
 
-      //  mouseVector = playerInputs.actions["Look"].ReadValue<Vector2>();
-       // mouseVector *= mouseSensitivity * Time.deltaTime;
+                if (context.phase == InputActionPhase.Performed && controller.isGrounded)
+                {
+                    _jumpElapsed += Time.fixedDeltaTime * 10;
+                    _jumpRequest = true;
+                }
 
-        //_camRot -= mouseVector.y;
-      //  _camRot = Mathf.Clamp(_camRot, -45f, 45f);
+                else if (context.phase == InputActionPhase.Canceled)
+                {
+                    _jumpRequest = false;
+                }
 
-        // This allows us to control our jump
-        // Meaning the longer we hold it, the higher we can jump
-           
-
-        
-        //if (Input.GetButtonUp("Jump"))
-        //{
-            
-        //}
-
-        //if (AbilityOne != null)
-        //{
-        //    AbilityOne.HandleInput();
-        //}
-
-        //if (AbilityTwo != null)
-        //    AbilityTwo.HandleInput();
-
-
-
-        //if (_currentEquiped != null)
-        //    _currentEquiped.HandleInput();
+                break;
+        }
     }
 
     private void HandleWeaponSwap(InputAction.CallbackContext context)
@@ -163,20 +144,6 @@ public class Actor_Player : Actor
             itemIndex %= LevelManager.Instance.InventoryList.Count;
             var _currentItem = LevelManager.Instance.InventoryList[itemIndex];
             _currentItem.Use();
-        }
-    }
-
-    protected void HandleJump(bool value)
-    {
-        if (value == true && controller.isGrounded)
-        {
-            _jumpElapsed += Time.fixedDeltaTime * 10;
-            _jumpRequest = true;
-        }
-
-        else
-        {
-            _jumpRequest = false;
         }
     }
 
@@ -201,7 +168,7 @@ public class Actor_Player : Actor
         if (_jumpRequest || _jumpElapsed.IsWithin(Mathf.Epsilon, _minJumpDuration) && _jumpElapsed <= _maxJumpDuration)
         {
             _jumpElapsed += Time.fixedDeltaTime;
-            _verticalVel = (jumpStrength * _jumpElapsed * 2.3f) + (0.5f * -15f * _jumpElapsed * _jumpElapsed);
+            _verticalVel = (jumpStrength * _jumpElapsed * 3.2f) + (0.5f * -26f * _jumpElapsed * _jumpElapsed);
         }
 
         else

@@ -203,6 +203,9 @@ public class Weapon_Hitscan : Weapon
         //going to change our damage value based on how far away our target it
         Vector3 shotDistance = firePosition - hitPosition;
 
+        if (shotDistance.magnitude < 5)
+            return Damage;
+
         //Debug.Log("shotDistance = " + shotDistance.magnitude);
         //Debug.Log("Percentage of damage to remove = " + shotDistance.magnitude / 100);
        

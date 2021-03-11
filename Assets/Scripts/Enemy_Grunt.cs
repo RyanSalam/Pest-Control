@@ -7,6 +7,10 @@ public class Enemy_Grunt : Actor_Enemy
     Scanner<Actor_Player> playerScanner;
     public bool hiveDictated;
 
+    
+
+    
+
     [Range(0, 360)] public float detectionAngle;
 
     protected override void OnEnable()
@@ -23,7 +27,7 @@ public class Enemy_Grunt : Actor_Enemy
     protected override void Start()
     {
         base.Start();
-
+        
         // Initialising the player scanner properly passing relevant variables
         playerScanner = new Scanner<Actor_Player>(transform);
         playerScanner.targetMask = _playerLayer;
@@ -44,15 +48,27 @@ public class Enemy_Grunt : Actor_Enemy
 
         if (Vector3.Distance(transform.position, currentTarget.position) <= _attackRange * 1.5f)
         {
-            Vector3 dir = currentTarget.position - transform.position;
-            dir.y = 0;
-            dir = dir.normalized;
-
+            //Vector3 dir = currentTarget.position - transform.position;
+            //dir.y = 0;
+            //dir = dir.normalized;
             //Quaternion rot = Quaternion.LookRotation(dir);
             //transform.rotation = Quaternion.Lerp(transform.rotation, rot, -0.6f);
-            transform.LookAt(currentTarget.position);
-        }
 
+            // When attacking core
+            if (currentTarget == Core.transform)
+            {
+                //Debug.Log("Attacking CORE");
+                transform.LookAt(currentTarget);
+            }
+            // When attacking player
+            else if (Vector3.Distance(transform.position, currentTarget.position) <= _attackRange)
+            {
+                //Debug.Log("Attacking player");
+                Vector3 targetAim = new Vector3(currentTarget.position.x, currentTarget.position.y - 1.0f, currentTarget.position.z);
+                transform.LookAt(targetAim);
+            }
+                
+        }
         else
         {
             //Quaternion rot = Quaternion.LookRotation(Agent.velocity);
