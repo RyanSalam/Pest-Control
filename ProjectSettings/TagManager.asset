@@ -8,6 +8,7 @@ TagManager:
   - ASMDammo
   - Trap
   - FxTemporaire
+  - gasLeakVFX
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Weapons
   - Walls
   - PostProcessVol
-  - 
+  - WarningSign
   - 
   - 
   - 

@@ -80,8 +80,9 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
             impactSettings = defaultSettings;
 
 
-        ObjectPooler.Instance.GetFromPool(impactSettings.decalToSpawn, hitPoint, hitRotation);
+        ObjectPooler.Instance.GetFromPool(impactSettings.decalToSpawn, hitPoint, hitRotation).transform.SetParent(targetHit.transform);
         ObjectPooler.Instance.GetFromPool(impactSettings.particleToSpawn, hitPoint, hitRotation);
+        
         Debug.Log(impactSettings.audioToPlay.name);
         ac.PlayAudioCue(impactSettings.audioToPlay, 100);
         

@@ -7,6 +7,7 @@ public class Enemy_Grunt : Actor_Enemy
     Scanner<Actor_Player> playerScanner;
     public bool hiveDictated;
 
+    public int hitsRecieved;
     
 
     
@@ -19,6 +20,7 @@ public class Enemy_Grunt : Actor_Enemy
         SetDestinationAroundTarget(CurrentDestination, AttackRange);
         Agent.speed = movementSpeed;
         GetComponentInChildren<Enemy_AnimEvent>().OnEnable();
+        hitsRecieved = 0;
 
         if (WaveManager.Instance.isBuildPhase == false)
             EnemyHiveMind.Instance.RegisterGrunt(this);
@@ -54,15 +56,20 @@ public class Enemy_Grunt : Actor_Enemy
             //Quaternion rot = Quaternion.LookRotation(dir);
             //transform.rotation = Quaternion.Lerp(transform.rotation, rot, -0.6f);
 
-            // When attacking player
-            if (currentTarget.gameObject.CompareTag("Player"))
+            // When attacking core
+            if (currentTarget == Core.transform)
             {
+                //Debug.Log("Attacking CORE");
+                transform.LookAt(currentTarget);
+            }
+            // When attacking player
+            else if (Vector3.Distance(transform.position, currentTarget.position) <= _attackRange)
+            {
+                //Debug.Log("Attacking player");
                 Vector3 targetAim = new Vector3(currentTarget.position.x, currentTarget.position.y - 1.0f, currentTarget.position.z);
                 transform.LookAt(targetAim);
             }
-            // When attacking core
-            else
-                transform.LookAt(currentTarget);
+                
         }
         else
         {
@@ -101,6 +108,13 @@ public class Enemy_Grunt : Actor_Enemy
         //{
         //    Core.TakeDamage(Damage); 
         //}
+    }
+
+    public override void TakeDamage(DamageData data)
+    {
+        base.TakeDamage(data);
+        hitsRecieved++;
+        Anim.SetInteger("hitsRecieved", hitsRecieved);
     }
 
     //private void OnDrawGizmos()

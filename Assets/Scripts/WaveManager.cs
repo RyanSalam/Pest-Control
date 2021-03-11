@@ -144,7 +144,6 @@ public class WaveManager : MonoSingleton<WaveManager>
     public void UpdateRemEnemies()
     {
         _enemiesRemaining--;
-
         if (_enemiesRemaining <= 0)
             WaveEnd();
     }
@@ -219,65 +218,27 @@ public class WaveManager : MonoSingleton<WaveManager>
         int _enemiesToSpawn = _enemiesRemaining;
         for (int i = 0; i < _enemiesToSpawn; i++)
         {
-            // If we have both grunts and drones in the wave then randomly spawn from them
-            if (_gruntsRemaining > 0 && _dronesRemaining > 0)
+            int randIndex = Random.Range(0, 1);
+
+            if (_gruntsRemaining <= 0)
+                randIndex = 1;
+            else if (_dronesRemaining <= 0)
+                randIndex = 0;
+
+            // If randomly selected grunts when spawning and grunts remain to be activated
+            if (randIndex == 0)
             {
-                int index = Random.Range(0, 1);
-                if (index == 0 && _gruntsRemaining > 0)
-                {
-                    foreach (GameObject grunt in _gruntPool)
-                    {
-                        if (!grunt.activeSelf)
-                        {
-                            grunt.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
-                            grunt.SetActive(true);
-                            grunt.GetComponent<AudioCue>().PlayAudioCue(grunt.GetComponent<Enemy_Grunt>().portalClip);
-                            _gruntsRemaining--;
-                            
-                            break;
-                        }
-                    }
-                }
-                else if (index == 1 && _dronesRemaining > 0)
-                {
-                    foreach (GameObject drone in _dronePool)
-                    {
-                        if (!drone.activeSelf)
-                        {
-                            int droneI = Random.Range(0, currentWave.availableSpawnPoints.Length);
-                            drone.transform.position = currentWave.availableSpawnPoints[droneI].position;
-                            drone.transform.rotation = currentWave.availableSpawnPoints[droneI].rotation;
-                            drone.SetActive(true);
-                            drone.GetComponent<AudioCue>().PlayAudioCue(drone.GetComponent<Enemy_DroneV2>().portalClip);
-                            _dronesRemaining--;
-                            break;
-                        }
-                    }
-                }
+                Transform spawnPoint = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)];
+                ObjectPooler.Instance.GetFromPool(gruntPrefab, spawnPoint.position, spawnPoint.rotation);
+                _gruntsRemaining--;
+                Debug.LogWarning("Grunts remaining: " + _gruntsRemaining);
             }
-            else if (_gruntsRemaining > 0)
+            else if (randIndex == 1)
             {
-                foreach (GameObject grunt in _gruntPool)
-                {
-                    if (!grunt.activeSelf)
-                    {
-                        grunt.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
-                        grunt.SetActive(true);
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                foreach (GameObject drone in _dronePool)
-                {
-                    if (!drone.activeSelf)
-                    {
-                        drone.transform.position = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)].position;
-                        drone.SetActive(true);
-                        break;
-                    }
-                }
+                Transform spawnPoint = currentWave.availableSpawnPoints[Random.Range(0, currentWave.availableSpawnPoints.Length)];
+                ObjectPooler.Instance.GetFromPool(dronePrefab, spawnPoint.position, spawnPoint.rotation);
+                _dronesRemaining--;
+                Debug.LogWarning("Drones remaining: " + _dronesRemaining);
             }
 
             yield return new WaitForSeconds(currentWave.spawnDelay);
@@ -298,11 +259,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         // Instantiate the relevant number of grunts
         for (int i = 0; i < _gruntsToSpawn; i++)
         {
-            GameObject grunt = Instantiate(gruntPrefab, enemyPoolParent.transform);
-            _gruntPool.Add(grunt);
-            grunt.name = ("Grunt: " + i);
-            grunt.GetComponent<Actor_Enemy>().OnDeath += UpdateRemEnemies;
-            grunt.SetActive(false);
+            ObjectPooler.Instance.InitializePool(gruntPrefab, _gruntsToSpawn);
         }
     }
 
@@ -319,11 +276,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         // Instantiate the relevant number of grunts
         for (int i = 0; i < _dronesToSpawn; i++)
         {
-            GameObject drone = Instantiate(dronePrefab, enemyPoolParent.transform);
-            _dronePool.Add(drone);
-            drone.name = ("Drone: " + i);
-            drone.GetComponent<Actor_Enemy>().OnDeath += UpdateRemEnemies;
-            drone.SetActive(false);
+            ObjectPooler.Instance.InitializePool(dronePrefab, _dronesToSpawn);
         }
     }
     #endregion

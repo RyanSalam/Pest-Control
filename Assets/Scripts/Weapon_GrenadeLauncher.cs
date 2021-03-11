@@ -83,10 +83,12 @@ public class Weapon_GrenadeLauncher : Weapon
 
             lastFired = Time.time;
 
+
             base.PrimaryFire();
         }
 
-       
+
+
     }
 
 
