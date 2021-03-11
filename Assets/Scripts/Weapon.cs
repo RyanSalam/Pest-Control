@@ -385,6 +385,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         transform.localPosition = positionalRecoil;
         //transform.rotation = Quaternion.Euler(rotationalRecoil);
+    }
 
     private void playOverHeatVFX()
     {
