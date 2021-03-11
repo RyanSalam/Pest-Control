@@ -37,6 +37,10 @@ public class HUDUI : MonoBehaviour
 
     [SerializeField] Sprite defaultCoreHealthFill;
     [SerializeField] Sprite damagedCoreHealthFill;
+    [SerializeField] Color defaultCoreIconColor;
+    [SerializeField] Color damagedCoreIconColor;
+    [SerializeField] GameObject coreBase;
+    [SerializeField] Image coreIcon;
     Coroutine changeCoreColor;
 
     private void Start()
@@ -86,9 +90,14 @@ public class HUDUI : MonoBehaviour
     public IEnumerator CoreHealthChange()
     {
         coreFill.sprite = damagedCoreHealthFill;
-        //coreFill.CrossFadeAlpha(10f, 0.25f, false);
+        coreIcon.color = damagedCoreIconColor;
+        //coreFill.gameObject.transform.localScale = Vector3.one * 1.2f;
+        //coreBase.transform.localScale = Vector3.one * 1.2f;
+        //coreIcon.transform.localScale = Vector3.one * 1.2f;
+
         yield return new WaitForSeconds(1.2f);
-        //coreFill.CrossFadeAlpha(255f, 0.25f, false);
+
+        coreIcon.color = defaultCoreIconColor;
         coreFill.sprite = defaultCoreHealthFill;
     }
 
