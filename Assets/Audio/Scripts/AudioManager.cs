@@ -23,6 +23,8 @@ public class AudioManager : MonoBehaviour
 	[SerializeField] [Range(0f, 1f)] private float _musicVolume;
 	[SerializeField] [Range(0f, 1f)] private float _sfxVolume;
 
+	public bool soloPlaying = false;
+
 
 	static AudioManager _instance = null;
 
@@ -112,24 +114,55 @@ public class AudioManager : MonoBehaviour
 	/// </summary>
 	public void PlayAudioCue(AudioCueSO audioCue, AudioConfigurationSO settings, Vector3 position = default)
 	{
-		AudioClip[] clipsToPlay = audioCue.GetClips();
-		int nOfClips = clipsToPlay.Length;
-
-		for (int i = 0; i < nOfClips; i++)
+		if (!audioCue.isSolo)
 		{
-			SoundEmitter soundEmitter = _pool.Request();
-			if (soundEmitter != null)
+			AudioClip[] clipsToPlay = audioCue.GetClips();
+			int nOfClips = clipsToPlay.Length;
+
+			for (int i = 0; i < nOfClips; i++)
 			{
-				soundEmitter.PlayAudioClip(clipsToPlay[i], settings, audioCue.looping, position);
-				if (!audioCue.looping)
-					soundEmitter.OnSoundFinishedPlaying += OnSoundEmitterFinishedPlaying;
+				SoundEmitter soundEmitter = _pool.Request();
+				if (soundEmitter != null)
+				{
+					soundEmitter.PlayAudioClip(clipsToPlay[i], settings, audioCue.looping, position);
+					if (!audioCue.looping)
+						soundEmitter.OnSoundFinishedPlaying += OnSoundEmitterFinishedPlaying;
+				}
 			}
 		}
 
-		//TODO: Save the SoundEmitters that were activated, to be able to stop them if needed
+		else if(audioCue.isSolo && !soloPlaying)
+        {
+			
+			AudioClip[] clipsToPlay = audioCue.GetClips();
+			int nOfClips = clipsToPlay.Length;
+			StartCoroutine(SoloClipDelay(clipsToPlay[0].length));
+			for (int i = 0; i < nOfClips; i++)
+			{
+				SoundEmitter soundEmitter = _pool.Request();
+				if (soundEmitter != null)
+				{
+					soundEmitter.PlayAudioClip(clipsToPlay[i], settings, audioCue.looping, position);
+					if (!audioCue.looping)
+						soundEmitter.OnSoundFinishedPlaying += OnSoundEmitterFinishedPlaying;
+				}
+			}
+
+		}
+
+		else
+        {
+			Debug.Log("Could not play solo clip as another one is currently playing");
+        }
+		
 	}
 	
-	
+	IEnumerator SoloClipDelay(float clipLength)
+    {
+		soloPlaying = true;
+		yield return new WaitForSeconds(clipLength);
+		soloPlaying = false;
+	}
 
 	private void OnSoundEmitterFinishedPlaying(SoundEmitter soundEmitter)
 	{

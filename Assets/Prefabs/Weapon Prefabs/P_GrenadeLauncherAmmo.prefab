@@ -113,7 +113,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   radius: 10
-  damage: 15
+  damage: 25
   explosionVFX: {fileID: 1416136211686774, guid: 2eb45cbb5c5e9d549ac5e123909fff4b,
     type: 3}
 --- !u!54 &2221685402508476846

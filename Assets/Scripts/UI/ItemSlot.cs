@@ -9,11 +9,11 @@ using TMPro;
 public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler
 {
     private ShopUI shop;
-    [SerializeField] public bool hasTooltip = false;
-    [SerializeField] public TMP_Text tooltipNameText;
-    [SerializeField] public TMP_Text tooltipDescriptionText;
+    //[SerializeField] public bool hasTooltip = false;
+    //[SerializeField] public TMP_Text tooltipNameText;
+    //[SerializeField] public TMP_Text tooltipDescriptionText;
 
-    [SerializeField] GameObject tooltipPanel;
+    //[SerializeField] GameObject tooltipPanel;
 
     [SerializeField] private Image BorderImage = null;
     [SerializeField] private Image ItemIcon = null;
@@ -24,6 +24,12 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     [SerializeField] private Sprite selectedSprite = null;
     [SerializeField] private Sprite unselectedSprite = null;
+    [SerializeField] private Sprite ownedSprite = null;
+
+    [SerializeField] private TMP_Text ownedText;
+
+    [SerializeField] private Image altFire;
+    [SerializeField] public bool storingWeapon = true;
 
     private bool purchased = false;
 
@@ -36,14 +42,37 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         itemName.text = item.itemName;
         ItemIcon.sprite = item.itemIcon;
-
         itemCost.text = item.itemCost.ToString();
+        
+        UpdateAltFire();
+    }
 
-        if (hasTooltip)
+    private void FixedUpdate()
+    {
+        if (LevelManager.Instance.InventoryList.Contains(item))
         {
-            tooltipPanel.SetActive(false);
-            tooltipNameText.text = item.itemName.ToString();
-            tooltipDescriptionText.text = item.itemDescription.ToString();
+            ownedText.text = "Owned";
+            BorderImage.sprite = ownedSprite;
+        }
+        else
+        {
+            ownedText.text = "Buy";
+            BorderImage.sprite = unselectedSprite;
+        }
+
+    }
+
+    public void UpdateAltFire()
+    {
+        if (storingWeapon)
+        {
+            if (altFire != null && item.isWeapon && item.altFireAttachment != null)
+            {
+                altFire.enabled = true;
+                altFire.sprite = item.altFireAttachment.altFireIcon;
+            }
+            else
+                altFire.enabled = false;
         }
     }
 
@@ -60,6 +89,7 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             purchased = true;
             item.ItemPurchased();
 
+            BorderImage.sprite = ownedSprite;
             //Debug.Log("Bought item: " + itemName.text + " for " + item.itemCost.ToString() + " Energy.");
         }
         else
@@ -73,24 +103,21 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.localScale = Vector3.one * 1.25f;
+        transform.localScale = Vector3.one * 1.05f;
         BorderImage.sprite = selectedSprite;
 
-        if (hasTooltip)
-        {
-            tooltipPanel.SetActive(true);
-        }
+        Fluffy.Instance.textToOverride = item.itemDescription.ToString();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         transform.localScale = Vector3.one;
-        BorderImage.sprite = unselectedSprite;
+        if (LevelManager.Instance.InventoryList.Contains(item))
+            BorderImage.sprite = ownedSprite;
+        else
+            BorderImage.sprite = unselectedSprite;
 
-        if (hasTooltip)
-        {
-            tooltipPanel.SetActive(false);
-        }
+        Fluffy.Instance.textToOverride = "";
     }
 
     public void OnMove(AxisEventData eventData)

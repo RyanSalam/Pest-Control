@@ -19,10 +19,27 @@ public class Enemy_DroneV2 : Actor_Enemy
 
     float timeAtCollision;
 
+    Rigidbody rb;
+
+    bool isDying = false;
+
     //reference to our agent / variables well need for our base offset
     NavMeshAgent agent;
 
     public Transform droneLegs;
+
+    [SerializeField] GameObject deathVFX;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        agent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
+
+        if (!rb)
+            Debug.Log("RigidBody not found");
+    }
 
     // Start is called before the first frame update
     protected override void Start()
@@ -30,7 +47,7 @@ public class Enemy_DroneV2 : Actor_Enemy
         //reset our queue on start
         trapQueue = new Queue<Transform>();
 
-        agent = gameObject.GetComponent<NavMeshAgent>();
+
 
         if (!agent)
             Debug.Log("Agent not found");
@@ -40,9 +57,12 @@ public class Enemy_DroneV2 : Actor_Enemy
         if (!droneLegs)
             Debug.Log("Body not found");
 
+        ObjectPooler.Instance.InitializePool(deathVFX, 5);
+
         base.Start();
     }
 
+    
     // Update is called once per frame
     protected override void Update()
     {
@@ -53,17 +73,19 @@ public class Enemy_DroneV2 : Actor_Enemy
         //without going through the wall
         if (Physics.SphereCast(collisionChecker.position, 1.0f, transform.forward , out RaycastHit hit, 1.5f, collisionLayer))
         {
-
+            //Debug.Log(hit.point + ": hitpoint");
             //checking if our hitpoint was above or below our y position. so we know if we should move below or above the obstacle in our way
             if (hit.point.y > gameObject.transform.position.y)//go down
             {
                 //Debug.Log("go down - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y );
-                agent.baseOffset -= 0.4f;
+                //agent.baseOffset -= 0.4f;
+                agent.baseOffset += 0.4f;
             }
-            else if (hit.point.y < gameObject.transform.position.y ) //go up
+            else if (hit.point.y < gameObject.transform.position.y) //go up
             {
                 //Debug.Log("go up - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y);
-                agent.baseOffset += 0.4f;
+                //agent.baseOffset += 0.4f;
+                agent.baseOffset -= 0.4f;
             }
 
             //using a bool and timer so we re-adjust our position when we are done colliding for x seconds - helps with smoothing and makes it less glitchy 
@@ -129,7 +151,12 @@ public class Enemy_DroneV2 : Actor_Enemy
             //transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.Euler(0,transform.rotation.y,transform.rotation.z), 1f); //trying to slowly bring the x rotation back to 0
         }
 
-        
+        //if (isDying)
+        //{
+        //    agent.baseOffset -= 0.25f;
+        //    agent.updateRotation = false;
+        //    transform.Rotate(Vector3.right * 400 * Time.deltaTime);
+        //}
 
         base.Update();
     }
@@ -140,6 +167,14 @@ public class Enemy_DroneV2 : Actor_Enemy
     //    Gizmos.DrawWireSphere(collisionChecker.position, 1.0f);
     //}
 
+
+   
+    protected override void OnEnable()
+    {
+        agent.enabled = true;
+        rb.isKinematic = true;
+        base.OnEnable();
+    }
     public Transform searchForTarget()
     {
         //SEARCH FOR TRAPS
@@ -162,7 +197,14 @@ public class Enemy_DroneV2 : Actor_Enemy
         //    return LevelManager.Instance.Player.transform;
         //}
 
-        return EnemyHiveMind.Instance.UpdateDrone(this);
+        Transform targ = null;
+
+        while (targ == null)
+        {
+            targ = EnemyHiveMind.Instance.UpdateDrone(this);
+        }
+
+        return targ;
     }
 
     public override void OnPathCompleted()
@@ -178,9 +220,24 @@ public class Enemy_DroneV2 : Actor_Enemy
 
     protected override void Death()
     {
+        StartCoroutine(startDroneDeath());
         base.Death();
-        gameObject.SetActive(false);
     }
 
-
+    IEnumerator startDroneDeath()
+    {
+        rb.isKinematic = false;
+        agent.enabled = false;
+        rb.AddForce(Vector3.back * 3.5f, ForceMode.Impulse);
+        isDying = true;
+        yield return new WaitForSeconds(1.5f);
+    }
+    private void OnCollisionEnter(Collision c)
+    {
+        if (isDying)
+        {
+            ObjectPooler.Instance.GetFromPool(deathVFX, c.GetContact(0).point, transform.rotation);
+            gameObject.SetActive(false);
+        }
+    }
 }

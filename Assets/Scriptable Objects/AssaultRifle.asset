@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
   itemName: Assault Rifle
-  itemCost: 20
-  itemIcon: {fileID: 21300000, guid: a02ba8184dd47574cba2d6fc1d7a7165, type: 3}
-  itemDescription: 'Rapid fire assault rifle. High fire rate, low damage, big magazine,
-    sizable cooldown. Becomes more inacurate the longer you hold the trigger.  Alt
-    Fire: Noob Toob: Shoot a grenade the bounces once then explodes on impact dealing
-    high area of affect damage. Costs 50 energy per shot.'
+  itemCost: 50
+  itemIcon: {fileID: 21300000, guid: 479dd5e3139620641b8f103d5aa2d7cf, type: 3}
+  itemDescription: 'Rapid fire assault rifle.High fire rate, low damage, big magazine.Becomes
+    more inacurate the longer you hold the trigger. Alt Fire: Noob Toob. Shoot a
+    grenade the bounces once then explodes on impact.Costs 100 energy per shot.'
   equipSound: {fileID: 0}
   EquipableToSpawn: {fileID: 9134610054443472385, guid: 3dbfccad6c40edf45aa0dc589ff285d9,
     type: 3}
+  isWeapon: 1
+  altFireAttachment: {fileID: 11400000, guid: d05d3cbff221f3b48b7b6169c7080f8e, type: 2}

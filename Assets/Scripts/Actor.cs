@@ -32,7 +32,9 @@ public abstract class Actor : MonoBehaviour
         }
     }
     [SerializeField] protected float moveSpeed = 10.0f;
-    protected bool isDead = false;
+    protected bool m_isDead = false;
+    public bool isDead { get { return m_isDead; } }
+
 
     [Header("Hit Box Properties")]
     [Tooltip("Determines The area where this Actor can take damage from")]
@@ -45,8 +47,8 @@ public abstract class Actor : MonoBehaviour
 
     protected bool isInvulnerable;
 
-    private Animator m_Anim;
-    public virtual Animator Anim { get { return m_Anim; } }
+    protected Animator m_Anim;
+    public virtual Animator Anim { get { return m_Anim; } set { m_Anim = value; } }
 
     protected virtual void Awake() // All components should be cached in Awake.
     {
@@ -56,7 +58,7 @@ public abstract class Actor : MonoBehaviour
     protected virtual void Start()
     {
         m_currentHealth = maxHealth;
-        isDead = false;
+        m_isDead = false;
     }
 
     // Take Damage should have two different functions.
@@ -69,7 +71,7 @@ public abstract class Actor : MonoBehaviour
     /// <param name="damageAmount"></param>
     public virtual void TakeDamage(float damageAmount)
     {
-        if (isDead) return; // We don't want to take anymore damage if we're already dead.
+        if (m_isDead) return; // We don't want to take anymore damage if we're already dead.
         if (isInvulnerable) return;
 
         CurrentHealth -= damageAmount;
@@ -83,7 +85,7 @@ public abstract class Actor : MonoBehaviour
     /// <param name="data"></param>
     public virtual void TakeDamage(DamageData data)
     {
-        if (isDead) return;
+        if (m_isDead) return;
         if (isInvulnerable) return;
 
         // This is mainly checking hit registration and if the attack is inside of the actor's hit angle.
@@ -110,9 +112,10 @@ public abstract class Actor : MonoBehaviour
 
     protected virtual void Death()
     {
-        isDead = true;
+        m_isDead = true;
         OnDeath?.Invoke();
-        Anim.SetTrigger("Death");
+        if (Anim != null)
+            Anim.SetTrigger("Death");
     }
 
     // OnEnabled will basically be our respawn solution.
@@ -120,7 +123,7 @@ public abstract class Actor : MonoBehaviour
     // Allows us to easily set up 
     protected virtual void OnEnable()
     {
-        isDead = false;
+        m_isDead = false;
         CurrentHealth = maxHealth;
     }
 

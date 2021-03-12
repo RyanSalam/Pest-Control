@@ -42,6 +42,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     [SerializeField] protected GameObject[] objectsToChange;
     //stats for our weapons damage
     public delegate void Weapondamage(DamageData data);
+    [SerializeField] public GameObject[] overheatSteamVFX;
    // public event DamageData
 
     public float lastFired = 0.0f;
@@ -49,7 +50,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     protected Vector3 initialCamPos;
 
     public bool canFire = true; //if we can fire or not
-    [SerializeField] protected bool isFiring = false; //are we currently firing ?
+    [SerializeField] public bool isFiring = false; //are we currently firing ?
     [SerializeField] protected AltFireAttachment weaponAttachment;
     [SerializeField] protected Transform firePoint;
 
@@ -58,6 +59,33 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     public delegate void DamageHandler(DamageData data);
     public event DamageHandler onDamageDealt;
+
+    [Header("Reference Points:")]
+    [SerializeField] protected Transform recoilPosition;
+    [SerializeField] protected Transform rotationPoint;
+    [Space(10)]
+
+    [Header("Speed Settings:")]
+    [SerializeField] protected float positionalRecoilSpeed = 8f;
+    [SerializeField] protected float rotationalRecoilSpeed = 8f;
+    [Space(10)]
+
+    [SerializeField] protected float positionalReturnSpeed = 18f;
+    [SerializeField] protected float rotationalReturnSpeed = 38f;
+    [Space(10)]
+
+    [Header("Amount Settings:")]
+    [SerializeField] protected static Vector3 RecoilRotation = new Vector3(10, 5, 7);
+    [SerializeField] protected Vector3 RecoilKickBack = new Vector3(0.015f, 0f, -0.2f);
+
+    //[Space(10)]
+    //public Vector3 RecoilRotationAim = new Vector3(10, 4, 6);
+    //public Vector3 RecoilKickBackAim = new Vector3(0.015f, 0f, -0.2f);
+    [Space(10)]
+
+    Vector3 rotationalRecoil;
+    Vector3 positionalRecoil;
+    Vector3 Rot;
 
     public void DamageDealt(DamageData data)
     {
@@ -131,6 +159,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         ObjectPooler.Instance.InitializePool(damageIndicatorObj, 5);
 
         //onDamageDealt += DamageIndication;
+        overheatSteamVFX = GameObject.FindGameObjectsWithTag("gasLeakVFX");
     }
 
     protected virtual void Update()
@@ -139,6 +168,16 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         if (auto && isFiring)
             PrimaryFire();
+    }
+
+    protected virtual void LateUpdate()
+    {
+        if (player == null) return;
+        Vector2 inputDir = player.playerInputs.actions["Move"].ReadValue<Vector2>();
+        animator.SetFloat("directionX", inputDir.x);
+        animator.SetFloat("directionY", inputDir.y);
+
+        animator.SetBool("isMoving", inputDir.magnitude > Mathf.Epsilon);
     }
 
     public virtual void Equip()
@@ -239,31 +278,29 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         currentShots += shotIncrease; //increment our current shots
         LevelManager.Instance.WeaponUI.UpdateHeatBar((float)currentShots, (float)maxShots);
         currentRatio = GetHeatRatio();
-        
+
+        Recoil();
+        Debug.Log("Weapon Recoil");
+
         //setting animator parameters
         animator.SetTrigger("fire");
         animator.SetBool("isFiring" , isFiring);
         //should trigger our weapon overheating-breaking animation
         if (currentShots >= maxShots)
         {
+            if (overheatSteamVFX.Length > 0) //play our vfx if they exist
+                StartCoroutine(playVFX());
+                //playOverHeatVFX();
+
             isFiring = false;
             canFire = false; //we cannot fire now
             animator.SetBool("isOverheating", true);
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
             currentCooldown = StartCoroutine(WeaponCooldown(GetHeatRatio()));
+
         }
     }
 
-    //protected virtual void DamageIndication(DamageData data)
-    //{
-    //    if (damageIndicatorObj != null)
-    //    {
-    //        //GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, hit.point, Quaternion.LookRotation(hit.normal)).gameObject;
-    //        GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, data.damageSource , Quaternion.LookRotation(-data.hitNormal)).gameObject;
-    //        temp.GetComponent<DamageIndicator>().setDamageIndicator(data.damageAmount, weaponColour);
-    //        //DamageIndicator.setDamageIndicator(temp, newDamage, weaponColour);
-    //    }
-    //}
 
     public virtual void SecondaryFire()
     {
@@ -316,6 +353,62 @@ public abstract class Weapon : MonoBehaviour, IEquippable
             LevelManager.Instance.WeaponUI.UpdateHeatBar(0, 1);
         }
     }
+    public void Recoil()
+    {
+        if (isFiring)
+        {
+            //Debug.Log("recoiling");
+            //weapon recoil script
+            rotationalRecoil = Vector3.Lerp(rotationalRecoil, Vector3.zero, rotationalReturnSpeed * Time.deltaTime);
+            positionalRecoil = Vector3.Lerp(positionalRecoil, Vector3.zero, positionalReturnSpeed * Time.deltaTime);
+
+            recoilPosition.localPosition = Vector3.Slerp(recoilPosition.localPosition, positionalRecoil, positionalRecoilSpeed * Time.fixedDeltaTime);
+            Rot = Vector3.Slerp(Rot, rotationalRecoil, rotationalRecoilSpeed * Time.fixedDeltaTime);
+            rotationPoint.localRotation = Quaternion.Euler(Rot);
+
+            //on shoot, not sure if this is the best location
+
+            rotationalRecoil += new Vector3(-RecoilRotation.x, Random.Range(-RecoilRotation.y, RecoilRotation.y), Random.Range(-RecoilRotation.z, RecoilRotation.z));
+            positionalRecoil += new Vector3(Random.Range(-RecoilKickBack.x, RecoilKickBack.x), Random.Range(-RecoilKickBack.y, RecoilKickBack.y), RecoilKickBack.z);
+
+            //timeFiring += Time.deltaTime;
+
+
+        }
+        else //if we are not firing we need to go back to normal
+        {
+            //weapon recoil script
+            rotationalRecoil = Vector3.Lerp(rotationalRecoil, Vector3.zero, rotationalReturnSpeed * Time.deltaTime);
+            positionalRecoil = Vector3.Lerp(positionalRecoil, Vector3.zero, positionalReturnSpeed * Time.deltaTime);
+
+        }
+
+        transform.localPosition = positionalRecoil;
+        //transform.rotation = Quaternion.Euler(rotationalRecoil);
+    }
+
+    private void playOverHeatVFX()
+    {
+        Debug.Log("Playing overheatVFX");
+        for (int i = 0; i < overheatSteamVFX.Length; i++)
+        {
+            overheatSteamVFX[i].GetComponent<ParticleSystem>().Play();
+            
+        }
+    }
+
+    IEnumerator playVFX()
+    {
+        yield return new WaitForSeconds(0.5f);
+        playOverHeatVFX();
+
+    }
+
+    public void PlayAnimation(string animation)
+    {
+        animator.SetTrigger(animation);
+    }
 }
+
 
 

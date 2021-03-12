@@ -15,6 +15,8 @@ public class HUDUI : MonoBehaviour
     /// </summary>
     [SerializeField] TMP_Text waveNumber;
     [SerializeField] TMP_Text buildPhase;
+    [SerializeField] GameObject rewardPanel;
+    [SerializeField] TMP_Text rewardAmount;
 
     Actor_Core core;
     [SerializeField] GameObject coreInfoPanel;
@@ -33,9 +35,17 @@ public class HUDUI : MonoBehaviour
     [SerializeField] GameObject skipBuildPhaseInfo;
     public float phaseTimerProgress;
 
+    [SerializeField] Sprite defaultCoreHealthFill;
+    [SerializeField] Sprite damagedCoreHealthFill;
+    [SerializeField] Color defaultCoreIconColor;
+    [SerializeField] Color damagedCoreIconColor;
+    [SerializeField] GameObject coreBase;
+    [SerializeField] Image coreIcon;
+    Coroutine changeCoreColor;
 
     private void Start()
     {
+        defaultCoreHealthFill = coreFill.sprite;
         core = LevelManager.Instance.Core;
         core.OnHealthChanged += UpdateCoreHealth;
         waveNumberIndicator.SetActive(false);
@@ -62,6 +72,33 @@ public class HUDUI : MonoBehaviour
 
         // Setting the core's health bar
         coreFill.fillAmount = coreCurrentHealth / coreMaxHealth;
+
+        CoreHealthFlash();
+    }
+
+    public void CoreHealthFlash()
+    {
+        if (changeCoreColor == null)
+            changeCoreColor = StartCoroutine(CoreHealthChange());
+        else
+        {
+            StopCoroutine(changeCoreColor);
+            changeCoreColor = StartCoroutine(CoreHealthChange());
+        }
+    }
+
+    public IEnumerator CoreHealthChange()
+    {
+        coreFill.sprite = damagedCoreHealthFill;
+        coreIcon.color = damagedCoreIconColor;
+        //coreFill.gameObject.transform.localScale = Vector3.one * 1.2f;
+        //coreBase.transform.localScale = Vector3.one * 1.2f;
+        //coreIcon.transform.localScale = Vector3.one * 1.2f;
+
+        yield return new WaitForSeconds(1.2f);
+
+        coreIcon.color = defaultCoreIconColor;
+        coreFill.sprite = defaultCoreHealthFill;
     }
 
     public IEnumerator BuildPhase()
@@ -71,6 +108,16 @@ public class HUDUI : MonoBehaviour
 
         // Display wave info panel
         WaveInfoPanel.SetActive(true);
+
+        // If we passed a wave: display reward panel & set reward amount
+        if (WaveManager.Instance.waveIndex + 1 > 1)
+        {
+            rewardPanel.SetActive(true);
+            rewardAmount.text = LevelManager.Instance.waveEnergyReward.ToString();
+        }
+        else
+            rewardPanel.SetActive(false);
+
         // Display build phase
         currentPhase = "Build Phase";
         buildPhase.text = currentPhase;
@@ -81,9 +128,6 @@ public class HUDUI : MonoBehaviour
         enemyInfoPanel.SetActive(false);
         // Hide coreInfo Panel until the Defence Phase
         coreInfoPanel.SetActive(false);
-
-        // Show text for skipping build phase
-        //skipBuildPhaseInfo.SetActive(true);
 
         yield return new WaitForSeconds(5f);
 
@@ -101,16 +145,14 @@ public class HUDUI : MonoBehaviour
         // Display defense phase
         currentPhase = "Enemies Incoming!";
         buildPhase.text = currentPhase;
+        // Disable reward panel regardless
+        rewardPanel.SetActive(false);
         WaveInfoPanel.SetActive(true);
         waveNumber.text = "Wave " + (WaveManager.Instance.waveIndex + 1).ToString();
         //Start displaying the enemyInfo Panel
         enemyInfoPanel.SetActive(true);
         // Start displaying coreInfo Panel
         coreInfoPanel.SetActive(true);
-
-        // Make sure to disable the skip build phase info
-        //skipBuildPhaseInfo.SetActive(false);
-
         // Display waveNumberIndicator during the wave
         waveNumberIndicator.SetActive(true);
         // Update wave number text
@@ -127,10 +169,6 @@ public class HUDUI : MonoBehaviour
         enemyCount.text = WaveManager.Instance.enemiesRemaining.ToString();
     }
 
-    //public void UpdateWaveNumber()
-    //{
-    //    waveNumber.text = WaveManagerDepreciated.Instance.WaveNumber.ToString();
-    //}
     #endregion
 
 }

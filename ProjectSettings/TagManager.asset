@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - ASMDammo
   - Trap
+  - FxTemporaire
+  - gasLeakVFX
   layers:
   - Default
   - TransparentFX
@@ -23,6 +25,8 @@ TagManager:
   - Props
   - Weapons
   - Walls
+  - PostProcessVol
+  - WarningSign
   - 
   - 
   - 
@@ -36,9 +40,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - PlayerOnlyCollision
   - OccludeLight
   m_SortingLayers:
   - name: Default

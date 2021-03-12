@@ -14,6 +14,7 @@ public class SMB_EnemyAttacking : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         self = animator.GetComponentInParent<Enemy_Grunt>();
+        self.ac.PlayAudioCue(self.enemyAttack);
         self.Agent.isStopped = true;
     }
 

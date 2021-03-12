@@ -9,7 +9,7 @@ public class TurretTrapProjectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ObjectPooler.Instance.InitializePool(hitEffect, 3);
     }
 
     // Update is called once per frame
@@ -22,7 +22,12 @@ public class TurretTrapProjectile : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
-            other.GetComponent<Actor_Enemy>().TakeDamage(30f); 
+            enemyTarget = other.GetComponent<Actor_Enemy>();
+            if (enemyTarget != null)
+            {
+                enemyTarget.TakeDamage(30f);
+                //ImpactSystem.Instance.DamageIndication(30f, Color.red, enemyTarget.transform.position, Quaternion.LookRotation(transform.position - enemyTarget.transform.position));
+            }
         }
         if (other.gameObject.tag != "Trap")
         {

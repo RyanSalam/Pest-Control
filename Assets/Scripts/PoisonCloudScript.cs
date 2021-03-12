@@ -15,7 +15,7 @@ public class PoisonCloudScript : MonoBehaviour
     float timer = 0;
 
     //Overlap-sphere variables
-    float radius = 30f;
+    float radius = 10f;
     LayerMask layerMask;
 
     //bool to see if we have hit something -> time to deploy poison

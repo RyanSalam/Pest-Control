@@ -97,6 +97,8 @@ public class Weapon_Charge : Weapon
 
     public override void PrimaryFire()
     {
+
+        Recoil();
         if (canFire == false) return;
 
         if (isCharging == false && !cooldownActive)
@@ -142,7 +144,7 @@ public class Weapon_Charge : Weapon
     public override void Release()
     {
         base.Release();
-
+        
         if (tempProjectile == null) return;
 
         isCanceled = false;

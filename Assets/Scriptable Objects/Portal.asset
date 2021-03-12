@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7cb710b6531164fbf51201c774544e, type: 3}
   m_Name: Portal
   m_EditorClassIdentifier: 
-  abilityName: Ability
-  abilityDesc: Description
+  abilityName: Portal
+  abilityDesc: It's pretty self-explanatory. Use it twice to place both portals.
   abilitySprite: {fileID: 21300000, guid: 532451042bf4d3645b3e2e49f78c1007, type: 3}
   lifetimeDuration: 20
   cooldownDuration: 15
@@ -27,6 +27,6 @@ MonoBehaviour:
     m_Bits: 1024
   obstacleMasks:
     serializedVersion: 2
-    m_Bits: 23040
+    m_Bits: 1073830400
   obstacleDetectionRange: 3
   verticalSearch: 1

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d9658d2c3c54dd47a6d2e10883834c8, type: 3}
   m_Name: PoisonCloud
   m_EditorClassIdentifier: 
-  energyCostPerFire: 50
+  energyCostPerFire: 100
   secondaryDamage: 0
+  altFireIcon: {fileID: 21300000, guid: ed9dcbfc8d8171e4ea1019d068188fbe, type: 3}
   projectilePrefab: {fileID: 6391247818688516985, guid: 188fadfcb133f2f438b846d2571201ee,
     type: 3}

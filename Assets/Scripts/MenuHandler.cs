@@ -87,11 +87,11 @@ public class MenuHandler : MonoBehaviour
         charDesc.text = c.c_desc;
         charProfile.sprite = c.c_profile;
         A1_image.sprite = c.A1_image;
-        A1_text.text = c.A1_text;
-        A1_name.text = c.A1_name;
+        A1_text.text = c.ab1.abilityDesc;
+        A1_name.text = c.ab1.abilityName;
         A2_image.sprite = c.A2_image;
-        A2_text.text = c.A2_text;
-        A2_name.text = c.A2_name;
+        A2_text.text = c.ab2.abilityDesc;
+        A2_name.text = c.ab2.abilityName;
         Cues.PlayAudioCue(c.CharacterChosen);
     }
 

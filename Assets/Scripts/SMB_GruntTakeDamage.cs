@@ -12,14 +12,15 @@ public class SMB_GruntTakeDamage : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         // Assign the enemy reference accordingly.
         thisEnemy = animator.GetComponentInParent<Actor_Enemy>();
-
-        // Ensure the Enemy is stopped as they search.
+        thisEnemy.ac.PlayAudioCue(thisEnemy.enemyHit);
+        // Ensure the Enemy is stopped as they react.
         thisEnemy.Agent.isStopped = true;
 
         // Reset the hits recieved.
-        //thisEnemy.hitsRecieved = 0;
+        thisEnemy.Anim.SetInteger("hitsRecieved", 0);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -28,9 +29,9 @@ public class SMB_GruntTakeDamage : StateMachineBehaviour
     //    
     //}
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        thisEnemy.Agent.isStopped = false;
+    }
 }

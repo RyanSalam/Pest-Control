@@ -554,6 +554,8 @@ GameObject:
   - component: {fileID: 3414804625668340200}
   - component: {fileID: 3414804625668340201}
   - component: {fileID: 3414804625668340202}
+  - component: {fileID: 308383581413862217}
+  - component: {fileID: -6503987919828991336}
   m_Layer: 9
   m_Name: P_droneV2
   m_TagString: Enemy
@@ -621,6 +623,11 @@ MonoBehaviour:
   _energyDrop: 10
   scanIntervals: 2
   movementSpeed: 3.5
+  ac: {fileID: 0}
+  portalClip: {fileID: 11400000, guid: 11f50e8e152759b40ab8252beb85692c, type: 2}
+  enemyHit: {fileID: 0}
+  enemyAttack: {fileID: 0}
+  enemyDeath: {fileID: 0}
   droneBombProjectile: {fileID: 8523800692139938874, guid: d4e157193736f454fa7d3cde9ad28751,
     type: 3}
   bombSpawnPoint: {fileID: 6316555152549702607}
@@ -630,6 +637,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16384
   droneLegs: {fileID: 2803846637370935330}
+  deathVFX: {fileID: 1840910365998424, guid: 9f423c73d6fd3e542a42b41623e81db1, type: 3}
 --- !u!195 &3414804625668340201
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -671,6 +679,40 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &308383581413862217
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3414804625668340203}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &-6503987919828991336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3414804625668340203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f4dcd5da0291c4b914bd20a115beb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioCue: {fileID: 0}
+  _playOnStart: 0
+  _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
+    type: 2}
+  _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
+    type: 2}
 --- !u!1 &3414804625832608051
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,15 +1016,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 563cbcf48da02fb4b879eaffed578992, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95c89443eefeec24b9bc8e0c7ffa9096, type: 3}
---- !u!4 &326105294977082240 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 95c89443eefeec24b9bc8e0c7ffa9096,
-    type: 3}
-  m_PrefabInstance: {fileID: 219610356979778667}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2803846637370935330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6492653693355307959, guid: 95c89443eefeec24b9bc8e0c7ffa9096,
+    type: 3}
+  m_PrefabInstance: {fileID: 219610356979778667}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &326105294977082240 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 95c89443eefeec24b9bc8e0c7ffa9096,
     type: 3}
   m_PrefabInstance: {fileID: 219610356979778667}
   m_PrefabAsset: {fileID: 0}

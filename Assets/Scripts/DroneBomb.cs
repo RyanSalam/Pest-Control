@@ -5,7 +5,7 @@ using UnityEngine;
 public class DroneBomb : MonoBehaviour
 {
     [SerializeField] LayerMask playerMask;
-    [SerializeField] int damage = 1;
+    [SerializeField] int damage = 50;
     [SerializeField] float radiusToPlayer = 5f;
     [SerializeField] GameObject explosionVFX;
   
@@ -20,8 +20,10 @@ public class DroneBomb : MonoBehaviour
         {
             foreach (Collider col in playerCollider)
             {
-                Actor_Player tempPlayer = col.gameObject.GetComponent<Actor_Player>();
-                tempPlayer.TakeDamage(damage * 10); //multiply by ten because our player now house 100 health, while trap max use is 10
+                Actor damageBody = col.gameObject.GetComponent<Actor>();
+
+                if (damageBody != null)
+                    damageBody.TakeDamage(damage ); //multiply by ten because our player now house 100 health, while trap max use is 10
             }
         }
        

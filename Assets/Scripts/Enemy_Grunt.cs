@@ -5,6 +5,12 @@ using UnityEngine;
 public class Enemy_Grunt : Actor_Enemy
 {
     Scanner<Actor_Player> playerScanner;
+    public bool hiveDictated;
+
+    public int hitsRecieved;
+    
+
+    
 
     [Range(0, 360)] public float detectionAngle;
 
@@ -12,14 +18,18 @@ public class Enemy_Grunt : Actor_Enemy
     {
         base.OnEnable();
         SetDestinationAroundTarget(CurrentDestination, AttackRange);
-        if(WaveManager.Instance.isBuildPhase == false)
+        Agent.speed = movementSpeed;
+        GetComponentInChildren<Enemy_AnimEvent>().OnEnable();
+        hitsRecieved = 0;
+
+        if (WaveManager.Instance.isBuildPhase == false)
             EnemyHiveMind.Instance.RegisterGrunt(this);
     }
 
     protected override void Start()
     {
         base.Start();
-
+        
         // Initialising the player scanner properly passing relevant variables
         playerScanner = new Scanner<Actor_Player>(transform);
         playerScanner.targetMask = _playerLayer;
@@ -40,17 +50,33 @@ public class Enemy_Grunt : Actor_Enemy
 
         if (Vector3.Distance(transform.position, currentTarget.position) <= _attackRange * 1.5f)
         {
-            Vector3 dir = currentTarget.position - transform.position;
-            dir.y = 0;
+            //Vector3 dir = currentTarget.position - transform.position;
+            //dir.y = 0;
+            //dir = dir.normalized;
+            //Quaternion rot = Quaternion.LookRotation(dir);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, rot, -0.6f);
 
-            Quaternion rot = Quaternion.LookRotation(dir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot, 0.6f);
+            // When attacking core
+            if (currentTarget == Core.transform)
+            {
+                //Debug.Log("Attacking CORE");
+                transform.LookAt(currentTarget);
+            }
+            // When attacking player
+            else if (Vector3.Distance(transform.position, currentTarget.position) <= _attackRange)
+            {
+                //Debug.Log("Attacking player");
+                Vector3 targetAim = new Vector3(currentTarget.position.x, currentTarget.position.y - 1.0f, currentTarget.position.z);
+                transform.LookAt(targetAim);
+            }
+                
         }
-
         else
         {
-            Quaternion rot = Quaternion.LookRotation(Agent.velocity);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot, 0.6f);
+            //Quaternion rot = Quaternion.LookRotation(Agent.velocity);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, rot, 0.6f);
+            Quaternion rot = Quaternion.LookRotation(Agent.velocity.normalized);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, -0.6f);
         }
     }
 
@@ -71,7 +97,7 @@ public class Enemy_Grunt : Actor_Enemy
     protected override void Death()
     {
         base.Death();
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     public override void OnPathCompleted()
@@ -82,6 +108,13 @@ public class Enemy_Grunt : Actor_Enemy
         //{
         //    Core.TakeDamage(Damage); 
         //}
+    }
+
+    public override void TakeDamage(DamageData data)
+    {
+        base.TakeDamage(data);
+        hitsRecieved++;
+        Anim.SetInteger("hitsRecieved", hitsRecieved);
     }
 
     //private void OnDrawGizmos()

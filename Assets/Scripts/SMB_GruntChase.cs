@@ -36,11 +36,10 @@ public class SMB_GruntChase : StateMachineBehaviour
 
     private void HandleChase()
     {
-        if (Vector3.Distance(self.transform.position, self.CurrentTarget.position) >= loseAggroDistance)
+        if (Vector3.Distance(self.transform.position, self.CurrentTarget.position) >= loseAggroDistance && self.GetComponent<Enemy_Grunt>().hiveDictated == false)
         {
-            //self.SwitchTarget(self.Core.transform);
+            self.SwitchTarget(LevelManager.Instance.Core.transform);
         }
-
         else
         {
             Vector3 destination;
