@@ -628,6 +628,8 @@ MonoBehaviour:
   enemyHit: {fileID: 0}
   enemyAttack: {fileID: 0}
   enemyDeath: {fileID: 0}
+  energyDrop: {fileID: 7083525136995877786, guid: fc7b3ecbb1285fd41ac87c408bb837c9,
+    type: 3}
   droneBombProjectile: {fileID: 8523800692139938874, guid: d4e157193736f454fa7d3cde9ad28751,
     type: 3}
   bombSpawnPoint: {fileID: 6316555152549702607}

@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7083525136741306603}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.048, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.255, y: 2.255, z: 2.255}
   m_Children: []
   m_Father: {fileID: 7083525136995877785}
@@ -40,7 +40,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7083525136741306603}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 0e2160465b5aca74b9f58ddc5a5dd37f, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 6817218ae923d8c41a0e0e5a085859b4, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -143,7 +143,6 @@ GameObject:
   - component: {fileID: 7083525136872750465}
   - component: {fileID: 7083525136872750494}
   - component: {fileID: 7083525136872750495}
-  - component: {fileID: 7083525136872750464}
   m_Layer: 0
   m_Name: EnergyDrop
   m_TagString: Untagged
@@ -159,7 +158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7083525136872750466}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.496, z: 0}
+  m_LocalPosition: {x: 0, y: 0.456, z: 0}
   m_LocalScale: {x: 0.20273314, y: 0.20273314, z: 0.20273314}
   m_Children: []
   m_Father: {fileID: 7083525136995877785}
@@ -212,19 +211,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &7083525136872750464
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7083525136872750466}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7083525136995877786
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,6 +220,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7083525136995877785}
+  - component: {fileID: 7068664093986384976}
+  - component: {fileID: 7303442221067503789}
   m_Layer: 0
   m_Name: P_EnergyDrop
   m_TagString: Untagged
@@ -249,11 +237,37 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7083525136995877786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5, y: 0, z: 0}
-  m_LocalScale: {x: 1.561, y: 1.561, z: 1.561}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 7083525136741306602}
   - {fileID: 7083525136872750465}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &7068664093986384976
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083525136995877786}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!114 &7303442221067503789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083525136995877786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e898b50cfe9d4f4fbd650d12c632abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 5

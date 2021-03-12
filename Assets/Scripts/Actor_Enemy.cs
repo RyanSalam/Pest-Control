@@ -43,6 +43,7 @@ public abstract class Actor_Enemy : Actor
     public AudioCueSO enemyAttack;
     public AudioCueSO enemyDeath;
 
+    [SerializeField] private GameObject energyDrop;
 
     #region Getters
     // Agent getter for out of class access
@@ -139,6 +140,8 @@ public abstract class Actor_Enemy : Actor
 
         m_player = LevelManager.Instance.Player;
         m_core = LevelManager.Instance.Core;
+
+        ObjectPooler.Instance.InitializePool(energyDrop, 25);
     }
 
     protected virtual void Update()
@@ -204,5 +207,17 @@ public abstract class Actor_Enemy : Actor
             m_agent.SetDestination(result);
             return;
         }
+    }
+
+    protected override void Death()
+    {
+        base.Death();
+
+        int rand = Random.Range(0, 100);
+
+        if (rand <= 60)
+        {
+            ObjectPooler.Instance.GetFromPool(energyDrop, transform.position, transform.rotation);
+        }        
     }
 }

@@ -121,7 +121,10 @@ MonoBehaviour:
   enemyHit: {fileID: 11400000, guid: df32668011ad55344a2465bf4efaaffb, type: 2}
   enemyAttack: {fileID: 11400000, guid: 69b2935a41bcb9c43a9e6a629920d61c, type: 2}
   enemyDeath: {fileID: 11400000, guid: 303e47fb041383248836acabda8d1705, type: 2}
+  energyDrop: {fileID: 7083525136995877786, guid: fc7b3ecbb1285fd41ac87c408bb837c9,
+    type: 3}
   hiveDictated: 0
+  hitsRecieved: 0
   detectionAngle: 90
 --- !u!54 &-1733453893914788994
 Rigidbody:
