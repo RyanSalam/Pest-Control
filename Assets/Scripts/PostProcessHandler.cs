@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using DG.Tweening;
 
 public class PostProcessHandler : MonoBehaviour
 {
@@ -10,5 +11,10 @@ public class PostProcessHandler : MonoBehaviour
     public void SetVolumeWeight(float weight)
     {
         volume.weight = weight;
+    }
+
+    public Tween SetVolumeWeight(float start, float end, float duration)
+    {
+        return DOVirtual.Float(start, end, duration, SetVolumeWeight);
     }
 }
