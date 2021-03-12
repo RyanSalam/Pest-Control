@@ -28,7 +28,7 @@ public abstract class Ability : ScriptableObject
         cooldownTimer = new Timer(cooldownDuration, false);
         //lifetimeTimer.OnTimerEnd += OnCooldownEnd;
         lifetimeTimer.OnTimerEnd += OnLifetimeEnd;
-        lifetimeTimer.OnTimerEnd += () => cooldownTimer.PlayFromStart();
+        lifetimeTimer.OnTimerEnd += cooldownTimer.PlayFromStart;
         cooldownTimer.OnTimerEnd += OnCooldownEnd;
 
         isAbilityOnCoolDown = false;

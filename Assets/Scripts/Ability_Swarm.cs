@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 [CreateAssetMenu(fileName = "SwarmAbility", menuName = "Abilities/Swarm Ability")]
 public class Ability_Swarm : Ability
@@ -12,67 +13,65 @@ public class Ability_Swarm : Ability
     [SerializeField] public float nanoDroneLaunchDelay = 0.1f;
     [SerializeField] public float nanoDroneMovementSpeed = 1f;
     [SerializeField] public float nanoDroneRotationSpeed = 1f;
-    bool firing = false;
+    bool isExecuting = false;
 
 
     //[SerializeField] Text temp;
 
     public int currentDrones;
 
-    private Actor_Player pA;
+    private Actor_Player player;
 
     public GameObject swarmMaster;
 
-    GameObject swarmController;
+    SwarmSpawn swarmController;
 
     public override void Initialize(GameObject abilitySource)
     {
         base.Initialize(abilitySource);
-        pA = abilitySource.GetComponent<Actor_Player>();
+        player = abilitySource.GetComponent<Actor_Player>();
         currentDrones = maxNanoDrones;
-
-        //temp = GameObject.FindGameObjectWithTag("aassdd").GetComponent<Text>();
-
-        //temp.text = currentDrones.ToString();
+        swarmController = Instantiate(swarmMaster, player.AbilitySpawnPoint.position, player.AbilitySpawnPoint.rotation).GetComponent<SwarmSpawn>();
+        swarmController.transform.SetParent(player.AbilitySpawnPoint);
     }
 
     public override void Execute()
     {
-        base.Execute();
+        swarmController.gameObject.SetActive(true);
+        isExecuting = true;
+    }
 
-        swarmController = Instantiate(swarmMaster, pA.AbilitySpawnPoint.position, pA.AbilitySpawnPoint.rotation);
-        firing = true;
+    public override void HandleInput(InputAction.CallbackContext context)
+    {
+        if (!CanExecute()) return;
+
+        if (context.action.name == AbilityButton)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                Execute();
+            }
+
+            else if (context.phase == InputActionPhase.Canceled && swarmController.gameObject.activeSelf)
+            {
+                swarmController.ExitState();
+                isExecuting = false;
+                isAbilityOnCoolDown = true;
+                cooldownTimer.PlayFromStart();
+            }
+        }
     }
 
     public override bool CanExecute()
     {
-
-        return swarmController == null && !isAbilityOnCoolDown;
+        return base.CanExecute();
     }
 
     public override void OnCooldownEnd()
     {
-        if (!firing)
-        {
-            if (currentDrones < maxNanoDrones)
-            {
-                currentDrones++;
-                if (currentDrones < maxNanoDrones) cooldownTimer.PlayFromStart();
-            }
-            //temp.text = currentDrones.ToString();
-            isAbilityOnCoolDown = false;
-        }
+        isAbilityOnCoolDown = false;
     }
-    public void OnSwarmEnd()
-    {
-        firing = false;
-        if (currentDrones == 0)
-        {
-            Debug.Log("Cooldown start");
-            isAbilityOnCoolDown = true;
-        }
-        Destroy(swarmController);
-    }
+
     public override void OnLifetimeEnd()
     {
         //cooldownTimer.PlayFromStart();

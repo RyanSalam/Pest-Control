@@ -8,4 +8,10 @@ public static class ExtensionMethods
     {
         return value >= minNumber && value <= maxNumber;
     }
+
+    public static Vector3 AddY(this Vector3 value, float yNumber)
+    {
+        value.y += yNumber;
+        return value;
+    }
 }
