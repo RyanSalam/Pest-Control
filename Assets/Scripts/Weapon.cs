@@ -403,6 +403,11 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         playOverHeatVFX();
 
     }
+
+    public void PlayAnimation(string animation)
+    {
+        animator.SetTrigger(animation);
+    }
 }
 
 
