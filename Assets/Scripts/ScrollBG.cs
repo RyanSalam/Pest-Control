@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class ScrollBG : MonoBehaviour
 {
-
-    public float scrollSpeed = -5f;
+    [SerializeField] float scrollSpeed = 5f;
     Vector2 startPos;
+    Material myMat;
+
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        startPos = transform.position;
+        myMat = GetComponent<Renderer>().material;
+        startPos = new Vector2(scrollSpeed, 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        float newPos = Mathf.Repeat(Time.time * scrollSpeed, 2000f);
-        transform.position =  Vector2.right * newPos + startPos;
+        myMat.mainTextureOffset += startPos * Time.deltaTime;    
     }
 }
