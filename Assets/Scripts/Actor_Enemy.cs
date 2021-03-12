@@ -120,6 +120,7 @@ public abstract class Actor_Enemy : Actor
         m_agent.speed = movementSpeed;
 
         OnDeath += () => LevelManager.Instance.CurrentEnergy += _energyDrop;
+        OnDeath += WaveManager.Instance.UpdateRemEnemies;
 
         _intervalTimer = new Timer(scanIntervals);
         _intervalTimer.OnTimerEnd += OnBtwnIntervals;
