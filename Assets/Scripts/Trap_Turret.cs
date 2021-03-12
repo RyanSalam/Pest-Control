@@ -134,6 +134,20 @@ public class Trap_Turret : Trap
 
             Vector3 pos = col.transform.position - transform.position;
             pos -= transform.up * Vector3.Dot(transform.up, pos);
+            
+            if (hitEffect) ObjectPooler.Instance.GetFromPool(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
+            
+            if (enemyTarget != null)
+            {
+                enemyTarget.TakeDamage(damage);
+                ImpactSystem.Instance.DamageIndication(damage, trapColor, enemyTarget.transform.position,
+                   Quaternion.LookRotation(enemyTarget.transform.position - LevelManager.Instance.Player.transform.position));
+            }
+            //Rigidbody proj = Instantiate(projectile, bulletSpawn.position, bulletSpawn.rotation);
+            //proj.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.Impulse);
+            //Instantiate(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
+            
+            //enemyTarget.GetComponent<Actor_Enemy>();
 
             if (Vector3.Angle(forward, pos) > detectionAngle / 2)
             {

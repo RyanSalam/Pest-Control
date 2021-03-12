@@ -152,6 +152,7 @@ MonoBehaviour:
   trapDamage: 50
   maxUses: 10
   buildDuration: 1
+  trapColor: {r: 1, g: 0, b: 0.6308284, a: 1}
   particleEffectObjects: {fileID: 6237411802662377187}
 --- !u!1001 &75484439110603352
 PrefabInstance:

@@ -201,6 +201,7 @@ MonoBehaviour:
   trapDamage: 3
   maxUses: 10
   buildDuration: 3
+  trapColor: {r: 1, g: 0, b: 0, a: 0}
   maxRange: 7
   detectionAngle: 180
   bulletSpawn: {fileID: 2565074226590723098}

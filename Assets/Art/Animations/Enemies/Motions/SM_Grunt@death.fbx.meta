@@ -8,7 +8,7 @@ ModelImporter:
     second: death
   externalObjects: {}
   materials:
-    materialImportMode: 0
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -39,7 +39,7 @@ ModelImporter:
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 70
+      lastFrame: 53
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -59,7 +59,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.33414832
+      - time: 0.3357143
         functionName: Despawn
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -125,12 +125,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 79ad81cedceeb064fa71f94c914745a5,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 2
+  avatarSetup: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

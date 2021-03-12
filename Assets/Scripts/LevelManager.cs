@@ -321,6 +321,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void OnQuitButton()
     {
+        Time.timeScale = 1;
         GameManager.Instance.ReturnToMenu();
     }
 
