@@ -1,12 +1,10 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Prefabs/Environment Prefabs/Track Lighting 3.prefab.meta
+guid: 59b2eeb55cc99124486a57cef7ae4475
+HEAD:Assets/Prefabs/Environment Prefabs/Track Lighting 3.prefab.meta
 guid: c7a07d61c0292df46ad49a725051b638
 PrefabImporter:
-=======
-guid: e2624f48e56d761458f3f52aef74069d
 folderAsset: yes
 DefaultImporter:
->>>>>>> Development:Assets/Art/Animations/VFX.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 8481842090681563893}
   - component: {fileID: 5931655468636638783}
   - component: {fileID: 2469117699246754137}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SM_Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4763213994142528848
 Transform:
@@ -93,5 +93,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.69136447, y: 0.749279, z: 0.14350152}
-  m_Center: {x: -0.007326007, y: 0.0665779, z: 0.7432563}
+  m_Size: {x: 0.69136447, y: 0.749279, z: 0.05260551}
+  m_Center: {x: -0.007326007, y: 0.06657791, z: 0.74830616}
