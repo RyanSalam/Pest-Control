@@ -46,7 +46,7 @@ public class Actor_Player : Actor
     [SerializeField] private Ability _abilityTwo;
 
     [SerializeField] protected Transform _abilitySpawnPoint;
-    [SerializeField] protected Transform _playerArms;
+    [SerializeField] protected Animator _playerArms;
     public Transform AbilitySpawnPoint { get { return _abilitySpawnPoint; } }
     public Ability AbilityOne { get { return _abilityOne; } set { _abilityOne = value; } }
     public Ability AbilityTwo { get { return _abilityTwo; } set { _abilityTwo = value; } }
@@ -60,7 +60,7 @@ public class Actor_Player : Actor
     public Transform WeaponHolder { get { return _weaponHolder; } }
     public Transform TrapHolder { get { return _trapHolder; } }
     public IEquippable CurrentEquipped { get { return _currentEquiped; } }
-
+    public Animator PlayerArms { get { return _playerArms; } }
     //Audio Params
 
     Timer invulnerableTimer;
