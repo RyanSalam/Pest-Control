@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class TrapPlacement : MonoBehaviour, IEquippable
 {
@@ -92,6 +93,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         //setting the trap GameObject to spawn on raycast's position IF its on whatIsbuildable
         if (CanPlace)
         {
+            player.PlayerArms.SetTrigger("Fire");
             GameObject tempTrap = Instantiate(trapToSpawn, trapModel.position, transform.rotation); //instantiating trap 
             //ACue.PlayAudioCue();
             LevelManager.Instance.CurrentEnergy -= trapPrice;
@@ -115,6 +117,10 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         transform.SetParent(null);
         gameObject.SetActive(true); //setting trap to activate when equiping 
 
+        player.PlayerArms.gameObject.SetActive(true);
+        player.PlayerArms.transform.DOLocalRotate(Vector3.zero, 0.3f).From(Vector3.right * -90).OnComplete(()
+            => player.PlayerArms.SetTrigger("Equip"));
+
         // Registering inputs when we equip this.
         LevelManager.Instance.Player.playerInputs.onActionTriggered += HandleInput;
     }
@@ -122,7 +128,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     public void Unequip()
     {
         gameObject.SetActive(false); //setting trap to deActivate when unEquipping 
-
+        player.PlayerArms.gameObject.SetActive(false);
         // Deregistering inputs when we unequip this.
         LevelManager.Instance.Player.playerInputs.onActionTriggered -= HandleInput;
     }
