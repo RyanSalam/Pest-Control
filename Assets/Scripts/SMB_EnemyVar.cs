@@ -2,20 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SMB_EnemyDying : StateMachineBehaviour
+public enum VarType
 {
-    #region Variables
-    // Reference to the enemy script on this enemy.
-    Enemy_Grunt thisEnemy;
-    #endregion
+    Death,
+    Attack,
+    Stun
+}
 
-     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+public class SMB_EnemyVar : StateMachineBehaviour
+{
+    public int variations;
+    public VarType type;
+    
+
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        thisEnemy = animator.GetComponentInParent<Enemy_Grunt>();
-        thisEnemy.ac.PlayAudioCue(thisEnemy.enemyDeath);
-        thisEnemy.Agent.isStopped = true;
-        thisEnemy.Agent.speed = 0f;
+        switch (type)
+        {
+            case VarType.Death:
+                animator.SetFloat("DeathVar", (float)Mathf.RoundToInt(Random.Range(0, variations)));
+                return;
+
+            case VarType.Attack:
+                animator.SetFloat("AttackVar", (float)Mathf.RoundToInt(Random.Range(0, variations)));
+                return;
+
+            case VarType.Stun:
+                animator.SetFloat("StunVar", (float)Mathf.RoundToInt(Random.Range(0, variations)));
+                return;
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -27,7 +43,7 @@ public class SMB_EnemyDying : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
-        
+    //    
     //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
