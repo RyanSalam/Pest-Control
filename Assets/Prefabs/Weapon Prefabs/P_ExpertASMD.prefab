@@ -97,12 +97,15 @@ MonoBehaviour:
   - {fileID: 1720623246950047714}
   - {fileID: 7355557941695712613}
   - {fileID: 8217699076705905641}
+  - {fileID: 678255273136742565}
+  overheatSteamVFX: []
   lastFired: 0
   canFire: 1
   isFiring: 0
   weaponAttachment: {fileID: 11400000, guid: e84381d79513e7047924a3b38efde32b, type: 2}
   firePoint: {fileID: 7856034215913622693}
-  damageIndicatorObj: {fileID: 0}
+  damageIndicatorObj: {fileID: 4527500523508540015, guid: c271527d08d2e6c4597aec6a2592ee56,
+    type: 3}
   recoilPosition: {fileID: 6757089558312982428}
   rotationPoint: {fileID: 4295073277899364731}
   positionalRecoilSpeed: 8
@@ -336,6 +339,12 @@ PrefabInstance:
 --- !u!4 &2561657956255971679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2519280058086975203, guid: 3ad1679f9bf260548a27a0d7222f18e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 106557570357878716}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &678255273136742565 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 581866056676982553, guid: 3ad1679f9bf260548a27a0d7222f18e2,
     type: 3}
   m_PrefabInstance: {fileID: 106557570357878716}
   m_PrefabAsset: {fileID: 0}

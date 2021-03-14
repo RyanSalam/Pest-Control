@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class Weapon_Hitscan : Weapon
 {
+
     //recoil variables
     /*[Header("REference Points:")]
     [SerializeField] protected Transform recoilPosition;
@@ -159,7 +160,7 @@ public class Weapon_Hitscan : Weapon
                 //}
             }
 
-            ImpactSystem.Instance.HandleImpact(hit.transform.gameObject, hit.point, Quaternion.LookRotation(hit.normal));
+            ImpactSystem.Instance.HandleImpact(hit.transform.gameObject, hit.point, Quaternion.LookRotation(hit.normal), weaponColour);
 
             //instantiating our impact particles for now - hope for an object pool down the line
             if (ImpactParticle != null)

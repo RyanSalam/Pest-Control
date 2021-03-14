@@ -23,7 +23,7 @@ public class DroneBomb : MonoBehaviour
                 Actor damageBody = col.gameObject.GetComponent<Actor>();
 
                 if (damageBody != null)
-                    damageBody.TakeDamage(damage ); //multiply by ten because our player now house 100 health, while trap max use is 10
+                    damageBody.TakeDamage(damage);
             }
         }
        
