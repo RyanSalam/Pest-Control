@@ -7,7 +7,7 @@ using System;
 public class EnergyDrop : MonoBehaviour
 {
     [SerializeField] private float lifeTime = 10.0f;
-    [SerializeField] private int energyValue = 30;
+    [SerializeField] private int energyValue = 10;
     private Timer lifeTimer;
 
     private void Awake()
