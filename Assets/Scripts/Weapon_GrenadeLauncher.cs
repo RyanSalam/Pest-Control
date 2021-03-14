@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Weapon_GrenadeLauncher : Weapon
 {
@@ -16,6 +17,7 @@ public class Weapon_GrenadeLauncher : Weapon
     bool phase1 = false;
     bool phase2 = false;
     bool phase3 = false;
+
 
     //phases: 
     //1. shoot grenade x distance in shootPhase1();
@@ -85,6 +87,7 @@ public class Weapon_GrenadeLauncher : Weapon
 
 
             base.PrimaryFire();
+            playerCam.DOShakePosition(.5f, 1f, 10, 100f);
         }
 
 
@@ -144,4 +147,5 @@ public class Weapon_GrenadeLauncher : Weapon
         temp2.AddForce(temp2.transform.forward * (projectileForce / 2), ForceMode.Impulse);
 
     }
+    
 }
