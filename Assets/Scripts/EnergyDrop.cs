@@ -7,9 +7,10 @@ using System;
 public class EnergyDrop : MonoBehaviour
 {
     [SerializeField] private float lifeTime = 10.0f;
+    [SerializeField] private int energyValue = 30;
     private Timer lifeTimer;
 
-    private void Start()
+    private void Awake()
     {
         lifeTimer = new Timer(lifeTime);
         lifeTimer.OnTimerEnd += Despawn;
@@ -35,7 +36,7 @@ public class EnergyDrop : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            LevelManager.Instance.CurrentEnergy += 30;
+            LevelManager.Instance.CurrentEnergy += energyValue;
             gameObject.SetActive(false);
         }
     }
