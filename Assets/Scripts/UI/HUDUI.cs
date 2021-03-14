@@ -29,10 +29,9 @@ public class HUDUI : MonoBehaviour
     [SerializeField] GameObject enemyInfoPanel;
     [SerializeField] GameObject phaseTimer;
     [SerializeField] Image phaseTimerClock;
-    //[SerializeField] TMP_Text phaseTimerCount;
     [SerializeField] GameObject waveNumberIndicator;
     [SerializeField] TMP_Text waveNumberText;
-    [SerializeField] GameObject skipBuildPhaseInfo;
+    [SerializeField] GameObject buildPhaseInfo;
     public float phaseTimerProgress;
 
     [SerializeField] Sprite defaultCoreHealthFill;
@@ -91,9 +90,6 @@ public class HUDUI : MonoBehaviour
     {
         coreFill.sprite = damagedCoreHealthFill;
         coreIcon.color = damagedCoreIconColor;
-        //coreFill.gameObject.transform.localScale = Vector3.one * 1.2f;
-        //coreBase.transform.localScale = Vector3.one * 1.2f;
-        //coreIcon.transform.localScale = Vector3.one * 1.2f;
 
         yield return new WaitForSeconds(1.2f);
 
@@ -128,13 +124,13 @@ public class HUDUI : MonoBehaviour
         enemyInfoPanel.SetActive(false);
         // Hide coreInfo Panel until the Defence Phase
         coreInfoPanel.SetActive(false);
+        // Display Build Phase text
+        buildPhaseInfo.SetActive(true);
 
         yield return new WaitForSeconds(5f);
 
         // Hide wave info panel;
         WaveInfoPanel.SetActive(false);
-        // Hide skip build phase text
-        skipBuildPhaseInfo.SetActive(false);
     }
 
     public IEnumerator DefensePhase()
@@ -157,6 +153,8 @@ public class HUDUI : MonoBehaviour
         waveNumberIndicator.SetActive(true);
         // Update wave number text
         waveNumberText.text = (WaveManager.Instance.waveIndex + 1).ToString();
+        // Hide build phase text
+        buildPhaseInfo.SetActive(false);
 
         yield return new WaitForSeconds(5f);
 
