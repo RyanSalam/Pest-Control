@@ -173,6 +173,7 @@ public class Enemy_DroneV2 : Actor_Enemy
     {
         agent.enabled = true;
         rb.isKinematic = true;
+        isDying = false;
         base.OnEnable();
     }
     public Transform searchForTarget()
