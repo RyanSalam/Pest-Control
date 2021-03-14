@@ -9792,6 +9792,8 @@ MonoBehaviour:
   - {fileID: 2888580984008250982}
   - {fileID: 6476911125243725025}
   - {fileID: 5619803382213665389}
+  - {fileID: 3935874701580560673}
+  overheatSteamVFX: []
   lastFired: 0
   canFire: 1
   isFiring: 0
@@ -15387,6 +15389,12 @@ PrefabInstance:
 --- !u!4 &2052087773255348443 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2519280058086975203, guid: 3ad1679f9bf260548a27a0d7222f18e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4507044570763187768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3935874701580560673 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 581866056676982553, guid: 3ad1679f9bf260548a27a0d7222f18e2,
     type: 3}
   m_PrefabInstance: {fileID: 4507044570763187768}
   m_PrefabAsset: {fileID: 0}

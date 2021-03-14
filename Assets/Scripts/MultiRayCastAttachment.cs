@@ -82,7 +82,7 @@ public class MultiRayCastAttachment : AltFireAttachment
                     Destroy(impactVFX, 0.15f);
                 }
 
-                ImpactSystem.Instance.HandleImpact(hit.transform.gameObject, hit.point, Quaternion.LookRotation(hit.normal));
+                ImpactSystem.Instance.HandleImpact(hit.transform.gameObject, hit.point, Quaternion.LookRotation(hit.normal), Color.blue);
 
             }
         }

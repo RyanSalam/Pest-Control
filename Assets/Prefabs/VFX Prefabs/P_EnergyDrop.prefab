@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 7083525136872750465}
   - component: {fileID: 7083525136872750494}
   - component: {fileID: 7083525136872750495}
+  - component: {fileID: 935809801585625643}
   m_Layer: 0
   m_Name: EnergyDrop
   m_TagString: Untagged
@@ -211,6 +212,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &935809801585625643
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083525136872750466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 2.98, z: 0.1}
+  m_Center: {x: 0, y: -1.34, z: 0.0000038146973}
 --- !u!1 &7083525136995877786
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,6 +236,7 @@ GameObject:
   - component: {fileID: 7083525136995877785}
   - component: {fileID: 7068664093986384976}
   - component: {fileID: 7303442221067503789}
+  - component: {fileID: 8705859997950318012}
   m_Layer: 0
   m_Name: P_EnergyDrop
   m_TagString: Untagged
@@ -271,3 +286,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 5
+--- !u!54 &8705859997950318012
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083525136995877786}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0

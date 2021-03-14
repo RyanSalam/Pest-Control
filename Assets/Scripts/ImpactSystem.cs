@@ -48,7 +48,7 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
 
    
 
-    public void HandleImpact(GameObject targetHit, Vector3 hitPoint, Quaternion hitRotation)
+    public void HandleImpact(GameObject targetHit, Vector3 hitPoint, Quaternion hitRotation, Color weaponColour)
     {
         //MeshRenderer myParentMeshRenderer = targetHit.GetComponent<MeshRenderer>();
 
@@ -79,11 +79,17 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
         else
             impactSettings = defaultSettings;
 
-
-        ObjectPooler.Instance.GetFromPool(impactSettings.decalToSpawn, hitPoint, hitRotation).transform.SetParent(targetHit.transform);
+        //if (impactSettings.decalToSpawn != null)
+        //{
+        //    MaterialHandler.materialColorChanger(impactSettings.decalToSpawn.transform.GetChild(0).gameObject, weaponColour, "_EmissionColor");
+        //}
+        
+        //ObjectPooler.Instance.GetFromPool(impactSettings.decalToSpawn, hitPoint, hitRotation).transform.SetParent(targetHit.transform); //if we want to child the decals this is the way
+        
+        ObjectPooler.Instance.GetFromPool(impactSettings.decalToSpawn, hitPoint, hitRotation);
         ObjectPooler.Instance.GetFromPool(impactSettings.particleToSpawn, hitPoint, hitRotation);
         
-        Debug.Log(impactSettings.audioToPlay.name);
+        //Debug.Log(impactSettings.audioToPlay.name);
         ac.PlayAudioCue(impactSettings.audioToPlay, 100);
         
     }

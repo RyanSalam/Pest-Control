@@ -21,6 +21,8 @@ public static class MaterialHandler
         //getting the objects renderer -> material
         Material existingMaterial = gameObject.GetComponent<Renderer>().material;
 
+        //Debug.Log("Changing color on:" + gameObject.name + " to: " + color.ToString());
+        
         if (existingMaterial != null) //we will only change the material if it exists in the first place
         {  
             //set our materials colour to the new desired one

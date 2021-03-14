@@ -26,10 +26,9 @@ public class ExpertASMD_Orb : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //explosionss???
-        if (other.gameObject.tag == "ASMDammo")
+        //if (other.gameObject.tag == "ASMDammo")
+        if (other.transform.gameObject.layer != enemyMask || other.gameObject.tag == "ASMDammo") 
         {
-
-           
             if (explosionEffect)
             {
                 GameObject tempVFX = explosionEffect;
