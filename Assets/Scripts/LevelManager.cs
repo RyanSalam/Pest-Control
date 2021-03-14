@@ -135,8 +135,8 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         // Set the starting energy value here -> 250 
         CurrentEnergy = 250;
-        // Set the initial waveEnergyReward -> 100
-        waveEnergyReward = 100;
+        // Set the initial waveEnergyReward -> 50
+        waveEnergyReward = 50;
     }
 
     private void Start()

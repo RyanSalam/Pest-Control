@@ -215,7 +215,7 @@ public abstract class Actor_Enemy : Actor
 
         int rand = Random.Range(0, 100);
 
-        if (rand <= 60)
+        if (rand <= 55)
         {
             ObjectPooler.Instance.GetFromPool(energyDrop, transform.position, transform.rotation);
         }        

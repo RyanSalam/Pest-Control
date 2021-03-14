@@ -35,7 +35,7 @@ public class EnergyDrop : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            LevelManager.Instance.CurrentEnergy += 30;
+            LevelManager.Instance.CurrentEnergy += 10;
             gameObject.SetActive(false);
         }
     }
