@@ -46,6 +46,7 @@ public class Trap_Turret : Trap
         startingRotVert = turretVerHinge.rotation;
         rateOfFire = (float)60 / RoundsPerMinute;
         ObjectPooler.Instance.InitializePool(hitEffect, 3);
+        Anim.SetBool("isIdle", true); 
     }
 
     // Update is called once per frame
@@ -83,6 +84,8 @@ public class Trap_Turret : Trap
             return;
         }
         base.Activate();
+        Anim.SetBool("isIdle", false);
+        Anim.SetBool("isAttacking", true);
     }
     private void FindClosestEnemy()
     {
@@ -121,7 +124,6 @@ public class Trap_Turret : Trap
         if (hitEffect) ObjectPooler.Instance.GetFromPool(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
         enemyTarget.GetComponent<Actor_Enemy>().TakeDamage(damage);
         muzzleFlash.Play();
-
     }
     Actor_Enemy TurretDetection()
     {
