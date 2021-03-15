@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.Video;
 
 public class MenuHandler : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class MenuHandler : MonoBehaviour
     public GameObject levelStartButton;
     public TMP_Text loadingText;
     public TMP_Text loadPercentage;
+    public VideoPlayer videoPlayer;
 
     [Header("Character Panel")]
     [SerializeField] TMP_Text charName;

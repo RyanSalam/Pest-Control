@@ -2014,7 +2014,6 @@ MonoBehaviour:
   - rig: {fileID: 0}
     active: 1
   m_Effectors: []
---- !u!114 &1575827048152331612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2027,7 +2026,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapParent: {fileID: 7174932915223360148}
---- !u!1 &5076650341606015580
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
