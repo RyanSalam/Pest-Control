@@ -308,6 +308,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         {
             LevelManager.Instance.CurrentEnergy -= weaponAttachment.energyCostPerFire;
             weaponAttachment.AltShoot();
+            animator.SetTrigger("SecondaryFire");
         }
     }
 
