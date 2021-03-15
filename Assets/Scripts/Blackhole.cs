@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Blackhole : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class Blackhole : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //Applies force to the projectile in an arc
         rb.AddForce(transform.forward * launchForwardForce + Vector3.up * launchUpWardForce, ForceMode.Impulse);
+
+        transform.DOScale(Vector3.one * 5, expandTime).From(Vector3.zero);
     }
 
    

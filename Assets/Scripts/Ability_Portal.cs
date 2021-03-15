@@ -68,6 +68,8 @@ public class Ability_Portal : Ability
             portalList[portalCount].transform.rotation = pA.AbilitySpawnPoint.rotation;
             portalList[portalCount].gameObject.SetActive(true);
             portalCount++;
+            player.CurrentEquipped.GetAnimator().SetTrigger("Ability");
+            player.CurrentEquipped.GetAnimator().SetInteger("AbilityIndex", AbilityIndex);
         }
         
         if (portalCount == portalList.Count)

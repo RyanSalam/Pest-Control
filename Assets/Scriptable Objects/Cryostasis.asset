@@ -21,4 +21,5 @@ MonoBehaviour:
   cooldownDuration: 30
   AbilityButton: Ability One
   isAbilityOnCoolDown: 1
+  AbilityIndex: 1
   triggerName: Cryostasis

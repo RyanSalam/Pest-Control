@@ -165,7 +165,7 @@ MonoBehaviour:
   areaOfEffect: 8
   pullStrength: 5
   TargetRadius: 7
-  expandTime: 0.8
+  expandTime: 1.5
 --- !u!54 &6633013781978673459
 Rigidbody:
   m_ObjectHideFlags: 0
