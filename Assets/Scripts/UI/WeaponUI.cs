@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WeaponUI : MonoBehaviour
 {
     [SerializeField] Image heatBar;
-    [SerializeField] Image crosshair;
+    [SerializeField] public Image crosshair;
     [SerializeField] Image hitmarkerImage;
     [SerializeField] float hitmarkerTime;
 
@@ -29,10 +29,10 @@ public class WeaponUI : MonoBehaviour
     }
 
     // Crosshair
-    public void CrosshairSpread(Vector2 spread)
-    {
-        crosshair.transform.position = spread;
-    }
+    //public void CrosshairSpread(Vector2 spread)
+    //{
+    //    crosshair.transform.position = spread;
+    //}
 
     // Toggle canvas
     /// <summary>

@@ -6674,7 +6674,7 @@ RectTransform:
   - {fileID: 8988061882473132731}
   - {fileID: 3707713631155444742}
   m_Father: {fileID: 6852412233157675779}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -10646,7 +10646,7 @@ RectTransform:
   m_Children:
   - {fileID: 7335526691105926143}
   m_Father: {fileID: 6852412233157675779}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -12824,7 +12824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heatBar: {fileID: 6852412232055492712}
-  crosshair: {fileID: 0}
+  crosshair: {fileID: 6852412231957912894}
   hitmarkerImage: {fileID: 0}
   hitmarkerTime: 0
   equippedWeaponIcon: {fileID: 8544978235009014}
@@ -12866,8 +12866,8 @@ RectTransform:
   m_Children:
   - {fileID: 1709754045563913940}
   - {fileID: 2970150870034026959}
-  - {fileID: 3089504706441482747}
   - {fileID: 5322567426122108589}
+  - {fileID: 3089504706441482747}
   - {fileID: 5130720647864135016}
   - {fileID: 8874641089536981703}
   - {fileID: 6852412232602653614}
@@ -12974,11 +12974,9 @@ MonoBehaviour:
   defaultCoreHealthFill: {fileID: 0}
   damagedCoreHealthFill: {fileID: 21300000, guid: e3628d07b2fd5014c94794892be6d6d1,
     type: 3}
-  defaultCoreIconColor: {r: 1, g: 1, b: 1, a: 1}
-  damagedCoreIconColor: {r: 1, g: 0, b: 0, a: 1}
+  damagedCoreIcon: {fileID: 21300000, guid: 9da5b73fa95d7f145bd6322b99ff37ed, type: 3}
   coreIcon: {fileID: 4781543318210466984}
-  energyChangePerSecond: 5
-  energyChangeAmount: 0
+  glowingMat: {fileID: 2100000, guid: b6c9c2786f8683c43a6dc870b146f350, type: 2}
   energyText: {fileID: 7839181427698369217}
   energyChangeIndicator: {fileID: 2546171069193177324}
   energyValue: 0

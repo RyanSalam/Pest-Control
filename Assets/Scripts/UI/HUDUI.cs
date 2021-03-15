@@ -36,15 +36,15 @@ public class HUDUI : MonoBehaviour
 
     [SerializeField] Sprite defaultCoreHealthFill;
     [SerializeField] Sprite damagedCoreHealthFill;
-    [SerializeField] Color defaultCoreIconColor;
-    [SerializeField] Color damagedCoreIconColor;
-    //[SerializeField] GameObject coreBase;
+    [SerializeField] Sprite damagedCoreIcon;
+    Sprite defaultCoreIcon;
     [SerializeField] Image coreIcon;
+    [SerializeField] Material glowingMat;
     Coroutine changeCoreColor;
 
-    bool energyChanging = false;
-    [SerializeField] float energyChangePerSecond;
-    [SerializeField] int energyChangeAmount = 5;
+    //bool energyChanging = false;
+    //[SerializeField] float energyChangePerSecond;
+    //[SerializeField] int energyChangeAmount = 5;
     [SerializeField] public TMP_Text energyText;
     [SerializeField] TMP_Text energyChangeIndicator;
     [SerializeField] public int energyValue;
@@ -58,6 +58,7 @@ public class HUDUI : MonoBehaviour
         core.OnHealthChanged += UpdateCoreHealth;
         waveNumberIndicator.SetActive(false);
         energyChangeIndicator.text = "";
+        defaultCoreIcon = coreIcon.sprite;
     }
 
     private void Update()
@@ -70,14 +71,6 @@ public class HUDUI : MonoBehaviour
             //phaseTimerCount.text = Mathf.RoundToInt(WaveManager.Instance.buildPhaseTimer.GetRemaining()).ToString();
             phaseTimerClock.fillAmount = 1 - phaseTimerProgress;
         }
-
-        //if (energyChanging)
-        //{
-        //    energyText.text = energyValue.ToString();
-        //    Debug.Log("CHANGING ENERGY");
-        //    Debug.Log("energyValue = " + energyValue);
-        //    energyValue += Mathf.RoundToInt(energyChangePerSecond * Time.deltaTime);
-        //}
     }
 
     #region Updating HUD UI
@@ -107,11 +100,13 @@ public class HUDUI : MonoBehaviour
     public IEnumerator CoreHealthChange()
     {
         coreFill.sprite = damagedCoreHealthFill;
-        coreIcon.color = damagedCoreIconColor;
+        //coreIcon.material = glowingMat;
+        coreIcon.sprite = damagedCoreIcon;
 
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1f);
 
-        coreIcon.color = defaultCoreIconColor;
+        //coreIcon.material = null;
+        coreIcon.sprite = defaultCoreIcon;
         coreFill.sprite = defaultCoreHealthFill;
     }
 
