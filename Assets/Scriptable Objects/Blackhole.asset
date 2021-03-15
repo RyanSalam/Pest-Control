@@ -20,5 +20,7 @@ MonoBehaviour:
   cooldownDuration: 10
   AbilityButton: Ability One
   isAbilityOnCoolDown: 0
+  AbilityIndex: 2
+  AnimationTriggerName: 
   prefabToSpawn: {fileID: 3147279108591053944, guid: 455f961f3b328a343892e31b7952b66b,
     type: 3}

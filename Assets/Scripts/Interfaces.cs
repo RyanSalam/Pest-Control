@@ -1,9 +1,10 @@
 ﻿using UnityEngine.InputSystem;
+using UnityEngine;
 
 public interface IEquippable
 {
     void Equip();
     void Unequip();
     void HandleInput(InputAction.CallbackContext context);
-    void PlayAnimation(string animation);
+    Animator GetAnimator();
 }

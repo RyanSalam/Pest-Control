@@ -405,9 +405,9 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     }
 
-    public void PlayAnimation(string animation)
+    public Animator GetAnimator()
     {
-        animator.SetTrigger(animation);
+        return animator;
     }
 }
 
