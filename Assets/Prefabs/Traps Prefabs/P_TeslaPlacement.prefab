@@ -90,6 +90,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Electri_Trap_LowPoly
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -132,6 +136,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
+      propertyPath: m_DynamicOccludee
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 5941f99a75aca71449249fbdd1c8bc7e, type: 3}
