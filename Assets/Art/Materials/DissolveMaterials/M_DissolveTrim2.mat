@@ -50,6 +50,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_75EA8EB6: 0
+    - Vector1_BB06D878: 1
+    - Vector1_E1C3E314: 1
     - _TextureTransition: -1
     m_Colors:
     - Color_499D1382: {r: 0, g: 0, b: 0, a: 0}

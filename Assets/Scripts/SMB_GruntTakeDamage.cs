@@ -6,7 +6,7 @@ public class SMB_GruntTakeDamage : StateMachineBehaviour
 {
     #region Variables
     // Reference to the enemy script on this enemy.
-    Actor_Enemy thisEnemy;
+    Enemy_Grunt thisEnemy;
     #endregion
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -14,12 +14,13 @@ public class SMB_GruntTakeDamage : StateMachineBehaviour
     {
 
         // Assign the enemy reference accordingly.
-        thisEnemy = animator.GetComponentInParent<Actor_Enemy>();
+        thisEnemy = animator.GetComponentInParent<Enemy_Grunt>();
         thisEnemy.ac.PlayAudioCue(thisEnemy.enemyHit);
         // Ensure the Enemy is stopped as they react.
         thisEnemy.Agent.isStopped = true;
 
         // Reset the hits recieved.
+        thisEnemy.hitsRecieved = 0;
         thisEnemy.Anim.SetInteger("hitsRecieved", 0);
     }
 
@@ -29,7 +30,7 @@ public class SMB_GruntTakeDamage : StateMachineBehaviour
     //    
     //}
 
-     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         thisEnemy.Agent.isStopped = false;

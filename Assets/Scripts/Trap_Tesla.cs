@@ -16,12 +16,14 @@ public class Trap_Tesla : Trap
     private Actor_Enemy enemyTarget;
     public bool canAttack = true;
     private float timeAttack = 0.0f;
-    private float attackDelay = 0.3f;
+    private float attackDelay = 0.1f;
+    
     private List<Actor_Enemy> enemies = new List<Actor_Enemy>();
     private LineRenderer lineRenderer;
 
     [SerializeField] private Transform chainOrigin;
     [SerializeField] private GameObject particleVFX;
+    [SerializeField] private GameObject particleVFXAttacking;
 
     [SerializeField] private DamageIndicator damageIndicator;
     protected override void Start()
@@ -30,7 +32,7 @@ public class Trap_Tesla : Trap
         lineRenderer = GetComponent<LineRenderer>();
         //lineRenderer.positionCount = enemyChainAmount;
         lineRenderer.enabled = false;
-        //Anim.SetBool("isIdle", true); //uncomment these when tesla trap animations is set on animator and applied
+        Anim.SetBool("isIdle", true); 
 
         //initialize our pool
         ObjectPooler.Instance.InitializePool(particleVFX, 10);
@@ -67,6 +69,7 @@ public class Trap_Tesla : Trap
     {
         base.Activate();
         EnemySphereCast(enemyTarget); //activate chain sphere cast on attacked enemy
+        spawnVFX(); //spawning attack VFX 
 
         lineRenderer.enabled = true; //adjusting linerenders position based off the chain origin
         lineRenderer.SetPosition(0, chainOrigin.position);
@@ -86,8 +89,6 @@ public class Trap_Tesla : Trap
         {
             if (enemy != null)
             {
-
-
                 enemy.TakeDamage(trapDamage);
 
                 ImpactSystem.Instance.DamageIndication(trapDamage, trapColor, enemy.transform.position, Quaternion.LookRotation(LevelManager.Instance.Player.transform.position - enemy.transform.position));
@@ -98,12 +99,13 @@ public class Trap_Tesla : Trap
         }
         //base.Activate();
         //StartCoroutine(Cooldown());
-        //Anim.SetBool("isAttacking", true); 
+        Anim.SetBool("isAttacking", true);
+        Anim.SetBool("isIdle", false); 
     }
 
     private IEnumerator Cooldown() //cooldown for attacks
     {
-        yield return new WaitForSeconds(attackDelay + .5f);
+        yield return new WaitForSeconds(attackDelay + .2f);
 
         lineRenderer.enabled = false;
         //enemies = new List<Actor_Enemy>();
@@ -112,7 +114,8 @@ public class Trap_Tesla : Trap
 
         currentChainAmount = 0;
         enemyTarget = null;
-
+        Anim.SetBool("isAttacking", false);
+        Anim.SetBool("isIdle", true);
         base.Activate();
     }
 
@@ -147,6 +150,15 @@ public class Trap_Tesla : Trap
         if (currentChainAmount >= enemyChainAmount) //reset chain amount
         {
             currentChainAmount = 0;
+        }
+    }
+
+    void spawnVFX()
+    {
+        if (particleVFXAttacking != null)
+        {
+            GameObject temp = Instantiate(particleVFXAttacking, transform.position, Quaternion.identity);
+            Destroy(temp, 2f); 
         }
     }
 }

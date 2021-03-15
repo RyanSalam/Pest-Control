@@ -1,0 +1,943 @@
+fileFormatVersion: 2
+guid: 253b81694cd4d6e48a79efdee401112b
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: Turret_Base
+  - first:
+      1: 100004
+    second: Turret_Base 1
+  - first:
+      1: 100006
+    second: Turret_FirePoint
+  - first:
+      1: 100008
+    second: Turret_Firepoint
+  - first:
+      1: 100010
+    second: Turret_FirePoint 1
+  - first:
+      1: 100012
+    second: Turret_Head
+  - first:
+      1: 100014
+    second: Turret_Head 1
+  - first:
+      1: 100016
+    second: Turret_Head 10
+  - first:
+      1: 100018
+    second: Turret_Head 11
+  - first:
+      1: 100020
+    second: Turret_Head 12
+  - first:
+      1: 100022
+    second: Turret_Head 13
+  - first:
+      1: 100024
+    second: Turret_Head 14
+  - first:
+      1: 100026
+    second: Turret_Head 15
+  - first:
+      1: 100028
+    second: Turret_Head 16
+  - first:
+      1: 100030
+    second: Turret_Head 17
+  - first:
+      1: 100032
+    second: Turret_Head 2
+  - first:
+      1: 100034
+    second: Turret_Head 3
+  - first:
+      1: 100036
+    second: Turret_Head 4
+  - first:
+      1: 100038
+    second: Turret_Head 5
+  - first:
+      1: 100040
+    second: Turret_Head 6
+  - first:
+      1: 100042
+    second: Turret_Head 7
+  - first:
+      1: 100044
+    second: Turret_Head 8
+  - first:
+      1: 100046
+    second: Turret_Head 9
+  - first:
+      1: 100048
+    second: Turret_Nobs
+  - first:
+      1: 100050
+    second: Turret_Rotation
+  - first:
+      1: 100052
+    second: Turret_RotatoryBase
+  - first:
+      1: 100054
+    second: Turret_TopBolts
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: Turret_Base
+  - first:
+      4: 400004
+    second: Turret_Base 1
+  - first:
+      4: 400006
+    second: Turret_FirePoint
+  - first:
+      4: 400008
+    second: Turret_Firepoint
+  - first:
+      4: 400010
+    second: Turret_FirePoint 1
+  - first:
+      4: 400012
+    second: Turret_Head
+  - first:
+      4: 400014
+    second: Turret_Head 1
+  - first:
+      4: 400016
+    second: Turret_Head 10
+  - first:
+      4: 400018
+    second: Turret_Head 11
+  - first:
+      4: 400020
+    second: Turret_Head 12
+  - first:
+      4: 400022
+    second: Turret_Head 13
+  - first:
+      4: 400024
+    second: Turret_Head 14
+  - first:
+      4: 400026
+    second: Turret_Head 15
+  - first:
+      4: 400028
+    second: Turret_Head 16
+  - first:
+      4: 400030
+    second: Turret_Head 17
+  - first:
+      4: 400032
+    second: Turret_Head 2
+  - first:
+      4: 400034
+    second: Turret_Head 3
+  - first:
+      4: 400036
+    second: Turret_Head 4
+  - first:
+      4: 400038
+    second: Turret_Head 5
+  - first:
+      4: 400040
+    second: Turret_Head 6
+  - first:
+      4: 400042
+    second: Turret_Head 7
+  - first:
+      4: 400044
+    second: Turret_Head 8
+  - first:
+      4: 400046
+    second: Turret_Head 9
+  - first:
+      4: 400048
+    second: Turret_Nobs
+  - first:
+      4: 400050
+    second: Turret_Rotation
+  - first:
+      4: 400052
+    second: Turret_RotatoryBase
+  - first:
+      4: 400054
+    second: Turret_TopBolts
+  - first:
+      43: 4300000
+    second: Turret_Base
+  - first:
+      43: 4300002
+    second: Turret_RotatoryBase
+  - first:
+      43: 4300004
+    second: Turret_Head
+  - first:
+      43: 4300006
+    second: Turret_Head
+  - first:
+      43: 4300008
+    second: Turret_Nobs
+  - first:
+      43: 4300010
+    second: Turret_Head
+  - first:
+      43: 4300012
+    second: Turret_Head
+  - first:
+      43: 4300014
+    second: Turret_Head
+  - first:
+      43: 4300016
+    second: Turret_Head
+  - first:
+      43: 4300018
+    second: Turret_Head
+  - first:
+      43: 4300020
+    second: Turret_Head
+  - first:
+      43: 4300022
+    second: Turret_Head
+  - first:
+      43: 4300024
+    second: Turret_Head
+  - first:
+      43: 4300026
+    second: Turret_Head
+  - first:
+      43: 4300028
+    second: Turret_Head
+  - first:
+      43: 4300030
+    second: Turret_FirePoint
+  - first:
+      43: 4300032
+    second: Turret_Head
+  - first:
+      43: 4300034
+    second: Turret_Head
+  - first:
+      43: 4300036
+    second: Turret_Head
+  - first:
+      43: 4300038
+    second: Turret_FirePoint
+  - first:
+      43: 4300040
+    second: Turret_Head
+  - first:
+      43: 4300042
+    second: Turret_Head
+  - first:
+      74: 7400000
+    second: Deployment
+  - first:
+      74: 7400002
+    second: Idle
+  - first:
+      74: 7400004
+    second: Attack
+  - first:
+      74: 7400006
+    second: Seek drone
+  - first:
+      74: 7400008
+    second: attack drone
+  - first:
+      74: 7400010
+    second: Death
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Turret_Base
+  - first:
+      137: 13700002
+    second: Turret_FirePoint
+  - first:
+      137: 13700004
+    second: Turret_FirePoint 1
+  - first:
+      137: 13700006
+    second: Turret_Head
+  - first:
+      137: 13700008
+    second: Turret_Head 1
+  - first:
+      137: 13700010
+    second: Turret_Head 10
+  - first:
+      137: 13700012
+    second: Turret_Head 11
+  - first:
+      137: 13700014
+    second: Turret_Head 12
+  - first:
+      137: 13700016
+    second: Turret_Head 13
+  - first:
+      137: 13700018
+    second: Turret_Head 14
+  - first:
+      137: 13700020
+    second: Turret_Head 15
+  - first:
+      137: 13700022
+    second: Turret_Head 16
+  - first:
+      137: 13700024
+    second: Turret_Head 2
+  - first:
+      137: 13700026
+    second: Turret_Head 3
+  - first:
+      137: 13700028
+    second: Turret_Head 4
+  - first:
+      137: 13700030
+    second: Turret_Head 5
+  - first:
+      137: 13700032
+    second: Turret_Head 6
+  - first:
+      137: 13700034
+    second: Turret_Head 7
+  - first:
+      137: 13700036
+    second: Turret_Head 8
+  - first:
+      137: 13700038
+    second: Turret_Head 9
+  - first:
+      137: 13700040
+    second: Turret_Nobs
+  - first:
+      137: 13700042
+    second: Turret_RotatoryBase
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #28
+    second: {fileID: 2100000, guid: 4605fa1b45f66c84c9d524b7f4caefb5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #29
+    second: {fileID: 2100000, guid: 2b2d5d5e66af80a41bdede7666afa458, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #30
+    second: {fileID: 2100000, guid: 77318d10420ddea408f42c6270ea06d0, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Deployment
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Turret_Base
+        weight: 1
+      - path: Turret_Base 1
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17/Turret_Firepoint
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17/Turret_TopBolts
+        weight: 1
+      - path: Turret_FirePoint
+        weight: 1
+      - path: Turret_FirePoint 1
+        weight: 1
+      - path: Turret_Head
+        weight: 1
+      - path: Turret_Head 1
+        weight: 1
+      - path: Turret_Head 2
+        weight: 1
+      - path: Turret_Head 3
+        weight: 1
+      - path: Turret_Head 4
+        weight: 1
+      - path: Turret_Head 5
+        weight: 1
+      - path: Turret_Head 6
+        weight: 1
+      - path: Turret_Head 7
+        weight: 1
+      - path: Turret_Head 8
+        weight: 1
+      - path: Turret_Head 9
+        weight: 1
+      - path: Turret_Head 10
+        weight: 1
+      - path: Turret_Head 11
+        weight: 1
+      - path: Turret_Head 12
+        weight: 1
+      - path: Turret_Head 13
+        weight: 1
+      - path: Turret_Head 14
+        weight: 1
+      - path: Turret_Head 15
+        weight: 1
+      - path: Turret_Head 16
+        weight: 1
+      - path: Turret_Nobs
+        weight: 1
+      - path: Turret_RotatoryBase
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 41
+      lastFrame: 65
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Turret_Base
+        weight: 1
+      - path: Turret_Base 1
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17/Turret_Firepoint
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17/Turret_TopBolts
+        weight: 1
+      - path: Turret_FirePoint
+        weight: 1
+      - path: Turret_FirePoint 1
+        weight: 1
+      - path: Turret_Head
+        weight: 1
+      - path: Turret_Head 1
+        weight: 1
+      - path: Turret_Head 2
+        weight: 1
+      - path: Turret_Head 3
+        weight: 1
+      - path: Turret_Head 4
+        weight: 1
+      - path: Turret_Head 5
+        weight: 1
+      - path: Turret_Head 6
+        weight: 1
+      - path: Turret_Head 7
+        weight: 1
+      - path: Turret_Head 8
+        weight: 1
+      - path: Turret_Head 9
+        weight: 1
+      - path: Turret_Head 10
+        weight: 1
+      - path: Turret_Head 11
+        weight: 1
+      - path: Turret_Head 12
+        weight: 1
+      - path: Turret_Head 13
+        weight: 1
+      - path: Turret_Head 14
+        weight: 1
+      - path: Turret_Head 15
+        weight: 1
+      - path: Turret_Head 16
+        weight: 1
+      - path: Turret_Nobs
+        weight: 1
+      - path: Turret_RotatoryBase
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 66
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Turret_Base
+        weight: 1
+      - path: Turret_Base 1
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17/Turret_Firepoint
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17/Turret_TopBolts
+        weight: 1
+      - path: Turret_FirePoint
+        weight: 1
+      - path: Turret_FirePoint 1
+        weight: 1
+      - path: Turret_Head
+        weight: 1
+      - path: Turret_Head 1
+        weight: 1
+      - path: Turret_Head 2
+        weight: 1
+      - path: Turret_Head 3
+        weight: 1
+      - path: Turret_Head 4
+        weight: 1
+      - path: Turret_Head 5
+        weight: 1
+      - path: Turret_Head 6
+        weight: 1
+      - path: Turret_Head 7
+        weight: 1
+      - path: Turret_Head 8
+        weight: 1
+      - path: Turret_Head 9
+        weight: 1
+      - path: Turret_Head 10
+        weight: 1
+      - path: Turret_Head 11
+        weight: 1
+      - path: Turret_Head 12
+        weight: 1
+      - path: Turret_Head 13
+        weight: 1
+      - path: Turret_Head 14
+        weight: 1
+      - path: Turret_Head 15
+        weight: 1
+      - path: Turret_Head 16
+        weight: 1
+      - path: Turret_Nobs
+        weight: 1
+      - path: Turret_RotatoryBase
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Seek drone
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 91
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Turret_Base
+        weight: 1
+      - path: Turret_Base 1
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17/Turret_Firepoint
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17/Turret_TopBolts
+        weight: 1
+      - path: Turret_FirePoint
+        weight: 1
+      - path: Turret_FirePoint 1
+        weight: 1
+      - path: Turret_Head
+        weight: 1
+      - path: Turret_Head 1
+        weight: 1
+      - path: Turret_Head 2
+        weight: 1
+      - path: Turret_Head 3
+        weight: 1
+      - path: Turret_Head 4
+        weight: 1
+      - path: Turret_Head 5
+        weight: 1
+      - path: Turret_Head 6
+        weight: 1
+      - path: Turret_Head 7
+        weight: 1
+      - path: Turret_Head 8
+        weight: 1
+      - path: Turret_Head 9
+        weight: 1
+      - path: Turret_Head 10
+        weight: 1
+      - path: Turret_Head 11
+        weight: 1
+      - path: Turret_Head 12
+        weight: 1
+      - path: Turret_Head 13
+        weight: 1
+      - path: Turret_Head 14
+        weight: 1
+      - path: Turret_Head 15
+        weight: 1
+      - path: Turret_Head 16
+        weight: 1
+      - path: Turret_Nobs
+        weight: 1
+      - path: Turret_RotatoryBase
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: attack drone
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 121
+      lastFrame: 150
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Turret_Base
+        weight: 1
+      - path: Turret_Base 1
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17/Turret_Firepoint
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17/Turret_TopBolts
+        weight: 1
+      - path: Turret_FirePoint
+        weight: 1
+      - path: Turret_FirePoint 1
+        weight: 1
+      - path: Turret_Head
+        weight: 1
+      - path: Turret_Head 1
+        weight: 1
+      - path: Turret_Head 2
+        weight: 1
+      - path: Turret_Head 3
+        weight: 1
+      - path: Turret_Head 4
+        weight: 1
+      - path: Turret_Head 5
+        weight: 1
+      - path: Turret_Head 6
+        weight: 1
+      - path: Turret_Head 7
+        weight: 1
+      - path: Turret_Head 8
+        weight: 1
+      - path: Turret_Head 9
+        weight: 1
+      - path: Turret_Head 10
+        weight: 1
+      - path: Turret_Head 11
+        weight: 1
+      - path: Turret_Head 12
+        weight: 1
+      - path: Turret_Head 13
+        weight: 1
+      - path: Turret_Head 14
+        weight: 1
+      - path: Turret_Head 15
+        weight: 1
+      - path: Turret_Head 16
+        weight: 1
+      - path: Turret_Nobs
+        weight: 1
+      - path: Turret_RotatoryBase
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Death
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 151
+      lastFrame: 195
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Turret_Base
+        weight: 1
+      - path: Turret_Base 1
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17/Turret_Firepoint
+        weight: 1
+      - path: Turret_Base 1/Turret_Rotation/Turret_Head 17/Turret_TopBolts
+        weight: 1
+      - path: Turret_FirePoint
+        weight: 1
+      - path: Turret_FirePoint 1
+        weight: 1
+      - path: Turret_Head
+        weight: 1
+      - path: Turret_Head 1
+        weight: 1
+      - path: Turret_Head 2
+        weight: 1
+      - path: Turret_Head 3
+        weight: 1
+      - path: Turret_Head 4
+        weight: 1
+      - path: Turret_Head 5
+        weight: 1
+      - path: Turret_Head 6
+        weight: 1
+      - path: Turret_Head 7
+        weight: 1
+      - path: Turret_Head 8
+        weight: 1
+      - path: Turret_Head 9
+        weight: 1
+      - path: Turret_Head 10
+        weight: 1
+      - path: Turret_Head 11
+        weight: 1
+      - path: Turret_Head 12
+        weight: 1
+      - path: Turret_Head 13
+        weight: 1
+      - path: Turret_Head 14
+        weight: 1
+      - path: Turret_Head 15
+        weight: 1
+      - path: Turret_Head 16
+        weight: 1
+      - path: Turret_Nobs
+        weight: 1
+      - path: Turret_RotatoryBase
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    fileIdsGeneration: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

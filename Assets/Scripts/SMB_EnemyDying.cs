@@ -6,13 +6,13 @@ public class SMB_EnemyDying : StateMachineBehaviour
 {
     #region Variables
     // Reference to the enemy script on this enemy.
-    Actor_Enemy thisEnemy;
+    Enemy_Grunt thisEnemy;
     #endregion
 
      //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        thisEnemy = animator.GetComponentInParent<Actor_Enemy>();
+        thisEnemy = animator.GetComponentInParent<Enemy_Grunt>();
         thisEnemy.ac.PlayAudioCue(thisEnemy.enemyDeath);
         thisEnemy.Agent.isStopped = true;
         thisEnemy.Agent.speed = 0f;
@@ -24,10 +24,10 @@ public class SMB_EnemyDying : StateMachineBehaviour
     //    
     //}
 
-    //// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
-
+        
     //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

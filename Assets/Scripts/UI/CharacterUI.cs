@@ -38,7 +38,7 @@ public class CharacterUI : MonoBehaviour
     void Update()
     {
         // Update current energy on UI
-        playerEnergy.text = LevelManager.Instance.CurrentEnergy.ToString();
+        //playerEnergy.text = LevelManager.Instance.CurrentEnergy.ToString();
         //Tick the player ability timers
         player.AbilityOne.lifetimeTimer.Tick(Time.deltaTime);
         player.AbilityOne.cooldownTimer.Tick(Time.deltaTime);

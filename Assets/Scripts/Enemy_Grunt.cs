@@ -19,6 +19,7 @@ public class Enemy_Grunt : Actor_Enemy
         base.OnEnable();
         SetDestinationAroundTarget(CurrentDestination, AttackRange);
         Agent.speed = movementSpeed;
+        Anim.SetBool("isDead", isDead);
         GetComponentInChildren<Enemy_AnimEvent>().OnEnable();
         hitsRecieved = 0;
 
@@ -97,6 +98,7 @@ public class Enemy_Grunt : Actor_Enemy
     protected override void Death()
     {
         base.Death();
+        Anim.SetBool("isDead", isDead);
         //gameObject.SetActive(false);
     }
 

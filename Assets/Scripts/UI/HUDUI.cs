@@ -22,26 +22,34 @@ public class HUDUI : MonoBehaviour
     [SerializeField] GameObject coreInfoPanel;
     [SerializeField] Image coreFill;
     [SerializeField] TMP_Text enemyCount;
-    [SerializeField] float coreCurrentHealth;
-    [SerializeField] float coreMaxHealth;
-    [SerializeField] string currentPhase;
+    float coreCurrentHealth;
+    float coreMaxHealth;
+    string currentPhase;
 
     [SerializeField] GameObject enemyInfoPanel;
     [SerializeField] GameObject phaseTimer;
     [SerializeField] Image phaseTimerClock;
-    //[SerializeField] TMP_Text phaseTimerCount;
     [SerializeField] GameObject waveNumberIndicator;
     [SerializeField] TMP_Text waveNumberText;
-    [SerializeField] GameObject skipBuildPhaseInfo;
+    [SerializeField] GameObject buildPhaseInfo;
     public float phaseTimerProgress;
 
     [SerializeField] Sprite defaultCoreHealthFill;
     [SerializeField] Sprite damagedCoreHealthFill;
     [SerializeField] Color defaultCoreIconColor;
     [SerializeField] Color damagedCoreIconColor;
-    [SerializeField] GameObject coreBase;
+    //[SerializeField] GameObject coreBase;
     [SerializeField] Image coreIcon;
     Coroutine changeCoreColor;
+
+    bool energyChanging = false;
+    [SerializeField] float energyChangePerSecond;
+    [SerializeField] int energyChangeAmount = 5;
+    [SerializeField] public TMP_Text energyText;
+    [SerializeField] TMP_Text energyChangeIndicator;
+    [SerializeField] public int energyValue;
+
+    Coroutine energyChangeCoroutine;
 
     private void Start()
     {
@@ -49,6 +57,7 @@ public class HUDUI : MonoBehaviour
         core = LevelManager.Instance.Core;
         core.OnHealthChanged += UpdateCoreHealth;
         waveNumberIndicator.SetActive(false);
+        energyChangeIndicator.text = "";
     }
 
     private void Update()
@@ -61,6 +70,14 @@ public class HUDUI : MonoBehaviour
             //phaseTimerCount.text = Mathf.RoundToInt(WaveManager.Instance.buildPhaseTimer.GetRemaining()).ToString();
             phaseTimerClock.fillAmount = 1 - phaseTimerProgress;
         }
+
+        //if (energyChanging)
+        //{
+        //    energyText.text = energyValue.ToString();
+        //    Debug.Log("CHANGING ENERGY");
+        //    Debug.Log("energyValue = " + energyValue);
+        //    energyValue += Mathf.RoundToInt(energyChangePerSecond * Time.deltaTime);
+        //}
     }
 
     #region Updating HUD UI
@@ -91,9 +108,6 @@ public class HUDUI : MonoBehaviour
     {
         coreFill.sprite = damagedCoreHealthFill;
         coreIcon.color = damagedCoreIconColor;
-        //coreFill.gameObject.transform.localScale = Vector3.one * 1.2f;
-        //coreBase.transform.localScale = Vector3.one * 1.2f;
-        //coreIcon.transform.localScale = Vector3.one * 1.2f;
 
         yield return new WaitForSeconds(1.2f);
 
@@ -128,13 +142,13 @@ public class HUDUI : MonoBehaviour
         enemyInfoPanel.SetActive(false);
         // Hide coreInfo Panel until the Defence Phase
         coreInfoPanel.SetActive(false);
+        // Display Build Phase text
+        buildPhaseInfo.SetActive(true);
 
         yield return new WaitForSeconds(5f);
 
         // Hide wave info panel;
         WaveInfoPanel.SetActive(false);
-        // Hide skip build phase text
-        skipBuildPhaseInfo.SetActive(false);
     }
 
     public IEnumerator DefensePhase()
@@ -157,6 +171,8 @@ public class HUDUI : MonoBehaviour
         waveNumberIndicator.SetActive(true);
         // Update wave number text
         waveNumberText.text = (WaveManager.Instance.waveIndex + 1).ToString();
+        // Hide build phase text
+        buildPhaseInfo.SetActive(false);
 
         yield return new WaitForSeconds(5f);
 
@@ -168,6 +184,74 @@ public class HUDUI : MonoBehaviour
     {
         enemyCount.text = WaveManager.Instance.enemiesRemaining.ToString();
     }
+
+    //public void EnergyChange()
+    //{
+
+    //    if (energyValue == LevelManager.Instance.CurrentEnergy) return;
+
+    //    int.TryParse(energyText.text, out energyValue);
+
+    //    //Debug.Log("energyValue: " + energyValue);
+    //    //Debug.Log("LevelManager.Instance.CurrentEnergy: " + LevelManager.Instance.CurrentEnergy.ToString());
+
+    //    // If energy goes down
+    //    if (energyValue > LevelManager.Instance.CurrentEnergy)
+    //    {
+    //        energyChangeAmount = energyValue - LevelManager.Instance.CurrentEnergy;
+    //        if (energyChangeCoroutine == null)
+    //            energyChangeCoroutine = StartCoroutine(EnergyChangeSequence(false));
+    //        else
+    //        {
+    //            StopCoroutine(energyChangeCoroutine);
+    //            energyText.text = LevelManager.Instance.CurrentEnergy.ToString();
+    //            energyChangeCoroutine = StartCoroutine(EnergyChangeSequence(false));
+    //        }
+    //    }
+    //    // If energy goes up
+    //    else if (LevelManager.Instance.CurrentEnergy > energyValue)
+    //    {
+    //        energyChangeAmount = LevelManager.Instance.CurrentEnergy - energyValue;
+    //        if (energyChangeCoroutine == null)
+    //            energyChangeCoroutine = StartCoroutine(EnergyChangeSequence(true));
+    //        else
+    //        {
+    //            StopCoroutine(energyChangeCoroutine);
+    //            energyText.text = LevelManager.Instance.CurrentEnergy.ToString();
+    //            energyChangeCoroutine = StartCoroutine(EnergyChangeSequence(true));
+    //        }
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("No Energy Change");
+    //    }
+
+    //}
+
+    //IEnumerator EnergyChangeSequence(bool increasing)
+    //{
+    //    //Debug.Log("Energy Change started!");
+    //    energyChanging = true;
+    //    if (increasing)
+    //    {
+    //        energyChangeIndicator.text = "+" + energyChangeAmount.ToString();
+    //    }
+    //    else
+    //    {
+    //        energyChangeIndicator.text = "-" + energyChangeAmount.ToString();
+    //    }
+
+    //    while (energyValue != LevelManager.Instance.CurrentEnergy)
+    //    {
+    //        energyValue += Mathf.RoundToInt(energyChangePerSecond);
+    //        energyText.text = energyValue.ToString();
+    //        yield return new WaitForSeconds(1f);
+    //    }
+
+    //    energyChanging = false;
+    //    energyChangeIndicator.text = "";
+    //    Debug.Log("Energy change done!");
+    //}
 
     #endregion
 

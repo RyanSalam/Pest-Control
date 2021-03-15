@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 7083525136872750494}
   - component: {fileID: 7083525136872750495}
   - component: {fileID: 935809801585625643}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: EnergyDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 5
+  energyValue: 10
 --- !u!54 &8705859997950318012
 Rigidbody:
   m_ObjectHideFlags: 0

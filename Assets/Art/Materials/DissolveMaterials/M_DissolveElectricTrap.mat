@@ -25,15 +25,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_987924E8:
-        m_Texture: {fileID: 2800000, guid: af97675f87fe00f46ae10dcf38c96a4f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 296e00d5e0132a64d93e58ac36bc040e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_CCA149E4:
-        m_Texture: {fileID: 2800000, guid: ee8aaa967afa3c74ea4a324d4caa33e0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4dc96c9b55c31d04486c568766c3ed1a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_DC8394EA:
-        m_Texture: {fileID: 2800000, guid: 7b6a110604feb0348a88df8cb5156df8, type: 3}
+        m_Texture: {fileID: 2800000, guid: f0e6fd770ebd5d84389fd94adfc47f8a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ChangingTexture:
@@ -41,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OriginalTextureAlbedo:
-        m_Texture: {fileID: 2800000, guid: d0bc1f6403316b041b4043511f7a26c4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 296e00d5e0132a64d93e58ac36bc040e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TransparentTexture:
@@ -50,7 +50,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_75EA8EB6: 0
+    - Vector1_BB06D878: 0
+    - Vector1_E1C3E314: 1
     - _TextureTransition: -1
     m_Colors:
-    - Color_499D1382: {r: 0, g: 0, b: 0, a: 0}
+    - Color_499D1382: {r: 1, g: 1, b: 1, a: 0}
     - Color_58F184D9: {r: 0, g: 0, b: 0, a: 0}
