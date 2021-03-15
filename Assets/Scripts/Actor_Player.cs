@@ -187,7 +187,7 @@ public class Actor_Player : Actor
         mouseVector *= mouseSensitivity * Time.deltaTime;
 
         _camRot -= mouseVector.y;
-        _camRot = Mathf.Clamp(_camRot, -45f, 45f);
+        _camRot = Mathf.Clamp(_camRot, -70f, 45f);
         // We rotate the player Camera vertically using the cached camRot
         // We rotate the player horizontally using 
         PlayerCam.transform.localRotation = Quaternion.Euler(_camRot, 0.0f, 0.0f);
