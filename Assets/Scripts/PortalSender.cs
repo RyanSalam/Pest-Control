@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PortalSender : MonoBehaviour
 {
@@ -20,6 +21,14 @@ public class PortalSender : MonoBehaviour
     private float currentDelayTime = 0.0f;
     [SerializeField] private float delayTime;
 
+    Vector3 originalScale;
+    [SerializeField] private float expandDuration = 1f;
+
+    private void Awake()
+    {
+        originalScale = transform.localScale;
+    }
+
     private void Start()
     {
         actP = LevelManager.Instance.Player;
@@ -38,6 +47,11 @@ public class PortalSender : MonoBehaviour
                 inDelay = false;
             }
         }
+    }
+
+    private void OnEnable()
+    {
+        transform.DOScale(originalScale, expandDuration).From(Vector3.zero);
     }
 
 
