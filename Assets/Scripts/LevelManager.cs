@@ -23,15 +23,26 @@ public class LevelManager : MonoSingleton<LevelManager>
     public Character Char_SO;
     private AudioCue Cues;
 
+    Coroutine energyChangeCoroutine;
+    float timeForEnergyUpdate = 2f;
 
-    private int _currentEnergy = 200;
+    private int _currentEnergy;
     public int CurrentEnergy
     {
         get { return _currentEnergy; }
         set
         {
+            if (energyChangeCoroutine == null)
+                energyChangeCoroutine = StartCoroutine(EnergyChange(_currentEnergy, value));
+            else
+            {
+                StopCoroutine(energyChangeCoroutine);
+                hudUI.energyText.text = _currentEnergy.ToString();
+                energyChangeCoroutine = StartCoroutine(EnergyChange(_currentEnergy, value));
+            }
             _currentEnergy = value;
-            // Call UI Update Here 
+            // Call UI Update Here
+            //shopUI.RefreshEnergyText();
         }
     }
     public int waveEnergyReward;
@@ -64,6 +75,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     private Dictionary<Item, IEquippable> m_equipables;
     public Dictionary<Item, IEquippable> Equipables => m_equipables;
 
+    [SerializeField] HUDUI hudUI;
     [SerializeField] ShopUI shopUI;
     [SerializeField] WeaponUI weaponUI;
     public WeaponUI WeaponUI { get { return weaponUI; } }
@@ -114,8 +126,6 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         }
         Cues = FindObjectOfType<AudioCue>();
-        
-        
 
         m_equipables = new Dictionary<Item, IEquippable>();
 
@@ -129,14 +139,18 @@ public class LevelManager : MonoSingleton<LevelManager>
         Player.OnDeath += characterUI.ResetHealthOnRespawn; //Reset health UI on respawn
         Player.OnHealthChanged += UpdateVolume;
 
+        Player.playerInputs.ActivateInput();
+
         Player.controlsEnabled = true;
         shopUI.pauseMenu.SetActive(false);
         gameOver = false;
 
         // Set the starting energy value here -> 250 
+        hudUI.energyText.text = "250";
         CurrentEnergy = 250;
         // Set the initial waveEnergyReward -> 50
         waveEnergyReward = 50;
+
     }
 
     private void Start()
@@ -188,6 +202,20 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         if (shopUI.gameObject.activeSelf && !WaveManager.Instance.isBuildPhase)
             shopUI.CloseShop();
+    }
+
+    private IEnumerator EnergyChange(int previousEnergy, int updatedEnergy)
+    {
+        float elapsed = 0f;
+
+        while (elapsed < timeForEnergyUpdate)
+        {
+            elapsed += Time.deltaTime;
+            float ratio = elapsed / timeForEnergyUpdate;
+            previousEnergy = (int)Mathf.Lerp(previousEnergy, updatedEnergy, ratio);
+            hudUI.energyText.text = previousEnergy.ToString();
+            yield return null;
+        }
     }
 
     public void TogglePause()

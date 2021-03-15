@@ -9,6 +9,8 @@ public class HealthUI : MonoBehaviour
     public float currentHealthValue;
     public float maxHealthValue;
     [SerializeField] Image bloodyScreen;
+    [SerializeField] float bloodScreenDuration;
+
     Coroutine damagedRoutine;
 
     private void Start()
@@ -16,13 +18,9 @@ public class HealthUI : MonoBehaviour
         bloodyScreen.color = new Color(bloodyScreen.color.r, bloodyScreen.color.g, bloodyScreen.color.b, 0.01f);
         currentHealthValue = LevelManager.Instance.Player.CurrentHealth;
         LevelManager.Instance.Player.OnHealthChanged += UpdateHealth;
-
     }
 
     // Update current health. Caused when taking damage or gaining health
-    /// <summary>
-    /// Update the health bar to the set value. Takes in floats for current health and maximum health.
-    /// </summary>
     public void UpdateHealth(float maxHealth, float health)
     {
         // If health is reduced from the last update
@@ -55,7 +53,7 @@ public class HealthUI : MonoBehaviour
     {
         Debug.Log("Coroutine getting called");
         bloodyScreen.CrossFadeAlpha(255f, 0.5f, false);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(bloodScreenDuration);
         bloodyScreen.CrossFadeAlpha(0.01f, 0.65f, false);
     }
 }
