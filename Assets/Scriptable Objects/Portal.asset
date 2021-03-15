@@ -19,6 +19,7 @@ MonoBehaviour:
   cooldownDuration: 15
   AbilityButton: Ability Two
   isAbilityOnCoolDown: 0
+  AbilityIndex: 3
   prefabToSpawn: {fileID: 6715927603155748980, guid: 57047f4ebc5abb144aeacc2ba41d1ff0,
     type: 3}
   canMake: 1
