@@ -8,6 +8,8 @@ using TMPro;
 public class ShopUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text customerEnergy = null;
+    //[SerializeField] private int energyValue;
+    //[SerializeField] private TMP_Text energyChangeIndicator;
     //[SerializeField] private Text itemDescription = null;
     //[SerializeField] private GameObject inventoryPanel = null;
     public Actor_Player Customer;
@@ -93,6 +95,11 @@ public class ShopUI : MonoBehaviour
 
     public void RefreshEnergyText()
     {
-        customerEnergy.text = LevelManager.Instance.CurrentEnergy.ToString();
+        // If shop open
+        if (gameObject.activeSelf)
+        {
+            customerEnergy.text = LevelManager.Instance.CurrentEnergy.ToString();
+            combatHUD.GetComponent<HUDUI>().energyText.text = LevelManager.Instance.CurrentEnergy.ToString();
+        }
     }
 }
