@@ -143,6 +143,7 @@ public class Trap_Turret : Trap
         if (hitEffect) ObjectPooler.Instance.GetFromPool(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
         enemyTarget.GetComponent<Actor_Enemy>().TakeDamage(damage);
         muzzleFlash.Play();
+        ImpactSystem.Instance.DamageIndication(damage, trapColor, enemyTarget.transform.position, Quaternion.LookRotation(enemyTarget.transform.position - LevelManager.Instance.Player.transform.position));
     }
     Actor_Enemy TurretDetection()
     {
