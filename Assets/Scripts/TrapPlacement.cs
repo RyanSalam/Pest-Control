@@ -149,8 +149,8 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         Gizmos.DrawWireCube(trapModel.position, Vector3.one * obstacleDetectionRange);
     }
 
-    public void PlayAnimation(string animation)
+    public Animator GetAnimator()
     {
-        player.PlayerArms.SetTrigger(animation);
+        return player.PlayerArms;
     }
 }
