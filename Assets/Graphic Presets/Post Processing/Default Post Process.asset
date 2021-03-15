@@ -1,5 +1,44 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2750672341789576688
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
+  m_Name: ShadowsMidtonesHighlights
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  shadows:
+    m_OverrideState: 1
+    m_Value: {x: 0.5353149, y: 0.56505483, z: 1, w: 0.20408164}
+  midtones:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: 0.06122449}
+  highlights:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.8195343, z: 0.89756244, w: 0.02040816}
+  shadowsStart:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+  shadowsEnd:
+    m_OverrideState: 0
+    m_Value: 0.3
+    min: 0
+  highlightsStart:
+    m_OverrideState: 0
+    m_Value: 0.55
+    min: 0
+  highlightsEnd:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
 --- !u!114 &-2142725599556167802
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -52,7 +91,8 @@ MonoBehaviour:
   - {fileID: -2142725599556167802}
   - {fileID: 2710360471697614264}
   - {fileID: 2587361291790818054}
-  - {fileID: 8867033763127046062}
+  - {fileID: 5301101382098715915}
+  - {fileID: -2750672341789576688}
 --- !u!114 &2587361291790818054
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -90,7 +130,7 @@ MonoBehaviour:
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 1.3
     min: 0
   scatter:
     m_OverrideState: 1
@@ -117,7 +157,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
     min: 0
---- !u!114 &8867033763127046062
+--- !u!114 &5301101382098715915
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,16 +166,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e021b4c809a781e468c2988c016ebbea, type: 3}
-  m_Name: ColorLookup
+  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
+  m_Name: ColorAdjustments
   m_EditorClassIdentifier: 
   active: 1
   m_AdvancedMode: 0
-  texture:
-    m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: c1df3012885324d4d8392e948b454fd8, type: 3}
-  contribution:
+  postExposure:
     m_OverrideState: 0
-    m_Value: 1
-    min: 0
-    max: 1
+    m_Value: 0
+  contrast:
+    m_OverrideState: 1
+    m_Value: 18
+    min: -100
+    max: 100
+  colorFilter:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    hdr: 1
+    showAlpha: 0
+    showEyeDropper: 1
+  hueShift:
+    m_OverrideState: 1
+    m_Value: 12
+    min: -180
+    max: 180
+  saturation:
+    m_OverrideState: 1
+    m_Value: 7
+    min: -100
+    max: 100

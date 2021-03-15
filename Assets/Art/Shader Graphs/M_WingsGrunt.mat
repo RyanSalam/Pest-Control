@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_WingsGrunt
+  m_Shader: {fileID: -6465566751694194690, guid: c63125dca73d5694c8e932be830fa011,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_4CC9C573:
+        m_Texture: {fileID: 2800000, guid: 0000c31189fdd0f4fa3aa35c61e306dc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_987924E8:
+        m_Texture: {fileID: 2800000, guid: af97675f87fe00f46ae10dcf38c96a4f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_CCA149E4:
+        m_Texture: {fileID: 2800000, guid: ee8aaa967afa3c74ea4a324d4caa33e0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_DC8394EA:
+        m_Texture: {fileID: 2800000, guid: 7b6a110604feb0348a88df8cb5156df8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OriginalTextureAlbedo:
+        m_Texture: {fileID: 2800000, guid: d0bc1f6403316b041b4043511f7a26c4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_BB06D878: 0
+    - Vector1_E1C3E314: 1
+    - _TextureTransition: 0
+    m_Colors:
+    - Color_499D1382: {r: 0, g: 0, b: 0, a: 0}
+    - Color_58F184D9: {r: 0, g: 0, b: 0, a: 0}
