@@ -107,7 +107,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   currentDestination: {x: 0, y: 0, z: 0}
   m_player: {fileID: 0}
-  _attackRange: 3
+  _attackRange: 3.5
   _damage: 12
   _bIsSearching: 0
   _playerLayer:
@@ -351,7 +351,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a89d5422619015b499eb0affb85da1a0, type: 2}
+      objectReference: {fileID: 2100000, guid: c6930611e2d3639458ad85cb0b66e494, type: 2}
     - target: {fileID: -6861924895633335379, guid: 79ad81cedceeb064fa71f94c914745a5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
