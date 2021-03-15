@@ -30,8 +30,12 @@ public class Trap_Turret : Trap
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] GameObject hitEffect;
 
+    [SerializeField] GameObject center;
+
     Quaternion startingRot;
     Quaternion startingRotVert;
+
+    Vector3 temp;
 
     float fireTimer = 0f;
     // Start is called before the first frame update
@@ -46,7 +50,8 @@ public class Trap_Turret : Trap
         startingRotVert = turretVerHinge.rotation;
         rateOfFire = (float)60 / RoundsPerMinute;
         ObjectPooler.Instance.InitializePool(hitEffect, 3);
-        Anim.SetBool("isIdle", true); 
+        //Anim.SetBool("isIdle", true);
+        temp = transform.position;
     }
 
     // Update is called once per frame
@@ -56,12 +61,24 @@ public class Trap_Turret : Trap
         base.Update();
         if (enemyTarget == null)
         {
+            //Anim.SetBool("isIdle", true);
+            //Anim.SetBool("isAttacking", false);
+
+            //transform.position = temp;
+
             // Reset turret rotation to default if it isn't already
             if (turretRotHinge.rotation != startingRot || turretVerHinge.rotation != startingRotVert) ResetRotation();
             FindClosestEnemy();
         }
         else
         {
+            //Anim.SetBool("isIdle", false);
+            //Anim.SetBool("isAttacking", true);
+
+            //Vector3 adjust = new Vector3(transform.position.x, transform.position.y - 0.35f, transform.position.z);
+
+            //transform.position = adjust;
+
             if (OutOfRange()) enemyTarget = null;
             else if (!enemyTarget.isActiveAndEnabled) enemyTarget = null;
             else
@@ -84,8 +101,8 @@ public class Trap_Turret : Trap
             return;
         }
         base.Activate();
-        Anim.SetBool("isIdle", false);
-        Anim.SetBool("isAttacking", true);
+        //Anim.SetBool("isIdle", false);
+        //Anim.SetBool("isAttacking", true);
     }
     private void FindClosestEnemy()
     {
@@ -105,22 +122,24 @@ public class Trap_Turret : Trap
     void AimAtTarget()
     {
         Vector3 turretLookPos = enemyTarget.transform.position - transform.position;
-        Vector3 rot = Quaternion.LookRotation(turretLookPos, Vector3.up).eulerAngles;
+        Vector3 rot = Quaternion.LookRotation(turretLookPos).eulerAngles;
 
-        Vector3 lookHor = new Vector3(0f, rot.y, 0f);
-        Vector3 lookVert = new Vector3(rot.x, rot.y, 0f);
-
+        Vector3 lookHor = new Vector3(0f, rot.y, -90f);
         Quaternion rotHor = Quaternion.Euler(lookHor);
-        Quaternion rotVert = Quaternion.Euler(lookVert);
-
         turretRotHinge.rotation = Quaternion.Slerp(turretRotHinge.rotation, rotHor, Time.deltaTime * 5);
-        turretVerHinge.rotation = Quaternion.Slerp(turretVerHinge.rotation, rotVert, Time.deltaTime * 5);
+
+        Vector3 lookVert = new Vector3(0f, 0f, rot.z + 90);
+
+        Quaternion rotVert = Quaternion.Euler(lookVert);
+        turretVerHinge.rotation = Quaternion.Slerp(turretVerHinge.rotation, Quaternion.LookRotation(turretLookPos), Time.deltaTime * 5);
+
+
+        //turretRotHinge.transform.rotation = Quaternion.LookRotation(turretLookPos, Vector3.up);
 
     }
     void Fire()
     {
         fireTimer = 0f;
-        Debug.Log("Fire");
         if (hitEffect) ObjectPooler.Instance.GetFromPool(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
         enemyTarget.GetComponent<Actor_Enemy>().TakeDamage(damage);
         muzzleFlash.Play();
@@ -136,8 +155,6 @@ public class Trap_Turret : Trap
 
             Vector3 pos = col.transform.position - transform.position;
             pos -= transform.up * Vector3.Dot(transform.up, pos);
-            
-            if (hitEffect) ObjectPooler.Instance.GetFromPool(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
             
             if (enemyTarget != null)
             {
