@@ -203,7 +203,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material #104
-    second: {fileID: 2100000, guid: f1cf54eb8709bd147bbf3988d9449783, type: 2}
+    second: {fileID: 2100000, guid: 0a6ab37a85c36574e9dc2d8ce2fa278d, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -456,7 +456,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 1
+        functionName: Despawn
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
