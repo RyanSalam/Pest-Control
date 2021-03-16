@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4547b9474c0ba043ab55a96059850dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapToSpawn: {fileID: 7174932915223360148, guid: 645d8b409e0bfec498722d2728054606,
+  trapToSpawn: {fileID: 7174932915223360148, guid: 70ab337c391bbac4596ef74b2f84879e,
     type: 3}
   trapModel: {fileID: 3710796590005066830}
   offset: 5
