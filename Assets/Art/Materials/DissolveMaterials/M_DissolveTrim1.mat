@@ -54,6 +54,6 @@ Material:
     - Vector1_E1C3E314: 1
     - _TextureTransition: 0
     m_Colors:
-    - Color_499D1382: {r: 0, g: 0, b: 0, a: 0}
+    - Color_499D1382: {r: 5.856082, g: 2.020137, b: 6.2067976, a: 0}
     - Color_58F184D9: {r: 0, g: 0, b: 0, a: 0}
     - Color_C18B1820: {r: 1, g: 1, b: 1, a: 0}
