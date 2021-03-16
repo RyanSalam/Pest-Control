@@ -21,13 +21,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Test_Blackhole_Outer
-  m_Shader: {fileID: -6465566751694194690, guid: a0a26c0324f16ea43a7b0dc85d3c12aa,
+  m_Shader: {fileID: -6465566751694194690, guid: 4e4af4125045b7e4faa99380db6649a3,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -57,6 +57,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DLOD_505D6DB7_Texture_1:
+        m_Texture: {fileID: 2800000, guid: fecbc2dbf76d9ab4089330c3e5ee2423, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_2627C88C_Texture_1:
         m_Texture: {fileID: 2800000, guid: a755dffd3a65f334aa5162022ada839e, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -80,6 +84,8 @@ Material:
     m_Floats:
     - Vector1_24FCA2E0: 3.8
     - Vector1_2C4A95D0: 0.5
+    - Vector1_2F5700E4: -0.86
+    - Vector1_715D9E0B: 0.02
     - Vector1_80565363: 5
     - Vector1_8A2FCB5E: 0.01
     - Vector1_D54F60A3: -0.02
@@ -106,7 +112,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_195383CE: {r: 0, g: 0, b: 0, a: 1}
+    - Color_249D2856: {r: 0.3904986, g: 0.1445799, b: 0.5377358, a: 0}
     - Color_85E16B9A: {r: 0.4291528, g: 0, b: 0.4716981, a: 0.8941177}
+    - Color_E0986A6F: {r: 0.09692496, g: 0.08904414, b: 0.2169811, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
