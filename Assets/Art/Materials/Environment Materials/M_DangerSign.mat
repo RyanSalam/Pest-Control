@@ -37,5 +37,5 @@ Material:
     - Vector1_F6051FBE: 0
     m_Colors:
     - Color_4B3646F7: {r: 0.13165456, g: 0, b: 0.3018868, a: 0}
-    - Color_6916F87C: {r: 1, g: 0.47070253, b: 0, a: 0}
+    - Color_6916F87C: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_B8C19C5: {r: -0.1, g: 0, b: 0, a: 0}
