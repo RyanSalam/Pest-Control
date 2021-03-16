@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using DG.Tweening;
 
 public class HUDUI : MonoBehaviour
 {
@@ -26,6 +27,13 @@ public class HUDUI : MonoBehaviour
     float coreMaxHealth;
     string currentPhase;
 
+    [HideInInspector] public bool warningNeeded = false;
+    [SerializeField] float warningMessageDuration;
+    [SerializeField] GameObject warningPanel;
+    Coroutine warningMessageCoroutine;
+    [SerializeField] Color warningColor;
+
+
     [SerializeField] GameObject enemyInfoPanel;
     [SerializeField] GameObject phaseTimer;
     [SerializeField] Image phaseTimerClock;
@@ -42,14 +50,11 @@ public class HUDUI : MonoBehaviour
     [SerializeField] Material glowingMat;
     Coroutine changeCoreColor;
 
-    //bool energyChanging = false;
-    //[SerializeField] float energyChangePerSecond;
-    //[SerializeField] int energyChangeAmount = 5;
     [SerializeField] public TMP_Text energyText;
     [SerializeField] TMP_Text energyChangeIndicator;
     [SerializeField] public int energyValue;
 
-    Coroutine energyChangeCoroutine;
+    //Coroutine energyChangeCoroutine;
 
     private void Start()
     {
@@ -59,6 +64,7 @@ public class HUDUI : MonoBehaviour
         waveNumberIndicator.SetActive(false);
         energyChangeIndicator.text = "";
         defaultCoreIcon = coreIcon.sprite;
+        warningPanel.SetActive(false);
     }
 
     private void Update()
@@ -70,6 +76,17 @@ public class HUDUI : MonoBehaviour
             phaseTimerProgress = WaveManager.Instance.buildPhaseTimer.GetProgress();
             //phaseTimerCount.text = Mathf.RoundToInt(WaveManager.Instance.buildPhaseTimer.GetRemaining()).ToString();
             phaseTimerClock.fillAmount = 1 - phaseTimerProgress;
+        }
+
+        if (warningNeeded)
+        {
+            if (warningMessageCoroutine == null)
+                warningMessageCoroutine = StartCoroutine(WarningMessage());
+            else
+            {
+                StopCoroutine(warningMessageCoroutine);
+                warningMessageCoroutine = StartCoroutine(WarningMessage());
+            }
         }
     }
 
@@ -108,6 +125,17 @@ public class HUDUI : MonoBehaviour
         //coreIcon.material = null;
         coreIcon.sprite = defaultCoreIcon;
         coreFill.sprite = defaultCoreHealthFill;
+    }
+
+    public IEnumerator WarningMessage()
+    {
+        energyText.rectTransform.DOPunchAnchorPos(Vector2.one * 20f, 1f, 50, 10f);
+        energyText.color = warningColor;
+        warningNeeded = false;
+        warningPanel.SetActive(true);
+        yield return new WaitForSeconds(warningMessageDuration);
+        warningPanel.SetActive(false);
+        energyText.color = Color.white;
     }
 
     public IEnumerator BuildPhase()

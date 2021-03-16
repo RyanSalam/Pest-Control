@@ -87,8 +87,11 @@ public class TrapPlacement : MonoBehaviour, IEquippable
     protected void PlaceTrap()
     {
         //Debug.Log("IS THIS BEING CALLED");
-        if (LevelManager.Instance.CurrentEnergy < trapPrice)
+        if (LevelManager.Instance.CurrentEnergy < trapPrice) 
+        { 
+            LevelManager.Instance.hudUI.warningNeeded = true;
             return;
+        }
 
         //setting the trap GameObject to spawn on raycast's position IF its on whatIsbuildable
         if (CanPlace)
