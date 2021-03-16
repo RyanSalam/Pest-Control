@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 696c516265d882846aa2001c8d402d01
+guid: 0fdb2b7f5d6305549926c9e3e849c6fd
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
@@ -59,7 +59,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.39499998
+      - time: 0.38623255
         functionName: DoAttack
         data: 
         objectReferenceParameter: {instanceID: 0}

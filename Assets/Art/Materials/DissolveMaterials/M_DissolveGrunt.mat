@@ -52,7 +52,7 @@ Material:
     - Vector1_75EA8EB6: 0
     - Vector1_BB06D878: 0
     - Vector1_E1C3E314: 2
-    - _TextureTransition: 0
+    - _TextureTransition: 0.32
     m_Colors:
     - Color_499D1382: {r: 1.5058824, g: 1.1843138, b: 0.1254902, a: 0}
     - Color_58F184D9: {r: 0, g: 0, b: 0, a: 0}
