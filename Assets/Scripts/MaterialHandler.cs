@@ -31,6 +31,20 @@ public static class MaterialHandler
         }
     }
 
+    public static void materialColorChanger(Material material, Color color, string shaderPropertyName)
+    {
+
+        //getting the objects renderer -> material
+
+        //Debug.Log("Changing color on:" + gameObject.name + " to: " + color.ToString());
+
+        if (material != null) //we will only change the material if it exists in the first place
+        {
+            //set our materials colour to the new desired one
+            if (color != null)
+                material.SetColor(shaderPropertyName, color);
+        }
+    }
 
 
     /// <summary>
