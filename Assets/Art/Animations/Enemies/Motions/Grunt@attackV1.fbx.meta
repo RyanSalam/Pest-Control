@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0eb00277837ed1f4aa922216ecc79531
+guid: 7565406d81ead6449bc126d2fb6bbd8d
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
@@ -39,7 +39,7 @@ ModelImporter:
       takeName: Take 001
       internalID: 0
       firstFrame: 1
-      lastFrame: 180
+      lastFrame: 48
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -59,7 +59,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.40666184
+      - time: 0.53999996
         functionName: DoAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
