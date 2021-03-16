@@ -17,6 +17,8 @@ public class Enemy_DroneV2 : Actor_Enemy
     [SerializeField] LayerMask collisionLayer;
     bool isColliding;
 
+    [SerializeField] float deathForce = 5;
+    private Vector3 hitNormal;
     float timeAtCollision;
 
     Rigidbody rb;
@@ -29,6 +31,7 @@ public class Enemy_DroneV2 : Actor_Enemy
     public Transform droneLegs;
 
     [SerializeField] GameObject deathVFX;
+    [SerializeField] GameObject initialDeathVFX;
 
     protected override void Awake()
     {
@@ -58,6 +61,7 @@ public class Enemy_DroneV2 : Actor_Enemy
             Debug.Log("Body not found");
 
         ObjectPooler.Instance.InitializePool(deathVFX, 5);
+        ObjectPooler.Instance.InitializePool(initialDeathVFX, 5);
 
         base.Start();
     }
@@ -136,7 +140,7 @@ public class Enemy_DroneV2 : Actor_Enemy
 
 
         //here, if our agent is above a certain velocity we will rotate the model on the x axis so it appears its tilted/propelling towards its target - its max mag-Velocity is agents speed parameter
-        if (agent.velocity.magnitude > 3.0f)
+        if (agent.velocity.magnitude > 3.0f && !isDying)
         {
             droneLegs.Rotate(transform.up * 400 * Time.deltaTime); //rotating x axis by 15 degrees - should slowly increment this up too but quaternions are wild
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.right * 50f), 0.5f);
@@ -144,7 +148,7 @@ public class Enemy_DroneV2 : Actor_Enemy
             //droneBody.LookAt(agent.velocity);
             //try out rotate around
         }
-        else //slowing down
+        else if (agent.velocity.magnitude < 2.9f && !isDying) //slowing down
         {
             droneLegs.Rotate(transform.up * 200 * Time.deltaTime);
             //droneLegs.rotation *= Quaternion.Euler( 0.5f, 0, 0); //trying to slowly bring the x rotation back to 0
@@ -174,6 +178,7 @@ public class Enemy_DroneV2 : Actor_Enemy
         agent.enabled = true;
         rb.isKinematic = true;
         isDying = false;
+        hitNormal = Vector3.zero;
         base.OnEnable();
     }
     public Transform searchForTarget()
@@ -222,16 +227,37 @@ public class Enemy_DroneV2 : Actor_Enemy
     protected override void Death()
     {
         StartCoroutine(startDroneDeath());
+        ObjectPooler.Instance.GetFromPool(initialDeathVFX, transform.position, transform.rotation);
         base.Death();
     }
-
+    public override void TakeDamage(DamageData data)
+    {
+        base.TakeDamage(data);
+        Vector3 hitNormal = data.hitNormal;
+    }
     IEnumerator startDroneDeath()
     {
         rb.isKinematic = false;
         agent.enabled = false;
-        rb.AddForce(Vector3.back * 3.5f, ForceMode.Impulse);
+        
+        //transform.root.rotation = Random.rotation;
+        //droneLegs.rotation = transform.root.rotation;
+
+        if (hitNormal != Vector3.zero)
+            rb.AddForce(-hitNormal.normalized * deathForce, ForceMode.Impulse);
+        else
+            rb.AddForce(-transform.forward * deathForce, ForceMode.Impulse);
+
+        //rb.AddTorque(rb.velocity.normalized * deathForce, ForceMode.Impulse);
+        rb.AddRelativeTorque(rb.velocity.normalized * deathForce, ForceMode.Impulse);
+        
+        //if we have the bool toggle before the waitforseconds it will add a delay to the death
+        //isDying = true;
+
+        yield return new WaitForSeconds(0.75f);
+
+        //this allowss for a little ragdoll-like effect
         isDying = true;
-        yield return new WaitForSeconds(1.5f);
     }
     private void OnCollisionEnter(Collision c)
     {
