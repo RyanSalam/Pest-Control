@@ -17,6 +17,10 @@ public abstract class Ability : ScriptableObject
     public string AbilityButton = "Button Name";
     public bool isAbilityOnCoolDown = false;
 
+    public int AbilityIndex;
+
+    protected Actor_Player player;
+
     /// <summary>
     /// Initializes the ability to be used.
     /// Takes in Gameobject parameter that will contain variables and components the ability will need.
@@ -33,7 +37,7 @@ public abstract class Ability : ScriptableObject
 
         isAbilityOnCoolDown = false;
 
-        Actor_Player player = abilitySource.GetComponent<Actor_Player>();
+        player = abilitySource.GetComponent<Actor_Player>();
         player.playerInputs.onActionTriggered += HandleInput;
     }
     public virtual void HandleInput(InputAction.CallbackContext context) 
@@ -49,6 +53,8 @@ public abstract class Ability : ScriptableObject
 
     public virtual void Execute()
     {
+        player.CurrentEquipped.GetAnimator().SetTrigger("Ability");
+        player.CurrentEquipped.GetAnimator().SetInteger("AbilityIndex", AbilityIndex);
         lifetimeTimer.PlayFromStart();
     }
     /// <summary>

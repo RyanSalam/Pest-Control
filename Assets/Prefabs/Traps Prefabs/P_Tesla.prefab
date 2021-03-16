@@ -247,6 +247,19 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &8550207271104192359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6742085253441843620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3c5b48d127693438241fad0bb277fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trapParent: {fileID: 6662004006499764242}
 --- !u!1001 &342461521943459676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -627,6 +640,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 285780cb285a2264092abe62c62c6d06, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb1366277757d5340894bd490a18f77b, type: 3}
+--- !u!1 &6742085253441843620 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100032, guid: eb1366277757d5340894bd490a18f77b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6742085253441877860}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6742085253441744324 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400032, guid: eb1366277757d5340894bd490a18f77b,

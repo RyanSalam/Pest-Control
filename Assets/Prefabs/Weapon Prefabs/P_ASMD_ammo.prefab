@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f35c8c6f47b225b4486ba1b1a142f28e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 25
   projForce: 50
   color: {r: 0, g: 0.99030876, b: 1, a: 1}
 --- !u!65 &8855913537942772735

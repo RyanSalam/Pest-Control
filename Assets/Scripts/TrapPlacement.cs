@@ -123,6 +123,9 @@ public class TrapPlacement : MonoBehaviour, IEquippable
 
         // Registering inputs when we equip this.
         LevelManager.Instance.Player.playerInputs.onActionTriggered += HandleInput;
+
+        // Disable Crosshair on UI
+        LevelManager.Instance.WeaponUI.crosshair.enabled = false;
     }
 
     public void Unequip()
@@ -131,6 +134,9 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         player.PlayerArms.gameObject.SetActive(false);
         // Deregistering inputs when we unequip this.
         LevelManager.Instance.Player.playerInputs.onActionTriggered -= HandleInput;
+
+        // Enable Crosshair back on UI
+        LevelManager.Instance.WeaponUI.crosshair.enabled = true;
     }
 
     protected void OnDrawGizmos()
@@ -143,8 +149,8 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         Gizmos.DrawWireCube(trapModel.position, Vector3.one * obstacleDetectionRange);
     }
 
-    public void PlayAnimation(string animation)
+    public Animator GetAnimator()
     {
-        player.PlayerArms.SetTrigger(animation);
+        return player.PlayerArms;
     }
 }

@@ -98,7 +98,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _WeaponEmission: {r: 0, g: 1.4980392, b: 0.039215688, a: 1}
+    - _WeaponEmission: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &1189230407166440251
 MonoBehaviour:
   m_ObjectHideFlags: 11

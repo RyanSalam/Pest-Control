@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.Video;
 
 public class MenuHandler : MonoBehaviour
 {
@@ -13,12 +14,21 @@ public class MenuHandler : MonoBehaviour
     public string levelname;
     AudioCue Cues;
 
+    [Header("Panel GameObjects")]
     public GameObject settingsPanel;
     public GameObject characterPanel;
     public GameObject levelPanel;
-    
+    public GameObject loadingScreenPanel;
 
-    //Character Panel
+    [Header("Loading Screen")]
+    public Slider loadingSlider;
+    public bool startButtonPressed = false;
+    public GameObject levelStartButton;
+    public TMP_Text loadingText;
+    public TMP_Text loadPercentage;
+    public VideoPlayer videoPlayer;
+
+    [Header("Character Panel")]
     [SerializeField] TMP_Text charName;
     [SerializeField] TMP_Text charDesc;
     [SerializeField] Image charProfile;
@@ -29,15 +39,16 @@ public class MenuHandler : MonoBehaviour
     [SerializeField] TMP_Text A2_text;
     [SerializeField] TMP_Text A2_name;
 
-    //Level Panel
+    [Header("Level Panel")]
     [SerializeField] TMP_Text maptitle;
     [SerializeField] Image map;
 
+    [Header("ControllerInput")]
     [SerializeField] GameObject startingButton;
 
     private void Awake()
     {
-       
+        startButtonPressed = false;
     }
 
 
@@ -50,12 +61,19 @@ public class MenuHandler : MonoBehaviour
         Cues = GetComponent<AudioCue>();
 
         SetSelectedButton(startingButton);
+
+        levelStartButton.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void PressedStartButton()
+    {
+        startButtonPressed = true;
     }
 
     public void TurnObjectOn(GameObject obj)

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d9658d2c3c54dd47a6d2e10883834c8, type: 3}
   m_Name: ExpertASMDAltFire
   m_EditorClassIdentifier: 
-  energyCostPerFire: 10
+  energyCostPerFire: 150
   secondaryDamage: 8
   altFireIcon: {fileID: 21300000, guid: 97d2d332942b1fe42a16f3584f3b426c, type: 3}
   projectilePrefab: {fileID: 3068646536275432137, guid: ec25280f86832dc409b369cbb5cac86b,
