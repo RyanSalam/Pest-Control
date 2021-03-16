@@ -310,6 +310,10 @@ public abstract class Weapon : MonoBehaviour, IEquippable
             weaponAttachment.AltShoot();
             animator.SetTrigger("SecondaryFire");
         }
+        else
+        {
+            LevelManager.Instance.hudUI.warningNeeded = true;
+        }
     }
 
     private void OnEnable()
