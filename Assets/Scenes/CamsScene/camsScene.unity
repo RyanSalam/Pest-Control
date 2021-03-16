@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -8419,7 +8419,7 @@ PrefabInstance:
     - target: {fileID: 3414804625668340203, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3414804625668340206, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}
@@ -19624,7 +19624,7 @@ PrefabInstance:
     - target: {fileID: 3414804625668340203, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3414804625668340206, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}
@@ -46518,7 +46518,7 @@ PrefabInstance:
     - target: {fileID: 3414804625668340203, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3414804625668340206, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}
@@ -47077,7 +47077,7 @@ PrefabInstance:
     - target: {fileID: 3414804625668340203, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3414804625668340206, guid: bf07f2fb012e7cd419acf52822c039ca,
         type: 3}
@@ -74928,6 +74928,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: P_Grunt
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864417393676115726, guid: bbbb804aa00c5624b841f067f4350dc2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbbb804aa00c5624b841f067f4350dc2, type: 3}

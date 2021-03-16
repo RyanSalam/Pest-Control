@@ -638,8 +638,11 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 16384
+  deathForce: 5
   droneLegs: {fileID: 2803846637370935330}
   deathVFX: {fileID: 1840910365998424, guid: 9f423c73d6fd3e542a42b41623e81db1, type: 3}
+  initialDeathVFX: {fileID: 1845764070681338, guid: ac2312a3e32471549882f1a6da5568e6,
+    type: 3}
 --- !u!195 &3414804625668340201
 NavMeshAgent:
   m_ObjectHideFlags: 0
