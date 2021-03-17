@@ -39,7 +39,7 @@ public class HUDUI : MonoBehaviour
     [SerializeField] Image phaseTimerClock;
     [SerializeField] GameObject waveNumberIndicator;
     [SerializeField] TMP_Text waveNumberText;
-    [SerializeField] GameObject buildPhaseInfo;
+    [SerializeField] public GameObject buildPhaseInfo;
     public float phaseTimerProgress;
 
     [SerializeField] Sprite defaultCoreHealthFill;
@@ -207,74 +207,6 @@ public class HUDUI : MonoBehaviour
     {
         enemyCount.text = WaveManager.Instance.enemiesRemaining.ToString();
     }
-
-    //public void EnergyChange()
-    //{
-
-    //    if (energyValue == LevelManager.Instance.CurrentEnergy) return;
-
-    //    int.TryParse(energyText.text, out energyValue);
-
-    //    //Debug.Log("energyValue: " + energyValue);
-    //    //Debug.Log("LevelManager.Instance.CurrentEnergy: " + LevelManager.Instance.CurrentEnergy.ToString());
-
-    //    // If energy goes down
-    //    if (energyValue > LevelManager.Instance.CurrentEnergy)
-    //    {
-    //        energyChangeAmount = energyValue - LevelManager.Instance.CurrentEnergy;
-    //        if (energyChangeCoroutine == null)
-    //            energyChangeCoroutine = StartCoroutine(EnergyChangeSequence(false));
-    //        else
-    //        {
-    //            StopCoroutine(energyChangeCoroutine);
-    //            energyText.text = LevelManager.Instance.CurrentEnergy.ToString();
-    //            energyChangeCoroutine = StartCoroutine(EnergyChangeSequence(false));
-    //        }
-    //    }
-    //    // If energy goes up
-    //    else if (LevelManager.Instance.CurrentEnergy > energyValue)
-    //    {
-    //        energyChangeAmount = LevelManager.Instance.CurrentEnergy - energyValue;
-    //        if (energyChangeCoroutine == null)
-    //            energyChangeCoroutine = StartCoroutine(EnergyChangeSequence(true));
-    //        else
-    //        {
-    //            StopCoroutine(energyChangeCoroutine);
-    //            energyText.text = LevelManager.Instance.CurrentEnergy.ToString();
-    //            energyChangeCoroutine = StartCoroutine(EnergyChangeSequence(true));
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("No Energy Change");
-    //    }
-
-    //}
-
-    //IEnumerator EnergyChangeSequence(bool increasing)
-    //{
-    //    //Debug.Log("Energy Change started!");
-    //    energyChanging = true;
-    //    if (increasing)
-    //    {
-    //        energyChangeIndicator.text = "+" + energyChangeAmount.ToString();
-    //    }
-    //    else
-    //    {
-    //        energyChangeIndicator.text = "-" + energyChangeAmount.ToString();
-    //    }
-
-    //    while (energyValue != LevelManager.Instance.CurrentEnergy)
-    //    {
-    //        energyValue += Mathf.RoundToInt(energyChangePerSecond);
-    //        energyText.text = energyValue.ToString();
-    //        yield return new WaitForSeconds(1f);
-    //    }
-
-    //    energyChanging = false;
-    //    energyChangeIndicator.text = "";
-    //    Debug.Log("Energy change done!");
-    //}
 
     #endregion
 
