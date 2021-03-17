@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class ShopUI : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class ShopUI : MonoBehaviour
     public GameObject[] hudElements;
     [SerializeField] InventorySlot[] inventorySlots;
     [SerializeField] WeaponUI weaponUI;
+    [SerializeField] GameObject warningPanel;
+    [HideInInspector] public bool warningNeeded = false;
+    Coroutine warningMessageCoroutine;
+    [SerializeField] Color warningColor;
+    [SerializeField] float warningMessageDuration;
 
     private void Awake()
     {
@@ -31,6 +37,32 @@ public class ShopUI : MonoBehaviour
     {
         LevelManager.Instance.onItemChangeCallback += UpdateItemUI;
         Customer = LevelManager.Instance.Player;
+        warningPanel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (warningNeeded)
+        {
+            if (warningMessageCoroutine == null)
+                warningMessageCoroutine = StartCoroutine(WarningMessage());
+            else
+            {
+                StopCoroutine(warningMessageCoroutine);
+                warningMessageCoroutine = StartCoroutine(WarningMessage());
+            }
+        }
+    }
+
+    public IEnumerator WarningMessage()
+    {
+        customerEnergy.rectTransform.DOPunchAnchorPos(Vector2.one * 20f, 1f, 50, 10f);
+        customerEnergy.color = warningColor;
+        warningNeeded = false;
+        warningPanel.SetActive(true);
+        yield return new WaitForSeconds(warningMessageDuration);
+        warningPanel.SetActive(false);
+        customerEnergy.color = Color.white;
     }
 
     public void ToggleShop()
@@ -101,5 +133,15 @@ public class ShopUI : MonoBehaviour
             customerEnergy.text = LevelManager.Instance.CurrentEnergy.ToString();
             combatHUD.GetComponent<HUDUI>().energyText.text = LevelManager.Instance.CurrentEnergy.ToString();
         }
+    }
+
+    private void OnDisable()
+    {
+        if (warningMessageCoroutine != null)
+        {
+            StopCoroutine(warningMessageCoroutine);
+            warningMessageCoroutine = null;
+        }
+        warningPanel.SetActive(false);
     }
 }
