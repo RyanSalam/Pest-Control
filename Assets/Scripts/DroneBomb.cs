@@ -36,7 +36,7 @@ public class DroneBomb : MonoBehaviour
         if (other.gameObject.tag == "Trap")
         {
             Trap trap = other.gameObject.GetComponent<Trap>();
-            trap.CurrentUses += damage; //increment their current uses - aka damage them
+            trap.TakeDamage(damage);
         }
     }
 

@@ -68,7 +68,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public Action onItemChangeCallback; //delgate void for when an item is changed from inventory 
 
-    [HideInInspector] public List<Trap> activeTraps = new List<Trap>();
+     public List<Trap> activeTraps = new List<Trap>();
 
     // Dictionary to store all the item classes and bind them to a gameobject that gets spawned 
     // when an item is added to the inventory.
