@@ -415,6 +415,8 @@ MonoBehaviour:
   shopUI: {fileID: 0}
   combatHUD: {fileID: 6852412233157675776}
   pauseMenu: {fileID: 2645232624158387402}
+  settingsPanel: {fileID: 8204111531393590026}
+  pausePanel: {fileID: 336101300158112904}
   hudElements:
   - {fileID: 752490256329279113}
   - {fileID: 1783641129291696704}
@@ -1838,7 +1840,7 @@ GameObject:
   - component: {fileID: 3760680852613575077}
   - component: {fileID: 8974891950240742649}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PausePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

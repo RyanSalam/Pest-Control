@@ -17,6 +17,8 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private GameObject shopUI;
     [SerializeField] public GameObject combatHUD;
     [SerializeField] public GameObject pauseMenu;
+    [SerializeField] public GameObject settingsPanel;
+    [SerializeField] public GameObject pausePanel;
     public GameObject[] hudElements;
     [SerializeField] InventorySlot[] inventorySlots;
     [SerializeField] WeaponUI weaponUI;
@@ -68,7 +70,7 @@ public class ShopUI : MonoBehaviour
 
     public IEnumerator WarningMessage()
     {
-        customerEnergy.rectTransform.DOPunchAnchorPos(Vector2.one * 20f, 1f, 50, 10f).OnComplete(() => customerEnergy.rectTransform.DORestart());
+        customerEnergy.rectTransform.DOPunchAnchorPos(Vector2.one * 20f, 1f, 50, 10f);
         customerEnergy.color = warningColor;
         warningNeeded = false;
         warningPanel.SetActive(true);
