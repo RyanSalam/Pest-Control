@@ -208,7 +208,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         float elapsed = 0f;
 
-        hudUI.energyText.rectTransform.DOPunchAnchorPos(Vector2.one * 5f, 0.75f, 10, 5f);
+        hudUI.energyText.rectTransform.DOPunchAnchorPos(Vector2.one * 5f, 0.75f, 10, 5f).OnComplete(()=>hudUI.energyText.rectTransform.DORestart());
 
         while (elapsed < timeForEnergyUpdate)
         {

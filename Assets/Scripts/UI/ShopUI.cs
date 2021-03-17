@@ -68,7 +68,7 @@ public class ShopUI : MonoBehaviour
 
     public IEnumerator WarningMessage()
     {
-        customerEnergy.rectTransform.DOPunchAnchorPos(Vector2.one * 20f, 1f, 50, 10f);
+        customerEnergy.rectTransform.DOPunchAnchorPos(Vector2.one * 20f, 1f, 50, 10f).OnComplete(() => customerEnergy.rectTransform.DORestart());
         customerEnergy.color = warningColor;
         warningNeeded = false;
         warningPanel.SetActive(true);
