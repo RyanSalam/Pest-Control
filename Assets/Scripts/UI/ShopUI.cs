@@ -26,6 +26,12 @@ public class ShopUI : MonoBehaviour
     [SerializeField] Color warningColor;
     [SerializeField] float warningMessageDuration;
 
+    public Image[] in_Game_Inventory;
+
+    [SerializeField] GameObject phaseTimer;
+    [SerializeField] Image phaseTimerClock;
+    public float phaseTimerProgress;
+
     private void Awake()
     {
         if (shopUI == null)
@@ -52,6 +58,12 @@ public class ShopUI : MonoBehaviour
                 warningMessageCoroutine = StartCoroutine(WarningMessage());
             }
         }
+
+        if (phaseTimer.activeSelf)
+        {
+            phaseTimerProgress = WaveManager.Instance.buildPhaseTimer.GetProgress();
+            phaseTimerClock.fillAmount = 1 - phaseTimerProgress;
+        }
     }
 
     public IEnumerator WarningMessage()
@@ -77,6 +89,12 @@ public class ShopUI : MonoBehaviour
         {
             hudElement.SetActive(true);
         }
+        foreach (Image img in in_Game_Inventory)
+        {
+            img.enabled = true;
+        }
+
+        LevelManager.Instance.hudUI.buildPhaseInfo.SetActive(false);
 
         gameObject.SetActive(false);
         combatHUD.SetActive(true);
@@ -97,6 +115,11 @@ public class ShopUI : MonoBehaviour
         {
             hudElement.SetActive(!gameObject.activeSelf);
         }
+        foreach (Image img in in_Game_Inventory)
+        {
+            img.enabled = !gameObject.activeSelf;
+        }
+        LevelManager.Instance.hudUI.buildPhaseInfo.SetActive(!gameObject.activeSelf);
 
         //Time.timeScale = gameObject.activeSelf ? 0.0f : 1.0f;
         Cursor.lockState = gameObject.activeSelf ? CursorLockMode.Confined : CursorLockMode.Locked;
