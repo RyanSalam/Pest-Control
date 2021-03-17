@@ -154,11 +154,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: PSIPBRG_ SDF
+  m_Name: PSIPBRG_SDF
   m_EditorClassIdentifier: 
-  hashCode: 849120739
+  hashCode: -625004669
   material: {fileID: -906426509141493926}
-  materialHashCode: -41117
+  materialHashCode: -529152189
   m_Version: 1.1.0
   m_SourceFontFileGUID: 622a4adcfe118bf4a8b4951468b84017
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 622a4adcfe118bf4a8b4951468b84017,
