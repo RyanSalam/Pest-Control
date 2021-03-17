@@ -96,6 +96,7 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             // Player does not have enough energy
             Debug.Log("You don't have enough Energy to purchase this item!");
+            shop.warningNeeded = true;
         }
         shop.RefreshEnergyText();
     }

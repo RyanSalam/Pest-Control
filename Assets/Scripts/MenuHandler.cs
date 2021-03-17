@@ -21,12 +21,12 @@ public class MenuHandler : MonoBehaviour
     public GameObject loadingScreenPanel;
 
     [Header("Loading Screen")]
-    public Slider loadingSlider;
     public bool startButtonPressed = false;
     public GameObject levelStartButton;
     public TMP_Text loadingText;
     public TMP_Text loadPercentage;
     public VideoPlayer videoPlayer;
+    public Image loadingBar;
 
     [Header("Character Panel")]
     [SerializeField] TMP_Text charName;
@@ -49,6 +49,7 @@ public class MenuHandler : MonoBehaviour
     private void Awake()
     {
         startButtonPressed = false;
+        videoPlayer.Prepare();
     }
 
 
@@ -79,7 +80,6 @@ public class MenuHandler : MonoBehaviour
     public void TurnObjectOn(GameObject obj)
     {
         obj.SetActive(true);
-        Debug.Log("clicked");
     }
 
     public void SetSelectedButton(GameObject obj)

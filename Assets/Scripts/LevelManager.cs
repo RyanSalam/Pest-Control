@@ -75,7 +75,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     private Dictionary<Item, IEquippable> m_equipables;
     public Dictionary<Item, IEquippable> Equipables => m_equipables;
 
-    [SerializeField] HUDUI hudUI;
+    [SerializeField] public HUDUI hudUI;
     [SerializeField] ShopUI shopUI;
     [SerializeField] WeaponUI weaponUI;
     public WeaponUI WeaponUI { get { return weaponUI; } }
@@ -208,11 +208,13 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         float elapsed = 0f;
 
+        hudUI.energyText.rectTransform.DOPunchAnchorPos(Vector2.one * 5f, 0.75f, 10, 5f);
+
         while (elapsed < timeForEnergyUpdate)
         {
             elapsed += Time.deltaTime;
             float ratio = elapsed / timeForEnergyUpdate;
-            previousEnergy = (int)Mathf.Lerp(previousEnergy, updatedEnergy, ratio);
+            previousEnergy = (int)Mathf.Lerp(previousEnergy, updatedEnergy, ratio + 0.1f);
             hudUI.energyText.text = previousEnergy.ToString();
             yield return null;
         }

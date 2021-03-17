@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Trap : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class Trap : MonoBehaviour
     [SerializeField] protected float buildDuration;
     [SerializeField] protected Color trapColor;
     public event System.Action TrapDestroyed;
+
+    [SerializeField] protected Image healthBar;
+    [SerializeField] protected Color healthStartColor = Color.green;
+    [SerializeField] protected Color healthEndColor = Color.red;
 
 
     private int _currentUses = 0;
@@ -23,7 +28,10 @@ public class Trap : MonoBehaviour
                 gameObject.SetActive(false);
                 LevelManager.Instance.GetComponent<AudioCue>().PlayAudioCue(LevelManager.Instance.Char_SO.TrapDestroyed, 5);
             }
-                
+
+            healthBar.fillAmount = 1 - (float)CurrentUses / (float)maxUses;
+            Color lerpColor = Color.Lerp(healthStartColor, healthEndColor, 1 - healthBar.fillAmount);
+            MaterialHandler.materialColorChanger(healthBar.material, lerpColor, "_EmissionColor");
         }
     }
     protected bool isTrapBuilt;
@@ -53,7 +61,10 @@ public class Trap : MonoBehaviour
             buildTimer.Tick(Time.deltaTime); //increasing build timer before the trap is built
             return;
         }
-        
+
+        //healthBar.fillAmount = 1 - (float)CurrentUses / (float)maxUses;
+        Debug.Log("CurrentUses/maxUses: " + (float)CurrentUses / (float)maxUses);
+
     }
 
     public virtual void Activate()

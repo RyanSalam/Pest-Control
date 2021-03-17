@@ -42,7 +42,8 @@ public class GameManager : MonoSingleton<GameManager>
             float progress = Mathf.Clamp01(operation.progress / .9f);
             //Debug.Log("Progress: " + operation.progress);
 
-            menuHandler.loadingSlider.value = progress;
+            menuHandler.loadingBar.fillAmount = progress;
+
             if (operation.progress >= 0.9f)
             {
                 menuHandler.loadPercentage.text = "100%";
@@ -60,8 +61,6 @@ public class GameManager : MonoSingleton<GameManager>
                 // Update current loading progress 
                 menuHandler.loadPercentage.text = (Mathf.RoundToInt(operation.progress * 100 * 1.1f)) + "%";
             }
-
-
             yield return null;
         }
 
