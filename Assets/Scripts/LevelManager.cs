@@ -109,7 +109,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         if (Char_SO != null)
         {
             var temp = Instantiate(Char_SO.player, playerSpawnPoint.position, playerSpawnPoint.rotation);
-            _player.gameObject.SetActive(false);
+            //_player.gameObject.SetActive(false);
             temp.AbilityOne = Char_SO.ab1;
             temp.AbilityTwo = Char_SO.ab2;
             temp.AbilityOne.Initialize(temp.gameObject);
