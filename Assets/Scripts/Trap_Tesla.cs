@@ -16,9 +16,9 @@ public class Trap_Tesla : Trap
     private Actor_Enemy enemyTarget;
     public bool canAttack = true;
     private float timeAttack = 0.0f;
-    private float attackDelay = 0.1f;
+    private float attackDelay = 2f;
     
-    private List<Actor_Enemy> enemies = new List<Actor_Enemy>();
+    public List<Actor_Enemy> enemies = new List<Actor_Enemy>();
     private LineRenderer lineRenderer;
 
     [SerializeField] private Transform chainOrigin;
@@ -40,20 +40,20 @@ public class Trap_Tesla : Trap
 
     protected override void Update()
     {
-        if (Physics.SphereCast(chainOrigin.position, chainRadius, chainOrigin.position, out RaycastHit hit, 2f, whatIsEnemy) && canAttack) //searching every frame using sphere cast for an enemy
+        if (Physics.SphereCast(chainOrigin.position, chainRadius, chainOrigin.position, out RaycastHit hit, chainRadius, whatIsEnemy) && canAttack) //searching every frame using sphere cast for an enemy
           
         {
             enemyTarget = hit.collider.gameObject.GetComponent<Actor_Enemy>(); //enemy goes collides with sphere cast 
 
             if (enemyTarget != null) // if there is an enemy, add it to the list, attack!
             {
-                //enemies.Add(enemyTarget);
+                enemies.Clear();
+                enemies.Add(enemyTarget);
                 Debug.Log("enemy target not null");
                 Debug.DrawLine(transform.position, hit.point, Color.red, 3f);
+                canAttack = false;
                 Activate(); //activate the trap when there is an enemy in the collider 
                 timeAttack = Time.time;
-                canAttack = false;
-                StartCoroutine(Cooldown());
             }
         }
 
@@ -76,9 +76,9 @@ public class Trap_Tesla : Trap
         lineRenderer.positionCount = currentChainAmount + 1;
         for (int i = 1; i < currentChainAmount + 1; i++) // adding enemies to the list and adding current chain amount 
         {
-
+            
             Vector3 position = enemies[i - 1].transform.position;
-            Debug.DrawLine(enemyTarget.transform.position, enemies[i - 1].transform.position, Color.red, 3f);
+            //Debug.DrawLine(enemyTarget.transform.position, enemies[i - 1].transform.position, Color.red, 3f);
             position.y += 1.4f;
             ObjectPooler.Instance.GetFromPool(particleVFX, position, enemies[i - 1].transform.rotation);
             //Instantiate(particleVFX, position, enemies[i - 1].transform.rotation);
@@ -100,12 +100,13 @@ public class Trap_Tesla : Trap
         //base.Activate();
         //StartCoroutine(Cooldown());
         Anim.SetBool("isAttacking", true);
-        Anim.SetBool("isIdle", false); 
+        Anim.SetBool("isIdle", false);
+        StartCoroutine(Cooldown());
     }
 
     private IEnumerator Cooldown() //cooldown for attacks
     {
-        yield return new WaitForSeconds(attackDelay + .2f);
+        yield return new WaitForSeconds(attackDelay);
 
         lineRenderer.enabled = false;
         //enemies = new List<Actor_Enemy>();
@@ -116,7 +117,6 @@ public class Trap_Tesla : Trap
         enemyTarget = null;
         Anim.SetBool("isAttacking", false);
         Anim.SetBool("isIdle", true);
-        base.Activate();
     }
 
     void EnemySphereCast(Actor_Enemy currentEnemy) //the base of the chain, creating sphere cast on another enemy so it can chain another enemy
@@ -135,10 +135,10 @@ public class Trap_Tesla : Trap
 
         foreach (RaycastHit enemyHit in hits) //hit new enemies you have not previously hit
         {
-            // newEnemy = enemyHit.transform.GetComponent<Actor_Enemy>();
-            if (!enemies.Contains(newEnemy))
+            newEnemy = enemyHit.transform.GetComponent<Actor_Enemy>();
+            if (!enemies.Contains(newEnemy) && newEnemy.gameObject.activeSelf == true)
             {
-                newEnemy = enemyHit.transform.GetComponent<Actor_Enemy>();
+                //newEnemy = enemyHit.transform.GetComponent<Actor_Enemy>();
                 enemies.Add(newEnemy);
                 break;
             }
