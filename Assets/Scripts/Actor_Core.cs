@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class Actor_Core : Actor
 {
@@ -10,7 +11,8 @@ public class Actor_Core : Actor
         [Header("Default Set Up")]
         [SerializeField] Rigidbody ring;
         [SerializeField] Vector3 rotationDir;
-        [SerializeField] float speed;
+        public float defaultSpeed;
+        private float currentSpeed;
 
         [Header("Attributes For Ring Dropping")]
         [Tooltip("The health percentage required to turn this ring off. 1 is 100% (Full Health) and 0 is 0% (No Health) ")]
@@ -26,7 +28,12 @@ public class Actor_Core : Actor
         public void HandleRingRotation()
         {
             if (!bIsRotating) return;
-            ring.transform.Rotate(rotationDir * speed * Time.deltaTime);
+            ring.transform.Rotate(rotationDir * currentSpeed * Time.deltaTime);
+        }
+
+        public void SetSpeed(float newSpeed)
+        {
+            currentSpeed = newSpeed;
         }
 
         // Delegate takes 
@@ -48,16 +55,37 @@ public class Actor_Core : Actor
     }
 
     [SerializeField] CoreRing[] rings;
+    [SerializeField] protected float damagedRingSpeed = 120.0f;
+    protected Timer CoreSpeedTimer;
+    [SerializeField] protected float coreSpeedupDuration = 1.0f;
+
+    [SerializeField] Transform coreCentre;
+    [SerializeField] GameObject CoreVFX;
 
     protected override void Start()
     {
         base.Start();
 
+        m_Anim = CoreVFX.GetComponent<Animator>();
+        Anim.SetFloat("HealthRatio", CurrentHealth / maxHealth);
+
+        CoreSpeedTimer = new Timer(coreSpeedupDuration, false);
+        CoreSpeedTimer.OnTimerEnd += ResetRingSpeed;
+        OnDamageTaken += HandleCoreDamage;
+
         // Binding the core's health change delegate to each ring's check function
         foreach (CoreRing ring in rings)
         {
-            OnHealthChanged += ring.CheckThreshold;
-            
+            ring.SetSpeed(ring.defaultSpeed);
+            OnHealthChanged += ring.CheckThreshold;            
+        }
+    }
+
+    private void ResetRingSpeed()
+    {
+        foreach (CoreRing ring in rings)
+        {
+            ring.SetSpeed(ring.defaultSpeed);
         }
     }
 
@@ -67,7 +95,24 @@ public class Actor_Core : Actor
         {
             ring.HandleRingRotation();
         }
+
+        CoreSpeedTimer.Tick(Time.deltaTime);
     }
 
-    
+    protected void LateUpdate()
+    {
+        Anim.SetFloat("HealthRatio", CurrentHealth / maxHealth);
+    }
+
+    protected void HandleCoreDamage(DamageData data)
+    {
+        CoreSpeedTimer.PlayFromStart();
+        Anim.SetTrigger("Hit");
+        coreCentre.DOShakePosition(1f, 0.1f).OnComplete(()=> coreCentre.DORestart());
+
+        foreach(CoreRing ring in rings)
+        {
+            ring.SetSpeed(damagedRingSpeed);
+        }
+    }
 }
