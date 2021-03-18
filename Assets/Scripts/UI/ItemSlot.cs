@@ -52,11 +52,13 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (LevelManager.Instance.InventoryList.Contains(item))
         {
             ownedText.text = "Owned";
+            ownedText.fontSize = 19.7f;
             BorderImage.sprite = ownedSprite;
         }
         else
         {
             ownedText.text = "Buy";
+            ownedText.fontSize = 25f;
             BorderImage.sprite = unselectedSprite;
         }
 
