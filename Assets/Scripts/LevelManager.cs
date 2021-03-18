@@ -224,7 +224,9 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         shopUI.pauseMenu.SetActive(!shopUI.pauseMenu.activeSelf);
         shopUI.combatHUD.SetActive(!shopUI.combatHUD.activeSelf);
-        
+
+        shopUI.settingsPanel.SetActive(false);
+        shopUI.pausePanel.SetActive(true);
 
         Time.timeScale = shopUI.pauseMenu.gameObject.activeSelf ? 0.0f : 1.0f;
         Cursor.lockState = shopUI.pauseMenu.activeSelf ? CursorLockMode.Confined : CursorLockMode.Locked;
