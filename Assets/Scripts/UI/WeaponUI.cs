@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WeaponUI : MonoBehaviour
 {
-    [SerializeField] Image heatBar;
+    [SerializeField] public Image heatBar;
     [SerializeField] public Image crosshair;
     [SerializeField] Image hitmarkerImage;
     [SerializeField] float hitmarkerTime;
