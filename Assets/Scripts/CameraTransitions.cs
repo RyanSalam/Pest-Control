@@ -9,6 +9,7 @@ public class CameraTransitions : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera playerView;
     [SerializeField] CinemachineVirtualCamera coreView;
+    [SerializeField] CinemachineVirtualCamera winView;
 
     [SerializeField] CinemachineBrain cameraBrain;
     [SerializeField] Camera _camera;
@@ -18,6 +19,7 @@ public class CameraTransitions : MonoBehaviour
     [SerializeField] float timeTillExplosion = 3.0f;
     [SerializeField] GameObject CoreExplosion;
     [SerializeField] GameObject CombatHud;
+    [SerializeField] GameObject fireWorks;
 
     private void Start()
     {
@@ -40,10 +42,10 @@ public class CameraTransitions : MonoBehaviour
         _camera.gameObject.SetActive(true);
         coreView.Priority = 15;
         playerView.Priority = 0;
-        StartCoroutine(DisplayGameOver());
+        StartCoroutine(DisplayGameOverLose());
     }
 
-    private IEnumerator DisplayGameOver()
+    private IEnumerator DisplayGameOverLose()
     {
         yield return new WaitForSeconds(timeTillExplosion);
         CoreExplosion.SetActive(true);
@@ -52,7 +54,25 @@ public class CameraTransitions : MonoBehaviour
         sequence.Append(CoreExplosion.transform.DOPunchScale(Vector3.one * 35, 2.5f, 0));
         sequence.Append(CoreExplosion.transform.DOScale(Vector3.one * 50.0f, 0.5f));
 
-        sequence.Play().OnComplete(()=> LevelManager.Instance.GameOver(false));
-        
+        sequence.Play().OnComplete(()=> LevelManager.Instance.GameOver(false));        
+    }
+
+    public void HandleWinTransition()
+    {
+        LevelManager.Instance.Player.playerInputs.SwitchCurrentActionMap("UI");
+        LevelManager.Instance.Player.PlayerCam.gameObject.SetActive(false);
+
+        CombatHud.SetActive(false);
+        _camera.gameObject.SetActive(true);
+
+        StartCoroutine(DisplayGameOverWin());
+    }
+
+    private IEnumerator DisplayGameOverWin()
+    {
+        yield return new WaitForSeconds(3.5f);
+        fireWorks.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        LevelManager.Instance.GameOver(true);
     }
 }

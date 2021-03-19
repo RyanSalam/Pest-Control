@@ -124,6 +124,8 @@ public class WaveManager : MonoSingleton<WaveManager>
     Coroutine waveInfoCoroutine;
     #endregion
 
+    [SerializeField] CameraTransitions cameraSettings;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -189,7 +191,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         // Game win condition
         if (waveIndex >= levelWaves.Count)
         {
-            LevelManager.Instance.GameOver(true);
+            cameraSettings.HandleWinTransition();
         }
         else
         {

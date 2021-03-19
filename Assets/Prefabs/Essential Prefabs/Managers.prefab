@@ -466,8 +466,12 @@ MonoBehaviour:
   _player: {fileID: 0}
   Char_SO: {fileID: 0}
   waveEnergyReward: 0
-  playerSpawnPoint: {fileID: 4025678378082292571}
+  playerSpawns:
+  - {fileID: 4025678378082292571}
   respawnTimer: 2
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
   spectatorCamera: {fileID: 7313690440217495902}
   EndGameMenu: {fileID: 1273472095868254689}
   EndGameText: {fileID: 7438268069115452912}
@@ -636,6 +640,7 @@ MonoBehaviour:
       type: 3}
     audioToPlay: {fileID: 0}
   ac: {fileID: 0}
+  uiAudio: {fileID: 0}
 --- !u!1001 &3136140622813290153
 PrefabInstance:
   m_ObjectHideFlags: 0
