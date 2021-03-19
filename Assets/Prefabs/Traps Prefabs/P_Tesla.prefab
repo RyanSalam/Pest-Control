@@ -311,12 +311,15 @@ MonoBehaviour:
   buildDuration: 0
   trapColor: {r: 0, g: 1, b: 0.9335954, a: 1}
   healthBar: {fileID: 469580165873399584}
+  healthStartColor: {r: 0, g: 1, b: 0, a: 1}
+  healthEndColor: {r: 1, g: 0, b: 0, a: 1}
   enemyChainAmount: 5
   chainRadius: 10
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 512
   canAttack: 1
+  enemies: []
   chainOrigin: {fileID: 4084208043290531406}
   particleVFX: {fileID: 1469211736650368, guid: b08f505eff218204fb92fac4cda2cfca,
     type: 3}
