@@ -30,6 +30,9 @@ public class MenuHandler : MonoBehaviour
 
     [Header("Character Panel")]
     [SerializeField] TMP_Text charName;
+    [SerializeField] TMP_Text charCodeName;
+    [SerializeField] TMP_Text charFullName;
+    [SerializeField] TMP_Text charAge;
     [SerializeField] TMP_Text charDesc;
     [SerializeField] Image charProfile;
     [SerializeField] Image A1_image;
@@ -102,6 +105,9 @@ public class MenuHandler : MonoBehaviour
     {
         character = c;
         charName.text = c.c_name;
+        charCodeName.text = c.c_codename;
+        charFullName.text = c.c_fullname;
+        charAge.text = c.c_age;
         charDesc.text = c.c_desc;
         charProfile.sprite = c.c_profile;
         A1_image.sprite = c.A1_image;

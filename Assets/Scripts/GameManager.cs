@@ -76,6 +76,11 @@ public class GameManager : MonoSingleton<GameManager>
         return selectedPlayer;
     }
 
+    public void playClick()
+    {
+        GetComponent<AudioCue>().PlayAudioCue();
+    }
+
     public void OnQuitButton()
     {
         Application.Quit();
