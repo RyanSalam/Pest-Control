@@ -37,7 +37,7 @@ public abstract class Actor_Enemy : Actor
 
     public float movementSpeed = 3.5f;
 
-    public AudioCue ac;
+    public AudioCue audioPlayer;
     public AudioCueSO portalClip;
     public AudioCueSO enemyHit;
     public AudioCueSO enemyAttack;
@@ -115,7 +115,7 @@ public abstract class Actor_Enemy : Actor
     protected override void Awake()
     {
         base.Awake();
-        ac = GetComponent<AudioCue>();
+        audioPlayer = GetComponent<AudioCue>();
         m_agent = GetComponent<NavMeshAgent>();
         m_agent.updateRotation = true;
         m_agent.speed = movementSpeed;

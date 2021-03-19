@@ -13,7 +13,7 @@ public class SMB_EnemyDying : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         thisEnemy = animator.GetComponentInParent<Enemy_Grunt>();
-        thisEnemy.ac.PlayAudioCue(thisEnemy.enemyDeath);
+        thisEnemy.audioPlayer.PlayAudioCue(thisEnemy.enemyDeath);
         thisEnemy.Agent.isStopped = true;
         thisEnemy.Agent.speed = 0f;
     }

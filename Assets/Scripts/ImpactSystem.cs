@@ -22,6 +22,8 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
     [SerializeField] ImpactSettings defaultSettings;
     public AudioCue ac;
 
+    [SerializeField] AudioCue uiAudio;
+
     protected override void Awake()
     {
         base.Awake();
@@ -50,26 +52,19 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
 
     public void HandleImpact(GameObject targetHit, Vector3 hitPoint, Quaternion hitRotation, Color weaponColour)
     {
-        //MeshRenderer myParentMeshRenderer = targetHit.GetComponent<MeshRenderer>();
-
         MeshRenderer myMeshRenderer = targetHit.GetComponent<MeshRenderer>();
-        MeshRenderer[] myMeshRenderer1 = targetHit.GetComponentsInChildren<MeshRenderer>();
         
-        //Debug.Log("renderer1 length: " + myMeshRenderer1.Length);
-        //Material myMaterial = targetHit.GetComponent<MeshRenderer>().material;
         Material myMaterial = null;
 
         if (myMeshRenderer != null)
         {
             myMaterial = myMeshRenderer.sharedMaterial;
-            //myMaterial = myMeshRenderer1[0].sharedMaterial;
         }
        
 
         if (myMaterial == null)
             return;
 
-        //Debug.Log("material name: " +  myMaterial.name);
         ImpactSettings impactSettings;
 
 
@@ -79,17 +74,9 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
         else
             impactSettings = defaultSettings;
 
-        //if (impactSettings.decalToSpawn != null)
-        //{
-        //    MaterialHandler.materialColorChanger(impactSettings.decalToSpawn.transform.GetChild(0).gameObject, weaponColour, "_EmissionColor");
-        //}
-        
-        //ObjectPooler.Instance.GetFromPool(impactSettings.decalToSpawn, hitPoint, hitRotation).transform.SetParent(targetHit.transform); //if we want to child the decals this is the way
-        
         ObjectPooler.Instance.GetFromPool(impactSettings.decalToSpawn, hitPoint, hitRotation);
         ObjectPooler.Instance.GetFromPool(impactSettings.particleToSpawn, hitPoint, hitRotation);
         
-        //Debug.Log(impactSettings.audioToPlay.name);
         ac.PlayAudioCue(impactSettings.audioToPlay, 100);
         
     }
@@ -98,11 +85,14 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
     {
         if (damageIndicatorObj != null)
         {
-            //GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, hit.point, Quaternion.LookRotation(hit.normal)).gameObject;
             GameObject temp = ObjectPooler.Instance.GetFromPool(damageIndicatorObj, position, rotation).gameObject;
             temp.GetComponent<DamageIndicator>().setDamageIndicator((int)damage, color);
-            //DamageIndicator.setDamageIndicator(temp, newDamage, weaponColour);
         }
+    }
+
+    public void PlayUISoundSFX(AudioCueSO audioToPlay)
+    {
+        uiAudio.PlayAudioCue(audioToPlay);
     }
 
 }

@@ -10,6 +10,8 @@ public class EnergyDrop : MonoBehaviour
     [SerializeField] private int energyValue = 10;
     private Timer lifeTimer;
 
+    [SerializeField] AudioCueSO energyIncreaseSound;
+
     private void Awake()
     {
         lifeTimer = new Timer(lifeTime);
@@ -37,6 +39,7 @@ public class EnergyDrop : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             LevelManager.Instance.CurrentEnergy += energyValue;
+            ImpactSystem.Instance.PlayUISoundSFX(energyIncreaseSound);
             gameObject.SetActive(false);
         }
     }

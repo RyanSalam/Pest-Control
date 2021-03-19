@@ -15,7 +15,7 @@ public class SMB_GruntTakeDamage : StateMachineBehaviour
 
         // Assign the enemy reference accordingly.
         thisEnemy = animator.GetComponentInParent<Enemy_Grunt>();
-        thisEnemy.ac.PlayAudioCue(thisEnemy.enemyHit);
+        thisEnemy.audioPlayer.PlayAudioCue(thisEnemy.enemyHit);
         // Ensure the Enemy is stopped as they react.
         thisEnemy.Agent.isStopped = true;
 

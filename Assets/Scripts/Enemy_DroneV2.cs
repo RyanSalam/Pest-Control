@@ -30,8 +30,11 @@ public class Enemy_DroneV2 : Actor_Enemy
 
     public Transform droneLegs;
 
+    [Header("Death Attributes")]
     [SerializeField] GameObject deathVFX;
     [SerializeField] GameObject initialDeathVFX;
+    [SerializeField] AudioCueSO breakSound;
+    [SerializeField] AudioCueSO explosionSound;
 
     //making a variable for the core so i can do a easy distance check if we are near it
     [SerializeField] Transform CoreReference;
@@ -243,6 +246,7 @@ public class Enemy_DroneV2 : Actor_Enemy
     {
         StartCoroutine(startDroneDeath());
         ObjectPooler.Instance.GetFromPool(initialDeathVFX, transform.position, transform.rotation);
+        audioPlayer.PlayAudioCue(breakSound);
         base.Death();
     }
     public override void TakeDamage(DamageData data)
@@ -280,6 +284,7 @@ public class Enemy_DroneV2 : Actor_Enemy
         {
             ObjectPooler.Instance.GetFromPool(deathVFX, c.GetContact(0).point, transform.rotation);
             gameObject.SetActive(false);
+            audioPlayer.PlayAudioCue(explosionSound);
         }
     }
 }

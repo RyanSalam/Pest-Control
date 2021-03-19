@@ -287,6 +287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 5
   energyValue: 10
+  energyIncreaseSound: {fileID: 11400000, guid: b25e8e111a0a126479f6fa01239367da,
+    type: 2}
 --- !u!54 &8705859997950318012
 Rigidbody:
   m_ObjectHideFlags: 0

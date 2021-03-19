@@ -129,7 +129,8 @@ public class HUDUI : MonoBehaviour
 
     public IEnumerator WarningMessage()
     {
-        energyText.rectTransform.DOPunchAnchorPos(Vector2.one * 20f, 1f, 50, 10f);
+        energyText.rectTransform.DOPunchAnchorPos(Vector2.one * 20f, 1f, 50, 10f)
+            .OnComplete(() => energyText.rectTransform.DORewind());
         energyText.color = warningColor;
         warningNeeded = false;
         warningPanel.SetActive(true);

@@ -624,10 +624,10 @@ MonoBehaviour:
   _energyDrop: 10
   scanIntervals: 2
   movementSpeed: 3.5
-  ac: {fileID: 0}
+  audioPlayer: {fileID: 0}
   portalClip: {fileID: 11400000, guid: 11f50e8e152759b40ab8252beb85692c, type: 2}
   enemyHit: {fileID: 0}
-  enemyAttack: {fileID: 0}
+  enemyAttack: {fileID: 11400000, guid: 6b2469b7fd02f234f9e4ab21099cf5e1, type: 2}
   enemyDeath: {fileID: 0}
   energyDrop: {fileID: 7083525136995877786, guid: fc7b3ecbb1285fd41ac87c408bb837c9,
     type: 3}
@@ -644,6 +644,9 @@ MonoBehaviour:
   deathVFX: {fileID: 1840910365998424, guid: 9f423c73d6fd3e542a42b41623e81db1, type: 3}
   initialDeathVFX: {fileID: 1845764070681338, guid: ac2312a3e32471549882f1a6da5568e6,
     type: 3}
+  breakSound: {fileID: 11400000, guid: b184a7b0442054c46ac4ba8cf239e5b8, type: 2}
+  explosionSound: {fileID: 11400000, guid: b187cf274c1a0fb4d927a71a03f95bf9, type: 2}
+  CoreReference: {fileID: 0}
 --- !u!195 &3414804625668340201
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -733,7 +736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 1, g: 0.9611176, b: 0, a: 1}
-  outlineWidth: 10
+  outlineWidth: 1.5
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

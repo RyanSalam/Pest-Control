@@ -418,9 +418,9 @@ GameObject:
   - component: {fileID: 8402986662682793159}
   - component: {fileID: 8402986662682793176}
   - component: {fileID: 7195516875643859446}
-  - component: {fileID: 1036353162095221082}
   - component: {fileID: 8562597381162518369}
   - component: {fileID: 8720728933321442606}
+  - component: {fileID: 1036353162095221082}
   - component: {fileID: 7344264690049572949}
   m_Layer: 0
   m_Name: Managers
@@ -559,24 +559,6 @@ MonoBehaviour:
     - {fileID: 7113731822745623719}
   waveIndex: 0
   hudUI: {fileID: 3695450296224022641}
---- !u!114 &1036353162095221082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8402986662682793157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96f4dcd5da0291c4b914bd20a115beb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioCue: {fileID: 0}
-  _playOnStart: 0
-  _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
-    type: 2}
-  _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
-    type: 2}
 --- !u!114 &8562597381162518369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,6 +583,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0d7187868134c4db247685c8cfe1f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1036353162095221082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402986662682793157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f4dcd5da0291c4b914bd20a115beb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioCue: {fileID: 0}
+  _playOnStart: 0
+  _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
+    type: 2}
+  _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
+    type: 2}
 --- !u!114 &7344264690049572949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1278,6 +1278,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4566075805874170559, guid: 5a1d76bd2f010ec4793b09149005bd25,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4775886820155223150, guid: 5a1d76bd2f010ec4793b09149005bd25,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1726,7 +1731,7 @@ PrefabInstance:
     - target: {fileID: 8757159821358810520, guid: 5a1d76bd2f010ec4793b09149005bd25,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -39.93921
+      value: -39.93927
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1d76bd2f010ec4793b09149005bd25, type: 3}

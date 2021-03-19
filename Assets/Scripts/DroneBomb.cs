@@ -8,6 +8,8 @@ public class DroneBomb : MonoBehaviour
     [SerializeField] int damage = 50;
     [SerializeField] float radiusToPlayer = 5f;
     [SerializeField] GameObject explosionVFX;
+
+    [SerializeField] private AudioCue audioPlayer;
   
     //on collisions - if we hit a trap increase their current uses (damaging them) - if player hurt them
     //else destroy it - so it can be killed by projectiles , need to look into how a raycast can affect it, may need to check on hitscan script
@@ -52,5 +54,10 @@ public class DroneBomb : MonoBehaviour
         }
         //destroying entire object here because this will always be the last line read in this script. so destroy last, after we handle everything else
         Destroy(gameObject, 0.15f);
+    }
+
+    private void OnDestroy()
+    {
+        audioPlayer.PlayAudioCue();
     }
 }
