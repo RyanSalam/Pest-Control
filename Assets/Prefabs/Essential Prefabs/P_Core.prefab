@@ -90,33 +90,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab7387a4ec90fc4ab16eb35396e1ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 250
   moveSpeed: 10
   hitAngle: 360
   hitForwardRot: 360
   rings:
   - ring: {fileID: 6924749076273481176}
     rotationDir: {x: 1, y: 0, z: 1}
-    defaultSpeed: 0
+    defaultSpeed: 50
     healthRequirement: 0.8
     restRotation: {x: 0, y: 0, z: 0}
     interpolateDuration: 0.3
   - ring: {fileID: 8359823622076893081}
     rotationDir: {x: 0, y: 1, z: 1}
-    defaultSpeed: 0
+    defaultSpeed: 80
     healthRequirement: 0.5
     restRotation: {x: 0, y: 0, z: 0}
     interpolateDuration: 0.3
   - ring: {fileID: 809764312726691804}
     rotationDir: {x: 1, y: 1, z: 0}
-    defaultSpeed: 0
+    defaultSpeed: 120
     healthRequirement: 0.3
     restRotation: {x: 0, y: 0, z: 0}
     interpolateDuration: 0.3
   damagedRingSpeed: 120
   coreSpeedupDuration: 1
-  coreCentre: {fileID: 0}
-  CoreVFX: {fileID: 0}
+  coreCentre: {fileID: 7462744208847586657}
+  CoreVFX: {fileID: 5852379291927270289}
 --- !u!114 &8843559693662818547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,6 +608,12 @@ PrefabInstance:
 --- !u!4 &438896679596638233 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fd4ca649d8348c04599d830babbc511f,
+    type: 3}
+  m_PrefabInstance: {fileID: 116529854761510898}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7462744208847586657 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7353534971425809043, guid: fd4ca649d8348c04599d830babbc511f,
     type: 3}
   m_PrefabInstance: {fileID: 116529854761510898}
   m_PrefabAsset: {fileID: 0}
