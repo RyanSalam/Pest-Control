@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tesla Trap
   m_EditorClassIdentifier: 
   itemName: Tesla Trap
-  itemCost: 100
+  itemCost: 250
   itemIcon: {fileID: 21300000, guid: 10d42edc461025541909736caf470e69, type: 3}
   itemDescription: A range type trap, enemy going near it will have themselves a
     shocking time(literally), this affects both ground and air type enemies.
