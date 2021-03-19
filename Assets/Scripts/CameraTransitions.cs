@@ -62,8 +62,12 @@ public class CameraTransitions : MonoBehaviour
         LevelManager.Instance.Player.playerInputs.SwitchCurrentActionMap("UI");
         LevelManager.Instance.Player.PlayerCam.gameObject.SetActive(false);
 
+
+
         CombatHud.SetActive(false);
         _camera.gameObject.SetActive(true);
+
+        winView.Priority = 15;
 
         StartCoroutine(DisplayGameOverWin());
     }
@@ -72,7 +76,7 @@ public class CameraTransitions : MonoBehaviour
     {
         yield return new WaitForSeconds(3.5f);
         fireWorks.SetActive(true);
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(6f);
         LevelManager.Instance.GameOver(true);
     }
 }
