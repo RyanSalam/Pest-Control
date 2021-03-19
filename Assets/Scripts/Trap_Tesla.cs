@@ -49,11 +49,11 @@ public class Trap_Tesla : Trap
             {
                 enemies.Clear();
                 enemies.Add(enemyTarget);
-                Debug.Log("enemy target not null");
                 Debug.DrawLine(transform.position, hit.point, Color.red, 3f);
                 canAttack = false;
                 Activate(); //activate the trap when there is an enemy in the collider 
                 timeAttack = Time.time;
+                StartCoroutine(Cooldown());
             }
         }
 
@@ -67,7 +67,7 @@ public class Trap_Tesla : Trap
 
     public override void Activate()
     {
-        base.Activate();
+        
         EnemySphereCast(enemyTarget); //activate chain sphere cast on attacked enemy
         spawnVFX(); //spawning attack VFX 
 
@@ -76,6 +76,7 @@ public class Trap_Tesla : Trap
         lineRenderer.positionCount = currentChainAmount + 1;
         for (int i = 1; i < currentChainAmount + 1; i++) // adding enemies to the list and adding current chain amount 
         {
+            enemyTarget = enemies[i - 1];
             
             Vector3 position = enemies[i - 1].transform.position;
             //Debug.DrawLine(enemyTarget.transform.position, enemies[i - 1].transform.position, Color.red, 3f);
@@ -101,7 +102,8 @@ public class Trap_Tesla : Trap
         //StartCoroutine(Cooldown());
         Anim.SetBool("isAttacking", true);
         Anim.SetBool("isIdle", false);
-        StartCoroutine(Cooldown());
+        
+        base.Activate();
     }
 
     private IEnumerator Cooldown() //cooldown for attacks
@@ -138,7 +140,7 @@ public class Trap_Tesla : Trap
             newEnemy = enemyHit.transform.GetComponent<Actor_Enemy>();
             if (!enemies.Contains(newEnemy) && newEnemy.gameObject.activeSelf == true)
             {
-                //newEnemy = enemyHit.transform.GetComponent<Actor_Enemy>();
+                newEnemy = enemyHit.transform.GetComponent<Actor_Enemy>();
                 enemies.Add(newEnemy);
                 break;
             }
