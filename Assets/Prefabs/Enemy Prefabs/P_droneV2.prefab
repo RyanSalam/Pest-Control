@@ -556,6 +556,7 @@ GameObject:
   - component: {fileID: 3414804625668340202}
   - component: {fileID: 308383581413862217}
   - component: {fileID: -6503987919828991336}
+  - component: {fileID: -4686553870305844474}
   m_Layer: 9
   m_Name: P_droneV2
   m_TagString: Enemy
@@ -718,6 +719,24 @@ MonoBehaviour:
     type: 2}
   _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
     type: 2}
+--- !u!114 &-4686553870305844474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3414804625668340203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.9611176, b: 0, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &3414804625832608051
 GameObject:
   m_ObjectHideFlags: 0
