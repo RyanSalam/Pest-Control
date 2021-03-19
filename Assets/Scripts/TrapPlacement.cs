@@ -127,8 +127,9 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         // Registering inputs when we equip this.
         LevelManager.Instance.Player.playerInputs.onActionTriggered += HandleInput;
 
-        // Disable Crosshair on UI
+        // Disable Crosshair (base and heat bar) on UI
         LevelManager.Instance.WeaponUI.crosshair.enabled = false;
+        LevelManager.Instance.WeaponUI.heatBar.enabled = false;
     }
 
     public void Unequip()
@@ -140,6 +141,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
 
         // Enable Crosshair back on UI
         LevelManager.Instance.WeaponUI.crosshair.enabled = true;
+        LevelManager.Instance.WeaponUI.heatBar.enabled = true;
     }
 
     protected void OnDrawGizmos()

@@ -33,6 +33,8 @@ public class Enemy_DroneV2 : Actor_Enemy
     [SerializeField] GameObject deathVFX;
     [SerializeField] GameObject initialDeathVFX;
 
+    //making a variable for the core so i can do a easy distance check if we are near it
+    [SerializeField] Transform CoreReference;
     protected override void Awake()
     {
         base.Awake();
@@ -42,6 +44,11 @@ public class Enemy_DroneV2 : Actor_Enemy
 
         if (!rb)
             Debug.Log("RigidBody not found");
+
+        CoreReference = LevelManager.Instance.Core.transform;
+
+        if (!CoreReference)
+            Debug.Log("Core not found");
     }
 
     // Start is called before the first frame update
@@ -155,12 +162,20 @@ public class Enemy_DroneV2 : Actor_Enemy
             //transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.Euler(0,transform.rotation.y,transform.rotation.z), 1f); //trying to slowly bring the x rotation back to 0
         }
 
-        //if (isDying)
-        //{
-        //    agent.baseOffset -= 0.25f;
-        //    agent.updateRotation = false;
-        //    transform.Rotate(Vector3.right * 400 * Time.deltaTime);
-        //}
+        //distance check, once inside we will raise the drones y offset so it will go higher in the air - also not dying here so we can still fall on death
+        if (CoreReference != null && !isDying)
+        {
+            bool nearCore = Vector3.Distance(collisionChecker.position, CoreReference.position) < 5f;
+            //if we are near the core and our offset is lower than 8 (this is a temp max offset should make variable) go up
+            if (nearCore && agent.baseOffset < 8)
+            {
+                agent.baseOffset += 0.1f;
+            }
+            else if (!nearCore && agent.baseOffset < 5) //not near core we go back to our regular offset of 5
+            {
+                agent.baseOffset -= 0.1f;
+            }
+        }
 
         base.Update();
     }

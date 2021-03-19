@@ -12,6 +12,9 @@ public class Character : ScriptableObject
 
     //Character Select Screen
     public string c_name;
+    public string c_codename;
+    public string c_fullname;
+    public string c_age;
     public string c_desc;
     public Sprite c_profile;
 

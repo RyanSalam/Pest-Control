@@ -7,6 +7,7 @@ public class SMB_EnemyMoving : StateMachineBehaviour
     #region Variables
     // Reference to the enemy script on this enemy.
     Actor_Enemy thisEnemy;
+    public float moveSpeed = 5.0f;
     #endregion
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -16,6 +17,8 @@ public class SMB_EnemyMoving : StateMachineBehaviour
         thisEnemy = animator.GetComponentInParent<Actor_Enemy>();
         // Allow the enemy agent to move.
         thisEnemy.Agent.isStopped = false;
+        thisEnemy.Agent.speed = moveSpeed;
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -17,6 +17,8 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private GameObject shopUI;
     [SerializeField] public GameObject combatHUD;
     [SerializeField] public GameObject pauseMenu;
+    [SerializeField] public GameObject settingsPanel;
+    [SerializeField] public GameObject pausePanel;
     public GameObject[] hudElements;
     [SerializeField] InventorySlot[] inventorySlots;
     [SerializeField] WeaponUI weaponUI;

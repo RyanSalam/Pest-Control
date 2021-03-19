@@ -109,7 +109,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         if (Char_SO != null)
         {
             var temp = Instantiate(Char_SO.player, playerSpawnPoint.position, playerSpawnPoint.rotation);
-            _player.gameObject.SetActive(false);
+            //_player.gameObject.SetActive(false);
             temp.AbilityOne = Char_SO.ab1;
             temp.AbilityTwo = Char_SO.ab2;
             temp.AbilityOne.Initialize(temp.gameObject);
@@ -155,7 +155,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     private void Start()
     {
-        Core.OnDeath += () => GameOver(false);
+        //Core.OnDeath += () => GameOver(false);
         
         Time.timeScale = 1;
 
@@ -224,7 +224,9 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         shopUI.pauseMenu.SetActive(!shopUI.pauseMenu.activeSelf);
         shopUI.combatHUD.SetActive(!shopUI.combatHUD.activeSelf);
-        
+
+        shopUI.settingsPanel.SetActive(false);
+        shopUI.pausePanel.SetActive(true);
 
         Time.timeScale = shopUI.pauseMenu.gameObject.activeSelf ? 0.0f : 1.0f;
         Cursor.lockState = shopUI.pauseMenu.activeSelf ? CursorLockMode.Confined : CursorLockMode.Locked;

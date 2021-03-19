@@ -6,22 +6,25 @@ public class SMB_Cryostasis : StateMachineBehaviour
 {
     private Actor_Player pA;
     [SerializeField] float abilityLifetime = 5.0f;
-    [SerializeField] float healPerSecond = 1.0f;
+    [SerializeField] float healPerSecond;
     private float healingTimer;
     private Collider[] enemiesHit;
     [SerializeField] float AoERange;
-    [SerializeField] float chargeAmount;
+    [SerializeField] float explosionDamage;
     [SerializeField] LayerMask whatIsEnemy;
-
     [SerializeField] GameObject explosionVFX;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        pA = animator.GetComponent<Actor_Player>();
+        pA = LevelManager.Instance.Player;
         pA.OnDamageFailed += Charge;
         // Set player's hit angle to 0
         pA.hitAngle = 0.0f;
+
+        // Set the default explosion damage HERE
+        explosionDamage = 40f;
+
         //pA.controlsEnabled = false;
         pA.playerInputs.currentActionMap.Disable();
         healingTimer = 0.0f;
@@ -54,9 +57,10 @@ public class SMB_Cryostasis : StateMachineBehaviour
         Instantiate(explosionVFX, pA.gameObject.transform.position, pA.gameObject.transform.rotation);
     }
 
+    // Increment the explosion damage every time the player receives damage during the cryo phase
     public void Charge(DamageData data)
     {
-        chargeAmount += data.damageAmount;
+        explosionDamage += data.damageAmount;
     }
 
     private void CryostasisExplosion()
@@ -67,20 +71,8 @@ public class SMB_Cryostasis : StateMachineBehaviour
         {
             Actor_Enemy e = enemy.GetComponent<Actor_Enemy>();
             if (e != null)
-                e.TakeDamage(chargeAmount);
+                e.TakeDamage(explosionDamage);
         }
-        chargeAmount = 0.0f;
+
     }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

@@ -23,11 +23,6 @@ public class Trap : MonoBehaviour
         set 
         { 
             _currentUses = value;
-            if (_currentUses > maxUses)
-            {
-                gameObject.SetActive(false);
-                LevelManager.Instance.GetComponent<AudioCue>().PlayAudioCue(LevelManager.Instance.Char_SO.TrapDestroyed, 5);
-            }
 
             healthBar.fillAmount = 1 - (float)CurrentUses / (float)maxUses;
             Color lerpColor = Color.Lerp(healthStartColor, healthEndColor, 1 - healthBar.fillAmount);
@@ -64,29 +59,45 @@ public class Trap : MonoBehaviour
 
         //healthBar.fillAmount = 1 - (float)CurrentUses / (float)maxUses;
         Debug.Log("CurrentUses/maxUses: " + (float)CurrentUses / (float)maxUses);
-
     }
 
     public virtual void Activate()
     {
-        /* if (!isTrapBuilt) // should be implemented on the top like this for other trap scripts if overiding
+         if (!isTrapBuilt) // should be implemented on the top like this for other trap scripts if overiding
          {
              return;
          }
-        */
+        
         // when trap is activated
-        CurrentUses++; //add current uses 
-        if (CurrentUses >= maxUses) //checks if the current trap uses is greater or equal to max
+        CurrentUses++; //add current uses
+
+        if (CurrentUses >= maxUses)
         {
-            LevelManager.Instance.AssessTraps(this);
-            Anim.SetTrigger("Destroy");
-            foreach (Animator anim in GetComponentsInChildren<Animator>())
-            {
-                anim.SetTrigger("Destroy"); 
-            }
+            Death();
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        CurrentUses += damage;
+
+        if (CurrentUses >= maxUses)
+        {
+            Death();
+        }
+    }
+
+    // Function to handle death methods
+    void Death()
+    {
+        //LevelManager.Instance.AssessTraps(this);
+        Anim.SetTrigger("Destroy");
+        foreach (Animator anim in GetComponentsInChildren<Animator>())
+        {
+            anim.SetTrigger("Destroy");
+        }
+        LevelManager.Instance.GetComponent<AudioCue>().PlayAudioCue(LevelManager.Instance.Char_SO.TrapDestroyed, 5);
+    }
 
     protected virtual void OnEnable()
     {

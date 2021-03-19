@@ -302,9 +302,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityLifetime: 4.5
-  healPerSecond: 1
+  healPerSecond: 7
   AoERange: 10
-  chargeAmount: 4
+  explosionDamage: 0
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 512

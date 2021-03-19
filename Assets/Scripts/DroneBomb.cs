@@ -13,12 +13,12 @@ public class DroneBomb : MonoBehaviour
     //else destroy it - so it can be killed by projectiles , need to look into how a raycast can affect it, may need to check on hitscan script
     private void OnCollisionEnter(Collision c)
     {
-        Collider[] playerCollider = Physics.OverlapSphere(transform.position, radiusToPlayer, playerMask);
+        Collider[] actorColliders = Physics.OverlapSphere(transform.position, radiusToPlayer, playerMask);
 
         //so we can hurt player if our bomb hits them
-        if (playerCollider.Length > 0)
+        if (actorColliders.Length > 0)
         {
-            foreach (Collider col in playerCollider)
+            foreach (Collider col in actorColliders)
             {
                 Actor damageBody = col.gameObject.GetComponent<Actor>();
 
@@ -36,7 +36,7 @@ public class DroneBomb : MonoBehaviour
         if (other.gameObject.tag == "Trap")
         {
             Trap trap = other.gameObject.GetComponent<Trap>();
-            trap.CurrentUses += damage; //increment their current uses - aka damage them
+            trap.TakeDamage(damage);
         }
     }
 
