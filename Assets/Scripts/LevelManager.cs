@@ -155,7 +155,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     private void Start()
     {
-        Core.OnDeath += () => GameOver(false);
+        //Core.OnDeath += () => GameOver(false);
         
         Time.timeScale = 1;
 
