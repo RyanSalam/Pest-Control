@@ -38,26 +38,28 @@ public class Trap_Tesla : Trap
         ObjectPooler.Instance.InitializePool(particleVFX, 10);
     }
 
-    protected override void Update()
+    private void FixedUpdate()
     {
-        if (Physics.SphereCast(chainOrigin.position, chainRadius, chainOrigin.position, out RaycastHit hit, chainRadius, whatIsEnemy) && canAttack) //searching every frame using sphere cast for an enemy
-          
+        if (canAttack)
         {
-            enemyTarget = hit.collider.gameObject.GetComponent<Actor_Enemy>(); //enemy goes collides with sphere cast 
+            Collider[] colls = Physics.OverlapSphere(chainOrigin.position, chainRadius, whatIsEnemy);
 
-            if (enemyTarget != null) // if there is an enemy, add it to the list, attack!
+            if (colls.Length <= 0) return;
+
+            enemyTarget = colls[0].gameObject.GetComponent<Actor_Enemy>(); //enemy goes collides with sphere cast 
+
+            if (enemyTarget != null)
             {
-                enemies.Clear();
-                enemies.Add(enemyTarget);
-                Debug.DrawLine(transform.position, hit.point, Color.red, 3f);
                 canAttack = false;
-                Activate(); //activate the trap when there is an enemy in the collider 
-                timeAttack = Time.time;
-                StartCoroutine(Cooldown());
+                enemies.Add(enemyTarget);
+                Activate();
             }
         }
 
-        base.Update(); //base trap update
+        else
+        {
+            Debug.Log("Cannot attack so we call this");
+        }
     }
 
     private void OnDrawGizmos()
@@ -67,23 +69,22 @@ public class Trap_Tesla : Trap
 
     public override void Activate()
     {
-        
+        Debug.Log("Activate Tesla");
+        canAttack = false;
         EnemySphereCast(enemyTarget); //activate chain sphere cast on attacked enemy
         spawnVFX(); //spawning attack VFX 
 
         lineRenderer.enabled = true; //adjusting linerenders position based off the chain origin
         lineRenderer.SetPosition(0, chainOrigin.position);
         lineRenderer.positionCount = currentChainAmount + 1;
-        for (int i = 1; i < currentChainAmount + 1; i++) // adding enemies to the list and adding current chain amount 
+        for (int i = 1; i <= enemies.Count; i++) // adding enemies to the list and adding current chain amount 
         {
-            enemyTarget = enemies[i - 1];
-            
+            enemyTarget = enemies[i - 1];            
             Vector3 position = enemies[i - 1].transform.position;
-            //Debug.DrawLine(enemyTarget.transform.position, enemies[i - 1].transform.position, Color.red, 3f);
             position.y += 1.4f;
             ObjectPooler.Instance.GetFromPool(particleVFX, position, enemies[i - 1].transform.rotation);
-            //Instantiate(particleVFX, position, enemies[i - 1].transform.rotation);
             lineRenderer.SetPosition(i, position);
+            Debug.Log("Enemy Position for Line Renderer is: " + position);
         }
 
         foreach (Actor_Enemy enemy in enemies)
@@ -91,30 +92,34 @@ public class Trap_Tesla : Trap
             if (enemy != null)
             {
                 enemy.TakeDamage(trapDamage);
-
                 ImpactSystem.Instance.DamageIndication(trapDamage, trapColor, enemy.transform.position, Quaternion.LookRotation(LevelManager.Instance.Player.transform.position - enemy.transform.position));
                  // when an enemy is hit (above line) spawn particle. need to spawn particle above feet...
-
                 //enemies.Remove(enemy);
             }
         }
-        //base.Activate();
-        //StartCoroutine(Cooldown());
         Anim.SetBool("isAttacking", true);
         Anim.SetBool("isIdle", false);
-        
+
+        StartCoroutine(Cooldown());
         base.Activate();
+        
     }
 
     private IEnumerator Cooldown() //cooldown for attacks
     {
-        yield return new WaitForSeconds(attackDelay);
+        Debug.Log("Deactivate Tesla");
+        yield return new WaitForSeconds(0.45f);
 
         lineRenderer.enabled = false;
-        //enemies = new List<Actor_Enemy>();
         lineRenderer.positionCount = 1;
-        canAttack = true;
 
+        yield return new WaitForSeconds(attackDelay);
+
+        Debug.Log("Wait For Delay");
+
+
+        enemies.Clear();
+        canAttack = true;
         currentChainAmount = 0;
         enemyTarget = null;
         Anim.SetBool("isAttacking", false);
@@ -127,31 +132,23 @@ public class Trap_Tesla : Trap
 
         currentChainAmount++;
 
-        // currentEnemy.TakeDamage(trapDamage);
-
-        RaycastHit[] hits;
-
-        hits = Physics.SphereCastAll(currentEnemy.transform.position, chainRadius, currentEnemy.transform.position, 1, whatIsEnemy); //when hits, spherecast on the current enemy to search for new enemies to chain
-
+        Collider[] enemiesFound = Physics.OverlapSphere(currentEnemy.transform.position, chainRadius, whatIsEnemy);
         Actor_Enemy newEnemy = currentEnemy;
 
-        foreach (RaycastHit enemyHit in hits) //hit new enemies you have not previously hit
+        foreach (Collider col in enemiesFound)
         {
-            newEnemy = enemyHit.transform.GetComponent<Actor_Enemy>();
-            if (!enemies.Contains(newEnemy) && newEnemy.gameObject.activeSelf == true)
+            newEnemy = col.transform.GetComponent<Actor_Enemy>();
+            if (!enemies.Contains(newEnemy))
             {
-                newEnemy = enemyHit.transform.GetComponent<Actor_Enemy>();
+                newEnemy = col.transform.GetComponent<Actor_Enemy>();
                 enemies.Add(newEnemy);
                 break;
             }
-        }
+        }        
+
         if (currentChainAmount <= enemyChainAmount && newEnemy != currentEnemy)
         {
             EnemySphereCast(newEnemy);
-        }
-        if (currentChainAmount >= enemyChainAmount) //reset chain amount
-        {
-            currentChainAmount = 0;
         }
     }
 
