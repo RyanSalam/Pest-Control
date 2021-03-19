@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3828171030826589136, guid: 31f6d2184e46d414a8bd729e1fbf60d0, type: 3}
   c_name: Aeon
-  c_desc: Mercenary
+  c_codename: Menacing Mercenary
+  c_fullname: 'Full Name: Aeon Tempus'
+  c_age: 'Age: 30'
+  c_desc: 'Profile: An no-nonsense fighter, former military; he goes in and gets
+    the job done, utilizing his abilities to efficiently take out his enemies. '
   c_profile: {fileID: 21300000, guid: 7b0855ba4c0a6cd44a171e26e0ca555c, type: 3}
   A1_image: {fileID: 21300000, guid: db3f0e485eda61c42a8bedc400535aae, type: 3}
   A1_name: Blackhole
-  A1_text: Blackhole
   A2_image: {fileID: 21300000, guid: 532451042bf4d3645b3e2e49f78c1007, type: 3}
   A2_name: Portal
-  A2_text: Portal
   ab1: {fileID: 11400000, guid: 56dd13d55c659f94aacbe6f99aa06512, type: 2}
   ab2: {fileID: 11400000, guid: f1a96881bf115c04ab530474e4edffc6, type: 2}
   emissionIntensity: 0
