@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random; 
 using TMPro;
 using System;
 using DG.Tweening;
@@ -46,10 +47,12 @@ public class LevelManager : MonoSingleton<LevelManager>
         }
     }
     public int waveEnergyReward;
-
-    [SerializeField] private Transform playerSpawnPoint;
+    //Respawn/SpawnPoints VAR
+    private Transform playerSpawnPoint;
+    public Transform[] playerSpawns; 
     [SerializeField] private float respawnTimer = 2.0f;
     private bool isRespawning = false;
+    public LayerMask enemyLayer; 
 
     [SerializeField] private Camera spectatorCamera;
     [SerializeField] private GameObject EndGameMenu;
@@ -108,7 +111,8 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         if (Char_SO != null)
         {
-            var temp = Instantiate(Char_SO.player, playerSpawnPoint.position, playerSpawnPoint.rotation);
+            
+            var temp = Instantiate(Char_SO.player, playerSpawns[0].position, playerSpawns[0].rotation);
             //_player.gameObject.SetActive(false);
             temp.AbilityOne = Char_SO.ab1;
             temp.AbilityTwo = Char_SO.ab2;
@@ -294,12 +298,32 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     #region GameLoop
 
+    private void GetPlayerSpawnPoint()
+    {
+        Collider[] detectionCollider;
+        foreach (Transform spawnPoint in playerSpawns)
+        {
+            detectionCollider = Physics.OverlapSphere(spawnPoint.position, 3f, enemyLayer);
+            if (detectionCollider.Length <= 0)
+            {
+                playerSpawnPoint = spawnPoint;
+                break;
+            }
+        }
+        if (playerSpawnPoint == null)
+        {
+            playerSpawnPoint = playerSpawns[Random.Range(0, playerSpawns.Length)];
+        }
+    }
+
     private void Respawn() // respawning character and Setting Spectator Camera
     {
+  
         if (isRespawning) return;
         //activate Spectator Camera and set Player's gameObject to false
         spectatorCamera.gameObject.SetActive(true);
         Player.gameObject.SetActive(false);
+        GetPlayerSpawnPoint();
         //start the player respawn
         StartCoroutine(RespawnTimer());
     }
@@ -312,6 +336,8 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         _player.transform.position = playerSpawnPoint.position;
         _player.transform.rotation = playerSpawnPoint.rotation;
+
+        playerSpawnPoint = null; 
 
         spectatorCamera.gameObject.SetActive(false);
         Player.controlsEnabled = true; 
@@ -441,5 +467,14 @@ public class LevelManager : MonoSingleton<LevelManager>
                 //MissionStart - Handled in Level Manager Start()
                 //MissionWin/MissionLoss - Handled in GameOver Method of LevelManager
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        foreach (Transform spawn in playerSpawns)
+        {
+            Gizmos.color = Color.green; 
+            Gizmos.DrawWireSphere(spawn.position, 3f); 
+        }
     }
 }
