@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd0c73ce6fa6e147995c50eeb2e062a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseSpeed: 5
+  chaseSpeed: 5.5
   loseAggroDistance: 15
 --- !u!206 &-1930172757198560544
 BlendTree:
@@ -654,6 +654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180bc80978a3eff408cdf2e8d05b20bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 5.5
 --- !u!1101 &7198122496846046354
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
