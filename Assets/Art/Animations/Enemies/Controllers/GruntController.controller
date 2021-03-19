@@ -428,7 +428,7 @@ BlendTree:
     m_DirectBlendParameter: StunVar
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: 92d55366ce983514d95df4a600288df2,
+    m_Motion: {fileID: 1827226128182048838, guid: fba2a15ec172fd247b9613eb35a02ebc,
       type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
