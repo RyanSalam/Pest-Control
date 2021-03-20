@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0fdb2b7f5d6305549926c9e3e849c6fd
+guid: f498be52097e706438b8acf7324a140f
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
@@ -59,7 +59,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.38623255
+      - time: 0.409396
         functionName: DoAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -107,7 +107,12 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
+  referencedClips:
+  - 7565406d81ead6449bc126d2fb6bbd8d
+  - fba2a15ec172fd247b9613eb35a02ebc
+  - 843e5b61903f2c244af4d31cbde3dc3c
+  - bd7bef60d41624b4e9430c20a89cba96
+  - a10c242f7eee51647aeb8d82e0dc35a8
   importAnimation: 1
   humanDescription:
     serializedVersion: 3

@@ -59,7 +59,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.44196427
+      - time: 0.4295302
         functionName: DoAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -107,12 +107,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 7565406d81ead6449bc126d2fb6bbd8d
-  - 843e5b61903f2c244af4d31cbde3dc3c
-  - 0fdb2b7f5d6305549926c9e3e849c6fd
-  - bd7bef60d41624b4e9430c20a89cba96
-  - a10c242f7eee51647aeb8d82e0dc35a8
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
