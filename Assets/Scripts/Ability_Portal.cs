@@ -51,25 +51,14 @@ public class Ability_Portal : Ability
         Ray floorCast = new Ray(pA.AbilitySpawnPoint.position, Vector3.down); //cast from player to spawn 
         Debug.DrawRay(pA.AbilitySpawnPoint.position, Vector3.down, Color.blue);
 
-        Collider[] obstacles = Physics.OverlapBox(pA.AbilitySpawnPoint.position, Vector3.one * obstacleDetectionRange, Quaternion.identity, obstacleMasks);
-
-        /*
-        if (Physics.Raycast(floorCast, out outHit, verticalSearch, whatIsBuildable))
-        {
-            pA.AbilitySpawnPoint.position = outHit.transform.position;
-
-        }
-        */
-        canMake = obstacles.Length <= 0;
-
         if (canMake)
         {
             portalList[portalCount].transform.position = pA.AbilitySpawnPoint.position + pA.AbilitySpawnPoint.transform.forward * 3;
             portalList[portalCount].transform.rotation = pA.AbilitySpawnPoint.rotation;
             portalList[portalCount].gameObject.SetActive(true);
             portalCount++;
-            player.CurrentEquipped.GetAnimator().SetTrigger("Ability");
-            player.CurrentEquipped.GetAnimator().SetInteger("AbilityIndex", AbilityIndex);
+            //player.CurrentEquipped.GetAnimator().SetTrigger("Ability");
+            //player.CurrentEquipped.GetAnimator().SetInteger("AbilityIndex", AbilityIndex);
         }
         
         if (portalCount == portalList.Count)
@@ -79,7 +68,11 @@ public class Ability_Portal : Ability
 
     public override bool CanExecute()
     {
-        return portalCount < portalList.Count && pA.Controller.isGrounded;
+        Collider[] obstacles = Physics.OverlapBox(pA.AbilitySpawnPoint.position, Vector3.one * obstacleDetectionRange, Quaternion.identity, obstacleMasks);
+
+        canMake = obstacles.Length <= 0;
+
+        return portalCount < portalList.Count && pA.Controller.isGrounded && canMake;
     }
 
     public override void OnCooldownEnd()

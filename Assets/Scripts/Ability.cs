@@ -47,14 +47,19 @@ public abstract class Ability : ScriptableObject
         if (context.action.name == AbilityButton)
         {
             if (context.phase == InputActionPhase.Performed)
-                Execute();
+                PlayAnimation();
         }
+    }
+
+    protected virtual void PlayAnimation()
+    {
+        isAbilityOnCoolDown = true;
+        player.CurrentEquipped.GetAnimator().SetTrigger("Ability");
+        player.CurrentEquipped.GetAnimator().SetInteger("AbilityIndex", AbilityIndex);
     }
 
     public virtual void Execute()
     {
-        player.CurrentEquipped.GetAnimator().SetTrigger("Ability");
-        player.CurrentEquipped.GetAnimator().SetInteger("AbilityIndex", AbilityIndex);
         lifetimeTimer.PlayFromStart();
     }
     /// <summary>
