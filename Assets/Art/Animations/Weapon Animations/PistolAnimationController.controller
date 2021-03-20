@@ -508,7 +508,7 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0
-  m_TransitionOffset: 0.0794402
+  m_TransitionOffset: 0
   m_ExitTime: 0.75000006
   m_HasExitTime: 0
   m_HasFixedDuration: 1
@@ -703,7 +703,7 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0
-  m_TransitionOffset: 0.19687067
+  m_TransitionOffset: 0
   m_ExitTime: 0.6765241
   m_HasExitTime: 0
   m_HasFixedDuration: 1
@@ -822,7 +822,7 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0
-  m_TransitionOffset: 0.36558482
+  m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
   m_HasFixedDuration: 1
@@ -1109,12 +1109,12 @@ AnimatorStateMachine:
   - {fileID: 4056659506147450361}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 8731273421976548927}
-    second:
-    - {fileID: 3906843647072055683}
   - first: {fileID: -3847805172501138875}
     second:
     - {fileID: -2755795649508423157}
+  - first: {fileID: 8731273421976548927}
+    second:
+    - {fileID: 3906843647072055683}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 400, z: 0}
@@ -1552,7 +1552,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BlackholeSummoning
-  m_Speed: 1.75
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8582513528961755788}

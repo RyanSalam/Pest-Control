@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAnimationEvents : MonoBehaviour
 {
-    public void ExecuteAbility(object ability)
+    public void ExecuteAbility(Object ability)
     {
         Ability abilityToCast = (Ability)ability;
         abilityToCast.Execute();
