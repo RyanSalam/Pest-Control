@@ -35,6 +35,7 @@ public class Enemy_DroneV2 : Actor_Enemy
     [SerializeField] GameObject initialDeathVFX;
     [SerializeField] AudioCueSO breakSound;
     [SerializeField] AudioCueSO explosionSound;
+    [SerializeField] GameObject deathImpactDecal;
 
     //making a variable for the core so i can do a easy distance check if we are near it
     [SerializeField] Transform CoreReference;
@@ -72,6 +73,7 @@ public class Enemy_DroneV2 : Actor_Enemy
 
         ObjectPooler.Instance.InitializePool(deathVFX, 5);
         ObjectPooler.Instance.InitializePool(initialDeathVFX, 5);
+        ObjectPooler.Instance.InitializePool(deathImpactDecal, 2);
 
         base.Start();
     }
@@ -142,11 +144,11 @@ public class Enemy_DroneV2 : Actor_Enemy
         }
 
         //adding a failsafe - if we havnt collided for a few seconds automatically snap back to a offset value of 5
-        if (Time.time > timeAtCollision + 5f)
-        {
-            Debug.Log("FailSafe activated");
-            agent.baseOffset = 5;
-        }
+        //if (Time.time > timeAtCollision + 5f)
+        //{
+        //    Debug.Log("FailSafe activated");
+        //    agent.baseOffset = 5;
+        //}
 
 
         //here, if our agent is above a certain velocity we will rotate the model on the x axis so it appears its tilted/propelling towards its target - its max mag-Velocity is agents speed parameter
@@ -168,9 +170,9 @@ public class Enemy_DroneV2 : Actor_Enemy
         //distance check, once inside we will raise the drones y offset so it will go higher in the air - also not dying here so we can still fall on death
         if (CoreReference != null && !isDying)
         {
-            bool nearCore = Vector3.Distance(collisionChecker.position, CoreReference.position) < 5f;
+            bool nearCore = Vector3.Distance(collisionChecker.position, CoreReference.position) < 6f;
             //if we are near the core and our offset is lower than 8 (this is a temp max offset should make variable) go up
-            if (nearCore && agent.baseOffset < 8)
+            if (nearCore && agent.baseOffset < 10)
             {
                 agent.baseOffset += 0.1f;
             }
@@ -195,6 +197,7 @@ public class Enemy_DroneV2 : Actor_Enemy
     {
         agent.enabled = true;
         rb.isKinematic = true;
+        droneLegs.rotation = Quaternion.identity; //reseting the drone legs rotation on respawn - have seen it get messed up so this should fix it
         isDying = false;
         hitNormal = Vector3.zero;
         base.OnEnable();
@@ -285,6 +288,12 @@ public class Enemy_DroneV2 : Actor_Enemy
             ObjectPooler.Instance.GetFromPool(deathVFX, c.GetContact(0).point, transform.rotation);
             gameObject.SetActive(false);
             audioPlayer.PlayAudioCue(explosionSound);
+        }
+
+        //if we hit the ground spawn the scorch mark decal
+        if (c.gameObject.layer == LayerMask.GetMask("Ground") && deathImpactDecal != null) 
+        {
+            ObjectPooler.Instance.GetFromPool(deathImpactDecal, c.GetContact(0).point, Quaternion.LookRotation(c.GetContact(0).normal));
         }
     }
 }

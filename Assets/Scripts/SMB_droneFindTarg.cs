@@ -16,7 +16,7 @@ public class SMB_droneFindTarg : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         drone = animator.gameObject.GetComponentInParent<Enemy_DroneV2>();
-        droneBody = drone.transform.GetChild(0); //getting our drone model to rotate
+        //droneBody = drone.transform.GetChild(0); //getting our drone model to rotate
 
         canAttack = true; //this is a second bool so we dont enter the attack state every frame
 
@@ -41,6 +41,15 @@ public class SMB_droneFindTarg : StateMachineBehaviour
 
             //here we will do a distance comparison to see if we should enter attack state
             bool inAttackRange = Vector3.Distance(drone.distanceChecker.position, drone.CurrentTarget.position) < drone.AttackRange;
+
+            ////if we change our attack range to only evaluate our targets x and y position, our height wont matter and we will still be able to drop bombs
+            //float xDistance = drone.distanceChecker.position.x - drone.CurrentTarget.position.x;
+            //float zDistance = drone.distanceChecker.position.z - drone.CurrentTarget.position.z;
+
+            ////so if our x or z distance is within -3, 3 we are in the attack range - can change these values
+            //if (xDistance.IsWithin(-3, 3) || zDistance.IsWithin(-3, 3))
+            //    inAttackRange = true;
+
 
             //this is being triggered way too much adding a second bool
             if (inAttackRange && canAttack)

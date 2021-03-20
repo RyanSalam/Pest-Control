@@ -15,7 +15,7 @@ public class SMB_DroneAttackV2 : StateMachineBehaviour
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         drone = animator.gameObject.GetComponentInParent<Enemy_DroneV2>();
-        droneBody = drone.transform.GetChild(0); //getting our drone model to rotate
+        //droneBody = drone.transform.GetChild(0); //getting our drone model to rotate
 
         if (drone != null)
         {
