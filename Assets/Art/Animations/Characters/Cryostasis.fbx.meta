@@ -39,7 +39,7 @@ ModelImporter:
       takeName: Cryostasis
       internalID: 0
       firstFrame: 0
-      lastFrame: 150
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -60,7 +60,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.115835786
-        functionName: ExecuteAbility
+        functionName: TurnControllerOn
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 93e50680bc69be547b4894696f5b0cd0,
           type: 2}
