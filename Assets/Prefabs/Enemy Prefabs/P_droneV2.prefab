@@ -646,6 +646,8 @@ MonoBehaviour:
     type: 3}
   breakSound: {fileID: 11400000, guid: b184a7b0442054c46ac4ba8cf239e5b8, type: 2}
   explosionSound: {fileID: 11400000, guid: b187cf274c1a0fb4d927a71a03f95bf9, type: 2}
+  deathImpactDecal: {fileID: 4982921017592928787, guid: 4d31dd821806973479fddfcda9e684f8,
+    type: 3}
   CoreReference: {fileID: 0}
 --- !u!195 &3414804625668340201
 NavMeshAgent:
