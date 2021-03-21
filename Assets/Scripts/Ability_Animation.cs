@@ -7,6 +7,9 @@ public class Ability_Animation : Ability
 {
     private Actor_Player pA;
     [SerializeField] private string triggerName;
+    public float duration = 5f;
+    [SerializeField] GameObject abilityInstance;
+    GameObject abilityController;
 
     public override void Execute()
     {
@@ -18,6 +21,19 @@ public class Ability_Animation : Ability
     {
         base.Initialize(abilitySource);
         pA = abilitySource.GetComponent<Actor_Player>();
+        abilityController = Instantiate(abilityInstance, player.AbilitySpawnPoint.position, player.AbilitySpawnPoint.rotation);
+        abilityController.transform.SetParent(player.AbilitySpawnPoint);
+        SwitchController(false);
+    }
+
+    public void SwitchController(bool isActivated)
+    {
+        abilityController.SetActive(isActivated);
+    }
+
+    public void DoCryoExplosion()
+    {
+        abilityController.GetComponent<Ability_Cryo>().CryostasisExplosion();
     }
 
     public override void OnCooldownEnd()
@@ -29,4 +45,5 @@ public class Ability_Animation : Ability
     {
         isAbilityOnCoolDown = true;
     }
+
 }
