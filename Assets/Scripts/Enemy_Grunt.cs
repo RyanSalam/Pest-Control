@@ -57,6 +57,8 @@ public class Enemy_Grunt : Actor_Enemy
             //Quaternion rot = Quaternion.LookRotation(dir);
             //transform.rotation = Quaternion.Lerp(transform.rotation, rot, -0.6f);
 
+            Anim.SetFloat("DistanceToTarg", Vector3.Distance(CurrentTarget.transform.position, transform.position));
+
             // When attacking core
             if (currentTarget == Core.transform)
             {
