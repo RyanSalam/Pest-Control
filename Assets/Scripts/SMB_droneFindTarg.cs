@@ -40,15 +40,18 @@ public class SMB_droneFindTarg : StateMachineBehaviour
             drone.Agent.SetDestination(drone.CurrentTarget.position); //needed to add this so it can update position - kiting
 
             //here we will do a distance comparison to see if we should enter attack state
-            bool inAttackRange = Vector3.Distance(drone.distanceChecker.position, drone.CurrentTarget.position) < drone.AttackRange;
+            // bool inAttackRange = Vector3.Distance(drone.distanceChecker.position, drone.CurrentTarget.position) < drone.AttackRange;
+            bool inAttackRange = false;
 
             ////if we change our attack range to only evaluate our targets x and y position, our height wont matter and we will still be able to drop bombs
-            //float xDistance = drone.distanceChecker.position.x - drone.CurrentTarget.position.x;
-            //float zDistance = drone.distanceChecker.position.z - drone.CurrentTarget.position.z;
+            float xDistance = drone.distanceChecker.position.x - drone.CurrentTarget.position.x;
+            Debug.Log(xDistance + "this is its x distance buddy");
+            float zDistance = drone.distanceChecker.position.z - drone.CurrentTarget.position.z;
+            Debug.Log("this is its z Distance check here ->" + zDistance);
 
             ////so if our x or z distance is within -3, 3 we are in the attack range - can change these values
-            //if (xDistance.IsWithin(-3, 3) || zDistance.IsWithin(-3, 3))
-            //    inAttackRange = true;
+            if (xDistance.IsWithin(-3, 3) && zDistance.IsWithin(-3, 3))
+                inAttackRange = true;
 
 
             //this is being triggered way too much adding a second bool
