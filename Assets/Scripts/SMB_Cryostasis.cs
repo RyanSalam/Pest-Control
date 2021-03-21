@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SMB_Cryostasis : StateMachineBehaviour
 {
     private Actor_Player pA;
+    public string AbilityButton = "Button Name";
     [SerializeField] float abilityLifetime = 5.0f;
     [SerializeField] float healPerSecond;
     private float healingTimer;
@@ -13,6 +16,7 @@ public class SMB_Cryostasis : StateMachineBehaviour
     [SerializeField] float explosionDamage;
     [SerializeField] LayerMask whatIsEnemy;
     [SerializeField] GameObject explosionVFX;
+    private bool isCanceled = false;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -29,12 +33,34 @@ public class SMB_Cryostasis : StateMachineBehaviour
         pA.playerInputs.currentActionMap.Disable();
         healingTimer = 0.0f;
         enemiesHit = null;
+
+        pA.playerInputs.onActionTriggered += HandleInput;
+        isCanceled = false;
+    }
+
+    private void HandleInput(InputAction.CallbackContext context)
+    {
+        if (context.action.name == AbilityButton)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                isCanceled = true;
+                CancelAbility();
+            }
+                
+        }
+    }
+
+    private void CancelAbility()
+    {
+        // TODO - Finish animation early & skip to the transition
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         LevelManager.Instance.CharacterUI.FadeAbilityEffect(abilityLifetime);
+        LevelManager.Instance.CharacterUI.abilityCancelText.SetActive(!isCanceled);
 
         healingTimer += Time.deltaTime;
         if (healingTimer >= 1.0f)
@@ -52,7 +78,7 @@ public class SMB_Cryostasis : StateMachineBehaviour
         pA.hitAngle = 360.0f;
         //pA.controlsEnabled = true;
         pA.playerInputs.currentActionMap.Enable();
-
+        LevelManager.Instance.CharacterUI.abilityCancelText.SetActive(false);
         LevelManager.Instance.CharacterUI.ResetAlphaValue();
         Instantiate(explosionVFX, pA.gameObject.transform.position, pA.gameObject.transform.rotation);
     }
@@ -73,6 +99,6 @@ public class SMB_Cryostasis : StateMachineBehaviour
             if (e != null)
                 e.TakeDamage(explosionDamage);
         }
-
     }
+
 }

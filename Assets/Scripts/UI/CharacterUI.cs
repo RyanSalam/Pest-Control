@@ -14,6 +14,8 @@ public class CharacterUI : MonoBehaviour
     [SerializeField] Image ability2_Clock;
     [SerializeField] TMP_Text playerEnergy;
 
+    public GameObject abilityCancelText;
+
     [SerializeField] public Image abilityEffect;
     private float effectTimer = 0.0f;
     public bool abilityActive = false;
@@ -32,6 +34,8 @@ public class CharacterUI : MonoBehaviour
 
         player.AbilityOne.cooldownTimer.OnTimerEnd += () => ability1_Clock.fillAmount = 0;
         player.AbilityTwo.cooldownTimer.OnTimerEnd += () => ability2_Clock.fillAmount = 0;
+
+        abilityCancelText.SetActive(false);
     }
 
     // Update is called once per frame
