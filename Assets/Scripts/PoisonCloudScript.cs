@@ -5,7 +5,7 @@ using UnityEngine;
 public class PoisonCloudScript : MonoBehaviour
 {
     //variables for our posion damage
-    float damageAmount = 5f;
+    float damageAmount = 10f;
     float timeSinceLastDamage = 0f;
     float damageDelay = 2f;
     float projectileForce = 10.0f;
@@ -15,7 +15,7 @@ public class PoisonCloudScript : MonoBehaviour
     float timer = 0;
 
     //Overlap-sphere variables
-    float radius = 10f;
+    float radius = 6f;
     LayerMask layerMask;
 
     //bool to see if we have hit something -> time to deploy poison

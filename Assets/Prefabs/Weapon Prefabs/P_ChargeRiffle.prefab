@@ -9778,10 +9778,10 @@ MonoBehaviour:
   hRecoil: 0
   recoilSpeed: 1
   fireRate: 1
-  Damage: 20
+  Damage: 25
   auto: 1
   currentShots: 0
-  maxShots: 25
+  maxShots: 15
   shotIncrease: 1
   timeTillWeaponCooldown: 3
   overHeatSound: {fileID: 11400000, guid: 4b2bfbc4a0226be449f6cfd666c8da39, type: 2}
