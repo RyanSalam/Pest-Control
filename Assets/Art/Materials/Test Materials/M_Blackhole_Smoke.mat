@@ -88,6 +88,7 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _dissipate: 0.75
     m_Colors:
     - Color_32661336: {r: 0.15182358, g: 0.08530617, b: 0.254717, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}

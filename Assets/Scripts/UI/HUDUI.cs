@@ -132,8 +132,9 @@ public class HUDUI : MonoBehaviour
         energyText.color = warningColor;
         warningNeeded = false;
         warningPanel.SetActive(true);
+        warningPanel.transform.DOScale(Vector3.one, 0.5f).From(Vector3.zero);
         yield return new WaitForSeconds(warningMessageDuration);
-        warningPanel.SetActive(false);
+        warningPanel.transform.DOScale(Vector3.zero, 0.15f).From(Vector3.one).OnComplete(() => warningPanel.SetActive(false));
         energyText.color = Color.white;
     }
 
