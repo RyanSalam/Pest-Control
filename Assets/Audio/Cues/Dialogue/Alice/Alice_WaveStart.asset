@@ -18,3 +18,11 @@ MonoBehaviour:
   - sequenceMode: 0
     audioClips:
     - {fileID: 8300000, guid: 17d8c44ef1e05f64eb61a47a4271e9bf, type: 3}
+    - {fileID: 8300000, guid: 1c0bc8a2a9da7ef46b2abeefba1e8f2b, type: 3}
+    - {fileID: 8300000, guid: 0c05e00fbf401c94bb0e73f9933a8efb, type: 3}
+    - {fileID: 8300000, guid: 59de363a6063bc84db79d2e191dca7fe, type: 3}
+    - {fileID: 8300000, guid: 79ea5e5d2ae401d4c8613e54e9d16b48, type: 3}
+    - {fileID: 8300000, guid: 6fc78cb6578c6e847801fb5ff9e17918, type: 3}
+    - {fileID: 8300000, guid: 17d8c44ef1e05f64eb61a47a4271e9bf, type: 3}
+    - {fileID: 8300000, guid: 17d8c44ef1e05f64eb61a47a4271e9bf, type: 3}
+    - {fileID: 8300000, guid: 17d8c44ef1e05f64eb61a47a4271e9bf, type: 3}
