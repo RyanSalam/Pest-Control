@@ -382,7 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ff234010e401f4ea5849e87efb95f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapDamage: 25
+  trapDamage: 15
   maxUses: 10
   buildDuration: 0
   trapColor: {r: 0, g: 1, b: 0.9335954, a: 1}
@@ -393,7 +393,7 @@ MonoBehaviour:
   healthEndColor: {r: 1, g: 0, b: 0, a: 1}
   audioPlayer: {fileID: 0}
   destroy: {fileID: 11400000, guid: 9386c40e8291844429580b8262c50bc7, type: 2}
-  enemyChainAmount: 5
+  enemyChainAmount: 4
   chainRadius: 10
   whatIsEnemy:
     serializedVersion: 2
