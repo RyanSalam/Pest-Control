@@ -90,7 +90,7 @@ Animator:
   m_GameObject: {fileID: 985980260826205731}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c687c57df7a450a4aa9c4e6c55e49130, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 2089267537730716536}
   - component: {fileID: 6633013781978673459}
   m_Layer: 0
-  m_Name: P_TestAbilitySphere
+  m_Name: P_Blackhole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,7 +262,7 @@ MonoBehaviour:
   launchForwardForce: 5
   launchUpWardForce: 5
   timeToSuck: 2
-  areaOfEffect: 8
+  areaOfEffect: 10
   pullStrength: 5
   TargetRadius: 7
   expandTime: 1.5

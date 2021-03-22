@@ -117,7 +117,7 @@ MonoBehaviour:
   vRecoil: 0
   hRecoil: 0
   recoilSpeed: 1.25
-  fireRate: 0.6
+  fireRate: 0.8
   Damage: 40
   auto: 0
   currentShots: 0
@@ -157,6 +157,8 @@ MonoBehaviour:
   positionalReturnSpeed: 10
   rotationalReturnSpeed: 10
   RecoilKickBack: {x: 0.015, y: 0, z: -0.09}
+  spriteSlot: {fileID: 0}
+  offset: {x: 0, y: 0}
   bulletTrail: {fileID: 6956728020116618863}
   spreadCurve:
     serializedVersion: 2

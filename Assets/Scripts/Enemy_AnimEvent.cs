@@ -31,7 +31,7 @@ public class Enemy_AnimEvent : MonoBehaviour
     {
         float distToPlayer = Vector3.Distance(thisEnemy.Player.transform.position, thisEnemy.transform.position) * 0.65f;
         Vector3 dashDist = thisEnemy.transform.position + (thisEnemy.transform.forward * distToPlayer);
-        dashDist.y = thisEnemy.CurrentTarget.position.y;
+        dashDist.y = thisEnemy.CurrentTarget.position.y - 1;
         thisEnemy.transform.DOMove(dashDist, 1f).SetEase(Ease.OutQuart).OnComplete(() => thisEnemy.Agent.Warp(dashDist));
     }
 
