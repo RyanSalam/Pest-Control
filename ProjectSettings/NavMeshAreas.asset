@@ -13,8 +13,8 @@ NavMeshProjectSettings:
     cost: 2
   - name: Core Route
     cost: 1
-  - name: 
-    cost: 3
+  - name: Unwalkable
+    cost: 20
   - name: 
     cost: 1
   - name: 
