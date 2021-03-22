@@ -34,6 +34,7 @@ public class Ability_Animation : Ability
     public void DoCryoExplosion()
     {
         abilityController.GetComponent<Ability_Cryo>().CryostasisExplosion();
+        cooldownTimer.PlayFromStart();
     }
 
     public override void OnCooldownEnd()

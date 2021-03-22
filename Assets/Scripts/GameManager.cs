@@ -14,7 +14,8 @@ public class GameManager : MonoSingleton<GameManager>
         menuHandler = FindObjectOfType<MenuHandler>();
         selectedPlayer = menuHandler.GetCharacter();
         selectedLevel = menuHandler.GetLevel();
-        LoadScene();
+        if (selectedLevel != "" && selectedPlayer != null)
+            LoadScene();
     }
 
     public void LoadScene()

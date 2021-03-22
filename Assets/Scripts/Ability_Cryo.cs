@@ -105,7 +105,14 @@ public class Ability_Cryo : MonoBehaviour
             pA.playerInputs.currentActionMap.Disable();
             pA.playerInputs.actions[AbilityButton].Enable();
         }
-        
+
+        // Set the default explosion damage HERE
+        explosionDamage = 40f;
+
+        healingTimer = 0.0f;
+        enemiesHit = null;
+        isCanceled = false;
+
     }
 
     private void OnDisable()
