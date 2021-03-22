@@ -123,6 +123,10 @@ public class Weapon_Charge : Weapon
         isCharging = true;
         currentCharge = 0.0f;
 
+        //setting animator parameters
+        animator.SetTrigger("fire");
+        animator.SetBool("isFiring", isFiring);
+
         if (currentCooldown != null)
         {
             StopCoroutine(currentCooldown);
@@ -186,6 +190,7 @@ public class Weapon_Charge : Weapon
             //temporary coroutine until we get smarter - coroutine toggles our weapon variables
             currentCooldown = StartCoroutine(WeaponCooldown(currentRatio));
             cooldownActive = true;
+            animator.SetBool("chargeOverheat", true);
         }
 
         // If we did a max charge, apply bonus damage

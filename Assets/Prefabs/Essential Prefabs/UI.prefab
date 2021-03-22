@@ -4460,7 +4460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -7717,7 +7717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -7885,7 +7885,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278209279
-  m_fontColor: {r: 1, g: 0.2901961, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 0.2901961, b: 0, a: 0.88235295}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9229,12 +9229,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue: {fileID: 6293219070067469738}
   defaultTexts:
-  - To refund any item, simply press the corresponding inventory slot.
-  - Trap items have  a cost for each placement, apart from their original purchase
-    costs.
-  - You can only have 4 different items at a time, to get another one, refund one
-    of your items to open up space in your inventory.
-  textToOverride: 
+  - 'Pro Tip:  To refund any item, simply press the corresponding inventory slot.'
+  - 'Pro Tip: Trap items have a cost for each placement, apart from their original
+    purchase costs.'
+  - 'Pro Tip: You can only have 4 different items at a time, to get another one,
+    refund one of your items to open up space in your inventory.'
+  - 'Pro Tip: You can only access the shop during the build phase.'
 --- !u!1 &4191029740505409352
 GameObject:
   m_ObjectHideFlags: 0
@@ -9543,8 +9543,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278209279
-  m_fontColor: {r: 1, g: 0.2901961, b: 0, a: 1}
+    rgba: 3774892799
+  m_fontColor: {r: 1, g: 0.2901961, b: 0, a: 0.88235295}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

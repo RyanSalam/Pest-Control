@@ -3,39 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class Fluffy : MonoSingleton<Fluffy>
 {
-    public static event System.Action<string> onTextChange;
+    public event System.Action<string> onTextChange;
 
     [SerializeField] TMP_Text dialogue;
     [SerializeField] string[] defaultTexts;
 
-    public string textToOverride = ""; 
+    private string _textToOverride;
+    public string TextToOverride
+    {
+        get { return _textToOverride; }
+        set 
+        {
+            _textToOverride = value;
+            onTextChange?.Invoke(_textToOverride);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         dialogue.text = defaultTexts[0];
+        onTextChange += HandleDialogue;
     }
 
     // Update is called once per frame
     void Update()
     {
-        HandleDialogue();
+        //HandleDialogue();
     }
 
-    private void HandleDialogue()
+    private void HandleDialogue(string overridingText)
     {
-        if (textToOverride != "")
+        if (overridingText != "")
         {
-            dialogue.text = textToOverride;
+            dialogue.text = overridingText;
         }
         else
         {
-            dialogue.text = defaultTexts[0];
-            //dialogue.text = defaultTexts[Random.Range(0, defaultTexts.Length - 1)];
+            //dialogue.text = defaultTexts[0];
+            dialogue.text = defaultTexts[UnityEngine.Random.Range(0, defaultTexts.Length)];
         }
     }
+
 
 }
