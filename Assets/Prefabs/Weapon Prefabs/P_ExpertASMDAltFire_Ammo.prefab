@@ -140,7 +140,7 @@ MonoBehaviour:
   force: 8
   explosionEffect: {fileID: 1834516428328612, guid: f39c43985f1039b47b3065f46848760e,
     type: 3}
-  explosionRadius: 15
+  explosionRadius: 8
   explosionDamage: 100
   enemyMask:
     serializedVersion: 2

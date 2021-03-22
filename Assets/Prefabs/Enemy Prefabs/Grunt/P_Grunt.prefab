@@ -124,7 +124,7 @@ MonoBehaviour:
   currentDestination: {x: 0, y: 0, z: 0}
   m_player: {fileID: 0}
   _attackRange: 3.5
-  _damage: 12
+  _damage: 15
   _bIsSearching: 0
   _playerLayer:
     serializedVersion: 2
