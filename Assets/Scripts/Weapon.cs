@@ -122,7 +122,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     // WARNING: This bool is only used by the ChargeRifle!
     protected bool isCanceled = false;
-
+    protected AudioCue ACue;
     //this is set on our weapon script when we shoot
     //this will maybe be changed to if proj -> projFire() elseif raycast ->
 
@@ -165,6 +165,9 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         if (spriteSlot != null)
             MaterialHandler.Vector2Changer(spriteSlot, "_MainTex_ST", offset);
+
+        //Audio Settings
+        ACue = GetComponent<AudioCue>();
     }
 
     protected virtual void Update()
@@ -296,7 +299,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
                 StartCoroutine(playVFX());
             //playOverHeatVFX();
 
-            ImpactSystem.Instance.PlayUISoundSFX(overHeatSound);
+            ACue.PlayAudioCue(overHeatSound);
 
             
             isFiring = false;

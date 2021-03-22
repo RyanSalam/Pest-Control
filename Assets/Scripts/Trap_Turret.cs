@@ -112,7 +112,7 @@ public class Trap_Turret : Trap
         if (enemyTarget != null)
         {
             Activate();
-        }
+        }   
     }
     void ResetRotation()
     {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Enemy_AnimEvent : MonoBehaviour
 {
@@ -24,6 +25,14 @@ public class Enemy_AnimEvent : MonoBehaviour
         thisEnemy = GetComponentInParent<Actor_Enemy>();
         damage = (int)thisEnemy.Damage;
         enabled = false;
+    }
+
+    public void Dash()
+    {
+        float distToPlayer = Vector3.Distance(thisEnemy.Player.transform.position, thisEnemy.transform.position) * 0.65f;
+        Vector3 dashDist = thisEnemy.transform.position + (thisEnemy.transform.forward * distToPlayer);
+        dashDist.y = thisEnemy.CurrentTarget.position.y - 1;
+        thisEnemy.transform.DOMove(dashDist, 1f).SetEase(Ease.OutQuart).OnComplete(() => thisEnemy.Agent.Warp(dashDist));
     }
 
     public void DoAttack()
@@ -67,7 +76,7 @@ public class Enemy_AnimEvent : MonoBehaviour
     IEnumerator Dissolve()
     {
         float elapsed = 0;
-        while(elapsed < dissolveTime)
+        while (elapsed < dissolveTime)
         {
             Debug.Log("Despawn");
             elapsed += Time.deltaTime;
