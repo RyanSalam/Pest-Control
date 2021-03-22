@@ -163,7 +163,8 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         //onDamageDealt += DamageIndication;
         overheatSteamVFX = GameObject.FindGameObjectsWithTag("gasLeakVFX");
 
-        MaterialHandler.Vector2Changer(spriteSlot, "_MainTex_ST", offset);
+        if (spriteSlot != null)
+            MaterialHandler.Vector2Changer(spriteSlot, "_MainTex_ST", offset);
     }
 
     protected virtual void Update()
