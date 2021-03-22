@@ -60,7 +60,6 @@ public class Enemy_Grunt : Actor_Enemy
             //transform.rotation = Quaternion.Lerp(transform.rotation, rot, -0.6f);
 
             Anim.SetFloat("DistanceToTarg", Vector3.Distance(CurrentTarget.transform.position, transform.position));
-            Anim.SetBool("isCoreTarget", currentTarget = Core.transform);
 
             // When attacking core
             if (currentTarget == Core.transform)

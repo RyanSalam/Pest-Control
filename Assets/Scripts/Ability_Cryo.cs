@@ -117,6 +117,8 @@ public class Ability_Cryo : MonoBehaviour
 
     private void OnDisable()
     {
+        if (pA == null)
+            pA = LevelManager.Instance.Player;
         pA.hitAngle = 360.0f;
         //pA.controlsEnabled = true;
         pA.playerInputs.currentActionMap.Enable();

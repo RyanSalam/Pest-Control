@@ -114,6 +114,13 @@ public static class MaterialHandler
         {
             spriteRenderer.sprite = newSprite;
         }
+    }
 
+    public static void Vector2Changer(SkinnedMeshRenderer renderer, string propertyName, Vector2 newValue)
+    {
+        MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
+        propertyBlock.SetVector(propertyName, newValue);
+
+        renderer.SetPropertyBlock(propertyBlock);
     }
 }

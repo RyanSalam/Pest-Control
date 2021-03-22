@@ -85,6 +85,10 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     Vector3 positionalRecoil;
     Vector3 Rot;
 
+    [Header("Weapon Sprite")]
+    [SerializeField] SkinnedMeshRenderer spriteSlot;
+    [SerializeField] Vector2 offset;
+
     public void DamageDealt(DamageData data)
     {
         //calling all functions in the DamageHandler list
@@ -158,6 +162,9 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         //onDamageDealt += DamageIndication;
         overheatSteamVFX = GameObject.FindGameObjectsWithTag("gasLeakVFX");
+
+        if (spriteSlot != null)
+            MaterialHandler.Vector2Changer(spriteSlot, "_MainTex_ST", offset);
     }
 
     protected virtual void Update()
