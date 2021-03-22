@@ -376,7 +376,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2309,10 +2309,10 @@ RectTransform:
   m_Father: {fileID: 144052066}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 685, y: 248}
-  m_SizeDelta: {x: 1283.14, y: 339.4}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -276, y: 248}
+  m_SizeDelta: {x: 1283.1401, y: 339.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &765771929294685062
 CanvasRenderer:
@@ -5304,7 +5304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.74500006}
   m_AnchorMax: {x: 0.31677085, y: 1}
-  m_AnchoredPosition: {x: -39.941406, y: -10}
+  m_AnchoredPosition: {x: -39.940918, y: -10}
   m_SizeDelta: {x: -11.200116, y: -1.500014}
   m_Pivot: {x: 0.4, y: 1}
 --- !u!222 &6311013233766829793
@@ -5885,9 +5885,9 @@ RectTransform:
   m_Father: {fileID: 144052066}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 343.99988, y: 407.00006}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -617.0001, y: 407.00006}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3880078962258960427
@@ -6479,7 +6479,7 @@ GameObject:
   - component: {fileID: 5443223387422349409}
   - component: {fileID: 4493786534751621423}
   m_Layer: 5
-  m_Name: QuitToMenuButton
+  m_Name: ExitToMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6738,7 +6738,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -8027,9 +8027,9 @@ RectTransform:
   m_Father: {fileID: 8757159821358810520}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 549.6248, y: -297.06494}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 250.62482, y: -160.06494}
   m_SizeDelta: {x: 656.31006, y: 340.2}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &8592627803834611450
@@ -9230,6 +9230,10 @@ MonoBehaviour:
   dialogue: {fileID: 6293219070067469738}
   defaultTexts:
   - To refund any item, simply press the corresponding inventory slot.
+  - Trap items have  a cost for each placement, apart from their original purchase
+    costs.
+  - You can only have 4 different items at a time, to get another one, refund one
+    of your items to open up space in your inventory.
   textToOverride: 
 --- !u!1 &4191029740505409352
 GameObject:
@@ -9309,7 +9313,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -12028,7 +12032,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit To Menu
+  m_text: Exit To Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 265750975a6e34c42925a4ee49787b60, type: 2}
   m_sharedMaterial: {fileID: -906426509141493926, guid: 265750975a6e34c42925a4ee49787b60,
@@ -14734,7 +14738,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

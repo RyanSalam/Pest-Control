@@ -70,12 +70,13 @@ public class ShopUI : MonoBehaviour
 
     public IEnumerator WarningMessage()
     {
-        customerEnergy.rectTransform.DOPunchAnchorPos(Vector2.one * 20f, 1f, 50, 10f);
+        customerEnergy.rectTransform.DOPunchAnchorPos(Vector2.one * 20f, 1f, 50, 10f).OnComplete(() => customerEnergy.rectTransform.DORewind());
         customerEnergy.color = warningColor;
         warningNeeded = false;
         warningPanel.SetActive(true);
+        warningPanel.transform.DOScale(Vector3.one, 0.5f).From(Vector3.zero);
         yield return new WaitForSeconds(warningMessageDuration);
-        warningPanel.SetActive(false);
+        warningPanel.transform.DOScale(Vector3.zero, 0.15f).From(Vector3.one).OnComplete(() => warningPanel.SetActive(false));
         customerEnergy.color = Color.white;
     }
 

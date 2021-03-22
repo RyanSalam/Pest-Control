@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Fluffy : MonoSingleton<Fluffy>
 {
+    public static event System.Action<string> onTextChange;
+
     [SerializeField] TMP_Text dialogue;
     [SerializeField] string[] defaultTexts;
 
@@ -32,6 +34,7 @@ public class Fluffy : MonoSingleton<Fluffy>
         else
         {
             dialogue.text = defaultTexts[0];
+            //dialogue.text = defaultTexts[Random.Range(0, defaultTexts.Length - 1)];
         }
     }
 
