@@ -2451,7 +2451,7 @@ MonoBehaviour:
   healthEndColor: {r: 1, g: 0, b: 0, a: 1}
   audioPlayer: {fileID: 0}
   destroy: {fileID: 11400000, guid: 9386c40e8291844429580b8262c50bc7, type: 2}
-  maxRange: 14
+  maxRange: 10
   detectionAngle: 180
   bulletSpawn: {fileID: 5076650341606186608}
   turretRotHinge: {fileID: 5076650341606186568}
@@ -2461,7 +2461,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  damage: 40
+  damage: 25
   RoundsPerMinute: 60
   bulletSpeed: 10
   bulletCount: 3
