@@ -310,13 +310,17 @@ MonoBehaviour:
   maxUses: 10
   buildDuration: 0
   trapColor: {r: 0, g: 1, b: 0.9335954, a: 1}
+  trapDeathVFX: {fileID: 0}
   healthBar: {fileID: 469580165873399584}
+  healthStartColor: {r: 0, g: 1, b: 0, a: 1}
+  healthEndColor: {r: 1, g: 0, b: 0, a: 1}
   enemyChainAmount: 5
   chainRadius: 10
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 512
   canAttack: 1
+  enemies: []
   chainOrigin: {fileID: 4084208043290531406}
   particleVFX: {fileID: 1469211736650368, guid: b08f505eff218204fb92fac4cda2cfca,
     type: 3}
@@ -435,6 +439,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapParent: {fileID: 6662004006499764242}
+  trapDeathVFX: {fileID: 8764043878647920493, guid: c4ed38c72957f2241ad144a1614956d9,
+    type: 3}
+  shrinkTimer: 1
 --- !u!1001 &342461521943459676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -724,6 +731,10 @@ PrefabInstance:
     - target: {fileID: 100032, guid: eb1366277757d5340894bd490a18f77b, type: 3}
       propertyPath: m_Name
       value: ETrap_FBX
+      objectReference: {fileID: 0}
+    - target: {fileID: 100032, guid: eb1366277757d5340894bd490a18f77b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400032, guid: eb1366277757d5340894bd490a18f77b, type: 3}
       propertyPath: m_RootOrder
