@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapParent: {fileID: 6662004006499764242}
+  trapDeathVFX: {fileID: 8764043878647920493, guid: 5724d832f9246a94da2654825659dbf7,
+    type: 3}
+  shrinkTimer: 2
 --- !u!114 &1137645048773752954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +269,10 @@ MonoBehaviour:
   maxUses: 10
   buildDuration: 1
   trapColor: {r: 1, g: 0, b: 0.6308284, a: 1}
+  trapDeathVFX: {fileID: 0}
   healthBar: {fileID: 8058773015510869963}
+  healthStartColor: {r: 0, g: 1, b: 0, a: 1}
+  healthEndColor: {r: 1, g: 0, b: 0, a: 1}
   particleEffectObjects: {fileID: 6237411802662377187}
 --- !u!1 &7130338200617746910
 GameObject:
