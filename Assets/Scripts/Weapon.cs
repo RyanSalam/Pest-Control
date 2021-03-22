@@ -30,6 +30,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     [SerializeField] protected int shotIncrease = 1; //everytime you shoot the currentShots is increased by shotIncrease, allowing for some guns to overheat faster
     //[SerializeField] protected float coolDownDelay = 3; //
     [SerializeField] protected float timeTillWeaponCooldown = 3; //how long it takes for our gun to reload (cool off)
+    [SerializeField] AudioCueSO overHeatSound;
     protected float lastUnequiped = 0.0f;
 
     [Space(10)]
@@ -78,9 +79,6 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     [SerializeField] protected static Vector3 RecoilRotation = new Vector3(10, 5, 7);
     [SerializeField] protected Vector3 RecoilKickBack = new Vector3(0.015f, 0f, -0.2f);
 
-    //[Space(10)]
-    //public Vector3 RecoilRotationAim = new Vector3(10, 4, 6);
-    //public Vector3 RecoilKickBackAim = new Vector3(0.015f, 0f, -0.2f);
     [Space(10)]
 
     Vector3 rotationalRecoil;
@@ -240,7 +238,6 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     protected IEnumerator WeaponCooldown(float percentage)
     {
         float elapsed = timeTillWeaponCooldown * percentage;
-
         while (elapsed > 0)
         {
             
@@ -290,8 +287,11 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         {
             if (overheatSteamVFX.Length > 0) //play our vfx if they exist
                 StartCoroutine(playVFX());
-                //playOverHeatVFX();
+            //playOverHeatVFX();
 
+            ImpactSystem.Instance.PlayUISoundSFX(overHeatSound);
+
+            
             isFiring = false;
             canFire = false; //we cannot fire now
             animator.SetBool("isOverheating", true);

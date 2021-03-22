@@ -3,7 +3,23 @@ guid: 6881091166f18bf4bbc575998af6d55c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _core: {instanceID: 0}
+  - _player: {instanceID: 0}
+  - Char_SO: {instanceID: 0}
+  - spectatorCamera: {instanceID: 0}
+  - EndGameMenu: {instanceID: 0}
+  - EndGameText: {instanceID: 0}
+  - StartingItem: {instanceID: 0}
+  - hudUI: {instanceID: 0}
+  - shopUI: {instanceID: 0}
+  - weaponUI: {instanceID: 0}
+  - characterUI: {instanceID: 0}
+  - ShopStartingButton: {instanceID: 0}
+  - PauseStartingButton: {instanceID: 0}
+  - GameOverStartingButton: {instanceID: 0}
+  - armMaterial: {fileID: 2100000, guid: e234493acfa807d4c97d9e7e078a10f0, type: 2}
+  - playerHealthVolume: {instanceID: 0}
   executionOrder: 300
   icon: {instanceID: 0}
   userData: 
