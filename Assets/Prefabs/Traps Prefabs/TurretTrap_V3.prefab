@@ -2202,6 +2202,7 @@ MonoBehaviour:
   trapParent: {fileID: 7174932915223360148}
   trapDeathVFX: {fileID: 8764043878647920493, guid: c4ed38c72957f2241ad144a1614956d9,
     type: 3}
+  shrinkTimer: 2
 --- !u!1 &5076650341606015580
 GameObject:
   m_ObjectHideFlags: 0
@@ -2328,6 +2329,7 @@ GameObject:
   - component: {fileID: 7555258778146646062}
   - component: {fileID: 7910019531310403710}
   - component: {fileID: 2577234306156353420}
+  - component: {fileID: 7697533406339043829}
   m_Layer: 11
   m_Name: TurretTrap_V3
   m_TagString: Trap
@@ -2371,6 +2373,8 @@ MonoBehaviour:
   healthBar: {fileID: 6264948329583329206}
   healthStartColor: {r: 0, g: 1, b: 0, a: 1}
   healthEndColor: {r: 1, g: 0, b: 0, a: 1}
+  audioPlayer: {fileID: 0}
+  destroy: {fileID: 11400000, guid: 9386c40e8291844429580b8262c50bc7, type: 2}
   maxRange: 14
   detectionAngle: 180
   bulletSpawn: {fileID: 5076650341606186608}
@@ -2389,6 +2393,7 @@ MonoBehaviour:
   hitEffect: {fileID: 7050105079803764325, guid: 95b65c856f420494990e4b32dcd5dd0b,
     type: 3}
   center: {fileID: 0}
+  attackSound: {fileID: 11400000, guid: c6dff8007e229ce4d9918f33034e53b7, type: 2}
 --- !u!65 &2577234306156353420
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2402,6 +2407,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.2961998, y: 2.0387754, z: 3.7082577}
   m_Center: {x: -0.033309937, y: 1.3455842, z: 0.4091997}
+--- !u!114 &7697533406339043829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7174932915223360148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f4dcd5da0291c4b914bd20a115beb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioCue: {fileID: 0}
+  _playOnStart: 0
+  _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
+    type: 2}
+  _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
+    type: 2}
 --- !u!1001 &2198206839823210972
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -61,6 +61,8 @@ MonoBehaviour:
   Hologram: {fileID: 2100000, guid: 3c852c0492ffc54488c16540cdd99acb, type: 2}
   CanPlace: 0
   obstacleDetectionRange: 2
+  audioPlayer: {fileID: 0}
+  placement: {fileID: 11400000, guid: 786d701e37c926945b2eb9ad49a3ba31, type: 2}
 --- !u!114 &551121752816470550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f4dcd5da0291c4b914bd20a115beb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioCue: {fileID: 11400000, guid: 786d701e37c926945b2eb9ad49a3ba31, type: 2}
+  _audioCue: {fileID: 0}
   _playOnStart: 0
   _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
     type: 2}

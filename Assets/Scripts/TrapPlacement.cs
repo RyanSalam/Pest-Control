@@ -19,8 +19,9 @@ public class TrapPlacement : MonoBehaviour, IEquippable
 
     Actor_Player player => LevelManager.Instance.Player;
 
-    //Audio Settings
-    AudioCue ACue;
+    public AudioCue audioPlayer;
+    [SerializeField] AudioCueSO placement;
+
     public event System.Action OnActivated;
 
     public virtual void Awake()
@@ -30,7 +31,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
 
     protected void Start()
     {
-
+        audioPlayer = GetComponent<AudioCue>();
     }
 
     private void Update()
@@ -98,7 +99,7 @@ public class TrapPlacement : MonoBehaviour, IEquippable
         {
             player.PlayerArms.SetTrigger("Fire");
             GameObject tempTrap = Instantiate(trapToSpawn, trapModel.position, transform.rotation); //instantiating trap 
-            //ACue.PlayAudioCue();
+            audioPlayer.PlayAudioCue(placement);
             LevelManager.Instance.CurrentEnergy -= trapPrice;
             LevelManager.Instance.GetComponent<AudioCue>().PlayAudioCue(LevelManager.Instance.Char_SO.BuildTrap, 20);
         }

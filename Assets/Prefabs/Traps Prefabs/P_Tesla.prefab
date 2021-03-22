@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: -6953393950034930389}
   - component: {fileID: 3016918925551148971}
   - component: {fileID: 8470837194361203702}
+  - component: {fileID: 5342951549292190337}
   m_Layer: 11
   m_Name: P_Tesla
   m_TagString: Trap
@@ -314,6 +315,8 @@ MonoBehaviour:
   healthBar: {fileID: 469580165873399584}
   healthStartColor: {r: 0, g: 1, b: 0, a: 1}
   healthEndColor: {r: 1, g: 0, b: 0, a: 1}
+  audioPlayer: {fileID: 0}
+  destroy: {fileID: 11400000, guid: 9386c40e8291844429580b8262c50bc7, type: 2}
   enemyChainAmount: 5
   chainRadius: 10
   whatIsEnemy:
@@ -326,6 +329,7 @@ MonoBehaviour:
     type: 3}
   particleVFXAttacking: {fileID: 606424661897687132, guid: 6f54be6c81ace4b4ea02aeb48046b143,
     type: 3}
+  attackSound: {fileID: 11400000, guid: a9f49e9c482f44a40b483a4d18ba1ba4, type: 2}
   damageIndicator: {fileID: 0}
 --- !u!120 &8470837194361203702
 LineRenderer:
@@ -426,6 +430,24 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &5342951549292190337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662004006499764242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f4dcd5da0291c4b914bd20a115beb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioCue: {fileID: 0}
+  _playOnStart: 0
+  _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
+    type: 2}
+  _audioConfiguration: {fileID: 11400000, guid: 7db604caae227634eac04bf18c584724,
+    type: 2}
 --- !u!114 &8550207271104192359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,7 +463,7 @@ MonoBehaviour:
   trapParent: {fileID: 6662004006499764242}
   trapDeathVFX: {fileID: 8764043878647920493, guid: c4ed38c72957f2241ad144a1614956d9,
     type: 3}
-  shrinkTimer: 1
+  shrinkTimer: 0.7
 --- !u!1001 &342461521943459676
 PrefabInstance:
   m_ObjectHideFlags: 0
