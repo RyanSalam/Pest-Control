@@ -9,7 +9,9 @@ public class Trap : MonoBehaviour
     [SerializeField] protected int maxUses = 10;
     [SerializeField] protected float buildDuration;
     [SerializeField] protected Color trapColor;
+    //[SerializeField] protected bool isDying = false; 
     public event System.Action TrapDestroyed;
+    [SerializeField] private GameObject trapDeathVFX; 
 
     [SerializeField] protected Image healthBar;
     [SerializeField] protected Color healthStartColor = Color.green;
@@ -46,6 +48,7 @@ public class Trap : MonoBehaviour
     protected virtual void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        
     }
 
     protected virtual void Update()
@@ -91,10 +94,11 @@ public class Trap : MonoBehaviour
     void Death()
     {
         //LevelManager.Instance.AssessTraps(this);
+        //isDying = true;
         Anim.SetTrigger("Destroy");
         foreach (Animator anim in GetComponentsInChildren<Animator>())
         {
-            anim.SetTrigger("Destroy");
+            anim.SetTrigger("Destroy"); 
         }
         LevelManager.Instance.GetComponent<AudioCue>().PlayAudioCue(LevelManager.Instance.Char_SO.TrapDestroyed, 5);
     }
@@ -109,6 +113,7 @@ public class Trap : MonoBehaviour
         else
         {
             isTrapBuilt = true; //if its on build phase instantly built the trap 
+            //isDying = false; 
         }
         CurrentUses = 0; //this should always occur when you spawn a trap so that it resets its current uses and dosent destroy instantly
         LevelManager.Instance.AssessTraps(this); 

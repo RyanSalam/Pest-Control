@@ -50,9 +50,6 @@ public class Weapon_Hitscan : Weapon
     [SerializeField] protected float timeFiring = 0f;
     
 
-    //Audio Settings
-    AudioCue ACue;
-
     //range variable for our raycast
     [SerializeField] protected float range = 80.0f;
 
@@ -71,7 +68,6 @@ public class Weapon_Hitscan : Weapon
         //ObjectPooler.Instance.InitializePool(bulletDecal, 20);
         
         base.Start();
-        ACue = GetComponent<AudioCue>();
     }
     
 

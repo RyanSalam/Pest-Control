@@ -128,7 +128,7 @@ MonoBehaviour:
   bounceCount: 0
   maxBounceCount: 2
   projectileForce: 10
-  radius: 10
+  radius: 8
   damage: 100
   explosionVFX: {fileID: 1845764070681338, guid: ac2312a3e32471549882f1a6da5568e6,
     type: 3}

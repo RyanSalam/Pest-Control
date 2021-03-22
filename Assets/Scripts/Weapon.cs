@@ -85,6 +85,10 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     Vector3 positionalRecoil;
     Vector3 Rot;
 
+    [Header("Weapon Sprite")]
+    [SerializeField] SkinnedMeshRenderer spriteSlot;
+    [SerializeField] Vector2 offset;
+
     public void DamageDealt(DamageData data)
     {
         //calling all functions in the DamageHandler list
@@ -118,7 +122,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
     // WARNING: This bool is only used by the ChargeRifle!
     protected bool isCanceled = false;
-
+    protected AudioCue ACue;
     //this is set on our weapon script when we shoot
     //this will maybe be changed to if proj -> projFire() elseif raycast ->
 
@@ -158,6 +162,12 @@ public abstract class Weapon : MonoBehaviour, IEquippable
 
         //onDamageDealt += DamageIndication;
         overheatSteamVFX = GameObject.FindGameObjectsWithTag("gasLeakVFX");
+
+        if (spriteSlot != null)
+            MaterialHandler.Vector2Changer(spriteSlot, "_MainTex_ST", offset);
+
+        //Audio Settings
+        ACue = GetComponent<AudioCue>();
     }
 
     protected virtual void Update()
@@ -289,7 +299,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
                 StartCoroutine(playVFX());
             //playOverHeatVFX();
 
-            ImpactSystem.Instance.PlayUISoundSFX(overHeatSound);
+            ACue.PlayAudioCue(overHeatSound);
 
             
             isFiring = false;

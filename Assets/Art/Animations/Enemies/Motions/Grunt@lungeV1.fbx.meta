@@ -1,11 +1,14 @@
 fileFormatVersion: 2
-guid: f498be52097e706438b8acf7324a140f
+guid: f64b2b1e5ac571643828aa8f03b28916
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: LungeV1
+    second: lungeV1
+  - first:
+      74: 1827226128182048838
+    second: Lunge V1
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,7 +38,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: LungeV1
+      name: Lunge V1
       takeName: Take 001
       internalID: 0
       firstFrame: 1
@@ -59,7 +62,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.3375959
+      - time: 0.28022242
+        functionName: Dash
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.37226552
         functionName: DoAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -107,7 +117,11 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
+  referencedClips:
+  - 7565406d81ead6449bc126d2fb6bbd8d
+  - fba2a15ec172fd247b9613eb35a02ebc
+  - 843e5b61903f2c244af4d31cbde3dc3c
+  - c80e25188a65c29498bd122c915a3d2e
   importAnimation: 1
   humanDescription:
     serializedVersion: 3

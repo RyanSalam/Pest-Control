@@ -253,7 +253,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     public void TurnObjectOn(GameObject obj)
     {
         obj.SetActive(true);
-        Debug.Log("clicked");
+        //Debug.Log("clicked");
     }
 
     public void TurnObjectOff(GameObject obj)
@@ -382,6 +382,12 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         Time.timeScale = 1;
         GameManager.Instance.ReturnToMenu();
+    }
+
+    public void OnGameQuit()
+    {
+        Time.timeScale = 1;
+        GameManager.Instance.OnQuitButton();
     }
 
     #endregion
