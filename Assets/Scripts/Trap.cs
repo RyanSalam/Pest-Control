@@ -14,6 +14,7 @@ public class Trap : MonoBehaviour
     [SerializeField] private GameObject trapDeathVFX; 
 
     [SerializeField] protected Image healthBar;
+    [SerializeField] protected Image glowBar;
     [SerializeField] protected Color healthStartColor = Color.green;
     [SerializeField] protected Color healthEndColor = Color.red;
     public AudioCue audioPlayer;
@@ -29,8 +30,9 @@ public class Trap : MonoBehaviour
             _currentUses = value;
 
             healthBar.fillAmount = 1 - (float)CurrentUses / (float)maxUses;
+            glowBar.fillAmount = 1 - (float)CurrentUses / (float)maxUses;
             Color lerpColor = Color.Lerp(healthStartColor, healthEndColor, 1 - healthBar.fillAmount);
-            MaterialHandler.materialColorChanger(healthBar.material, lerpColor, "_EmissionColor");
+            healthBar.color = lerpColor;
         }
     }
     protected bool isTrapBuilt;
