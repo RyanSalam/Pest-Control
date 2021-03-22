@@ -2200,6 +2200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapParent: {fileID: 7174932915223360148}
+  trapDeathVFX: {fileID: 8764043878647920493, guid: c4ed38c72957f2241ad144a1614956d9,
+    type: 3}
 --- !u!1 &5076650341606015580
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,7 +2367,10 @@ MonoBehaviour:
   maxUses: 10
   buildDuration: 3
   trapColor: {r: 1, g: 0, b: 0, a: 0}
+  trapDeathVFX: {fileID: 0}
   healthBar: {fileID: 6264948329583329206}
+  healthStartColor: {r: 0, g: 1, b: 0, a: 1}
+  healthEndColor: {r: 1, g: 0, b: 0, a: 1}
   maxRange: 14
   detectionAngle: 180
   bulletSpawn: {fileID: 5076650341606186608}
