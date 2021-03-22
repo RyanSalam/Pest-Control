@@ -2373,6 +2373,8 @@ MonoBehaviour:
   healthBar: {fileID: 6264948329583329206}
   healthStartColor: {r: 0, g: 1, b: 0, a: 1}
   healthEndColor: {r: 1, g: 0, b: 0, a: 1}
+  audioPlayer: {fileID: 0}
+  destroy: {fileID: 11400000, guid: 9386c40e8291844429580b8262c50bc7, type: 2}
   maxRange: 14
   detectionAngle: 180
   bulletSpawn: {fileID: 5076650341606186608}
@@ -2391,6 +2393,7 @@ MonoBehaviour:
   hitEffect: {fileID: 7050105079803764325, guid: 95b65c856f420494990e4b32dcd5dd0b,
     type: 3}
   center: {fileID: 0}
+  attackSound: {fileID: 11400000, guid: c6dff8007e229ce4d9918f33034e53b7, type: 2}
 --- !u!65 &2577234306156353420
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2416,7 +2419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f4dcd5da0291c4b914bd20a115beb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioCue: {fileID: 11400000, guid: c6dff8007e229ce4d9918f33034e53b7, type: 2}
+  _audioCue: {fileID: 0}
   _playOnStart: 0
   _audioCueEventChannel: {fileID: 11400000, guid: e954a0dd3c3edd448ba1d99d6d0896af,
     type: 2}

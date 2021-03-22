@@ -15,7 +15,7 @@ MonoBehaviour:
   trapParent: {fileID: 6662004006499764242}
   trapDeathVFX: {fileID: 8764043878647920493, guid: 5724d832f9246a94da2654825659dbf7,
     type: 3}
-  shrinkTimer: 2
+  shrinkTimer: 1
 --- !u!114 &1137645048773752954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,7 +274,10 @@ MonoBehaviour:
   healthBar: {fileID: 8058773015510869963}
   healthStartColor: {r: 0, g: 1, b: 0, a: 1}
   healthEndColor: {r: 1, g: 0, b: 0, a: 1}
+  audioPlayer: {fileID: 0}
+  destroy: {fileID: 11400000, guid: 9386c40e8291844429580b8262c50bc7, type: 2}
   particleEffectObjects: {fileID: 6237411802662377187}
+  attackSound: {fileID: 11400000, guid: 0eb1e6af88f22ec42bd300d534e1add8, type: 2}
 --- !u!114 &7801496675770492753
 MonoBehaviour:
   m_ObjectHideFlags: 0

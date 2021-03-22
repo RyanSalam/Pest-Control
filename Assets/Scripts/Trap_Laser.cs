@@ -6,13 +6,13 @@ public class Trap_Laser : Trap
 {
     private Actor_Enemy enemyTarget;
     [SerializeField] private GameObject particleEffectObjects;
-    protected AudioCue ACue;
+    [SerializeField] AudioCueSO attackSound;
 
     protected override void Start()
     {
         base.Start();
         Anim.SetBool("isIdle", true);
-        ACue = GetComponent<AudioCue>();
+        
     }
 
     public override void Activate()
@@ -22,7 +22,7 @@ public class Trap_Laser : Trap
             return;
         }
         base.Activate();
-        ACue.PlayAudioCue();
+        audioPlayer.PlayAudioCue(attackSound);
         particleEffectObjects.SetActive(true); 
         //laserAttack.Play();
         enemyTarget.TakeDamage(trapDamage); //damage enemy 

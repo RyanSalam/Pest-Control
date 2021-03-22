@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04269c8150901a429efa8db7281493a, type: 3}
   m_Name: Trap_Place
   m_EditorClassIdentifier: 
+  isSolo: 0
   looping: 0
   _audioClipGroups:
   - sequenceMode: 0
     audioClips:
-    - {fileID: 8300000, guid: 38a97d75af5ba9041b005dd984f9f8b7, type: 3}
+    - {fileID: 8300000, guid: 6ddc035f5c8faf74bbfed6d1451085dc, type: 3}

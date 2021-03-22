@@ -61,6 +61,8 @@ MonoBehaviour:
   Hologram: {fileID: 2100000, guid: 3c852c0492ffc54488c16540cdd99acb, type: 2}
   CanPlace: 0
   obstacleDetectionRange: 1
+  audioPlayer: {fileID: 0}
+  placement: {fileID: 11400000, guid: 786d701e37c926945b2eb9ad49a3ba31, type: 2}
 --- !u!114 &551121752816470550
 MonoBehaviour:
   m_ObjectHideFlags: 0
