@@ -21,6 +21,10 @@ public class CameraTransitions : MonoBehaviour
     [SerializeField] GameObject CombatHud;
     [SerializeField] GameObject fireWorks;
 
+    [SerializeField] AudioCueSO coreAlarmSound;
+    [SerializeField] AudioCueSO coreExplosionSound;
+    [SerializeField] AudioCueSO fireWorkSound;
+
     private void Start()
     {
         LevelManager.Instance.Core.OnDeath += HandleLoseTransition;
@@ -38,7 +42,7 @@ public class CameraTransitions : MonoBehaviour
         LevelManager.Instance.Player.PlayerCam.gameObject.SetActive(false);
 
         CombatHud.SetActive(false);
-
+        ImpactSystem.Instance.PlayUISoundSFX(coreAlarmSound);
         _camera.gameObject.SetActive(true);
         coreView.Priority = 15;
         playerView.Priority = 0;
@@ -49,10 +53,13 @@ public class CameraTransitions : MonoBehaviour
     {
         yield return new WaitForSeconds(timeTillExplosion);
         CoreExplosion.SetActive(true);
+        ImpactSystem.Instance.PlayUISoundSFX(coreExplosionSound);
 
         Sequence sequence = DOTween.Sequence();
         sequence.Append(CoreExplosion.transform.DOPunchScale(Vector3.one * 35, 2.5f, 0));
+            
         sequence.Append(CoreExplosion.transform.DOScale(Vector3.one * 50.0f, 0.5f));
+            
 
         sequence.Play().OnComplete(()=> LevelManager.Instance.GameOver(false));        
     }

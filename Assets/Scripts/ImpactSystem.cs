@@ -92,6 +92,7 @@ public class ImpactSystem : MonoSingleton<ImpactSystem>
 
     public void PlayUISoundSFX(AudioCueSO audioToPlay)
     {
+        if (audioToPlay == null) return;
         uiAudio.PlayAudioCue(audioToPlay);
     }
 

@@ -485,7 +485,7 @@ MonoBehaviour:
   ShopStartingButton: {fileID: 3136140621590705029}
   PauseStartingButton: {fileID: 4445807850305677669}
   GameOverStartingButton: {fileID: 5421731853599999248}
-  armMaterial: {fileID: 0}
+  armMaterial: {fileID: 2100000, guid: e234493acfa807d4c97d9e7e078a10f0, type: 2}
   playerHealthVolume: {fileID: 193148580040540162}
 --- !u!114 &7195516875643859446
 MonoBehaviour:
@@ -563,6 +563,7 @@ MonoBehaviour:
     - {fileID: 7113731822745623719}
   waveIndex: 0
   hudUI: {fileID: 3695450296224022641}
+  cameraSettings: {fileID: 0}
 --- !u!114 &8562597381162518369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1936,6 +1937,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6837716633056641584, guid: c5a92f942a7f19e40b7acc5ebf37e41e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6837716633056641584, guid: c5a92f942a7f19e40b7acc5ebf37e41e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6837716633056641584, guid: c5a92f942a7f19e40b7acc5ebf37e41e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8069638809081402491, guid: c5a92f942a7f19e40b7acc5ebf37e41e,
         type: 3}

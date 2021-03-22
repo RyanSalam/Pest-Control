@@ -85,6 +85,15 @@ public class MenuHandler : MonoBehaviour
         obj.SetActive(true);
     }
 
+    public void CharToLevelSelect()
+    {
+        if (character != null)
+        {
+            characterPanel.SetActive(false);
+            levelPanel.SetActive(true);
+        }
+    }
+
     public void SetSelectedButton(GameObject obj)
     {
         if(Gamepad.current != null)

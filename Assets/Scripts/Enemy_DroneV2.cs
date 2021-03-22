@@ -24,6 +24,7 @@ public class Enemy_DroneV2 : Actor_Enemy
     Rigidbody rb;
 
     bool isDying = false;
+    bool coreAttacker = false;
 
     //reference to our agent / variables well need for our base offset
     NavMeshAgent agent;
@@ -83,23 +84,23 @@ public class Enemy_DroneV2 : Actor_Enemy
     protected override void Update()
     {
 
-
+         coreAttacker = Vector3.Distance(collisionChecker.position, CoreReference.position) < 4f;
         //we need to check for obstacle detection - 
         //ex. if we run into a doorframe/roof we need to adjust our agent-offset so the droneModel can go through it
         //without going through the wall
-        if (Physics.SphereCast(collisionChecker.position, 1.0f, transform.forward , out RaycastHit hit, 1.5f, collisionLayer))
+        if (Physics.SphereCast(collisionChecker.position, 1.0f, transform.forward , out RaycastHit hit, 1.5f, collisionLayer)&& !coreAttacker)
         {
             //Debug.Log(hit.point + ": hitpoint");
             //checking if our hitpoint was above or below our y position. so we know if we should move below or above the obstacle in our way
-            if (hit.point.y > gameObject.transform.position.y)//go down
+            if (hit.point.y > gameObject.transform.position.y && !coreAttacker)//go down
             {
-                //Debug.Log("go down - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y );
+                Debug.Log("go down - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y );
                 //agent.baseOffset -= 0.4f;
                 agent.baseOffset += 0.4f;
             }
-            else if (hit.point.y < gameObject.transform.position.y) //go up
+            else if (hit.point.y < gameObject.transform.position.y && !coreAttacker) //go up
             {
-                //Debug.Log("go up - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y);
+                Debug.Log("go up - ypos: " + gameObject.transform.position.y + " hit point: " + hit.point.y);
                 //agent.baseOffset += 0.4f;
                 agent.baseOffset -= 0.4f;
             }
@@ -133,11 +134,12 @@ public class Enemy_DroneV2 : Actor_Enemy
         if (Time.time > timeAtCollision + 0.5f)
         {
             ////only go back down if our sphere cast isnt hitting something and our offset is above 5 - so we are always at yPos = 5 units 
-            if (!isColliding && agent.baseOffset > 5) //shrink back down to 5 offset
+            if (!isColliding && agent.baseOffset > 5 && !coreAttacker) //shrink back down to 5 offset
             {
+                Debug.Log("I'M CLIMBING LOOK AT ME");
                 agent.baseOffset -= 0.1f;
             }
-            if (!isColliding && agent.baseOffset < 5)//grow back up to 5 offset
+            if (!isColliding && agent.baseOffset < 5 && !coreAttacker)//grow back up to 5 offset
             {
                 agent.baseOffset += 0.1f;
             }
@@ -170,15 +172,17 @@ public class Enemy_DroneV2 : Actor_Enemy
         //distance check, once inside we will raise the drones y offset so it will go higher in the air - also not dying here so we can still fall on death
         if (CoreReference != null && !isDying)
         {
-            bool nearCore = Vector3.Distance(collisionChecker.position, CoreReference.position) < 6f;
+           
+           
             //if we are near the core and our offset is lower than 8 (this is a temp max offset should make variable) go up
-            if (nearCore && agent.baseOffset < 10)
+            if (coreAttacker && agent.baseOffset < 10f)
             {
-                agent.baseOffset += 0.1f;
+                Debug.Log(coreAttacker + "we are at core");
+                agent.baseOffset += 0.05f;
             }
-            else if (!nearCore && agent.baseOffset < 5) //not near core we go back to our regular offset of 5
+            else if (!coreAttacker && agent.baseOffset < 4.9f) //not near core we go back to our regular offset of 5
             {
-                agent.baseOffset -= 0.1f;
+                agent.baseOffset -= 0.05f;
             }
         }
 
@@ -286,14 +290,16 @@ public class Enemy_DroneV2 : Actor_Enemy
         if (isDying)
         {
             ObjectPooler.Instance.GetFromPool(deathVFX, c.GetContact(0).point, transform.rotation);
+            // ObjectPooler.Instance.GetFromPool(deathImpactDecal, c.GetContact(0).point, Quaternion.LookRotation(c.GetContact(0).normal));
+            //if we hit the ground spawn the scorch mark decal
+            if (c.gameObject.layer == LayerMask.GetMask("Ground") && deathImpactDecal != null)
+            {
+                ObjectPooler.Instance.GetFromPool(deathImpactDecal, c.GetContact(0).point, Quaternion.LookRotation(c.GetContact(0).normal));
+            }
             gameObject.SetActive(false);
             audioPlayer.PlayAudioCue(explosionSound);
         }
 
-        //if we hit the ground spawn the scorch mark decal
-        if (c.gameObject.layer == LayerMask.GetMask("Ground") && deathImpactDecal != null) 
-        {
-            ObjectPooler.Instance.GetFromPool(deathImpactDecal, c.GetContact(0).point, Quaternion.LookRotation(c.GetContact(0).normal));
-        }
+       
     }
 }

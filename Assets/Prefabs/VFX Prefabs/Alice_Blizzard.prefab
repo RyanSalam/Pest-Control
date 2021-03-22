@@ -4828,7 +4828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 15
-  blizzardRange: 20
+  blizzardRange: 7
   speedReductionMultiplier: 0.5
   blizzardEffectTime: 3
   enemies:

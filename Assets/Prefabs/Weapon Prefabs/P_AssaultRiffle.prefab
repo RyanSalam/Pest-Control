@@ -151,6 +151,7 @@ MonoBehaviour:
   maxShots: 40
   shotIncrease: 1
   timeTillWeaponCooldown: 3
+  overHeatSound: {fileID: 11400000, guid: e958aeb3b30f4864c9da445ef3006e0f, type: 2}
   fireSound: {fileID: 0}
   ImpactParticle: {fileID: 198707351522894782, guid: 91fb7ab2ef38317499700fcf6b971451,
     type: 3}

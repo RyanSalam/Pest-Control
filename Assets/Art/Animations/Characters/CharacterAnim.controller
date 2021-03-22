@@ -301,6 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddeaed970a072a74d89261e81ad4148a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityButton: Ability One
   abilityLifetime: 4.5
   healPerSecond: 7
   AoERange: 10

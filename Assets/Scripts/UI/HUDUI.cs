@@ -51,7 +51,6 @@ public class HUDUI : MonoBehaviour
     Coroutine changeCoreColor;
 
     [SerializeField] public TMP_Text energyText;
-    [SerializeField] TMP_Text energyChangeIndicator;
     [SerializeField] public int energyValue;
 
     //Coroutine energyChangeCoroutine;
@@ -62,7 +61,6 @@ public class HUDUI : MonoBehaviour
         core = LevelManager.Instance.Core;
         core.OnHealthChanged += UpdateCoreHealth;
         waveNumberIndicator.SetActive(false);
-        energyChangeIndicator.text = "";
         defaultCoreIcon = coreIcon.sprite;
         warningPanel.SetActive(false);
     }

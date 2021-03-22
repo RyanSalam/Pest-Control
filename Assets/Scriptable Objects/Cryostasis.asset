@@ -23,3 +23,6 @@ MonoBehaviour:
   isAbilityOnCoolDown: 1
   AbilityIndex: 1
   triggerName: Cryostasis
+  duration: 5
+  abilityInstance: {fileID: 8952846474292739604, guid: 7c314e0a29bbfab499972716dd041468,
+    type: 3}

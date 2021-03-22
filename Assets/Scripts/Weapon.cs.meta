@@ -3,7 +3,16 @@ guid: 87e38cedb51de9848acba97909823281
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - overHeatSound: {fileID: 11400000, guid: 4b2bfbc4a0226be449f6cfd666c8da39, type: 2}
+  - fireSound: {instanceID: 0}
+  - ImpactParticle: {instanceID: 0}
+  - muzzleFlashParticle: {instanceID: 0}
+  - weaponAttachment: {instanceID: 0}
+  - firePoint: {instanceID: 0}
+  - damageIndicatorObj: {instanceID: 0}
+  - recoilPosition: {instanceID: 0}
+  - rotationPoint: {instanceID: 0}
   executionOrder: 250
   icon: {instanceID: 0}
   userData: 
