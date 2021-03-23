@@ -6029,6 +6029,14 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Input Actions
       m_Flags: 0
+    - m_Name: 
+      m_Id: ebef05b3-b286-4fff-a094-0e1f7c7e1fb4
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input Actions
+      m_Flags: 0
 --- !u!1 &1273557637
 GameObject:
   m_ObjectHideFlags: 0
@@ -8976,7 +8984,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797765572}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 94b55e664330c8b43a9e83df18dc4af2, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 3d7f361a5e0786748a963f426b1ccf10, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 97748028}
@@ -9908,8 +9916,6 @@ MonoBehaviour:
   characterPanel: {fileID: 1120649136}
   levelPanel: {fileID: 289577172}
   loadingScreenPanel: {fileID: 408796920}
-  creditsPanel: {fileID: 1259719570}
-  mainPanel: {fileID: 1434687564}
   startButtonPressed: 0
   levelStartButton: {fileID: 1539681361}
   loadingText: {fileID: 1334296837}

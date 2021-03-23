@@ -253,7 +253,6 @@ public class LevelManager : MonoSingleton<LevelManager>
     public void TurnObjectOn(GameObject obj)
     {
         obj.SetActive(true);
-        //Debug.Log("clicked");
     }
 
     public void TurnObjectOff(GameObject obj)
