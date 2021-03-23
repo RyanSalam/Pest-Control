@@ -9800,6 +9800,7 @@ MonoBehaviour:
   isFiring: 0
   weaponAttachment: {fileID: 0}
   firePoint: {fileID: 6965653023597013632}
+  spriteScreen: {fileID: 5170163055401265940}
   damageIndicatorObj: {fileID: 0}
   recoilPosition: {fileID: 8465535629831829397}
   rotationPoint: {fileID: 5606234310872279828}
@@ -15416,6 +15417,12 @@ GameObject:
 --- !u!1 &5619803382213665389 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8318623839329399893, guid: 3ad1679f9bf260548a27a0d7222f18e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4507044570763187768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5170163055401265940 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8740403649990835500, guid: 3ad1679f9bf260548a27a0d7222f18e2,
     type: 3}
   m_PrefabInstance: {fileID: 4507044570763187768}
   m_PrefabAsset: {fileID: 0}

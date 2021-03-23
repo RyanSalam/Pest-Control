@@ -33,6 +33,14 @@ public class Weapon_GrenadeLauncher : Weapon
         base.Start();
     }
 
+    private void OnEnable()
+    {
+        //need to switch our tiling offset for the weapon icon
+        SkinnedMeshRenderer skinnedMesh = spriteScreen.GetComponent<SkinnedMeshRenderer>();
+        if (skinnedMesh != null)
+            MaterialHandler.Vector2Changer(skinnedMesh, "_TilingOffset", new Vector2(1.2f, 0f));
+    }
+
     // Update is called once per frame
     protected override void Update()
     {
