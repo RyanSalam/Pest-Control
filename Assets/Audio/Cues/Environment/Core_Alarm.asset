@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Core_Alarm
   m_EditorClassIdentifier: 
   isSolo: 0
-  looping: 1
+  looping: 0
   _audioClipGroups:
   - sequenceMode: 0
     audioClips:
-    - {fileID: 8300000, guid: 8b824fc1d86845b4baf06e6648f107f3, type: 3}
+    - {fileID: 8300000, guid: 0409202945365b54f87cdcf2145bdd8a, type: 3}

@@ -69,12 +69,6 @@ public class MenuHandler : MonoBehaviour
         levelStartButton.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void PressedStartButton()
     {
         startButtonPressed = true;
