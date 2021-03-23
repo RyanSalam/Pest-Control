@@ -158,8 +158,8 @@ MonoBehaviour:
   positionalReturnSpeed: 10
   rotationalReturnSpeed: 10
   RecoilKickBack: {x: 0.015, y: 0, z: -0.09}
-  spriteSlot: {fileID: 0}
-  offset: {x: 0, y: 0}
+  spriteSlot: {fileID: 655060445777648772}
+  offset: {x: 0.6, y: 0}
   bulletTrail: {fileID: 6956728020116618863}
   spreadCurve:
     serializedVersion: 2
@@ -619,6 +619,12 @@ GameObject:
 --- !u!1 &6329640731007784933 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8740403649990835500, guid: 3ad1679f9bf260548a27a0d7222f18e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3358348843634338505}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &655060445777648772 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2849791734594369101, guid: 3ad1679f9bf260548a27a0d7222f18e2,
     type: 3}
   m_PrefabInstance: {fileID: 3358348843634338505}
   m_PrefabAsset: {fileID: 0}

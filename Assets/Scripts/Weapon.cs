@@ -54,8 +54,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     [SerializeField] public bool isFiring = false; //are we currently firing ?
     [SerializeField] protected AltFireAttachment weaponAttachment;
     [SerializeField] protected Transform firePoint;
-    [SerializeField] public GameObject spriteScreen;
-
+  
     //our damage indicator prefabs
     [SerializeField] protected GameObject damageIndicatorObj;
 
@@ -165,7 +164,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
         overheatSteamVFX = GameObject.FindGameObjectsWithTag("gasLeakVFX");
 
         if (spriteSlot != null)
-            MaterialHandler.Vector2Changer(spriteSlot, "_MainTex_ST", offset);
+            MaterialHandler.Vector2Changer(spriteSlot, "_TilingOffset", offset);
 
         //Audio Settings
         ACue = GetComponent<AudioCue>();
