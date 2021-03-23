@@ -365,6 +365,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
             currentShots = 0;
             currentCooldown = null;
             animator.SetBool("isOverheating", false);
+            animator.SetBool("chargeOverheat", false);
             LevelManager.Instance.WeaponUI.UpdateHeatBar(0, 1);
         }
     }

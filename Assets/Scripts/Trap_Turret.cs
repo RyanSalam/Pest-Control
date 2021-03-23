@@ -38,6 +38,10 @@ public class Trap_Turret : Trap
     Vector3 temp;
 
     float fireTimer = 0f;
+
+    [SerializeField] AudioCueSO attackSound;
+
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -101,6 +105,7 @@ public class Trap_Turret : Trap
             return;
         }
         base.Activate();
+        
         //Anim.SetBool("isIdle", false);
         //Anim.SetBool("isAttacking", true);
     }
@@ -139,6 +144,7 @@ public class Trap_Turret : Trap
     }
     void Fire()
     {
+        audioPlayer.PlayAudioCue(attackSound);
         fireTimer = 0f;
         if (hitEffect) ObjectPooler.Instance.GetFromPool(hitEffect, enemyTarget.transform.position, enemyTarget.transform.rotation);
         enemyTarget.GetComponent<Actor_Enemy>().TakeDamage(damage);

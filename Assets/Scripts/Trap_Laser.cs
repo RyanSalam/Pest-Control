@@ -5,12 +5,14 @@ using UnityEngine;
 public class Trap_Laser : Trap
 {
     private Actor_Enemy enemyTarget;
-    [SerializeField] private GameObject particleEffectObjects; 
+    [SerializeField] private GameObject particleEffectObjects;
+    [SerializeField] AudioCueSO attackSound;
 
     protected override void Start()
     {
         base.Start();
         Anim.SetBool("isIdle", true);
+        
     }
 
     public override void Activate()
@@ -20,6 +22,7 @@ public class Trap_Laser : Trap
             return;
         }
         base.Activate();
+        audioPlayer.PlayAudioCue(attackSound);
         particleEffectObjects.SetActive(true); 
         //laserAttack.Play();
         enemyTarget.TakeDamage(trapDamage); //damage enemy 

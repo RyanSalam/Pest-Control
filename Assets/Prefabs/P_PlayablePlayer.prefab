@@ -3822,7 +3822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb9fcc069b42bb46a1c4b41b7addd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 100
   moveSpeed: 10
   hitAngle: 360
   hitForwardRot: 360

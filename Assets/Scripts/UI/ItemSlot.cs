@@ -109,7 +109,7 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         transform.localScale = Vector3.one * 1.05f;
         BorderImage.sprite = selectedSprite;
 
-        Fluffy.Instance.textToOverride = item.itemDescription.ToString();
+        Fluffy.Instance.TextToOverride = item.itemDescription.ToString();
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -120,7 +120,7 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         else
             BorderImage.sprite = unselectedSprite;
 
-        Fluffy.Instance.textToOverride = "";
+        Fluffy.Instance.TextToOverride = "";
     }
 
     public void OnMove(AxisEventData eventData)

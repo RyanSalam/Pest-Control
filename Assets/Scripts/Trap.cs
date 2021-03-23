@@ -14,8 +14,11 @@ public class Trap : MonoBehaviour
     [SerializeField] private GameObject trapDeathVFX; 
 
     [SerializeField] protected Image healthBar;
+    [SerializeField] protected Image glowBar;
     [SerializeField] protected Color healthStartColor = Color.green;
     [SerializeField] protected Color healthEndColor = Color.red;
+    public AudioCue audioPlayer;
+    [SerializeField] AudioCueSO destroy;
 
 
     private int _currentUses = 0;
@@ -27,8 +30,9 @@ public class Trap : MonoBehaviour
             _currentUses = value;
 
             healthBar.fillAmount = 1 - (float)CurrentUses / (float)maxUses;
+            glowBar.fillAmount = 1 - (float)CurrentUses / (float)maxUses;
             Color lerpColor = Color.Lerp(healthStartColor, healthEndColor, 1 - healthBar.fillAmount);
-            MaterialHandler.materialColorChanger(healthBar.material, lerpColor, "_EmissionColor");
+            healthBar.color = lerpColor;
         }
     }
     protected bool isTrapBuilt;
@@ -48,7 +52,8 @@ public class Trap : MonoBehaviour
     protected virtual void Start()
     {
         anim = GetComponentInChildren<Animator>();
-        
+        audioPlayer = GetComponent<AudioCue>();
+
     }
 
     protected virtual void Update()
@@ -96,6 +101,7 @@ public class Trap : MonoBehaviour
         //LevelManager.Instance.AssessTraps(this);
         //isDying = true;
         Anim.SetTrigger("Destroy");
+        audioPlayer.PlayAudioCue(destroy);
         foreach (Animator anim in GetComponentsInChildren<Animator>())
         {
             anim.SetTrigger("Destroy"); 

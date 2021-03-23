@@ -7,36 +7,6 @@ using UnityEngine.InputSystem;
 public class Weapon_Hitscan : Weapon
 {
 
-    //recoil variables
-    /*[Header("REference Points:")]
-    [SerializeField] protected Transform recoilPosition;
-    [SerializeField] protected Transform rotationPoint;
-    [Space(10)]
-
-    [Header("Speed Settings:")]
-    [SerializeField] protected float positionalRecoilSpeed = 8f;
-    [SerializeField] protected float rotationalRecoilSpeed = 8f;
-    [Space(10)]
-
-    [SerializeField] protected float positionalReturnSpeed = 18f;
-    [SerializeField] protected float rotationalReturnSpeed = 38f;
-    [Space(10)]
-
-    [Header("Amount Settings:")]
-    [SerializeField] protected Vector3 RecoilRotation = new Vector3(10, 5, 7);
-    [SerializeField] protected Vector3 RecoilKickBack = new Vector3(0.015f, 0f, -0.2f);
-
-    //[Space(10)]
-    //public Vector3 RecoilRotationAim = new Vector3(10, 4, 6);
-    //public Vector3 RecoilKickBackAim = new Vector3(0.015f, 0f, -0.2f);
-    [Space(10)]
-
-    [SerializeField] protected float bloomX = 1f;
-    [SerializeField] protected float bloomY = 1f;
-
-    Vector3 rotationalRecoil;
-    Vector3 positionalRecoil;
-    Vector3 Rot;*/
 
     Vector2 weaponRecoil;
 
@@ -202,9 +172,6 @@ public class Weapon_Hitscan : Weapon
 
         if (shotDistance.magnitude < 5)
             return Damage;
-
-        //Debug.Log("shotDistance = " + shotDistance.magnitude);
-        //Debug.Log("Percentage of damage to remove = " + shotDistance.magnitude / 100);
        
         float damageFalloff = shotDistance.magnitude / 100; //get a percentage
         damageFalloff *= Damage; //apply the percentage to our damage
@@ -220,36 +187,6 @@ public class Weapon_Hitscan : Weapon
     protected override void Update()
     {
         base.Update();
-        //when we are firing simulate recoil
-        /*if (isFiring)
-        {
-            //weapon recoil script
-            rotationalRecoil = Vector3.Lerp(rotationalRecoil, Vector3.zero, rotationalReturnSpeed * Time.deltaTime);
-            positionalRecoil = Vector3.Lerp(positionalRecoil, Vector3.zero, positionalReturnSpeed * Time.deltaTime);
-
-            recoilPosition.localPosition = Vector3.Slerp(recoilPosition.localPosition, positionalRecoil, positionalRecoilSpeed * Time.fixedDeltaTime);
-            Rot = Vector3.Slerp(Rot, rotationalRecoil, rotationalRecoilSpeed * Time.fixedDeltaTime);
-            rotationPoint.localRotation = Quaternion.Euler(Rot);
-
-            //on shoot, not sure if this is the best location
-
-            rotationalRecoil += new Vector3(-RecoilRotation.x, Random.Range(-RecoilRotation.y, RecoilRotation.y), Random.Range(-RecoilRotation.z, RecoilRotation.z));
-            positionalRecoil += new Vector3(Random.Range(-RecoilKickBack.x, RecoilKickBack.x), Random.Range(-RecoilKickBack.y, RecoilKickBack.y), RecoilKickBack.z);
-
-            timeFiring += Time.deltaTime;
-            
-
-        }
-        else //if we are not firing we need to go back to normal
-        {
-            //weapon recoil script
-            rotationalRecoil = Vector3.Lerp(rotationalRecoil, Vector3.zero, rotationalReturnSpeed * Time.deltaTime);
-            positionalRecoil = Vector3.Lerp(positionalRecoil, Vector3.zero, positionalReturnSpeed * Time.deltaTime);
-            
-        }
-
-        transform.localPosition = positionalRecoil;
-        //transform.rotation = Quaternion.Euler(rotationalRecoil);*/
 
     }
 

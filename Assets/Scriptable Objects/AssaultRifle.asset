@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
   itemName: Assault Rifle
-  itemCost: 50
+  itemCost: 250
   itemIcon: {fileID: 21300000, guid: 479dd5e3139620641b8f103d5aa2d7cf, type: 3}
   itemDescription: 'Rapid fire assault rifle.High fire rate, low damage, big magazine.Becomes
     more inacurate the longer you hold the trigger. Alt Fire: Noob Toob. Shoot a

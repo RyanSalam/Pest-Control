@@ -824,15 +824,15 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 1
-        functionName: Despawn
+      - time: 0.17189808
+        functionName: Shrink
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.830989
-        functionName: Shrink
+      - time: 1
+        functionName: Despawn
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

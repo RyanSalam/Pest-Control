@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GrenadeLauncher
   m_EditorClassIdentifier: 
   itemName: Grenade Launcher
-  itemCost: 100
+  itemCost: 400
   itemIcon: {fileID: 21300000, guid: 7627b7b1be5a05a49b6f165c47cbce12, type: 3}
   itemDescription: 'Brad''s favourite weapon.Cluster grenade launcher that deals
     area of affect damage. Alt Fire: Deploy a poison cloud grenade that sticks to

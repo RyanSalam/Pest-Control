@@ -24,6 +24,7 @@ public class Trap_Tesla : Trap
     [SerializeField] private Transform chainOrigin;
     [SerializeField] private GameObject particleVFX;
     [SerializeField] private GameObject particleVFXAttacking;
+    [SerializeField] AudioCueSO attackSound;
 
     [SerializeField] private DamageIndicator damageIndicator;
     protected override void Start()
@@ -72,6 +73,7 @@ public class Trap_Tesla : Trap
         Debug.Log("Activate Tesla");
         canAttack = false;
         EnemySphereCast(enemyTarget); //activate chain sphere cast on attacked enemy
+        audioPlayer.PlayAudioCue(attackSound);
         spawnVFX(); //spawning attack VFX 
 
         lineRenderer.enabled = true; //adjusting linerenders position based off the chain origin
