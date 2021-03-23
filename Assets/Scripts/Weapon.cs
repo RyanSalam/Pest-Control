@@ -54,6 +54,7 @@ public abstract class Weapon : MonoBehaviour, IEquippable
     [SerializeField] public bool isFiring = false; //are we currently firing ?
     [SerializeField] protected AltFireAttachment weaponAttachment;
     [SerializeField] protected Transform firePoint;
+    [SerializeField] public GameObject spriteScreen;
 
     //our damage indicator prefabs
     [SerializeField] protected GameObject damageIndicatorObj;
