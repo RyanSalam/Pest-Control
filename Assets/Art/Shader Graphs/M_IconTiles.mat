@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_SG_WeaponIcon
+  m_Name: M_IconTiles
   m_Shader: {fileID: -6465566751694194690, guid: 9454ac7bfa913a04b93acc3986bd522a,
     type: 3}
   m_ShaderKeywords: 
@@ -29,5 +29,6 @@ Material:
     - _WeaponEmissionIntensity: 1.1
     m_Colors:
     - _IconTiling: {r: 1, g: 0, b: 0, a: 0}
+    - _TilingOffset: {r: 0, g: 0, b: 0, a: 0}
     - _WeaponEmissionColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 0}
     - _WeaponIconTile: {r: 0.2, g: 1, b: 0, a: 0}
