@@ -7,7 +7,7 @@ using System;
 public class EnergyDrop : MonoBehaviour
 {
     [SerializeField] private float lifeTime = 10.0f;
-    [SerializeField] private int energyValue = 10;
+    [SerializeField] private int energyValue = 20;
     private Timer lifeTimer;
 
     [SerializeField] AudioCueSO energyIncreaseSound;
