@@ -2451,7 +2451,7 @@ MonoBehaviour:
   healthEndColor: {r: 1, g: 0, b: 0, a: 1}
   audioPlayer: {fileID: 0}
   destroy: {fileID: 11400000, guid: 9386c40e8291844429580b8262c50bc7, type: 2}
-  maxRange: 10
+  maxRange: 12
   detectionAngle: 180
   bulletSpawn: {fileID: 5076650341606186608}
   turretRotHinge: {fileID: 5076650341606186568}
