@@ -98,7 +98,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6233103297168673178
 Transform:
   m_ObjectHideFlags: 0
@@ -107,8 +107,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7799004024120745672}
   m_LocalRotation: {x: -0.3707572, y: 0.56076187, z: -0.43075067, w: 0.60211223}
-  m_LocalPosition: {x: -1.49, y: -6.99, z: 16.08}
-  m_LocalScale: {x: 1, y: -34.687836, z: 1}
+  m_LocalPosition: {x: -1.4481, y: -7.0451, z: 16.064}
+  m_LocalScale: {x: 1.3224, y: -33.99606, z: 1.3224}
   m_Children: []
   m_Father: {fileID: 2758479469794914474}
   m_RootOrder: 0
@@ -128,7 +128,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7799004024120745672}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
