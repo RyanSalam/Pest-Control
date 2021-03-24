@@ -137,6 +137,7 @@ MonoBehaviour:
   isFiring: 0
   weaponAttachment: {fileID: 11400000, guid: dbcb79a4f59b1a541b57d4e3ab887e21, type: 2}
   firePoint: {fileID: 1276595699964514502}
+  spriteScreen: {fileID: 4677831126039673226}
   damageIndicatorObj: {fileID: 4527500523508540015, guid: c271527d08d2e6c4597aec6a2592ee56,
     type: 3}
   recoilPosition: {fileID: 8335698925569201755}
@@ -480,6 +481,12 @@ GameObject:
 --- !u!1 &5392893559923028211 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8318623839329399893, guid: 3ad1679f9bf260548a27a0d7222f18e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4154245546114483366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4677831126039673226 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8740403649990835500, guid: 3ad1679f9bf260548a27a0d7222f18e2,
     type: 3}
   m_PrefabInstance: {fileID: 4154245546114483366}
   m_PrefabAsset: {fileID: 0}

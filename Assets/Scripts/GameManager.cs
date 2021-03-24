@@ -31,6 +31,7 @@ public class GameManager : MonoSingleton<GameManager>
         menuHandler.settingsPanel.SetActive(false);
 
         menuHandler.loadingScreenPanel.SetActive(true);
+        menuHandler.videoPlayer.Prepare();
         menuHandler.videoPlayer.Play();
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(level);
