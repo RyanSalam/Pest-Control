@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefabs/Environment Prefabs/Columns(2).prefab.meta
+guid: 959d8c812cc91694fbb1f98dd55b4bb9
+PrefabImporter:
+=======
 guid: 8a526638876fce9449a26067f877cb0e
 NativeFormatImporter:
+>>>>>>> Development:Assets/Art/Animations/RoombaAnimation.anim.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 
