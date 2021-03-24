@@ -24,13 +24,13 @@ public class Weapon_ExpertASMD : Weapon
         }
     }
 
-    private void OnEnable()
-    {
-        //need to switch our tiling offset for the weapon icon
-        SkinnedMeshRenderer skinnedMesh = spriteScreen.GetComponent<SkinnedMeshRenderer>();
-        if (skinnedMesh != null)
-            MaterialHandler.Vector2Changer(skinnedMesh, "_TilingOffset", new Vector2(1.4f, 0f));
-    }
+    //private void OnEnable()
+    //{
+    //    //need to switch our tiling offset for the weapon icon
+    //    SkinnedMeshRenderer skinnedMesh = spriteScreen.GetComponent<SkinnedMeshRenderer>();
+    //    if (skinnedMesh != null)
+    //        MaterialHandler.Vector2Changer(skinnedMesh, "_TilingOffset", new Vector2(1.4f, 0f));
+    //}
     public override void Release()
     {
         base.Release();

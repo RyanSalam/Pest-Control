@@ -147,8 +147,8 @@ MonoBehaviour:
   positionalReturnSpeed: 18
   rotationalReturnSpeed: 38
   RecoilKickBack: {x: 0.015, y: 0, z: -0.1}
-  spriteSlot: {fileID: 0}
-  offset: {x: 0, y: 0}
+  spriteSlot: {fileID: 2173732476955947755}
+  offset: {x: 1.2, y: 0}
   projectilePrefab: {fileID: 2221685402508476846, guid: 77811e88227db92489017efc683573df,
     type: 3}
   projectileForce: 15
@@ -487,6 +487,12 @@ GameObject:
 --- !u!1 &4677831126039673226 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8740403649990835500, guid: 3ad1679f9bf260548a27a0d7222f18e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4154245546114483366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &2173732476955947755 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2849791734594369101, guid: 3ad1679f9bf260548a27a0d7222f18e2,
     type: 3}
   m_PrefabInstance: {fileID: 4154245546114483366}
   m_PrefabAsset: {fileID: 0}
