@@ -25,6 +25,7 @@ public class CameraTransitions : MonoBehaviour
     [SerializeField] AudioCueSO coreExplosionSound;
     [SerializeField] AudioCueSO fireWorkSound;
 
+    private Animator anim;
     private void Start()
     {
         LevelManager.Instance.Core.OnDeath += HandleLoseTransition;
@@ -34,6 +35,8 @@ public class CameraTransitions : MonoBehaviour
         playerView.LookAt = LevelManager.Instance.Player.transform;
 
         _camera.gameObject.SetActive(false);
+        anim = GetComponent<Animator>();
+        anim.enabled = false;
     }
 
     private void HandleLoseTransition()
@@ -41,6 +44,7 @@ public class CameraTransitions : MonoBehaviour
         LevelManager.Instance.Player.playerInputs.SwitchCurrentActionMap("UI");
         LevelManager.Instance.Player.PlayerCam.gameObject.SetActive(false);
 
+        anim.enabled = true;
         CombatHud.SetActive(false);
         ImpactSystem.Instance.PlayUISoundSFX(coreAlarmSound);
         _camera.gameObject.SetActive(true);
@@ -54,7 +58,6 @@ public class CameraTransitions : MonoBehaviour
         yield return new WaitForSeconds(timeTillExplosion);
         CoreExplosion.SetActive(true);
         ImpactSystem.Instance.PlayUISoundSFX(coreExplosionSound);
-
         Sequence sequence = DOTween.Sequence();
         sequence.Append(CoreExplosion.transform.DOPunchScale(Vector3.one * 35, 2.5f, 0));
             

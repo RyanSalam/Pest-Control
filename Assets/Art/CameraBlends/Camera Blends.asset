@@ -27,7 +27,7 @@ MonoBehaviour:
   - m_From: PlayerView
     m_To: CoreView
     m_Blend:
-      m_Style: 3
+      m_Style: 0
       m_Time: 3
       m_CustomCurve:
         serializedVersion: 2
