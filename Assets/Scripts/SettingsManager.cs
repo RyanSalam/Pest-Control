@@ -173,7 +173,10 @@ public class SettingsManager : MonoBehaviour
             AM.SetGroupVolume("Master", MasterVolumeSlider.value);
         }
         else
-            MasterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolumePreference");
+        {
+            MasterVolumeSlider.value = 1;
+            AM.SetGroupVolume("Master", MasterVolumeSlider.value);
+        }
 
         if (PlayerPrefs.HasKey("MusicVolumePreference"))
         {
@@ -181,7 +184,10 @@ public class SettingsManager : MonoBehaviour
             AM.SetGroupVolume("Music", MusicVolumeSlider.value);
         }
         else
-            MusicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolumePreference");
+        {
+            MusicVolumeSlider.value = 1;
+            AM.SetGroupVolume("Music", MusicVolumeSlider.value);
+        }
 
         if (PlayerPrefs.HasKey("SFXVolumePreference"))
         {
@@ -189,9 +195,10 @@ public class SettingsManager : MonoBehaviour
             AM.SetGroupVolume("SFX", SFXVolumeSlider.value);
         }
         else
-            SFXVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolumePreference");
-
-
+        {
+            SFXVolumeSlider.value = 1;
+            AM.SetGroupVolume("SFX", SFXVolumeSlider.value);
+        }
     }
 
 

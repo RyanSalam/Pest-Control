@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2162,8 +2162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 1389582356}
-    m_SelectOnDown: {fileID: 636259994}
+    m_SelectOnUp: {fileID: 964683520}
+    m_SelectOnDown: {fileID: 894454262}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 2
@@ -5965,14 +5965,6 @@ MonoBehaviour:
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 0700bad9-0b3b-4b1d-9349-939c1ec39514
-      m_Path: <Gamepad>/buttonSouth
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input Actions
-      m_Flags: 0
     - m_Name: 
       m_Id: 0c86bfda-3198-402d-8083-5bf21338629d
       m_Path: <Gamepad>/start
@@ -10483,6 +10475,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 493223457982040987, guid: ab10f6b8454dead49a3d97ced2e11edb,
         type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 718c9f620d0ca914e9610eafaa85df0d,
+        type: 3}
+    - target: {fileID: 493223457982040987, guid: ab10f6b8454dead49a3d97ced2e11edb,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -10758,6 +10756,12 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 493223458934552575, guid: ab10f6b8454dead49a3d97ced2e11edb,
+        type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 718c9f620d0ca914e9610eafaa85df0d,
+        type: 3}
     - target: {fileID: 493223458934552575, guid: ab10f6b8454dead49a3d97ced2e11edb,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
